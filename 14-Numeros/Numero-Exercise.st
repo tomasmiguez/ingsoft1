@@ -364,27 +364,35 @@ Numero subclass: #Entero
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 23:13'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 17:41:30'!
 * aMultiplier 
-	
-	^self class with: value * aMultiplier integerValue
+	(aMultiplier isKindOf: Fraccion) 
+	ifTrue: 
+		[^Fraccion with: self * aMultiplier numerator over: aMultiplier denominator ]
+	ifFalse: 
+		[^self class with: value * aMultiplier integerValue].
 	! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 23:13'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 17:30:03'!
 + anAdder 
-	
-	^self class with: value + anAdder integerValue
+	(anAdder isKindOf: Fraccion) ifTrue: [^Fraccion with: anAdder numerator + (self * anAdder denominator)  over: anAdder denominator] ifFalse:
+	[^self class with: value + anAdder integerValue]
 ! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'NR 9/23/2018 23:40:37'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 18:09:32'!
 - aSubtrahend 
-	
-	^ self class with: value - aSubtrahend integerValue.! !
+	(aSubtrahend isKindOf: Fraccion)
+	ifTrue:
+		[^Fraccion with: (self * aSubtrahend denominator)  - aSubtrahend numerator over: aSubtrahend denominator] 
+	ifFalse: 
+		[^self class with: value - aSubtrahend integerValue.]! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 23:14'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 17:56:34'!
 / aDivisor 
-	
-	^Fraccion with: self over: aDivisor! !
+	(aDivisor isKindOf: Fraccion) ifTrue:
+		[^Fraccion with: self * aDivisor denominator over: aDivisor numerator]
+	ifFalse:
+		[^Fraccion with: self over: aDivisor]! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 21:55'!
 // aDivisor 
@@ -483,37 +491,52 @@ Numero subclass: #Fraccion
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 23:14'!
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 17:42:55'!
 * aMultiplier 
-	
-	^(numerator * aMultiplier numerator) / (denominator * aMultiplier denominator)
+	(aMultiplier isKindOf: Entero) 
+	ifTrue:
+		[^numerator* aMultiplier / denominator]
+	ifFalse:
+		[^(numerator * aMultiplier numerator) / (denominator * aMultiplier denominator)]
 	! !
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 23:14'!
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 17:36:05'!
 + anAdder 
 	
 	| newNumerator newDenominator |
-	
-	newNumerator := (numerator * anAdder denominator) + (denominator * anAdder numerator).
-	newDenominator := denominator * anAdder denominator.
+	(anAdder isKindOf: Entero) 
+	ifTrue: 
+		[newNumerator := numerator + (anAdder *  denominator).
+		newDenominator := denominator] 
+	ifFalse:
+		[newNumerator := (numerator * anAdder denominator) + (denominator * anAdder numerator).
+		newDenominator := denominator * anAdder denominator.].
 	
 	^newNumerator / newDenominator ! !
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'NR 9/23/2018 23:43:50'!
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 18:16:58'!
 - aSubtrahend 
 	
 	| newNumerator newDenominator |
 	
-	newNumerator := (numerator * aSubtrahend denominator) - (denominator * aSubtrahend numerator).
-	newDenominator := denominator * aSubtrahend denominator.
+	(aSubtrahend isKindOf: Entero)
+	ifTrue:
+		[newNumerator := numerator - (aSubtrahend * denominator).
+		newDenominator := denominator.]
+	ifFalse:
+		[newNumerator := (numerator * aSubtrahend denominator) - (denominator * aSubtrahend numerator).
+		newDenominator := denominator * aSubtrahend denominator.].
 	
 	^newNumerator / newDenominator 
 ! !
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 23:14'!
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 17:59:15'!
 / aDivisor 
-	
-	^(numerator * aDivisor denominator) / (denominator * aDivisor numerator)! !
+	(aDivisor isKindOf: Entero)
+	ifTrue: 
+		[^Fraccion with: numerator over: denominator * aDivisor ]
+	ifFalse:
+		[^(numerator * aDivisor denominator) / (denominator * aDivisor numerator)]! !
 
 
 !Fraccion methodsFor: 'comparing' stamp: 'HernanWilkinson 5/7/2016 20:42'!
