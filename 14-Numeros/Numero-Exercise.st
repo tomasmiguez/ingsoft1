@@ -373,10 +373,9 @@ Numero subclass: #Entero
 		[^self class with: value * aMultiplier integerValue].
 	! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 17:30:03'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 20:35:57'!
 + anAdder 
-	(anAdder isKindOf: Fraccion) ifTrue: [^Fraccion with: anAdder numerator + (self * anAdder denominator)  over: anAdder denominator] ifFalse:
-	[^self class with: value + anAdder integerValue]
+	^anAdder sumarEntero: self
 ! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 18:09:32'!
@@ -417,6 +416,16 @@ fibonacci
 greatestCommonDivisorWith: anEntero 
 	
 	^self class with: (value gcd: anEntero integerValue)! !
+
+!Entero methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 20:46:22'!
+multiplicarEntero: aMultiplierEntero
+		^aMultiplierEntero class with: aMultiplierEntero integerValue * self integerValue.
+	! !
+
+!Entero methodsFor: 'arithmetic operations' stamp: 'FS 9/13/2021 20:40:35'!
+sumarEntero: anAdderEntero
+		^anAdderEntero class with: anAdderEntero integerValue + (self integerValue).
+! !
 
 
 !Entero methodsFor: 'comparing' stamp: 'HernanWilkinson 5/7/2016 21:01'!
@@ -595,6 +604,17 @@ printOn: aStream
 		print: numerator;
 		nextPut: $/;
 		print: denominator ! !
+
+
+!Fraccion methodsFor: 'as yet unclassified' stamp: 'FS 9/13/2021 20:46:22'!
+multiplicarEntero: aMultiplierEntero
+	^self class with: aMultiplierEntero * self numerator over: self denominator.
+	! !
+
+!Fraccion methodsFor: 'as yet unclassified' stamp: 'FS 9/13/2021 20:33:28'!
+sumarEntero: anAdderEntero
+	^Fraccion with: self numerator + (anAdderEntero * self denominator)  over: self denominator.
+! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
