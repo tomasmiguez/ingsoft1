@@ -432,18 +432,10 @@ sumarFraccion: anAdder
 	
 	^self class with: value // aDivisor integerValue! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'HAW 9/24/2018 08:47:50'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'Ejercicio1 9/13/2021 23:54:00'!
 fibonacci
-
-	| one two |
-	
-	one := Entero with: 1.
-	two := Entero with: 2.
-	
-	self isNegative ifTrue: [self error: Entero negativeFibonacciErrorDescription ].	
-	(self isZero or: [self isOne]) ifTrue: [^one].
-	
-	^ (self - one) fibonacci + (self - two) fibonacci
+	"CAMBIAR POR ES RESPONSABILIDAD DE LAS SUBCLASES"
+	^nil.
 		! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 21:00'!
@@ -508,13 +500,109 @@ Entero class
 negativeFibonacciErrorDescription
 	^ ' Fibonacci no está definido aquí para Enteros Negativos!!!!!!'! !
 
-!Entero class methodsFor: 'instance creation' stamp: 'HernanWilkinson 5/7/2016 22:53'!
+!Entero class methodsFor: 'instance creation' stamp: 'Ejercicio1 9/13/2021 23:45:06'!
 with: aValue 
 	
 	"Esta verificacion esta puesta por si se equivocan y quieren crear un Entero pasando otra cosa que un Integer - Hernan"
 	aValue isInteger ifFalse: [  self error: 'aValue debe ser anInteger' ].
 	
-	^self new initalizeWith: aValue! !
+	"^self new initalizeWith: aValue"
+	
+	^(Entero subclasses detect: [:subClass | subClass es: aValue]) new initalizeWith: aValue.! !
+
+
+!classDefinition: #Cero category: 'Numero-Exercise'!
+Entero subclass: #Cero
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Numero-Exercise'!
+
+!Cero methodsFor: 'arithmetic operations' stamp: 'Ejercicio1 9/13/2021 23:46:17'!
+fibonacci
+	^Entero with: 1.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Cero class' category: 'Numero-Exercise'!
+Cero class
+	instanceVariableNames: ''!
+
+!Cero class methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 9/13/2021 22:55:47'!
+es: unEntero 
+	^unEntero = 0.! !
+
+
+!classDefinition: #EnteroNegativo category: 'Numero-Exercise'!
+Entero subclass: #EnteroNegativo
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Numero-Exercise'!
+
+!EnteroNegativo methodsFor: 'arithmetic operations' stamp: 'Ejercicio1 9/13/2021 23:47:50'!
+fibonacci
+	self error: Entero negativeFibonacciErrorDescription
+! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'EnteroNegativo class' category: 'Numero-Exercise'!
+EnteroNegativo class
+	instanceVariableNames: ''!
+
+!EnteroNegativo class methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 9/13/2021 22:56:02'!
+es: unEntero 
+	^unEntero < 0.! !
+
+
+!classDefinition: #EnteroPositivo category: 'Numero-Exercise'!
+Entero subclass: #EnteroPositivo
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Numero-Exercise'!
+
+!EnteroPositivo methodsFor: 'arithmetic operations' stamp: 'Ejercicio1 9/13/2021 23:47:50'!
+fibonacci
+	| one two |
+	
+	one := Entero with: 1.
+	two := Entero with: 2.
+	
+	^ (self - one) fibonacci + (self - two) fibonacci! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'EnteroPositivo class' category: 'Numero-Exercise'!
+EnteroPositivo class
+	instanceVariableNames: ''!
+
+!EnteroPositivo class methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 9/13/2021 23:22:23'!
+es: unEntero 
+	^unEntero > 1.! !
+
+
+!classDefinition: #Uno category: 'Numero-Exercise'!
+Entero subclass: #Uno
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Numero-Exercise'!
+
+!Uno methodsFor: 'arithmetic operations' stamp: 'Ejercicio1 9/13/2021 23:47:50'!
+fibonacci
+	^Entero with: 1.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Uno class' category: 'Numero-Exercise'!
+Uno class
+	instanceVariableNames: ''!
+
+!Uno class methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 9/13/2021 22:56:32'!
+es: unEntero 
+	^unEntero = 1.! !
 
 
 !classDefinition: #Fraccion category: 'Numero-Exercise'!
@@ -637,6 +725,11 @@ restarFraccion: aSubtrahend
 	^newNumerator / newDenominator 
 ! !
 
+!Fraccion methodsFor: 'aux' stamp: 'FS 9/13/2021 20:33:28'!
+sumarEntero: anAdderEntero
+	^Fraccion with: self numerator + (anAdderEntero * self denominator)  over: self denominator.
+! !
+
 !Fraccion methodsFor: 'aux' stamp: 'Ejercicio1 9/13/2021 21:14:13'!
 sumarFraccion: anAdder 	
 	| newDenominator newNumerator |
@@ -644,12 +737,6 @@ sumarFraccion: anAdder
 	newDenominator := anAdder denominator * self denominator.
 	
 	^newNumerator / newDenominator ! !
-
-
-!Fraccion methodsFor: 'as yet unclassified' stamp: 'FS 9/13/2021 20:33:28'!
-sumarEntero: anAdderEntero
-	^Fraccion with: self numerator + (anAdderEntero * self denominator)  over: self denominator.
-! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
