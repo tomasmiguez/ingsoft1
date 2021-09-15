@@ -432,10 +432,9 @@ sumarFraccion: anAdder
 	
 	^self class with: value // aDivisor integerValue! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'Ejercicio1 9/13/2021 23:54:00'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'Ejercicio1 9/15/2021 18:27:47'!
 fibonacci
-	"CAMBIAR POR ES RESPONSABILIDAD DE LAS SUBCLASES"
-	^nil.
+	^self subclassResponsibility.
 		! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 21:00'!
@@ -500,7 +499,7 @@ Entero class
 negativeFibonacciErrorDescription
 	^ ' Fibonacci no está definido aquí para Enteros Negativos!!!!!!'! !
 
-!Entero class methodsFor: 'instance creation' stamp: 'Ejercicio1 9/13/2021 23:45:06'!
+!Entero class methodsFor: 'instance creation' stamp: 'Ejercicio1 9/15/2021 18:43:52'!
 with: aValue 
 	
 	"Esta verificacion esta puesta por si se equivocan y quieren crear un Entero pasando otra cosa que un Integer - Hernan"
@@ -508,6 +507,7 @@ with: aValue
 	
 	"^self new initalizeWith: aValue"
 	
+	"Cambiado para ejercicio de fibonacci"
 	^(Entero subclasses detect: [:subClass | subClass es: aValue]) new initalizeWith: aValue.! !
 
 
