@@ -147,10 +147,38 @@ TestCase subclass: #SentenceFinderByPrefixTest
 
 !classDefinition: #OOStack category: 'Stack-Exercise'!
 Object subclass: #OOStack
-	instanceVariableNames: ''
+	instanceVariableNames: 'elements'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
+
+!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 20:34:05'!
+initialize
+	elements  _ OrderedCollection new.
+	! !
+
+!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 21:06:56'!
+isEmpty
+	^elements isEmpty.! !
+
+!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 21:07:47'!
+pop
+	self isEmpty ifTrue: [self error: self class stackEmptyErrorDescription.].
+	^elements removeFirst.! !
+
+!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 20:35:27'!
+push: aString 
+	elements addFirst: aString.! !
+
+!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 20:38:30'!
+size
+	^elements size.! !
+
+!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 20:46:26'!
+top
+	self isEmpty ifTrue: [self error: self class stackEmptyErrorDescription.].
+	^elements first.! !
+
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -158,10 +186,24 @@ Object subclass: #OOStack
 OOStack class
 	instanceVariableNames: ''!
 
-!OOStack class methodsFor: 'error descriptions' stamp: 'NR 9/16/2021 17:39:43'!
-stackEmptyErrorDescription
-	
-	^ 'stack is empty!!!!!!'! !
+!OOStack class methodsFor: 'error descriptions' stamp: 'TM 9/16/2021 20:41:16'!
+stackEmptyErrorDescription	^ 'stack is empty!!!!!!'! !
+
+
+!classDefinition: #EmptyStack category: 'Stack-Exercise'!
+OOStack subclass: #EmptyStack
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Stack-Exercise'!
+
+
+!classDefinition: #NotEmptyStack category: 'Stack-Exercise'!
+OOStack subclass: #NotEmptyStack
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Stack-Exercise'!
 
 
 !classDefinition: #SentenceFinderByPrefix category: 'Stack-Exercise'!
