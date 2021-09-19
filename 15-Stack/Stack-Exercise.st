@@ -147,38 +147,38 @@ TestCase subclass: #SentenceFinderByPrefixTest
 
 !classDefinition: #OOStack category: 'Stack-Exercise'!
 Object subclass: #OOStack
-	instanceVariableNames: 'elements'
+	instanceVariableNames: 'state'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 20:34:05'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:19:55'!
 initialize
-	elements  _ OrderedCollection new.
+	state _ OOStackEmptyState new.
 	! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 21:06:56'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:20:26'!
 isEmpty
-	^elements isEmpty.! !
+	^state size == 0.! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 21:07:47'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:15:53'!
 pop
-	self isEmpty ifTrue: [self error: self class stackEmptyErrorDescription.].
-	^elements removeFirst.! !
+	| val |
+	val := state top.
+	state := state prevState.
+	^val.! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 20:35:27'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:20:19'!
 push: aString 
-	elements addFirst: aString.! !
+	state := OOStackNoEmptyState prevState: state value: aString.! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 20:38:30'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:16:27'!
 size
-	^elements size.! !
+	^state size.! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'TM 9/16/2021 20:46:26'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:20:11'!
 top
-	self isEmpty ifTrue: [self error: self class stackEmptyErrorDescription.].
-	^elements first.! !
-
+	^state top.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -190,20 +190,60 @@ OOStack class
 stackEmptyErrorDescription	^ 'stack is empty!!!!!!'! !
 
 
-!classDefinition: #EmptyStack category: 'Stack-Exercise'!
-OOStack subclass: #EmptyStack
-	instanceVariableNames: ''
+!classDefinition: #OOStackEmptyState category: 'Stack-Exercise'!
+Object subclass: #OOStackEmptyState
+	instanceVariableNames: 'value'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
+!OOStackEmptyState methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 20:53:23'!
+prevState
+	self error: OOStack stackEmptyErrorDescription! !
+
+!OOStackEmptyState methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:09:29'!
+size
+	^0! !
+
+!OOStackEmptyState methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:04:46'!
+top
+	self error: OOStack stackEmptyErrorDescription! !
+
 
-!classDefinition: #NotEmptyStack category: 'Stack-Exercise'!
-OOStack subclass: #NotEmptyStack
-	instanceVariableNames: ''
+!classDefinition: #OOStackNoEmptyState category: 'Stack-Exercise'!
+Object subclass: #OOStackNoEmptyState
+	instanceVariableNames: 'prevState value size'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
+
+!OOStackNoEmptyState methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:22:39'!
+prevState
+	^prevState.! !
+
+!OOStackNoEmptyState methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:11:05'!
+prevState: aPrevState value: aValue
+	prevState := aPrevState.
+	value := aValue.
+	size := aPrevState size + 1.! !
+
+!OOStackNoEmptyState methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:07:49'!
+size
+	^size.! !
+
+!OOStackNoEmptyState methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:03:15'!
+top
+	^value.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'OOStackNoEmptyState class' category: 'Stack-Exercise'!
+OOStackNoEmptyState class
+	instanceVariableNames: 'prevState'!
+
+!OOStackNoEmptyState class methodsFor: 'as yet unclassified' stamp: 'mls 9/18/2021 21:00:45'!
+prevState: prevValue value: aValue
+	^self new prevState: prevValue value: aValue! !
 
 
 !classDefinition: #SentenceFinderByPrefix category: 'Stack-Exercise'!
