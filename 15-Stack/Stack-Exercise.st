@@ -144,6 +144,63 @@ TestCase subclass: #SentenceFinderByPrefixTest
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'mls 9/19/2021 11:12:29'!
+test01NothingWhenEmptyStack
+
+	| stack sentenceFinder |
+	
+	stack := OOStack new.
+	sentenceFinder := SentenceFinderByPrefix new.
+	
+	self assert: (sentenceFinder find: 'nada' in: stack) = Set new.! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'mls 9/19/2021 11:12:35'!
+test02FindPrefixWhenHasOnlyOne
+
+	| stack sentenceFinder |
+	
+	stack := OOStack new.
+	stack push: 'winter'.
+	sentenceFinder := SentenceFinderByPrefix new.
+	
+	self assert: (sentenceFinder find: 'winter' in: stack) = (Set with: 'winter').! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'mls 9/19/2021 11:12:42'!
+test03NotFoundBecauseOfCaseSensitive
+
+	| stack sentenceFinder |
+	
+	stack := OOStack new.
+	stack push: 'WINTER'.
+	sentenceFinder := SentenceFinderByPrefix new.
+	
+	self assert: (sentenceFinder find: 'winter' in: stack) = (Set new).! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'mls 9/19/2021 11:12:47'!
+test04NotFoundBecauseOfCaseSensitive2
+
+	| stack sentenceFinder |
+	
+	stack := OOStack new.
+	stack push: 'WINTER'.
+	stack push: 'WiNtEr'.
+	sentenceFinder := SentenceFinderByPrefix new.
+	
+	self assert: (sentenceFinder find: 'winter' in: stack) = (Set new).! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'mls 9/19/2021 11:12:52'!
+test05MultiplePrefixFound
+
+	| stack sentenceFinder |
+	
+	stack := OOStack new.
+	stack push: 'winter is coming'.
+	stack push: 'winter is strong'.
+	stack push: 'the winter is strong'.
+	sentenceFinder := SentenceFinderByPrefix new.
+	
+	self assert: (sentenceFinder find: 'winter is' in: stack) = (Set with: 'winter is coming' with: 'winter is strong').! !
+
 
 !classDefinition: #OOStack category: 'Stack-Exercise'!
 Object subclass: #OOStack
@@ -252,3 +309,22 @@ Object subclass: #SentenceFinderByPrefix
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
+
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'mls 9/19/2021 11:12:21'!
+find: aPrefix in: aStack
+	| matches stackAux auxValue |
+	matches := Set new.
+	stackAux := OOStack new.
+	[aStack isEmpty not] whileTrue: [
+		auxValue := aStack pop.
+		stackAux push: auxValue.
+		
+		(auxValue beginsWith: aPrefix) ifTrue: [matches add: auxValue]
+	].
+
+	[stackAux isEmpty not] whileTrue: [
+		aStack push: stackAux pop.
+	].
+	^matches.
+
+	! !
