@@ -188,8 +188,19 @@ test04NotFoundBecauseOfCaseSensitive2
 	
 	self assert: (sentenceFinder find: 'winter' in: stack) = (Set new).! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'mls 9/19/2021 11:12:52'!
-test05MultiplePrefixFound
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'TM 9/20/2021 11:20:49'!
+test05NotFoundBecauseNotPrefix
+
+	| stack sentenceFinder |
+	
+	stack := OOStack new.
+	stack push: 'the winter'.
+	sentenceFinder := SentenceFinderByPrefix new.
+	
+	self assert: (sentenceFinder find: 'winter' in: stack) = (Set new).! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'TM 9/20/2021 11:21:04'!
+test06MultiplePrefixFound
 
 	| stack sentenceFinder |
 	
@@ -200,6 +211,33 @@ test05MultiplePrefixFound
 	sentenceFinder := SentenceFinderByPrefix new.
 	
 	self assert: (sentenceFinder find: 'winter is' in: stack) = (Set with: 'winter is coming' with: 'winter is strong').! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'TM 9/20/2021 11:23:35'!
+test07CanBeUsedMultipleTimes
+
+	| stack sentenceFinder |
+	
+	stack := OOStack new.
+	stack push: 'winter is coming'.
+	stack push: 'the cold winter'.
+	stack push: 'winter is strong'.
+	stack push: 'the winter is strong'.
+	sentenceFinder := SentenceFinderByPrefix new.
+	
+	self assert: (sentenceFinder find: 'winter is' in: stack) = (Set with: 'winter is coming' with: 'winter is strong').
+	self assert: (sentenceFinder find: 'the' in: stack) = (Set with: 'the cold winter' with: 'the winter is strong').! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'TM 9/20/2021 11:25:00'!
+test08AddsEachOnlyOneTime
+
+	| stack sentenceFinder |
+	
+	stack := OOStack new.
+	stack push: 'the winter is strong'.
+	stack push: 'thethethethe'.
+	sentenceFinder := SentenceFinderByPrefix new.
+	
+	self assert: (sentenceFinder find: 'the' in: stack) = (Set with: 'the winter is strong' with: 'thethethethe').! !
 
 
 !classDefinition: #OOStack category: 'Stack-Exercise'!
