@@ -5,8 +5,8 @@ TestCase subclass: #TestMarsRover
 	poolDictionaries: ''
 	category: 'MarsRover'!
 
-!TestMarsRover methodsFor: 'testing' stamp: 'mls 10/4/2021 20:45:42'!
-test01
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:31:38'!
+test01NoCommand
 	| marsRover |
 	
 	marsRover _ MarsRover at: 1@2 heading: #North.
@@ -15,8 +15,8 @@ test01
 	
 	self assert: (marsRover isAt: 1@2 heading: #North)! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 13:47:30'!
-test02
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:31:48'!
+test02Forward
 	| marsRover |
 	
 	marsRover _ MarsRover at: 1@2 heading: #North.
@@ -25,8 +25,8 @@ test02
 	
 	self assert: (marsRover isAt: 1@3 heading: #North).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 13:45:04'!
-test03
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:32:00'!
+test03Backward
 
 	| marsRover |
 		
@@ -36,8 +36,8 @@ test03
 	
 	self assert: (marsRover isAt: 1@1 heading: #North).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:02:49'!
-test04
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:41:17'!
+test04SameCommandTwice
 
 	| marsRover |
 		
@@ -48,20 +48,8 @@ test04
 	
 	self assert: (marsRover isAt: 1@4 heading: #North).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:02:53'!
-test05
-
-	| marsRover |
-		
-	marsRover _ MarsRover at: 1@2 heading: #North.
-	
-	marsRover process: 'b'.
-	marsRover process: 'b'.
-	
-	self assert: (marsRover isAt: 1@0 heading: #North).! !
-
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:05:51'!
-test06
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:32:30'!
+test06Left
 
 	| marsRover |
 		
@@ -71,8 +59,8 @@ test06
 	
 	self assert: (marsRover isAt: 1@2 heading: #West).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:06:31'!
-test07
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:32:33'!
+test07Right
 
 	| marsRover |
 		
@@ -82,8 +70,8 @@ test07
 	
 	self assert: (marsRover isAt: 1@2 heading: #East).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:10:26'!
-test08
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:57:00'!
+test08Rotate180
 
 	| marsRover |
 		
@@ -94,8 +82,8 @@ test08
 	
 	self assert: (marsRover isAt: 1@2 heading: #South).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:12:28'!
-test09
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:57:06'!
+test09Rotate270
 
 	| marsRover |
 		
@@ -107,8 +95,8 @@ test09
 	
 	self assert: (marsRover isAt: 1@2 heading: #East).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:15:09'!
-test10
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:57:18'!
+test10Rotate360
 
 	| marsRover |
 		
@@ -121,8 +109,8 @@ test10
 	
 	self assert: (marsRover isAt: 1@2 heading: #North).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:36:39'!
-test11
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:41:33'!
+test11RotateAndMove
 
 	| marsRover |
 		
@@ -133,20 +121,8 @@ test11
 	
 	self assert: (marsRover isAt: 2@2 heading: #East).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:44:47'!
-test12
-
-	| marsRover |
-		
-	marsRover _ MarsRover at: 0@0 heading: #East.
-	
-	marsRover process: 'l'.
-	marsRover process: 'b'.
-	
-	self assert: (marsRover isAt: 0@-1 heading: #North).! !
-
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:46:31'!
-test13
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:45:20'!
+test13Sequence
 
 	| marsRover |
 		
@@ -156,30 +132,8 @@ test13
 	
 	self assert: (marsRover isAt: 1@4 heading: #North).! !
 
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:47:17'!
-test14
-
-	| marsRover |
-		
-	marsRover _ MarsRover at: 1@2 heading: #North.
-	
-	marsRover process: 'fff'.
-	
-	self assert: (marsRover isAt: 1@5 heading: #North).! !
-
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:54:55'!
-test15
-
-	| marsRover |
-		
-	marsRover _ MarsRover at: 1@2 heading: #North.
-	
-	marsRover process: 'rr'.
-	
-	self assert: (marsRover isAt: 1@2 heading: #South).! !
-
-!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:57:55'!
-test16
+!TestMarsRover methodsFor: 'testing' stamp: 'FS 10/6/2021 21:45:31'!
+test16SequenceWithError
 
 	| marsRover |
 		
