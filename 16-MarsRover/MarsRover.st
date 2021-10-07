@@ -322,12 +322,35 @@ Object subclass: #MarsRover
 	poolDictionaries: ''
 	category: 'MarsRover'!
 
-!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:20:32'!
+!MarsRover methodsFor: 'status' stamp: 'TM\ 10/6/2021 14:28:06'!
+isAt: aPosition heading: aDirectionLiteral
+
+	^(position = aPosition) and: [direction is: aDirectionLiteral].! !
+
+
+!MarsRover methodsFor: 'commands' stamp: 'FS 10/6/2021 21:15:22'!
+isValidCommand: aCharacter
+ 	^(Set with: $f with: $b with: $r with: $l) includes: aCharacter! !
+
+!MarsRover methodsFor: 'commands' stamp: 'FS 10/6/2021 21:15:46'!
+process: instructions
+
+	instructions do: [:aCharacter |
+		(self isValidCommand: aCharacter) ifTrue: [
+			aCharacter = $f ifTrue: [self moveForward].
+			aCharacter = $b ifTrue: [self moveBackward].
+			aCharacter = $r ifTrue: [self turnRight].
+			aCharacter = $l ifTrue: [self turnLeft].
+		] ifFalse: [^nil].
+	]! !
+
+
+!MarsRover methodsFor: 'initalization' stamp: 'TM\ 10/6/2021 14:20:32'!
 initialize
 	position _ 1@2.
 	direction _ North new.! !
 
-!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:44:09'!
+!MarsRover methodsFor: 'initalization' stamp: 'TM\ 10/6/2021 14:44:09'!
 initializeAt: anInitialPosition heading: anInitialDirectionLiteral.
 
 	position _ anInitialPosition.
@@ -336,20 +359,31 @@ initializeAt: anInitialPosition heading: anInitialDirectionLiteral.
 	anInitialDirectionLiteral = #South ifTrue: [direction _ South new].
 	anInitialDirectionLiteral = #East ifTrue: [direction _ East new].! !
 
-!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:28:06'!
-isAt: aPosition heading: aDirectionLiteral
 
-	^(position = aPosition) and: [direction is: aDirectionLiteral].! !
+!MarsRover methodsFor: 'movement' stamp: 'FS 10/6/2021 21:10:03'!
+moveBackward
+	position _ (position - direction unitVector).
 
-!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:56:33'!
-process: instructions
+! !
 
-	instructions do: [:aCharacter |
-		aCharacter = $f ifTrue: [position _ (position + direction unitVector)].
-		aCharacter = $b ifTrue: [position _ (position - direction unitVector)].
-		aCharacter = $r ifTrue: [direction _ direction right].
-		aCharacter = $l ifTrue: [direction _ direction left].
-		].! !
+!MarsRover methodsFor: 'movement' stamp: 'FS 10/6/2021 21:09:44'!
+moveForward
+	position _ (position + direction unitVector).
+! !
+
+!MarsRover methodsFor: 'movement' stamp: 'FS 10/6/2021 21:10:44'!
+turnLeft
+	direction _ direction left.
+
+
+! !
+
+!MarsRover methodsFor: 'movement' stamp: 'FS 10/6/2021 21:10:30'!
+turnRight
+	direction _ direction right.
+
+
+! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
