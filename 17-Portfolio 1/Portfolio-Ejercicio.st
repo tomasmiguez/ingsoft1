@@ -1,3 +1,86 @@
+!classDefinition: #PortfolioTest category: 'Portfolio-Ejercicio'!
+TestCase subclass: #PortfolioTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:45:39'!
+test01
+
+	| aPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	
+	self assert: 0 equals: (aPortfolio balance).! !
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:36'!
+test02
+
+	| aPortfolio anAccount |
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio add: anAccount.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:50'!
+test03
+
+	| aPortfolio anOtherPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	anOtherPortfolio _ Portfolio new.
+	
+	aPortfolio add: anOtherPortfolio. 
+	
+	self assert: 0 equals: (aPortfolio balance).! !
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:18:40'!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio _ Portfolio new.
+	
+	anOtherPortfolio _ Portfolio new.
+	anOtherPortfolio add: anAccount.
+
+	aPortfolio add: anOtherPortfolio.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:22:17'!
+test05
+
+	| aPortfolio aDeposit |
+	
+	aPortfolio _ Portfolio new.
+	aDeposit _ Deposit for: 10.
+	
+	self deny: (aPortfolio hasRegistered: aDeposit).! !
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:23:36'!
+test06
+
+	| aPortfolio anAccount aDeposit |
+	
+	aDeposit _ Deposit for: 10.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: aDeposit.
+	aPortfolio _ Portfolio new.
+	
+	aPortfolio add: anAccount.
+	
+	self assert: (aPortfolio hasRegistered: aDeposit).! !
+
+
 !classDefinition: #ReceptiveAccountTest category: 'Portfolio-Ejercicio'!
 TestCase subclass: #ReceptiveAccountTest
 	instanceVariableNames: ''
@@ -101,6 +184,7 @@ value
 
 	self subclassResponsibility ! !
 
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'AccountTransaction class' category: 'Portfolio-Ejercicio'!
@@ -131,6 +215,10 @@ initializeFor: aValue
 	value := aValue ! !
 
 
+!Deposit methodsFor: 'value' stamp: 'TM\ 10/7/2021 21:54:26'!
+addValueToBalance: aBalance
+	^ aBalance + value.! !
+
 !Deposit methodsFor: 'value' stamp: 'HernanWilkinson 7/13/2011 18:38'!
 value
 
@@ -155,11 +243,16 @@ AccountTransaction subclass: #Withdraw
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!Withdraw methodsFor: 'initialization' stamp: 'HernanWilkinson 7/13/2011 18:46'!
+!Withdraw methodsFor: 'initialization' stamp: 'TM\ 10/7/2021 20:25:39'!
 initializeFor: aValue
 
 	value := aValue ! !
 
+
+!Withdraw methodsFor: 'value' stamp: 'TM\ 10/7/2021 21:54:38'!
+addValueToBalance: aBalance
+
+	^ aBalance - value.! !
 
 !Withdraw methodsFor: 'value' stamp: 'HernanWilkinson 7/13/2011 18:33'!
 value
@@ -178,8 +271,44 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
+!classDefinition: #XXX category: 'Portfolio-Ejercicio'!
+Object subclass: #XXX
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+
+!classDefinition: #Portfolio category: 'Portfolio-Ejercicio'!
+XXX subclass: #Portfolio
+	instanceVariableNames: 'XXXs'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:16:18'!
+add: aReceptiveAccount 
+	
+	XXXs add: aReceptiveAccount.! !
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:14:58'!
+balance
+
+	^(XXXs sum: [ :anXXX | anXXX balance ] ifEmpty: [0]).! !
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:25:43'!
+hasRegistered: anAccountTransaction 
+	
+	^XXXs anySatisfy: [:anXXX | anXXX hasRegistered: anAccountTransaction].! !
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:05'!
+initialize
+
+	XXXs _ OrderedCollection new.! !
+
+
 !classDefinition: #ReceptiveAccount category: 'Portfolio-Ejercicio'!
-Object subclass: #ReceptiveAccount
+XXX subclass: #ReceptiveAccount
 	instanceVariableNames: 'transactions'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -191,7 +320,7 @@ initialize
 	transactions := OrderedCollection new.! !
 
 
-!ReceptiveAccount methodsFor: 'transactions' stamp: 'HernanWilkinson 7/13/2011 18:37'!
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'TM\ 10/7/2021 21:09:05'!
 register: aTransaction
 
 	transactions add: aTransaction 
@@ -203,10 +332,14 @@ transactions
 	^ transactions copy! !
 
 
-!ReceptiveAccount methodsFor: 'balance' stamp: 'HAW 5/23/2019 15:19:32'!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 21:57:43'!
 balance
-
-	^transactions sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]! !
+	
+	| balance |
+	
+	balance _ 0.
+	(transactions do: [:aTransaction | balance _ aTransaction addValueToBalance: balance]).
+	^balance.! !
 
 
 !ReceptiveAccount methodsFor: 'testing' stamp: 'NR 10/17/2019 03:28:43'!

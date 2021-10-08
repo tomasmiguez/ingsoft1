@@ -1,0 +1,3891 @@
+
+
+----QUIT----(9 March 2021 14:58:42) CuisUniversity-4532.image priorSource: 13044060!
+
+----STARTUP---- (9 March 2021 14:58:43) as /Users/hernan/Documents/Cuis/5.0-64Bits/Cuis-University-Installer/CuisUniversity-4532.image!
+
+
+----QUIT----(9 March 2021 14:58:43) CuisUniversity-4532.image priorSource: 16885479!
+
+----STARTUP---- (2 September 2021 20:50:22) as D:\Users\Tomas\Documents\CUIS\windows64\CuisUniversity-4532.image!
+
+
+----End fileIn of \Users\Tomas\Documents\CUIS\windows64\Natural Numbers.st----!
+
+----End fileIn of \Users\Tomas\Documents\CUIS\windows64\Natural Numbers Tests.st----!
+
+!classRemoval: #IIIII stamp: 'TM 9/2/2021 20:58:55'!
+II subclass: #IIIII
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Natural Numbers'!
+
+!classRemoval: #IIII stamp: 'TM 9/2/2021 20:58:56'!
+II subclass: #IIII
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Natural Numbers'!
+
+!classRemoval: #III stamp: 'TM 9/2/2021 20:58:56'!
+II subclass: #III
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Natural Numbers'!
+!II class methodsFor: 'next & previous' stamp: 'TM 9/2/2021 21:41:51'!
+nextName
+
+	^ self name, 'I'! !
+!II class methodsFor: 'next & previous' stamp: 'TM 9/2/2021 21:41:51' prior: 50859478!
+next
+
+	next ifNotNil: [^next].
+	next := II createChildNamed: (self nextName).
+	next previous: self.
+	
+	^next
+! !
+!II class methodsFor: 'next & previous' stamp: 'TM 9/2/2021 21:41:59' prior: 50859739!
+next
+
+	next ifNotNil: [^next].
+	next := II createChildNamed: self nextName.
+	next previous: self.
+	
+	^next
+! !
+
+----End fileIn of D:\Users\Tomas\Documents\CUIS\windows64\Packages\TerseGuide.pck.st----!
+!II class methodsFor: 'next & previous' stamp: 'TM 9/2/2021 21:51:10' prior: 50859735!
+nextName
+
+	| tempName |
+	tempName _ self name, 'I'.! !
+
+LowercasingTable!
+
+UppercasingTable!
+
+UppercasingTable!
+!II class methodsFor: 'next & previous' stamp: 'TM 9/2/2021 22:00:27' prior: 50862678!
+nextName
+	| tempName |
+	
+	tempName _ self name, 'I'.
+.! !
+!II class methodsFor: 'next & previous' stamp: 'TM 9/2/2021 22:00:31' prior: 50862685!
+nextName
+	| tempName |
+	
+	tempName _ self name, 'I'.
+! !
+
+----STARTUP---- (23 September 2021 20:38:00) as D:\Users\Tomas\Documents\CUIS\windows64\CuisUniversity-4532.image!
+
+
+----End fileIn of D:\Users\Tomas\Documents\CUIS\windows64\ISW1-2021-2C-1erParcial.st----!
+
+----STARTUP---- (6 October 2021 13:37:17) as D:\Users\Tomas\Documents\CUIS\windows64 - Copy\CuisUniversity-4532.image!
+
+
+----End fileIn of D:\Users\Tomas\Documents\CUIS\windows64 - Copy\MarsRover.st----!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:39:37'!
+test03
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #North) equals: false.! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:39:42' prior: 50863561!
+test03
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #North) equals: false.! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:45:04' prior: 50863570!
+test03
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 heading: #North).! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:45:42' prior: 50863540!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (1@1)]! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:47:00' prior: 50863587!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (1@3)].
+	instructions = 'b' ifTrue: [position _ (1@1)].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:47:04' prior: 50863593!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (1@1)].
+	instructions = 'b' ifTrue: [position _ (1@1)].! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:47:22' prior: 50863511!
+test02
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@3 heading: #North) equals: false.! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:47:30' prior: 50863607!
+test02
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@3 heading: #North).! !
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 13:47:30'!
+FAILURE!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 13:47:34'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:47:48' prior: 50863600!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (1@3)].
+	instructions = 'b' ifTrue: [position _ (1@1)].! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 13:47:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 13:47:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 13:47:49'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:48:10'!
+test04
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 heading: #North).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:48:21' prior: 50863643!
+test04
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 heading: #North).! !
+
+!classDefinition: #MarsRover category: 'MarsRover' stamp: 'TM\ 10/6/2021 13:49:13'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position direction'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:49:08' prior: 50863629!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (1@3)].
+	instructions = 'b' ifTrue: [position _ (1@1)].
+	instructions = 'l' ifTrue: [direction _ #West]! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:49:46' prior: 50863535!
+isAt: aPosition heading: aDirection
+	direction = aDirection.
+	position = aPosition.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:49:54' prior: 50863677!
+isAt: aPosition heading: aDirection
+	position = aPosition.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:49:58' prior: 50863683!
+isAt: aPosition heading: aDirection
+	position = aPosition.
+	direction = aDirection.! !
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:50:23'!
+ERROR!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:50:23'!
+ERROR!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:50:49'!
+ERROR!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'mls 10/5/2021 18:38:07' prior: 50863688!
+isAt: aPosition heading: aDirection
+
+	^position = aPosition! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:51:47' prior: 50863668!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (1@3)].
+	instructions = 'b' ifTrue: [position _ (1@1)].! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 13:51:50'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 13:51:50'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 13:51:50'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:51:50'!
+FAILURE!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:51:50'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:52:28' prior: 50863701!
+isAt: aPosition heading: aDirection
+
+	^(position = aPosition) and: [direction = aDirection].! !
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:52:31'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:53:42' prior: 50863531 overrides: 16896425!
+initialize
+	position _ 1@2.
+	direction _ #North.! !
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:53:48'!
+FAILURE!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:54:09' prior: 50863652!
+test04
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #North).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:54:13' prior: 50863742!
+test04
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #West).! !
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:54:14'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:55:21' prior: 50863706!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (1@3)].
+	instructions = 'b' ifTrue: [position _ (1@1)].
+	instructions = 'l' ifTrue: [position _ #West].! !
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:55:47'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:56:07' prior: 50863762!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (1@3)].
+	instructions = 'b' ifTrue: [position _ (1@1)].
+	instructions = 'l' ifTrue: [direction _ #West].! !
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:56:09'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 13:56:09'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 13:56:09'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 13:56:09'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:56:09'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:56:22'!
+test05
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'r'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #East).! !
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 13:56:23'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:56:44' prior: 50863773!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (1@3)].
+	instructions = 'b' ifTrue: [position _ (1@1)].
+	instructions = 'l' ifTrue: [direction _ #West].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 13:56:47'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 13:56:47'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 13:56:47'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 13:56:47'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:56:47'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 13:56:47'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:57:25' prior: 50863793!
+test05
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'f'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@4 heading: #North).! !
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 13:57:26'!
+FAILURE!
+
+marsRover!
+
+1@3!
+
+1@3!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:59:36' prior: 50863804!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (1@1)].
+	instructions = 'l' ifTrue: [direction _ #West].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 13:59:40'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 13:59:40'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 13:59:40'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 13:59:40'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 13:59:40'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 13:59:40'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:00:14' prior: 50863828!
+test05
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'b'.
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 1@4 heading: #North).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 13:57:25' prior: 50863865!
+test05
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'f'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@4 heading: #North).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:00:32'!
+test06
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'f'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@4 heading: #North).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:00:36' prior: 50863883!
+test06
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'b'.
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 1@4 heading: #North).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:00:43' prior: 50863892!
+test06
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'b'.
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 1@0 heading: #North).! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:00:51'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:00:51'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:00:51'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:00:51'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:00:51'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:00:51'!
+FAILURE!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:00:51'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:01:10' prior: 50863840!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [direction _ #West].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:01:15'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:01:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:01:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:01:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:01:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:01:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:01:18'!
+PASSED!
+
+!methodRemoval: TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:02:44'!
+test04
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #West).!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:02:49'!
+test04
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'f'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@4 heading: #North).! !
+
+!methodRemoval: TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:02:49'!
+test05
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'f'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@4 heading: #North).!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:02:53'!
+test05
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'b'.
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 1@0 heading: #North).! !
+
+!methodRemoval: TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:02:53'!
+test06
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'b'.
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 1@0 heading: #North).!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:03:29' prior: 50863927!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:03:33' prior: 50863734 overrides: 16896425!
+initialize
+	position _ 1@2.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:03:39' prior: 50863725!
+isAt: aPosition heading: aDirection
+
+	^(position = aPosition).! !
+
+!classDefinition: #MarsRover category: 'MarsRover' stamp: 'TM\ 10/6/2021 14:03:46'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:04:35'!
+test06
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@0 heading: #North).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:04:42' prior: 50864020!
+test06
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@0 heading: #West).! !
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:04:44'!
+FAILURE!
+
+!classDefinition: #MarsRover category: 'MarsRover' stamp: 'TM\ 10/6/2021 14:05:20'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position direction'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:05:17' prior: 50863995!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [direction _ #West].! !
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:05:24'!
+FAILURE!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:05:51' prior: 50864029!
+test06
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #West).! !
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:05:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:05:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:05:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:05:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:05:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:05:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:05:57'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:06:15' prior: 50864004 overrides: 16896425!
+initialize
+	position _ 1@2.
+	direction _ #North.! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:06:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:06:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:06:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:06:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:06:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:06:18'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:06:31'!
+test07
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'r'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #East).! !
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:06:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:06:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:06:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:06:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:06:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:06:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:06:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:06:35'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:07:14' prior: 50864008!
+isAt: aPosition heading: aDirection
+
+	^(position = aPosition) and: [direction = aDirection].! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:07:27'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:07:27'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:07:27'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:07:27'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:07:27'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:07:27'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:07:27'!
+FAILURE!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:07:27'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:07:53' prior: 50864047!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [direction _ #West].
+	instructions = 'l' ifTrue: [direction _ #East].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:07:58' prior: 50864155!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [direction _ #West].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:08:00'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:08:02'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:08:02'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:08:02'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:08:02'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:08:02'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:08:02'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:08:02'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:08:15'!
+test08
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #East).! !
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:08:16'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:10:17' prior: 50864166!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [
+		direction = #North ifTrue: [direction _ #West]
+		ifFalse: [direction = #South].
+		].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:10:21'!
+FAILURE!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:10:26' prior: 50864195!
+test08
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #South).! !
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:10:27'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:11:16' prior: 50864207!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [
+		direction = #North ifTrue: [direction _ #West]
+		ifFalse: [direction _ #South].
+		].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:11:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:11:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:11:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:11:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:11:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:11:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:11:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:11:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:11:18'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:12:20' prior: 50864223!
+test08
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #East).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:12:28'!
+test09
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #East).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:10:26' prior: 50864269!
+test08
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #South).! !
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:12:40'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:14:51' prior: 50864235!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [
+		direction = #North ifTrue: [direction _ #West]
+		ifFalse: [(direction = #West) ifTrue: [direction _ #South]
+		ifFalse: [direction _ #East]].
+		].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:14:52'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:15:00'!
+test10
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #East).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:15:09' prior: 50864339!
+test10
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	marsRover process: 'l'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #North).! !
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:15:36'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:16:39' prior: 50864301!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [
+		direction = #North ifTrue: [direction _ #West]
+		ifFalse: [(direction = #West) ifTrue: [direction _ #South]
+		ifFalse: [(direction = #South) ifTrue: [direction _ #East]
+		ifFalse: [direction _ #North]]].
+		].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:16:56' prior: 50864362!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [
+		direction = #North ifTrue: [direction _ #West]
+		ifFalse: [(direction = #West) ifTrue: [direction _ #South]
+			ifFalse: [(direction = #South) ifTrue: [direction _ #East]
+				ifFalse: [direction _ #North]
+				]
+			]
+		].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:17:37'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:17:38'!
+PASSED!
+
+Object subclass: #Direction
+	instanceVariableNames: 'position direction'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!classDefinition: #Direction category: 'MarsRover' stamp: 'TM\ 10/6/2021 14:18:47'!
+Object subclass: #Direction
+	instanceVariableNames: 'position direction'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+Direction subclass: #North
+	instanceVariableNames: 'position direction'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+Direction subclass: #North
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!classDefinition: #North category: 'MarsRover' stamp: 'TM\ 10/6/2021 14:19:01'!
+Direction subclass: #North
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+Object subclass: #Direction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!classDefinition: #Direction category: 'MarsRover' stamp: 'TM\ 10/6/2021 14:19:06'!
+Object subclass: #Direction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+Direction subclass: #West
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!classDefinition: #West category: 'MarsRover' stamp: 'TM\ 10/6/2021 14:19:14'!
+Direction subclass: #West
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+Direction subclass: #South
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!classDefinition: #South category: 'MarsRover' stamp: 'TM\ 10/6/2021 14:19:17'!
+Direction subclass: #South
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+Direction subclass: #East
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!classDefinition: #East category: 'MarsRover' stamp: 'TM\ 10/6/2021 14:19:20'!
+Direction subclass: #East
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:20:32' prior: 50864084 overrides: 16896425!
+initialize
+	position _ 1@2.
+	direction _ North new.! !
+
+----End fileIn of D:\Users\Tomas\Documents\CUIS\Entrega\mail\ISW1-2021-2C-1erParcial.st----!
+!TestMarsRover methodsFor: 'instance creation' stamp: 'TM\ 10/6/2021 14:22:34'!
+north
+
+	^North new.! !
+
+!methodRemoval: TestMarsRover #north stamp: 'TM\ 10/6/2021 14:23:04'!
+north
+
+	^North new.!
+!Direction methodsFor: 'no messages' stamp: 'TM\ 10/6/2021 14:24:32'!
+leftDirection
+! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:24:40' overrides: 50865291!
+leftDirection
+! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:24:40' overrides: 50865291!
+leftDirection
+! !
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:24:40' overrides: 50865291!
+leftDirection
+! !
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:24:40' overrides: 50865291!
+leftDirection
+! !
+
+!methodRemoval: Direction #leftDirection stamp: 'TM\ 10/6/2021 14:24:40'!
+leftDirection
+!
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:24:53' prior: 50865307!
+leftDirection
+
+	^North new.! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:25:09' prior: 50865295!
+leftDirection
+
+	^East new.
+! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:25:15' prior: 50865318!
+leftDirection
+
+	^West new.
+! !
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:25:34' prior: 50865303!
+leftDirection
+
+	^East new.
+! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:25:50' prior: 50865299!
+leftDirection
+
+	^South new.
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:26:11' prior: 50864379!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [
+		direction _ direction leftDirection.
+		].
+	instructions = 'r' ifTrue: [direction _ #East].! !
+!Direction methodsFor: 'no messages' stamp: 'TM\ 10/6/2021 14:26:50' overrides: 16882504!
+is: aDirectionLiteral! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:27:01' prior: 50864130!
+isAt: aPosition heading: aDirectionLiteral
+
+	^(position = aPosition) and: [direction = aDirectionLiteral].! !
+!MarsRover class methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:27:15' prior: 50863553!
+at: anInitialPosition heading: anInitialDirectionLiteral
+	^self new initialize.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:28:06' prior: 50865350!
+isAt: aPosition heading: aDirectionLiteral
+
+	^(position = aPosition) and: [direction is: aDirectionLiteral].! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:28:25' overrides: 50865346!
+is: aDirectionLiteral! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:28:26' overrides: 50865346!
+is: aDirectionLiteral! !
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:28:26' overrides: 50865346!
+is: aDirectionLiteral! !
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:28:26' overrides: 50865346!
+is: aDirectionLiteral! !
+
+!methodRemoval: Direction #is: stamp: 'TM\ 10/6/2021 14:28:26'!
+is: aDirectionLiteral!
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:28:41' prior: 50865382 overrides: 16882504!
+is: aDirectionLiteral
+
+	^aDirectionLiteral = #East.! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:28:56' prior: 50865370 overrides: 16882504!
+is: aDirectionLiteral
+
+	^aDirectionLiteral = #North.! !
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:29:09' prior: 50865378 overrides: 16882504!
+is: aDirectionLiteral
+
+	^aDirectionLiteral = #South.! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:29:20' prior: 50865374 overrides: 16882504!
+is: aDirectionLiteral
+
+	^aDirectionLiteral = #West.! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:29:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:29:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:29:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:29:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:29:31'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:29:31'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:29:31'!
+FAILURE!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:29:31'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:29:31'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:29:31'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:29:31'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:29:49' prior: 50865334!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [
+		direction _ direction leftDirection.
+		].
+	instructions = 'r' ifTrue: [direction _ direction rightDirection].! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:29:54'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:29:54'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:29:54'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:29:54'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:29:54'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:29:54'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:29:54'!
+ERROR!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:29:54'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:29:54'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:29:54'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:29:54'!
+ERROR!
+!Direction methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:04'!
+rightDirection
+	self shouldBeImplemented.! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:14' overrides: 50865476!
+rightDirection
+	self shouldBeImplemented.! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:15' overrides: 50865476!
+rightDirection
+	self shouldBeImplemented.! !
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:15' overrides: 50865476!
+rightDirection
+	self shouldBeImplemented.! !
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:15' overrides: 50865476!
+rightDirection
+	self shouldBeImplemented.! !
+
+!methodRemoval: Direction #rightDirection stamp: 'TM\ 10/6/2021 14:30:15'!
+rightDirection
+	self shouldBeImplemented.!
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:35'!
+right
+	self shouldBeImplemented.! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:35'!
+right
+	self shouldBeImplemented.! !
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:35'!
+right
+	self shouldBeImplemented.! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:35'!
+right
+	self shouldBeImplemented.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:35' prior: 50865438!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [
+		direction _ direction leftDirection.
+		].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+
+!methodRemoval: South #rightDirection stamp: 'TM\ 10/6/2021 14:30:35'!
+rightDirection
+	self shouldBeImplemented.!
+
+!methodRemoval: West #rightDirection stamp: 'TM\ 10/6/2021 14:30:35'!
+rightDirection
+	self shouldBeImplemented.!
+
+!methodRemoval: East #rightDirection stamp: 'TM\ 10/6/2021 14:30:35'!
+rightDirection
+	self shouldBeImplemented.!
+
+!methodRemoval: North #rightDirection stamp: 'TM\ 10/6/2021 14:30:35'!
+rightDirection
+	self shouldBeImplemented.!
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:53'!
+left
+
+	^East new.
+! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:53'!
+left
+
+	^South new.
+! !
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:53'!
+left
+
+	^North new.! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:53'!
+left
+
+	^West new.
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:30:53' prior: 50865521!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [
+		direction _ direction left.
+		].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+
+!methodRemoval: South #leftDirection stamp: 'TM\ 10/6/2021 14:30:53'!
+leftDirection
+
+	^East new.
+!
+
+!methodRemoval: West #leftDirection stamp: 'TM\ 10/6/2021 14:30:53'!
+leftDirection
+
+	^South new.
+!
+
+!methodRemoval: East #leftDirection stamp: 'TM\ 10/6/2021 14:30:53'!
+leftDirection
+
+	^North new.!
+
+!methodRemoval: North #leftDirection stamp: 'TM\ 10/6/2021 14:30:53'!
+leftDirection
+
+	^West new.
+!
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:31:46' prior: 50865512!
+right
+	
+	^North new.! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:32:08' prior: 50865516!
+right
+	
+	^East new.! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:32:13' prior: 50865588!
+right
+	
+	^South new.! !
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:32:24' prior: 50865504!
+right
+	
+	^West new.! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:32:34' prior: 50865508!
+right
+	
+	^North new.! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:32:42'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:32:42'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:32:42'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:32:42'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:32:42'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:32:42'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:32:42'!
+FAILURE!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:32:42'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:32:42'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:32:42'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:32:42'!
+FAILURE!
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:33:10' prior: 50865584!
+right
+	
+	^South new.! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:33:15' prior: 50865592!
+right
+	
+	^East new.! !
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:33:18'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:33:20'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:33:46' prior: 50865560!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + (0@1))].
+	instructions = 'b' ifTrue: [position _ (position - (0@1))].
+	instructions = 'l' ifTrue: [direction _ direction left.].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:36:20'!
+test11
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'r'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #East).! !
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:36:27'!
+FAILURE!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:36:39' prior: 50865675!
+test11
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'r'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 2@2 heading: #East).! !
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:36:39'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:37:11' prior: 50865664!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + direction unitVector)].
+	instructions = 'b' ifTrue: [position _ (position - direction unitVector)].
+	instructions = 'l' ifTrue: [direction _ direction left.].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+!Direction methodsFor: 'no messages' stamp: 'TM\ 10/6/2021 14:37:35'!
+unitVector
+! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:37:39' overrides: 50865710!
+unitVector
+! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:37:39' overrides: 50865710!
+unitVector
+! !
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:37:39' overrides: 50865710!
+unitVector
+! !
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:37:39' overrides: 50865710!
+unitVector
+! !
+
+!methodRemoval: Direction #unitVector stamp: 'TM\ 10/6/2021 14:37:39'!
+unitVector
+!
+!East methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:38:04' prior: 50865726!
+unitVector
+
+	^(1@0).
+! !
+!North methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:38:18' prior: 50865714!
+unitVector
+
+	^(0@1).! !
+!South methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:38:31' prior: 50865722!
+unitVector
+
+	^(0@-1).! !
+!West methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:38:46' prior: 50865718!
+unitVector
+
+	^(-1@0).
+! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:38:49'!
+PASSED!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:39:47'!
+test12
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	marsRover process: 'f'.
+	marsRover process: 'l'.
+	marsRover process: 'f'.
+	marsRover process: 'l'.
+	marsRover process: 'f'.
+	marsRover process: 'l'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 2@2 heading: #East).! !
+
+!methodRemoval: TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:40:04'!
+test12
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'l'.
+	marsRover process: 'f'.
+	marsRover process: 'l'.
+	marsRover process: 'f'.
+	marsRover process: 'l'.
+	marsRover process: 'f'.
+	marsRover process: 'l'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 2@2 heading: #East).!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:40:14'!
+test12
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'r'.
+	marsRover process: 'f'.
+	
+	self assert: (marsRover isAt: 2@2 heading: #East).! !
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:40:52' prior: 50865799!
+test12
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 0@0 heading: #East.
+	
+	marsRover process: 'l'.
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 0@-1 heading: #East).! !
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:40:54'!
+FAILURE!
+!MarsRover class methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:41:23' prior: 50865357!
+at: anInitialPosition heading: anInitialDirectionLiteral
+	^self new initializeAt: anInitialPosition heading: anInitialDirectionLiteral .! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:42:27'!
+initializeAt: anInitialPosition heading: anInitialDirectionLiteral.
+
+	position _ 1@2.
+	direction _ North new.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:43:07' prior: 50865827!
+initializeAt: anInitialPosition heading: anInitialDirectionLiteral.
+
+	position _ 1@2.
+	anInitialDirectionLiteral = #North ifTrue: [direction _ North new.].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:43:10' prior: 50865834!
+initializeAt: anInitialPosition heading: anInitialDirectionLiteral.
+
+	position _ 1@2.
+	anInitialDirectionLiteral = #North ifTrue: [direction _ North new].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:43:41' prior: 50865842!
+initializeAt: anInitialPosition heading: anInitialDirectionLiteral.
+
+	position _ 1@2.
+	anInitialDirectionLiteral = #North ifTrue: [direction _ North new].
+	anInitialDirectionLiteral = #West ifTrue: [direction _ West new].
+	anInitialDirectionLiteral = #South ifTrue: [direction _ South new].
+	anInitialDirectionLiteral = #East ifTrue: [direction _ North new].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:43:45' prior: 50865850!
+initializeAt: anInitialPosition heading: anInitialDirectionLiteral.
+
+	position _ 1@2.
+	anInitialDirectionLiteral = #North ifTrue: [direction _ North new].
+	anInitialDirectionLiteral = #West ifTrue: [direction _ West new].
+	anInitialDirectionLiteral = #South ifTrue: [direction _ South new].
+	anInitialDirectionLiteral = #East ifTrue: [direction _ East new].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:44:07' prior: 50865865!
+initializeAt: anInitialPosition heading: anInitialDirectionLiteral.
+
+	position _ anInitialPosition .
+	anInitialDirectionLiteral = #North ifTrue: [direction _ North new].
+	anInitialDirectionLiteral = #West ifTrue: [direction _ West new].
+	anInitialDirectionLiteral = #South ifTrue: [direction _ South new].
+	anInitialDirectionLiteral = #East ifTrue: [direction _ East new].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:44:09' prior: 50865880!
+initializeAt: anInitialPosition heading: anInitialDirectionLiteral.
+
+	position _ anInitialPosition.
+	anInitialDirectionLiteral = #North ifTrue: [direction _ North new].
+	anInitialDirectionLiteral = #West ifTrue: [direction _ West new].
+	anInitialDirectionLiteral = #South ifTrue: [direction _ South new].
+	anInitialDirectionLiteral = #East ifTrue: [direction _ East new].! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:44:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:44:11'!
+FAILURE!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:44:11'!
+FAILURE!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:44:40' prior: 50865808!
+test12
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 0@0 heading: #East.
+	
+	marsRover process: 'l'.
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 0@-1 heading: #Norht).! !
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:44:41'!
+FAILURE!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:44:47' prior: 50865940!
+test12
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 0@0 heading: #East.
+	
+	marsRover process: 'l'.
+	marsRover process: 'b'.
+	
+	self assert: (marsRover isAt: 0@-1 heading: #North).! !
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:44:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:44:55'!
+PASSED!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:46:31'!
+test13
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'ff'.
+	
+	self assert: (marsRover isAt: 1@4 heading: #North).! !
+
+!testRun: #TestMarsRover #test13 stamp: 'TM\ 10/6/2021 14:46:35'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:47:00' prior: 50865698!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + direction unitVector)].
+	instructions = 'ff' ifTrue: [position _ (position + direction unitVector). position _ (position + direction unitVector).].
+	instructions = 'b' ifTrue: [position _ (position - direction unitVector)].
+	instructions = 'l' ifTrue: [direction _ direction left.].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+
+!testRun: #TestMarsRover #test13 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test13 stamp: 'TM\ 10/6/2021 14:47:03'!
+PASSED!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:47:12'!
+test14
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'fff'.
+	
+	self assert: (marsRover isAt: 1@4 heading: #North).! !
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:47:17' prior: 50866052!
+test14
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'fff'.
+	
+	self assert: (marsRover isAt: 1@5 heading: #North).! !
+
+!testRun: #TestMarsRover #test14 stamp: 'TM\ 10/6/2021 14:47:20'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:47:45' prior: 50866003!
+process: instructions
+
+	instructions = 'f' ifTrue: [position _ (position + direction unitVector)].
+	instructions = 'ff' ifTrue: [position _ (position + direction unitVector). position _ (position + direction unitVector).].
+	instructions = 'fff' ifTrue: [position _ (position + direction unitVector). position _ (position + direction unitVector). position _ (position + direction unitVector).].
+	instructions = 'b' ifTrue: [position _ (position - direction unitVector)].
+	instructions = 'l' ifTrue: [direction _ direction left.].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+
+!testRun: #TestMarsRover #test14 stamp: 'TM\ 10/6/2021 14:47:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:47:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:47:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:47:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:47:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:47:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:47:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:47:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:47:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:47:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:47:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:47:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:47:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test13 stamp: 'TM\ 10/6/2021 14:47:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test14 stamp: 'TM\ 10/6/2021 14:47:49'!
+PASSED!
+
+----End fileIn of D:\Users\Tomas\Documents\CUIS\windows64 - Copy\Packages\TerseGuide.pck.st----!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:52:42' prior: 50866071!
+process: instructions
+
+	instructions do: [:aCharacter |
+		aCharacter = $f ifTrue: [position _ (position + direction unitVector)].
+		].
+	instructions = 'b' ifTrue: [position _ (position - direction unitVector)].
+	instructions = 'l' ifTrue: [direction _ direction left.].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+
+!testRun: #TestMarsRover #test14 stamp: 'TM\ 10/6/2021 14:52:58'!
+PASSED!
+
+!testRun: #TestMarsRover #test14 stamp: 'TM\ 10/6/2021 14:53:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:53:06'!
+PASSED!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:53:07'!
+PASSED!
+
+!testRun: #TestMarsRover #test13 stamp: 'TM\ 10/6/2021 14:53:07'!
+PASSED!
+
+!testRun: #TestMarsRover #test14 stamp: 'TM\ 10/6/2021 14:53:07'!
+PASSED!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:53:38'!
+test15
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'bb'.
+	
+	self assert: (marsRover isAt: 1@0 heading: #North).! !
+
+!testRun: #TestMarsRover #test15 stamp: 'TM\ 10/6/2021 14:53:40'!
+FAILURE!
+
+!testRun: #TestMarsRover #test15 stamp: 'TM\ 10/6/2021 14:53:40'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:53:59' prior: 50869054!
+process: instructions
+
+	instructions do: [:aCharacter |
+		aCharacter = $f ifTrue: [position _ (position + direction unitVector)].
+		].
+	instructions = 'b' ifTrue: [position _ (position - direction unitVector)].
+	instructions = 'bb' ifTrue: [position _ (position - direction unitVector). position _ (position - direction unitVector)].
+	instructions = 'l' ifTrue: [direction _ direction left.].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+
+!testRun: #TestMarsRover #test15 stamp: 'TM\ 10/6/2021 14:54:01'!
+PASSED!
+
+!testRun: #TestMarsRover #test15 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test13 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test14 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test15 stamp: 'TM\ 10/6/2021 14:54:03'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:54:22' prior: 50869118!
+process: instructions
+
+	instructions do: [:aCharacter |
+		aCharacter = $f ifTrue: [position _ (position + direction unitVector)].
+		].
+	instructions = 'l' ifTrue: [direction _ direction left.].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:54:30' prior: 50869175!
+process: instructions
+
+	instructions do: [:aCharacter |
+		aCharacter = $f ifTrue: [position _ (position + direction unitVector)].
+		aCharacter = $b ifTrue: [position _ (position - direction unitVector)].
+		].
+	instructions = 'l' ifTrue: [direction _ direction left.].
+	instructions = 'r' ifTrue: [direction _ direction right].! !
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:54:32'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:54:32'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:54:32'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:54:32'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:54:32'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:54:32'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:54:32'!
+PASSED!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:54:32'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:54:32'!
+PASSED!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:54:33'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:54:33'!
+PASSED!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:54:33'!
+PASSED!
+
+!testRun: #TestMarsRover #test13 stamp: 'TM\ 10/6/2021 14:54:33'!
+PASSED!
+
+!testRun: #TestMarsRover #test14 stamp: 'TM\ 10/6/2021 14:54:33'!
+PASSED!
+
+!testRun: #TestMarsRover #test15 stamp: 'TM\ 10/6/2021 14:54:33'!
+PASSED!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:54:55' prior: 50869105!
+test15
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'rr'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #South).! !
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:55:00'!
+test16
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'rr'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #South).! !
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:54:55' prior: 50869235!
+test15
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'rr'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #South).! !
+
+!testRun: #TestMarsRover #test16 stamp: 'TM\ 10/6/2021 14:55:10'!
+FAILURE!
+
+!testRun: #TestMarsRover #test16 stamp: 'TM\ 10/6/2021 14:55:10'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:55:50' prior: 50869186!
+process: instructions
+
+	instructions do: [:aCharacter |
+		aCharacter = $f ifTrue: [position _ (position + direction unitVector)].
+		aCharacter = $b ifTrue: [position _ (position - direction unitVector)].
+		aCharacter = $r ifTrue: [direction _ direction left].
+		aCharacter = $l ifTrue: [direction _ direction right].
+		].! !
+
+!testRun: #TestMarsRover #test16 stamp: 'TM\ 10/6/2021 14:55:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test16 stamp: 'TM\ 10/6/2021 14:55:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test01 stamp: 'TM\ 10/6/2021 14:55:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test02 stamp: 'TM\ 10/6/2021 14:55:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test03 stamp: 'TM\ 10/6/2021 14:55:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test04 stamp: 'TM\ 10/6/2021 14:55:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test05 stamp: 'TM\ 10/6/2021 14:55:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:55:57'!
+FAILURE!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:55:57'!
+FAILURE!
+
+!testRun: #TestMarsRover #test08 stamp: 'TM\ 10/6/2021 14:55:57'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:55:58'!
+FAILURE!
+
+!testRun: #TestMarsRover #test10 stamp: 'TM\ 10/6/2021 14:55:58'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:55:58'!
+FAILURE!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:55:58'!
+FAILURE!
+
+!testRun: #TestMarsRover #test13 stamp: 'TM\ 10/6/2021 14:55:58'!
+PASSED!
+
+!testRun: #TestMarsRover #test14 stamp: 'TM\ 10/6/2021 14:55:58'!
+PASSED!
+
+!testRun: #TestMarsRover #test15 stamp: 'TM\ 10/6/2021 14:55:58'!
+PASSED!
+
+!testRun: #TestMarsRover #test16 stamp: 'TM\ 10/6/2021 14:55:58'!
+PASSED!
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:56:02'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'TM\ 10/6/2021 14:56:33' prior: 50869264!
+process: instructions
+
+	instructions do: [:aCharacter |
+		aCharacter = $f ifTrue: [position _ (position + direction unitVector)].
+		aCharacter = $b ifTrue: [position _ (position - direction unitVector)].
+		aCharacter = $r ifTrue: [direction _ direction right].
+		aCharacter = $l ifTrue: [direction _ direction left].
+		].! !
+
+!testRun: #TestMarsRover #test06 stamp: 'TM\ 10/6/2021 14:56:34'!
+PASSED!
+
+!testRun: #TestMarsRover #test07 stamp: 'TM\ 10/6/2021 14:56:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test09 stamp: 'TM\ 10/6/2021 14:56:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test11 stamp: 'TM\ 10/6/2021 14:56:35'!
+PASSED!
+
+!testRun: #TestMarsRover #test12 stamp: 'TM\ 10/6/2021 14:56:35'!
+PASSED!
+!TestMarsRover methodsFor: 'testing' stamp: 'TM\ 10/6/2021 14:57:55' prior: 50869243!
+test16
+
+	| marsRover |
+		
+	marsRover _ MarsRover at: 1@2 heading: #North.
+	
+	marsRover process: 'xf'.
+	
+	self assert: (marsRover isAt: 1@2 heading: #North).! !
+
+!testRun: #TestMarsRover #test16 stamp: 'TM\ 10/6/2021 14:57:59'!
+FAILURE!
+
+----SNAPSHOT----(6 October 2021 15:02:13) CuisUniversity-4532.image priorSource: 16885703!
+
+----STARTUP---- (7 October 2021 20:10:03) as D:\Users\Tomas\Documents\CUIS\windows64 - Copy\CuisUniversity-4532.image!
+
+
+----End fileIn of D:\Users\Tomas\Documents\CUIS\windows64 - Copy\Portfolio-Ejercicio.st----!
+!Withdraw methodsFor: 'initialization' stamp: 'TM\ 10/7/2021 20:25:39' prior: 50869531!
+initializeFor: aValue
+
+	value := aValue ! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 20:25:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:25:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:25:50'!
+FAILURE!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 20:25:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 20:25:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 20:25:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 20:25:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:25:50'!
+FAILURE!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:28:35' prior: 50869580!
+balance
+
+	^transactions sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:34:53' prior: 50869630!
+balance
+
+	"^transactions sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]"
+	
+	^((transactions select: [ :aTransaction | aTransaction isDeposit]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]) -
+	(transactions select: [ :aTransaction | aTransaction isDeposit not]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ].! !
+!AccountTransaction methodsFor: 'nil' stamp: 'TM\ 10/7/2021 20:35:11'!
+isDeposit
+
+	^false.! !
+!Deposit methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:35:24' overrides: 50869650!
+isDeposit
+
+	^false.! !
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:35:24' overrides: 50869650!
+isDeposit
+
+	^false.! !
+
+!methodRemoval: AccountTransaction #isDeposit stamp: 'TM\ 10/7/2021 20:35:24'!
+isDeposit
+
+	^false.!
+!Deposit methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:35:29' prior: 50869654!
+isDeposit
+
+	^true.! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 20:35:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:35:31'!
+FAILURE!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:35:31'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 20:35:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 20:35:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 20:35:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 20:35:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:35:39'!
+ERROR!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:36:08' prior: 50869636!
+balance
+
+	"^transactions sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]"
+	
+	^((transactions select: [ :aTransaction | aTransaction isDeposit]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]) -
+	((transactions select: [ :aTransaction | aTransaction isDeposit not]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]).! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 20:36:10'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:36:10'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:36:10'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 20:36:10'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 20:36:10'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 20:36:10'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 20:36:10'!
+PASSED!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:37:55'!
+balanceIn
+
+	"^transactions sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]"
+	
+	^((transactions select: [ :aTransaction | aTransaction isDeposit]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]).! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:38:02'!
+balanceOut
+
+	"^transactions sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]"
+	
+	^((transactions select: [ :aTransaction | aTransaction isDeposit]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]).! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:38:13' prior: 50869749!
+balanceOut
+
+	"^transactions sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]"
+	
+	^((transactions select: [ :aTransaction | aTransaction isDeposit not]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]).! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:38:21' prior: 50869759!
+balanceOut
+	
+	^((transactions select: [ :aTransaction | aTransaction isDeposit not]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]).! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:38:27' prior: 50869739!
+balanceIn
+	
+	^((transactions select: [ :aTransaction | aTransaction isDeposit]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]).! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:38:53' prior: 50869699!
+balance
+
+	"^transactions sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]"
+	
+	^self balanceIn - self balanceOut.! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 20:38:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:38:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:38:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 20:38:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 20:38:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 20:38:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 20:38:59'!
+PASSED!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 20:39:14' prior: 50869785!
+balance
+	
+	^self balanceIn - self balanceOut.! !
+
+TestCase subclass: #PortfolioTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #PortfolioTest category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/7/2021 20:40:48'!
+TestCase subclass: #PortfolioTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #Portfolio category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/7/2021 20:44:44'!
+Object subclass: #Portfolio
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!PortfolioTest methodsFor: 'nil' stamp: 'TM\ 10/7/2021 20:44:31'!
+test01
+
+	| aPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	
+	self assert: (aPortfolio balance) isEqualTo: 0.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:45:39' prior: 50869842!
+test01
+
+	| aPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	
+	self assert: 0 equals: (aPortfolio balance).! !
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 20:45:46'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:45:58'!
+balance
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:46:05' prior: 50869858!
+balance
+	^0.! !
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 20:46:08'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 20:46:08'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:48:49'!
+test02
+
+	| aPortfolio anAccount|
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	
+	
+	self assert: 0 equals: (aPortfolio balance).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:50:04' prior: 50869871!
+test02
+
+	| aPortfolio anAccount|
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	
+	
+	self assert: 0 equals: (aPortfolio balance).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:52:36' prior: 50869879!
+test02
+
+	| aPortfolio anAccount|
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio add: anAccount.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:52:38'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:52:43'!
+add: aReceptiveAccount 
+	self shouldBeImplemented.! !
+
+!classDefinition: #Portfolio category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/7/2021 20:53:07'!
+Object subclass: #Portfolio
+	instanceVariableNames: 'accounts'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:53:03' prior: 50869899!
+add: aReceptiveAccount 
+	
+	accounts add: aReceptiveAccount.! !
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:53:16'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:53:45' overrides: 16896425!
+initialize
+
+	accounts _ OrderedCollection new.! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 20:53:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:53:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:53:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 20:53:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 20:53:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 20:53:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 20:53:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 20:53:58'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:53:58'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 20:53:58'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 20:53:58'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 20:53:58'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 20:53:58'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 20:53:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 20:54:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:54:05'!
+FAILURE!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:54:05'!
+FAILURE!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:54:45'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:56:00' prior: 50869863!
+balance
+	^accounts sum: [ :anAccount | anAccount value ].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:56:07' prior: 50869987!
+balance
+	^accounts sum: [ :anAccount | anAccount balance ].! !
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:56:09'!
+FAILURE!
+
+accounts sum: [ :anAccount | anAccount balance ]!
+
+aPortfolio balance!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:57:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 20:58:01'!
+ERROR!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:58:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 20:58:01'!
+ERROR!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 20:58:18'!
+ERROR!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:58:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 20:58:18'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:58:33' prior: 50869992!
+balance
+	^accounts sum: [ :anAccount | anAccount balance ] ifEmpty: [0].! !
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 20:58:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 20:58:36'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:59:42' prior: 50869887!
+test02
+
+	| aPortfolio anAccount |
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio add: anAccount.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+!Behavior method!
+initialize
+	(accounts _ [
+	(OrderedCollection
+		cover: (25 to: 41)
+		declaredAt: (25 to: 41)) new ] valueCoveringAll:
+		{43 to: 45})
+		cover: (14 to: 21)
+		declaredAt: (14 to: 21).! !
+!Behavior method!
+balance
+	^ [
+	(accounts
+		cover: (11 to: 18)
+		declaredAt: (11 to: 18))
+		sum: [ :anAccount |
+			[
+			(anAccount
+				cover: (40 to: 48)
+				declaredAt: (28 to: 36)) balance ] valueCoveringAll:
+				{50 to: 56} ]
+		ifEmpty: [
+			0 coverAll:
+				{70 to: 70} ]] valueCoveringAll:
+		{20 to: 23. 60 to: 67}.! !
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:02:07'!
+PASSED!
+!Behavior method!
+initialize
+	(transactions _ [
+	(OrderedCollection
+		cover: (32 to: 48)
+		declaredAt: (32 to: 48)) new ] valueCoveringAll:
+		{50 to: 52})
+		cover: (16 to: 27)
+		declaredAt: (16 to: 27).! !
+!Behavior method!
+for: aValue
+	^ [
+	([
+	(self coverAll:
+		{19 to: 22}) new ] valueCoveringAll:
+		{24 to: 26}) initializeFor:
+		(aValue
+			cover: (43 to: 48)
+			declaredAt: (6 to: 11)) ] valueCoveringAll:
+		{28 to: 41}.! !
+!Behavior method!
+initializeFor: aValue
+	(value _ aValue
+		cover: (36 to: 41)
+		declaredAt: (16 to: 21))
+		cover: (27 to: 31)
+		declaredAt: (27 to: 31).! !
+!Behavior method!
+register: aTransaction
+	[
+	(transactions
+		cover: (28 to: 39)
+		declaredAt: (28 to: 39)) add:
+		(aTransaction
+			cover: (46 to: 57)
+			declaredAt: (11 to: 22)) ] valueCoveringAll:
+		{41 to: 44}.! !
+!Behavior method!
+add: aReceptiveAccount
+	[
+	(accounts
+		cover: (28 to: 35)
+		declaredAt: (28 to: 35)) add:
+		(aReceptiveAccount
+			cover: (42 to: 58)
+			declaredAt: (6 to: 22)) ] valueCoveringAll:
+		{37 to: 40}.! !
+!Behavior method!
+balance
+	^ [
+	([
+	(self coverAll:
+		{13 to: 16}) balanceIn ] valueCoveringAll:
+		{18 to: 26}) -
+		([
+		(self coverAll:
+			{30 to: 33}) balanceOut ] valueCoveringAll:
+			{35 to: 44}) ] valueCoveringAll:
+		{28 to: 28}.! !
+!Behavior method!
+balanceIn
+	^ [
+	([
+	(transactions
+		cover: (17 to: 28)
+		declaredAt: (17 to: 28)) select: [ :aTransaction |
+		[
+		(aTransaction
+			cover: (56 to: 67)
+			declaredAt: (41 to: 52)) isDeposit ] valueCoveringAll:
+			{69 to: 77} ]] valueCoveringAll:
+		{30 to: 36})
+		sum: [ :aTransaction |
+			[
+			(aTransaction
+				cover: (104 to: 115)
+				declaredAt: (89 to: 100)) value ] valueCoveringAll:
+				{117 to: 121} ]
+		ifEmpty: [
+			0 coverAll:
+				{136 to: 136} ]] valueCoveringAll:
+		{81 to: 84. 125 to: 132}.! !
+!Behavior method!
+isDeposit
+	^ true coverAll:
+		{14 to: 17}.! !
+!Behavior method!
+value
+	^ value
+		cover: (13 to: 17)
+		declaredAt: (13 to: 17).! !
+!Behavior method!
+balanceOut
+	^ [
+	([
+	(transactions
+		cover: (18 to: 29)
+		declaredAt: (18 to: 29)) select: [ :aTransaction |
+		[
+		([
+		(aTransaction
+			cover: (57 to: 68)
+			declaredAt: (42 to: 53)) isDeposit ] valueCoveringAll:
+			{70 to: 78}) not ] valueCoveringAll:
+			{80 to: 82} ]] valueCoveringAll:
+		{31 to: 37})
+		sum: [ :aTransaction |
+			[
+			(aTransaction
+				cover: (109 to: 120)
+				declaredAt: (94 to: 105)) value ] valueCoveringAll:
+				{122 to: 126} ]
+		ifEmpty: [
+			0 coverAll:
+				{141 to: 141} ]] valueCoveringAll:
+		{86 to: 89. 130 to: 137}.! !
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:02:08'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 21:02:08'!
+PASSED!
+!Behavior method!
+register: aValue on: account
+	| transaction |
+	(transaction _ [
+	(self coverAll:
+		{70 to: 73}) for:
+		(aValue
+			cover: (80 to: 85)
+			declaredAt: (11 to: 16)) ] valueCoveringAll:
+		{75 to: 78})
+		cover: (55 to: 65)
+		declaredAt: (36 to: 46).
+	[
+	(account
+		cover: (90 to: 96)
+		declaredAt: (22 to: 28)) register:
+		(transaction
+			cover: (108 to: 118)
+			declaredAt: (36 to: 46)) ] valueCoveringAll:
+		{98 to: 106}.
+	^ transaction
+		cover: (129 to: 139)
+		declaredAt: (36 to: 46).! !
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:02:08'!
+PASSED!
+!Behavior method!
+for: aValue
+	^ [
+	([
+	(self coverAll:
+		{19 to: 22}) new ] valueCoveringAll:
+		{24 to: 26}) initializeFor:
+		(aValue
+			cover: (43 to: 48)
+			declaredAt: (6 to: 11)) ] valueCoveringAll:
+		{28 to: 41}.! !
+!Behavior method!
+initializeFor: aValue
+	(value _ aValue
+		cover: (34 to: 39)
+		declaredAt: (16 to: 21))
+		cover: (25 to: 29)
+		declaredAt: (25 to: 29).! !
+!Behavior method!
+isDeposit
+	^ false coverAll:
+		{14 to: 18}.! !
+!Behavior method!
+value
+	^ value
+		cover: (13 to: 17)
+		declaredAt: (13 to: 17).! !
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:02:08'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 21:02:08'!
+PASSED!
+!Behavior method!
+hasRegistered: aTransaction
+	^ [
+	(transactions
+		cover: (35 to: 46)
+		declaredAt: (35 to: 46)) includes:
+		(aTransaction
+			cover: (58 to: 69)
+			declaredAt: (16 to: 27)) ] valueCoveringAll:
+		{48 to: 56}.! !
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 21:02:08'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 21:02:08'!
+PASSED!
+!Behavior method!
+transactions
+	^ [
+	(transactions
+		cover: (21 to: 32)
+		declaredAt: (21 to: 32)) copy ] valueCoveringAll:
+		{34 to: 37}.! !
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 21:02:08'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:04:06'!
+test03
+
+	| aPortfolio anOtherPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	anOtherPortfolio _ Portfolio new.
+	
+	aPortfolio addPortfolio: anOtherPortfolio. 
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:04:25'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:04:32'!
+addPortfolio: aPortfolio 
+	self shouldBeImplemented.! !
+
+!classDefinition: #Portfolio category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/7/2021 21:04:52'!
+Object subclass: #Portfolio
+	instanceVariableNames: 'accounts portfolios'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:04:51' prior: 50870228!
+addPortfolio: aPortfolio 
+	
+	portfolios add: aPortfolio.! !
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:04:55'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:05:14' prior: 50869920 overrides: 16896425!
+initialize
+
+	accounts _ OrderedCollection new.
+	portfolios _ OrderedCollection new.! !
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:05:27'!
+ERROR!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:05:29'!
+ERROR!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:05:31'!
+ERROR!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:05:32'!
+ERROR!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:05:33'!
+ERROR!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:05:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:05:59'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:05:59'!
+FAILURE!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:05:59'!
+FAILURE!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:06:05' prior: 50870216!
+test03
+
+	| aPortfolio anOtherPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	anOtherPortfolio _ Portfolio new.
+	
+	aPortfolio addPortfolio: anOtherPortfolio. 
+	
+	self assert: 0 equals: (aPortfolio balance).! !
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:06:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:06:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:06:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:06:10'!
+PASSED!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:06:26'!
+addAccount: aReceptiveAccount 
+	
+	accounts add: aReceptiveAccount.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:06:26' prior: 50870241!
+addPortfolio: aPortfolio 
+	
+	portfolios addAccount: aPortfolio.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:06:26' prior: 50870029!
+test02
+
+	| aPortfolio anAccount |
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio addAccount: anAccount.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:06:26' prior: 50869571!
+register: aTransaction
+
+	transactions addAccount: aTransaction 
+! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:06:26' prior: 50869912!
+add: aReceptiveAccount 
+	
+	accounts addAccount: aReceptiveAccount.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:06:26' prior: 50870295!
+addAccount: aReceptiveAccount 
+	
+	accounts addAccount: aReceptiveAccount.! !
+
+!methodRemoval: Portfolio #add: stamp: 'TM\ 10/7/2021 21:06:26'!
+add: aReceptiveAccount 
+	
+	accounts addAccount: aReceptiveAccount.!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:07:28'!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	aPortfolio _ Portfolio new.
+	anOtherPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio addAccount: anAccount.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:07:52' prior: 50870340!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	aPortfolio _ Portfolio new.
+	anOtherPortfolio _ Portfolio new.
+	anOtherPortfolio addAccount: anAccount.
+	
+	
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:08:39' prior: 50870352!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio _ Portfolio new.
+	
+	anOtherPortfolio _ Portfolio new.
+	anOtherPortfolio addAccount: anAccount.
+
+	aPortfolio addPortfolio: anOtherPortfolio.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:08:40'!
+ERROR!
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'TM\ 10/7/2021 21:09:05' prior: 50870318!
+register: aTransaction
+
+	transactions add: aTransaction 
+! !
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:09:08'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:09:17' prior: 50870330!
+addAccount: aReceptiveAccount 
+	
+	accounts add: aReceptiveAccount.! !
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:09:19'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:09:25' prior: 50870301!
+addPortfolio: aPortfolio 
+	
+	portfolios add: aPortfolio.! !
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:09:26'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:10:19' prior: 50870018!
+balance
+	^(accounts sum: [ :anAccount | anAccount balance ] ifEmpty: [0]) +
+	(portfolios sum: [ :anAccount | anAccount balance ] ifEmpty: [0]).! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:10:31' prior: 50870405!
+balance
+	^(accounts sum: [ :anAccount | anAccount balance ] ifEmpty: [0]) +
+	(portfolios sum: [ :aPortfolio | aPortfolio balance ] ifEmpty: [0]).! !
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:10:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:10:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:10:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:10:36'!
+PASSED!
+
+Object subclass: #xxx
+	instanceVariableNames: 'accounts portfolios'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+Object subclass: #XXX
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #XXX category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/7/2021 21:11:39'!
+Object subclass: #XXX
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+XXX subclass: #Portfolio
+	instanceVariableNames: 'accounts portfolios'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #Portfolio category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/7/2021 21:13:18'!
+XXX subclass: #Portfolio
+	instanceVariableNames: 'accounts portfolios'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+XXX subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #ReceptiveAccount category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/7/2021 21:13:24'!
+XXX subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:13:58' prior: 50870413!
+balance
+	^(accounts sum: [ :anXXX | anXXX balance ] ifEmpty: [0])! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:14:15' prior: 50870471!
+balance
+	^(accounts sum: [ :anXXX | anXXX balance ] ifEmpty: [0]).! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:14:17' prior: 50870477!
+balance
+
+	^(accounts sum: [ :anXXX | anXXX balance ] ifEmpty: [0]).! !
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:14:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:14:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:14:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:14:20'!
+FAILURE!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:14:20'!
+FAILURE!
+
+XXX subclass: #Portfolio
+	instanceVariableNames: 'XXXs'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #Portfolio category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/7/2021 21:14:53'!
+XXX subclass: #Portfolio
+	instanceVariableNames: 'XXXs'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:14:58' prior: 50870483!
+balance
+
+	^(XXXs sum: [ :anXXX | anXXX balance ] ifEmpty: [0]).! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:05' prior: 50870249 overrides: 16896425!
+initialize
+
+	XXXs _ OrderedCollection new.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:36'!
+add: aReceptiveAccount 
+	
+	accounts add: aReceptiveAccount.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:36' prior: 50870307!
+test02
+
+	| aPortfolio anAccount |
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio add: anAccount.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:36' prior: 50870365!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio _ Portfolio new.
+	
+	anOtherPortfolio _ Portfolio new.
+	anOtherPortfolio add: anAccount.
+
+	aPortfolio addPortfolio: anOtherPortfolio.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+
+!methodRemoval: Portfolio #addAccount: stamp: 'TM\ 10/7/2021 21:15:36'!
+addAccount: aReceptiveAccount 
+	
+	accounts add: aReceptiveAccount.!
+
+!methodRemoval: Portfolio #addPortfolio: stamp: 'TM\ 10/7/2021 21:15:42'!
+addPortfolio: aPortfolio 
+	
+	portfolios add: aPortfolio.!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:50' prior: 50870276!
+test03
+
+	| aPortfolio anOtherPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	anOtherPortfolio _ Portfolio new.
+	
+	aPortfolio add: anOtherPortfolio. 
+	
+	self assert: 0 equals: (aPortfolio balance).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:55' prior: 50870538!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio _ Portfolio new.
+	
+	anOtherPortfolio _ Portfolio new.
+	anOtherPortfolio add: anAccount.
+
+	aPortfolio add: anOtherPortfolio.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:15:59'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:15:59'!
+ERROR!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:15:59'!
+ERROR!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:15:59'!
+ERROR!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:16:04'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:16:18' prior: 50870522!
+add: aReceptiveAccount 
+	
+	XXXs add: aReceptiveAccount.! !
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:16:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:16:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:16:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:16:25'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:16:25'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:16:25'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:16:25'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 21:16:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:16:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:16:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 21:16:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 21:16:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 21:16:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 21:16:31'!
+PASSED!
+!Behavior method!
+initialize
+	(XXXs _ [
+	(OrderedCollection
+		cover: (21 to: 37)
+		declaredAt: (21 to: 37)) new ] valueCoveringAll:
+		{39 to: 41})
+		cover: (14 to: 17)
+		declaredAt: (14 to: 17).! !
+!Behavior method!
+balance
+	^ [
+	(XXXs
+		cover: (13 to: 16)
+		declaredAt: (13 to: 16))
+		sum: [ :anXXX |
+			[
+			(anXXX
+				cover: (34 to: 38)
+				declaredAt: (26 to: 30)) balance ] valueCoveringAll:
+				{40 to: 46} ]
+		ifEmpty: [
+			0 coverAll:
+				{60 to: 60} ]] valueCoveringAll:
+		{18 to: 21. 50 to: 57}.! !
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:16:37'!
+PASSED!
+!Behavior method!
+initialize
+	(transactions _ [
+	(OrderedCollection
+		cover: (32 to: 48)
+		declaredAt: (32 to: 48)) new ] valueCoveringAll:
+		{50 to: 52})
+		cover: (16 to: 27)
+		declaredAt: (16 to: 27).! !
+!Behavior method!
+for: aValue
+	^ [
+	([
+	(self coverAll:
+		{19 to: 22}) new ] valueCoveringAll:
+		{24 to: 26}) initializeFor:
+		(aValue
+			cover: (43 to: 48)
+			declaredAt: (6 to: 11)) ] valueCoveringAll:
+		{28 to: 41}.! !
+!Behavior method!
+initializeFor: aValue
+	(value _ aValue
+		cover: (36 to: 41)
+		declaredAt: (16 to: 21))
+		cover: (27 to: 31)
+		declaredAt: (27 to: 31).! !
+!Behavior method!
+register: aTransaction
+	[
+	(transactions
+		cover: (28 to: 39)
+		declaredAt: (28 to: 39)) add:
+		(aTransaction
+			cover: (46 to: 57)
+			declaredAt: (11 to: 22)) ] valueCoveringAll:
+		{41 to: 44}.! !
+!Behavior method!
+add: aReceptiveAccount
+	[
+	(XXXs
+		cover: (28 to: 31)
+		declaredAt: (28 to: 31)) add:
+		(aReceptiveAccount
+			cover: (38 to: 54)
+			declaredAt: (6 to: 22)) ] valueCoveringAll:
+		{33 to: 36}.! !
+!Behavior method!
+balance
+	^ [
+	([
+	(self coverAll:
+		{13 to: 16}) balanceIn ] valueCoveringAll:
+		{18 to: 26}) -
+		([
+		(self coverAll:
+			{30 to: 33}) balanceOut ] valueCoveringAll:
+			{35 to: 44}) ] valueCoveringAll:
+		{28 to: 28}.! !
+!Behavior method!
+balanceIn
+	^ [
+	([
+	(transactions
+		cover: (17 to: 28)
+		declaredAt: (17 to: 28)) select: [ :aTransaction |
+		[
+		(aTransaction
+			cover: (56 to: 67)
+			declaredAt: (41 to: 52)) isDeposit ] valueCoveringAll:
+			{69 to: 77} ]] valueCoveringAll:
+		{30 to: 36})
+		sum: [ :aTransaction |
+			[
+			(aTransaction
+				cover: (104 to: 115)
+				declaredAt: (89 to: 100)) value ] valueCoveringAll:
+				{117 to: 121} ]
+		ifEmpty: [
+			0 coverAll:
+				{136 to: 136} ]] valueCoveringAll:
+		{81 to: 84. 125 to: 132}.! !
+!Behavior method!
+isDeposit
+	^ true coverAll:
+		{14 to: 17}.! !
+!Behavior method!
+value
+	^ value
+		cover: (13 to: 17)
+		declaredAt: (13 to: 17).! !
+!Behavior method!
+balanceOut
+	^ [
+	([
+	(transactions
+		cover: (18 to: 29)
+		declaredAt: (18 to: 29)) select: [ :aTransaction |
+		[
+		([
+		(aTransaction
+			cover: (57 to: 68)
+			declaredAt: (42 to: 53)) isDeposit ] valueCoveringAll:
+			{70 to: 78}) not ] valueCoveringAll:
+			{80 to: 82} ]] valueCoveringAll:
+		{31 to: 37})
+		sum: [ :aTransaction |
+			[
+			(aTransaction
+				cover: (109 to: 120)
+				declaredAt: (94 to: 105)) value ] valueCoveringAll:
+				{122 to: 126} ]
+		ifEmpty: [
+			0 coverAll:
+				{141 to: 141} ]] valueCoveringAll:
+		{86 to: 89. 130 to: 137}.! !
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:16:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:16:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:16:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 21:16:38'!
+PASSED!
+!Behavior method!
+register: aValue on: account
+	| transaction |
+	(transaction _ [
+	(self coverAll:
+		{70 to: 73}) for:
+		(aValue
+			cover: (80 to: 85)
+			declaredAt: (11 to: 16)) ] valueCoveringAll:
+		{75 to: 78})
+		cover: (55 to: 65)
+		declaredAt: (36 to: 46).
+	[
+	(account
+		cover: (90 to: 96)
+		declaredAt: (22 to: 28)) register:
+		(transaction
+			cover: (108 to: 118)
+			declaredAt: (36 to: 46)) ] valueCoveringAll:
+		{98 to: 106}.
+	^ transaction
+		cover: (129 to: 139)
+		declaredAt: (36 to: 46).! !
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:16:38'!
+PASSED!
+!Behavior method!
+for: aValue
+	^ [
+	([
+	(self coverAll:
+		{19 to: 22}) new ] valueCoveringAll:
+		{24 to: 26}) initializeFor:
+		(aValue
+			cover: (43 to: 48)
+			declaredAt: (6 to: 11)) ] valueCoveringAll:
+		{28 to: 41}.! !
+!Behavior method!
+initializeFor: aValue
+	(value _ aValue
+		cover: (34 to: 39)
+		declaredAt: (16 to: 21))
+		cover: (25 to: 29)
+		declaredAt: (25 to: 29).! !
+!Behavior method!
+isDeposit
+	^ false coverAll:
+		{14 to: 18}.! !
+!Behavior method!
+value
+	^ value
+		cover: (13 to: 17)
+		declaredAt: (13 to: 17).! !
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:16:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 21:16:38'!
+PASSED!
+!Behavior method!
+hasRegistered: aTransaction
+	^ [
+	(transactions
+		cover: (35 to: 46)
+		declaredAt: (35 to: 46)) includes:
+		(aTransaction
+			cover: (58 to: 69)
+			declaredAt: (16 to: 27)) ] valueCoveringAll:
+		{48 to: 56}.! !
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 21:16:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 21:16:39'!
+PASSED!
+!Behavior method!
+transactions
+	^ [
+	(transactions
+		cover: (21 to: 32)
+		declaredAt: (21 to: 32)) copy ] valueCoveringAll:
+		{34 to: 37}.! !
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 21:16:39'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:18:20' prior: 50870570!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: -10).
+	
+	aPortfolio _ Portfolio new.
+	
+	anOtherPortfolio _ Portfolio new.
+	anOtherPortfolio add: anAccount.
+
+	aPortfolio add: anOtherPortfolio.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:18:21'!
+FAILURE!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:18:26' prior: 50870825!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio _ Portfolio new.
+	
+	anOtherPortfolio _ Portfolio new.
+	anOtherPortfolio add: anAccount.
+
+	aPortfolio add: anOtherPortfolio.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:18:33' prior: 50870841!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Withdraw for: 10).
+	
+	aPortfolio _ Portfolio new.
+	
+	anOtherPortfolio _ Portfolio new.
+	anOtherPortfolio add: anAccount.
+
+	aPortfolio add: anOtherPortfolio.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:18:34'!
+FAILURE!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:18:40' prior: 50870854!
+test04
+
+	| aPortfolio anOtherPortfolio anAccount |
+	
+	anAccount _ ReceptiveAccount new.
+	anAccount register: (Deposit for: 10).
+	
+	aPortfolio _ Portfolio new.
+	
+	anOtherPortfolio _ Portfolio new.
+	anOtherPortfolio add: anAccount.
+
+	aPortfolio add: anOtherPortfolio.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:20:14'!
+test05
+
+	| aPortfolio aDeposit |
+	
+	aPortfolio _ Portfolio new.
+	aDeposit _ Deposit for: 10.
+	
+	self assert: (aPortfolio hasRegistered: aDeposit).! !
+
+!testRun: #PortfolioTest #test05 stamp: 'TM\ 10/7/2021 21:20:20'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:20:48'!
+hasRegistered: aDeposit 
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:21:19' prior: 50870893!
+hasRegistered: anAccountTransaction 
+	
+	^false.! !
+
+!testRun: #PortfolioTest #test05 stamp: 'TM\ 10/7/2021 21:21:21'!
+FAILURE!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:22:17' prior: 50870883!
+test05
+
+	| aPortfolio aDeposit |
+	
+	aPortfolio _ Portfolio new.
+	aDeposit _ Deposit for: 10.
+	
+	self deny: (aPortfolio hasRegistered: aDeposit).! !
+
+!testRun: #PortfolioTest #test05 stamp: 'TM\ 10/7/2021 21:22:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:22:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:22:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:22:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:22:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'TM\ 10/7/2021 21:22:19'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:23:03'!
+test06
+
+	| aPortfolio anAccount aDeposit |
+	
+	aDeposit _ Deposit for: 10.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: aDeposit.
+	aPortfolio _ Portfolio new.
+	
+	aPortfolio add: anAccount.
+	
+	self assert: 10 equals: (aPortfolio balance).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:23:36' prior: 50870928!
+test06
+
+	| aPortfolio anAccount aDeposit |
+	
+	aDeposit _ Deposit for: 10.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: aDeposit.
+	aPortfolio _ Portfolio new.
+	
+	aPortfolio add: anAccount.
+	
+	self assert: (aPortfolio hasRegistered: aDeposit).! !
+
+!testRun: #PortfolioTest #test06 stamp: 'TM\ 10/7/2021 21:23:49'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:25:43' prior: 50870898!
+hasRegistered: anAccountTransaction 
+	
+	^XXXs anySatisfy: [:anXXX | anXXX hasRegistered: anAccountTransaction].! !
+
+!testRun: #PortfolioTest #test06 stamp: 'TM\ 10/7/2021 21:25:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:25:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:25:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:25:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:25:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'TM\ 10/7/2021 21:25:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'TM\ 10/7/2021 21:25:44'!
+PASSED!
+
+----SNAPSHOT----(7 October 2021 21:44:41) CuisUniversity-4532.image priorSource: 17206603!
+
+----SNAPSHOT----(7 October 2021 21:51:39) CuisUniversity-4532.image priorSource: 17258399!
+
+----STARTUP---- (7 October 2021 21:53:18) as D:\Users\Tomas\Documents\CUIS\windows64 - Copy\CuisUniversity-4532.image!
+
+
+!methodRemoval: Deposit #isDeposit stamp: 'TM\ 10/7/2021 21:53:27'!
+isDeposit
+
+	^true.!
+
+!methodRemoval: Withdraw #isDeposit stamp: 'TM\ 10/7/2021 21:53:29'!
+isDeposit
+
+	^false.!
+!Deposit methodsFor: 'value' stamp: 'TM\ 10/7/2021 21:54:12'!
+addValueToBalance: aBalance
+
+	^ aBalance + value.! !
+!Deposit methodsFor: 'value' stamp: 'TM\ 10/7/2021 21:54:26' prior: 50870991!
+addValueToBalance: aBalance
+	^ aBalance + value.! !
+!Withdraw methodsFor: 'value' stamp: 'TM\ 10/7/2021 21:54:35'!
+addValueToBalance: aBalance
+
+	^ aBalance + value.! !
+!Withdraw methodsFor: 'value' stamp: 'TM\ 10/7/2021 21:54:38' prior: 50871000!
+addValueToBalance: aBalance
+
+	^ aBalance - value.! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 21:56:14' prior: 50869819!
+balance
+	
+	^(transactions do: [:aTransaction | aTransaction ]).! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 21:56:51' prior: 50871010!
+balance
+	
+	^(transactions do: [:aTransaction | | balance | balance _ aTransaction addValueToBalance: balance]).! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 21:57:07' prior: 50871015!
+balance
+	
+	| balance |
+	
+	^(transactions do: [:aTransaction | balance _ aTransaction addValueToBalance: balance]).! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 21:57:43' prior: 50871022!
+balance
+	
+	| balance |
+	
+	balance _ 0.
+	(transactions do: [:aTransaction | balance _ aTransaction addValueToBalance: balance]).
+	^balance.! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 21:57:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:57:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:57:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 21:57:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 21:57:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 21:57:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 21:57:53'!
+PASSED!
+
+!methodRemoval: ReceptiveAccount #balanceIn stamp: 'TM\ 10/7/2021 21:57:59'!
+balanceIn
+	
+	^((transactions select: [ :aTransaction | aTransaction isDeposit]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]).!
+
+!methodRemoval: ReceptiveAccount #balanceOut stamp: 'TM\ 10/7/2021 21:58:01'!
+balanceOut
+	
+	^((transactions select: [ :aTransaction | aTransaction isDeposit not]) sum: [ :aTransaction | aTransaction value ] ifEmpty: [ 0 ]).!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'TM\ 10/7/2021 21:58:05'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:58:05'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'TM\ 10/7/2021 21:58:05'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'TM\ 10/7/2021 21:58:05'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'TM\ 10/7/2021 21:58:05'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'TM\ 10/7/2021 21:58:05'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'TM\ 10/7/2021 21:58:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/7/2021 21:58:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/7/2021 21:58:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/7/2021 21:58:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/7/2021 21:58:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'TM\ 10/7/2021 21:58:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'TM\ 10/7/2021 21:58:07'!
+PASSED!
+
+----SNAPSHOT----(7 October 2021 21:59:21) CuisUniversity-4532.image priorSource: 17258491!
