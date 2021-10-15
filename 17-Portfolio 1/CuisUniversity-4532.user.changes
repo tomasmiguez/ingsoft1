@@ -3889,3 +3889,230 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(7 October 2021 21:59:21) CuisUniversity-4532.image priorSource: 17258491!
+
+----STARTUP---- (14 October 2021 21:10:39) as D:\Users\Tomas\Documents\CUIS\windows64 - Copy\CuisUniversity-4532.image!
+
+
+!classRenamed: #XXX as: #PortfolioItem stamp: 'TM\ 10/14/2021 21:14:19'!
+Smalltalk renameClassNamed: #XXX as: #PortfolioItem!
+
+!classDefinition: #Portfolio category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/14/2021 21:14:38'!
+PortfolioItem subclass: #Portfolio
+	instanceVariableNames: 'PortfolioItems'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:14:38' prior: 50870953!
+hasRegistered: anAccountTransaction 
+	
+	^PortfolioItems anySatisfy: [:anXXX | anXXX hasRegistered: anAccountTransaction].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:14:38' prior: 50870512!
+balance
+
+	^(PortfolioItems sum: [ :anXXX | anXXX balance ] ifEmpty: [0]).! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:14:38' prior: 50870518 overrides: 16896425!
+initialize
+
+	PortfolioItems _ OrderedCollection new.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:14:38' prior: 50870595!
+add: aReceptiveAccount 
+	
+	PortfolioItems add: aReceptiveAccount.! !
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'TM\ 10/14/2021 21:17:08' prior: 50869576!
+transactions 
+
+	^ transactions copy! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:18:37'!
+test07
+
+	| aPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	
+	self assert: (OrderedCollection new) equals: (aPortfolio transactions).! !
+
+!testRun: #PortfolioTest #test07 stamp: 'TM\ 10/14/2021 21:18:38'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:18:46'!
+transactions
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:19:18' prior: 50871173!
+transactions
+	
+	^OrderedCollection new.! !
+
+!testRun: #PortfolioTest #test07 stamp: 'TM\ 10/14/2021 21:19:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/14/2021 21:19:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/14/2021 21:19:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/14/2021 21:19:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/14/2021 21:19:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'TM\ 10/14/2021 21:19:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'TM\ 10/14/2021 21:19:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'TM\ 10/14/2021 21:19:22'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:21:44'!
+test08
+
+	| aPortfolio anAccount aDeposit transactions |
+	
+	aDeposit _ (Deposit for: 10).
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: aDeposit.
+	transactions _ OrderedCollection new with: aDeposit.
+	
+	aPortfolio add: anAccount.
+	
+	self assert: 10 equals: (aPortfolio transactions).! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:22:06' prior: 50871201!
+test08
+
+	| aPortfolio anAccount aDeposit transactions |
+	
+	aDeposit _ (Deposit for: 10).
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: aDeposit.
+	transactions _ OrderedCollection new with: aDeposit.
+	
+	aPortfolio add: anAccount.
+	
+	self assert: transactions equals: (aPortfolio transactions).! !
+
+!testRun: #PortfolioTest #test08 stamp: 'TM\ 10/14/2021 21:25:36'!
+ERROR!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:25:50' prior: 50871215!
+test08
+
+	| aPortfolio anAccount aDeposit transactions |
+	
+	aDeposit _ (Deposit for: 10).
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	anAccount register: aDeposit.
+	transactions _ OrderedCollection with: aDeposit.
+	
+	aPortfolio add: anAccount.
+	
+	self assert: transactions equals: (aPortfolio transactions).! !
+
+!testRun: #PortfolioTest #test08 stamp: 'TM\ 10/14/2021 21:25:51'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:35' prior: 50871178!
+transactions
+	
+	^PortfolioItems do: [].! !
+
+!classDefinition: #Portfolio category: 'Portfolio-Ejercicio' stamp: 'TM\ 10/14/2021 21:26:42'!
+PortfolioItem subclass: #Portfolio
+	instanceVariableNames: 'portfolioItems'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:42' prior: 50871247!
+transactions
+	
+	^portfolioItems do: [].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:42' prior: 50871149 overrides: 16896425!
+initialize
+
+	portfolioItems _ OrderedCollection new.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:42' prior: 50871136!
+hasRegistered: anAccountTransaction 
+	
+	^portfolioItems anySatisfy: [:anXXX | anXXX hasRegistered: anAccountTransaction].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:42' prior: 50871143!
+balance
+
+	^(portfolioItems sum: [ :anXXX | anXXX balance ] ifEmpty: [0]).! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:42' prior: 50871154!
+add: aReceptiveAccount 
+	
+	portfolioItems add: aReceptiveAccount.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:33:39' prior: 50871260!
+transactions
+	
+	^portfolioItems inject: OrderedCollection new into: [:allTransactions :eachPortfolioItem | allTransactions addAll: (eachPortfolioItem transactions)].! !
+
+!testRun: #PortfolioTest #test08 stamp: 'TM\ 10/14/2021 21:33:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/14/2021 21:33:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/14/2021 21:33:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/14/2021 21:33:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/14/2021 21:33:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'TM\ 10/14/2021 21:33:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'TM\ 10/14/2021 21:33:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'TM\ 10/14/2021 21:33:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'TM\ 10/14/2021 21:33:42'!
+PASSED!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:34:29' prior: 50871289!
+transactions
+	
+	^portfolioItems inject: OrderedCollection new into: [:allTransactions :eachPortfolioItem | allTransactions addAll: (eachPortfolioItem transactions)].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:34:44' prior: 50871319!
+transactions
+	
+	^portfolioItems inject: OrderedCollection new into: [:allTransactions :eachPortfolioItem | allTransactions addAll: (eachPortfolioItem transactions)].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:35:28' prior: 50871328!
+transactions
+
+	| allTransactions |
+	
+	allTransactions _ OrderedCollection new.
+	portfolioItems do: [:eachPortfolioItem | allTransactions addAll: (eachPortfolioItem transactions)].
+	^allTransactions.! !
+
+!testRun: #PortfolioTest #test01 stamp: 'TM\ 10/14/2021 21:35:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'TM\ 10/14/2021 21:35:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'TM\ 10/14/2021 21:35:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'TM\ 10/14/2021 21:35:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'TM\ 10/14/2021 21:35:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'TM\ 10/14/2021 21:35:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'TM\ 10/14/2021 21:35:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'TM\ 10/14/2021 21:35:29'!
+PASSED!
+
+----SNAPSHOT----(14 October 2021 21:47:45) CuisUniversity-4532.image priorSource: 17262925!
