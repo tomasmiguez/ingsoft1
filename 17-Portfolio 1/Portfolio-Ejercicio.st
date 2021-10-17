@@ -5,8 +5,8 @@ TestCase subclass: #PortfolioTest
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 20:45:39'!
-test01
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'mls 10/17/2021 11:43:35'!
+test01EmptyPortfolioHas0Balance
 
 	| aPortfolio |
 	
@@ -14,8 +14,8 @@ test01
 	
 	self assert: 0 equals: (aPortfolio balance).! !
 
-!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:36'!
-test02
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'mls 10/17/2021 11:44:36'!
+test02PortfolioWithAccountHasAccountBalance
 
 	| aPortfolio anAccount |
 	
@@ -27,8 +27,8 @@ test02
 	
 	self assert: 10 equals: (aPortfolio balance).! !
 
-!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:15:50'!
-test03
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'mls 10/17/2021 11:55:09'!
+test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance
 
 	| aPortfolio anOtherPortfolio |
 	
@@ -39,8 +39,8 @@ test03
 	
 	self assert: 0 equals: (aPortfolio balance).! !
 
-!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:18:40'!
-test04
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'mls 10/17/2021 11:48:32'!
+test04PortfolioWithPortfolioWithAccountHasAccountBalance
 
 	| aPortfolio anOtherPortfolio anAccount |
 	
@@ -56,8 +56,8 @@ test04
 	
 	self assert: 10 equals: (aPortfolio balance).! !
 
-!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:22:17'!
-test05
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'mls 10/17/2021 11:50:49'!
+test05EmptyPortfolioHasNotRegisteredDeposits
 
 	| aPortfolio aDeposit |
 	
@@ -66,8 +66,8 @@ test05
 	
 	self deny: (aPortfolio hasRegistered: aDeposit).! !
 
-!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/7/2021 21:23:36'!
-test06
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'mls 10/17/2021 11:58:13'!
+test06PortfolioWithItemsHasRegisteredItemsDeposits
 
 	| aPortfolio anAccount aDeposit |
 	
@@ -80,8 +80,8 @@ test06
 	
 	self assert: (aPortfolio hasRegistered: aDeposit).! !
 
-!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:18:37'!
-test07
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'mls 10/17/2021 11:53:25'!
+test07EmptyPortfolioDoesNotHaveTransactions
 
 	| aPortfolio |
 	
@@ -89,8 +89,8 @@ test07
 	
 	self assert: (OrderedCollection new) equals: (aPortfolio transactions).! !
 
-!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:25:50'!
-test08
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'mls 10/17/2021 11:54:35'!
+test08PortfolioWithItemsHasItemsTransactions
 
 	| aPortfolio anAccount aDeposit transactions |
 	
@@ -208,7 +208,6 @@ value
 
 	self subclassResponsibility ! !
 
-
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'AccountTransaction class' category: 'Portfolio-Ejercicio'!
@@ -242,6 +241,10 @@ initializeFor: aValue
 !Deposit methodsFor: 'value' stamp: 'TM\ 10/7/2021 21:54:26'!
 addValueToBalance: aBalance
 	^ aBalance + value.! !
+
+!Deposit methodsFor: 'value' stamp: 'mls 10/17/2021 11:25:06'!
+balanceValue
+	^value.! !
 
 !Deposit methodsFor: 'value' stamp: 'HernanWilkinson 7/13/2011 18:38'!
 value
@@ -277,6 +280,10 @@ initializeFor: aValue
 addValueToBalance: aBalance
 
 	^ aBalance - value.! !
+
+!Withdraw methodsFor: 'value' stamp: 'mls 10/17/2021 11:27:10'!
+balanceValue
+	^value negated.! !
 
 !Withdraw methodsFor: 'value' stamp: 'HernanWilkinson 7/13/2011 18:33'!
 value
@@ -365,14 +372,10 @@ transactions
 	^ transactions copy! !
 
 
-!ReceptiveAccount methodsFor: 'balance' stamp: 'TM\ 10/7/2021 21:57:43'!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'mls 10/17/2021 11:39:59'!
 balance
 	
-	| balance |
-	
-	balance _ 0.
-	(transactions do: [:aTransaction | balance _ aTransaction addValueToBalance: balance]).
-	^balance.! !
+	^transactions sum: [:aTransaction | aTransaction balanceValue] ifEmpty: [0].! !
 
 
 !ReceptiveAccount methodsFor: 'testing' stamp: 'NR 10/17/2019 03:28:43'!
