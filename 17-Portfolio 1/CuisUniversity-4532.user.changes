@@ -4116,3 +4116,2166 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(14 October 2021 21:47:45) CuisUniversity-4532.image priorSource: 17262925!
+
+----STARTUP---- (17 October 2021 12:06:49) as /Users/franco/Repos/isw1/cuis/CuisUniversity-4532.image!
+
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 12:09:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 12:09:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 12:09:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 12:09:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 12:09:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 12:09:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 12:09:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 12:09:19'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:10:56'!
+test09
+	| portfolio |
+	portfolio _ Portfolio new.
+	! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:12:22' prior: 50859766!
+test09
+	| portfolio deposit |
+	portfolio _ Portfolio new.
+	deposit _ Deposit new.
+	deposit with: 	100.
+	portfolio hasRegistered: deposit.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:13:41' prior: 50859771!
+test09
+	| deposit mainPortfolio |
+	mainPortfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	mainPortfolio hasRegistered: deposit.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:13:53' prior: 50859779!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:14:55' prior: 50859787!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	portfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.
+	mainPortfolio add: portfolio.
+	self assert: mainPortfolio ! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:16:34' prior: 50859795!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	portfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.
+	mainPortfolio add: portfolio.
+	self assert: (mainPortfolio hasRegistered: deposit).! !
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 12:16:35'!
+FAILURE!
+
+mainPortfolio hasRegistered: deposit!
+
+!methodRemoval: PortfolioTest #test09 stamp: 'FS 10/17/2021 12:21:48'!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	portfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.
+	mainPortfolio add: portfolio.
+	self assert: (mainPortfolio hasRegistered: deposit).!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:28:36'!
+test09
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:29:16' prior: 50859831!
+test09
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 12:29:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 12:29:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 12:29:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 12:29:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 12:29:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 12:29:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 12:29:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 12:29:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 12:29:22'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 12:29:22'!
+FAILURE!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 15:21:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 15:21:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 15:21:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 15:21:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 15:21:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 15:21:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 15:21:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 15:21:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 15:21:38'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 15:21:38'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 16:38:35'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 16:38:41'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 16:39:11'!
+FAILURE!
+
+aBlock!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 16:40:14'!
+FAILURE!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 16:40:23'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 16:40:23'!
+FAILURE!
+
+aBlock value.!
+
+aBlock!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 16:47:53' prior: 50859658!
+add: aReceptiveAccount 
+	
+	portfolioItems add: aReceptiveAccount.! !
+
+----STARTUP---- (17 October 2021 16:49:02) as /Users/franco/Repos/isw1/cuis/CuisUniversity-4532.image!
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:10:56'!
+test09
+	| portfolio |
+	portfolio _ Portfolio new.
+	! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:12:22' prior: 50859968!
+test09
+	| portfolio deposit |
+	portfolio _ Portfolio new.
+	deposit _ Deposit new.
+	deposit with: 	100.
+	portfolio hasRegistered: deposit.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:13:41' prior: 50859973!
+test09
+	| deposit mainPortfolio |
+	mainPortfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	mainPortfolio hasRegistered: deposit.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:13:53' prior: 50859981!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:14:55' prior: 50859989!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	portfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.
+	mainPortfolio add: portfolio.
+	self assert: mainPortfolio ! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:16:34' prior: 50859997!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	portfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.
+	mainPortfolio add: portfolio.
+	self assert: (mainPortfolio hasRegistered: deposit).! !
+
+!methodRemoval: PortfolioTest #test09 stamp: 'FS 10/17/2021 16:49:05'!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	portfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.
+	mainPortfolio add: portfolio.
+	self assert: (mainPortfolio hasRegistered: deposit).!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:28:36'!
+test09
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:29:16' prior: 50860029!
+test09
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 16:47:53' prior: 50859658!
+add: aReceptiveAccount 
+	
+	portfolioItems add: aReceptiveAccount.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 16:50:47' prior: 50860047!
+add: aPortfolioItem 
+	
+	portfolioItems add: aPortfolioItem.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 16:58:17' prior: 50860053!
+add: aPortfolioItem 
+	aPortfolioItem assertNotContains: self.
+	portfolioItems add: aPortfolioItem.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 16:59:29' prior: 50860058!
+add: aPortfolioItem 
+	aPortfolioItem notContains: self.
+	portfolioItems add: aPortfolioItem.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:02:37' prior: 50860065!
+add: aPortfolioItem 
+	(aPortfolioItem has: self) ifTrue: 
+		[self error: 'cyclic portfolios'].
+	portfolioItems add: aPortfolioItem.! !
+!PortfolioItem methodsFor: 'nil' stamp: 'FS 10/17/2021 17:03:44'!
+has: anotherPortfolioItem
+	self childResponsibility .! !
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:03:49' prior: 50860078!
+has: anotherPortfolioItem
+	self childResponsibility.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:05:16' overrides: 50860083!
+has: anotherPortfolioItem 
+	portfolioItems   ! !
+
+OrderedCollection new.!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:16:26' prior: 50860088 overrides: 50860083!
+has: anotherPortfolioItem 
+	portfolioItems includes: anotherPortfolioItem.! !
+!ReceptiveAccount methodsFor: 'balance' stamp: 'FS 10/17/2021 17:16:54' overrides: 50860083!
+has: anotherPortfolioItem
+	
+	^false! !
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:18:40' prior: 50860083!
+has: anotherPortfolioItem
+	self subclassResponsibility .! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 17:18:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:18:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:18:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:18:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 17:18:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 17:18:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 17:18:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 17:18:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 17:18:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:19:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:19:24'!
+ERROR!
+
+aPortfolioItem has: self!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 17:21:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:21:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:21:06'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:21:06'!
+ERROR!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 17:21:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 17:21:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 17:21:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 17:21:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 17:21:06'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:21:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:21:25'!
+ERROR!
+!Portfolio methodsFor: 'items' stamp: 'FS 10/17/2021 17:21:41' prior: 50860094 overrides: 50860105!
+has: anotherPortfolioItem 
+	^portfolioItems includes: anotherPortfolioItem.! !
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:21:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:21:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 17:21:44'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:26:05'!
+test10
+
+	| portfolio1 portfolio2 portfolio3 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	portfolio2 add: portfolio3.
+	self should: [portfolio3 add: portfolio1] 
+		raise: Exception.! !
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 17:26:35'!
+FAILURE!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 17:40:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:40:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:40:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:40:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 17:40:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 17:40:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 17:40:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 17:40:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 17:40:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 17:40:27'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 17:40:27'!
+FAILURE!
+!Portfolio methodsFor: 'items' stamp: 'FS 10/17/2021 17:42:29' prior: 50860189 overrides: 50860105!
+has: anotherPortfolioItem 
+	^portfolioItems includes: anotherPortfolioItem or:
+	portfolioItems anySatisfy: [:item | item has: anotherPortfolioItem].! !
+!Portfolio methodsFor: 'items' stamp: 'FS 10/17/2021 17:43:09' prior: 50860255 overrides: 50860105!
+has: anotherPortfolioItem 
+	^(portfolioItems includes: anotherPortfolioItem) or:
+	(portfolioItems anySatisfy: [:item | item has: anotherPortfolioItem]).! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 17:43:28'!
+PASSED!
+!Portfolio methodsFor: 'transactions' stamp: 'FS 10/17/2021 17:43:55' prior: 50859680!
+transactions
+	^portfolioItems flatten.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 17:43:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:43:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:43:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:43:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 17:43:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 17:43:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 17:43:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 17:43:57'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 17:43:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 17:43:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 17:43:57'!
+FAILURE!
+!Portfolio methodsFor: 'transactions' stamp: 'FS 10/17/2021 17:45:10' prior: 50860305!
+transactions
+
+	^(portfolioItems collect: [:item | item transactions]) flatten.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 17:45:21'!
+PASSED!
+!Portfolio methodsFor: 'items' stamp: 'FS 10/17/2021 17:46:03' prior: 50860263 overrides: 50860105!
+has: aPortfolioItem 
+	^(portfolioItems includes: aPortfolioItem) or:
+	(portfolioItems anySatisfy: [:item | item has: aPortfolioItem]).! !
+!ReceptiveAccount methodsFor: 'items' stamp: 'FS 10/17/2021 17:46:36' prior: 50860100 overrides: 50860105!
+has: aPortfolioItem
+	
+	^false! !
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:46:49' prior: 50860105!
+has: aPortfolioItem
+	self subclassResponsibility .! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:47:52' prior: 50860205!
+test10
+
+	| portfolioParent portfolio2 portfolio3 |
+	portfolioParent _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	portfolioParent add: portfolio2.
+	portfolio2 add: portfolio3.
+	self should: [portfolio3 add: portfolioParent] 
+		raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:47:57' prior: 50860405!
+test10
+
+	| portfolioParent portfolioChild portfolio3 |
+	portfolioParent _ Portfolio new.
+	portfolioChild _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	portfolioParent add: portfolioChild.
+	portfolioChild add: portfolio3.
+	self should: [portfolio3 add: portfolioParent] 
+		raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:49:10' prior: 50860417!
+test10
+
+	| rootPortfolio portfolioChild portfolio3 |
+	rootPortfolio _ Portfolio new.
+	portfolioChild _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	rootPortfolio add: portfolioChild.
+	portfolioChild add: portfolio3.
+	self should: [portfolio3 add: rootPortfolio] 
+		raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:49:25' prior: 50860430!
+test10
+
+	| rootPortfolio subPortfolio portfolio3 |
+	rootPortfolio _ Portfolio new.
+	subPortfolio _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	rootPortfolio add: subPortfolio.
+	subPortfolio add: portfolio3.
+	self should: [portfolio3 add: rootPortfolio] 
+		raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:49:34' prior: 50860442!
+test10
+
+	| rootPortfolio subPortfolio subSubPortfolio |
+	rootPortfolio _ Portfolio new.
+	subPortfolio _ Portfolio new.
+	subSubPortfolio _ Portfolio new.
+	rootPortfolio add: subPortfolio.
+	subPortfolio add: subSubPortfolio.
+	self should: [subSubPortfolio add: rootPortfolio] 
+		raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 17:55:14'!
+test11
+
+	| rootPortfolio subSubPortfolio subPortfolio1 subPortfolio2 |
+	rootPortfolio _ Portfolio new.
+	subPortfolio1 _ Portfolio new.
+	subPortfolio2 _ Portfolio new.
+	subSubPortfolio _ Portfolio new.
+	rootPortfolio add: subPortfolio1.
+	rootPortfolio add: subPortfolio2.
+	subPortfolio1 add: subSubPortfolio.
+	self should: [subPortfolio2 add: subSubPortfolio] 
+		raise: Exception.! !
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 17:55:36'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 18:55:26' prior: 50860071!
+add: aPortfolioItem 
+	(aPortfolioItem has: self) ifTrue: 
+		[self error: 'cyclic portfolios'].
+	aPortfolioItem addParent: self.
+	portfolioItems add: aPortfolioItem.! !
+
+Object subclass: #PortfolioItem
+	instanceVariableNames: 'parents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #PortfolioItem category: 'Portfolio-Ejercicio' stamp: 'FS 10/17/2021 18:55:51'!
+Object subclass: #PortfolioItem
+	instanceVariableNames: 'parents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 18:56:26'!
+addParent: aPortfolioItem
+	parents add: aPortfolioItem .! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 18:57:40' prior: 50860484!
+add: aPortfolioItem 
+	(aPortfolioItem has: self) or: (parents anySatisfy: [:item | item has: self]): 
+		[self error: 'cyclic portfolios'].
+	aPortfolioItem addParent: self.
+	portfolioItems add: aPortfolioItem.! !
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 18:58:18' overrides: 16896425!
+initialize
+	parents _ Collection new.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:03:08'!
+assertNoCycles: aPortfolioItem
+
+	^ (aPortfolioItem has: self) or: (parents anySatisfy: [:item | item has: self]): 
+		[self error: 'cyclic portfolios']! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:03:08' prior: 50860510!
+add: aPortfolioItem 
+	self assertNoCycles: aPortfolioItem.
+	aPortfolioItem addParent: self.
+	portfolioItems add: aPortfolioItem.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:05:41' prior: 50860524!
+assertNoCycles: aPortfolioItem
+	parents do: [:item | item assertNoCycles].
+	^ (aPortfolioItem has: self): 
+		[self error: 'cyclic portfolios']! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:05:56' prior: 50860540!
+assertNoCycles: aPortfolioItem
+	parents do: [:item | item assertNoCycles].
+	^ (aPortfolioItem has: self): 
+		[self error: 'cyclic portfolios'].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:06:00' prior: 50860548!
+assertNoCycles: aPortfolioItem
+	parents do: [:item | item assertNoCycles].
+	(aPortfolioItem has: self): 
+		[self error: 'cyclic portfolios'].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:06:08' prior: 50860556!
+assertNoCycles: aPortfolioItem
+	parents do: [:item | item assertNoCycles].
+	(aPortfolioItem has: self) ifTrue:
+		[self error: 'cyclic portfolios'].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:06:54' prior: 50860532!
+add: aPortfolioItem 
+
+	self assertNoCycles: aPortfolioItem.
+	aPortfolioItem addParent: self.
+	portfolioItems add: aPortfolioItem.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 19:06:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:06:58'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 19:06:58'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:06:58'!
+ERROR!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 19:06:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 19:06:58'!
+ERROR!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 19:06:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 19:06:58'!
+ERROR!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:06:58'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 19:06:58'!
+ERROR!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 19:06:58'!
+ERROR!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:07:03'!
+ERROR!
+
+parents!
+
+ nil !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:08:01' prior: 50859675 overrides: 50860520!
+initialize
+
+	portfolioItems _ OrderedCollection new.
+	parents _ Collection new.! !
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'FS 10/17/2021 19:08:17' prior: 50859703 overrides: 50860520!
+initialize
+
+	transactions := OrderedCollection new.
+	parents _ Collection new.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 19:08:26'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:08:26'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 19:08:26'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:08:26'!
+ERROR!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 19:08:26'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 19:08:26'!
+ERROR!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 19:08:26'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 19:08:26'!
+ERROR!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:08:26'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 19:08:26'!
+ERROR!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 19:08:26'!
+ERROR!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:08:28'!
+ERROR!
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'FS 10/17/2021 19:09:37' prior: 50860627 overrides: 50860520!
+initialize
+
+	transactions := OrderedCollection new.
+	parents _ Set new.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:09:44' prior: 50860620 overrides: 50860520!
+initialize
+
+	portfolioItems _ OrderedCollection new.
+	parents _ Set new.! !
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:09:52' prior: 50860520 overrides: 16896425!
+initialize
+	parents _ Set new.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 19:10:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:10:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 19:10:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:10:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 19:10:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 19:10:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 19:10:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 19:10:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:10:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 19:10:05'!
+ERROR!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 19:10:05'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 19:10:07'!
+ERROR!
+
+item!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:10:40' prior: 50860564!
+assertNoCycles: aPortfolioItem
+	parents do: [:item | item assertNoCycles: aPortfolioItem].
+	(aPortfolioItem has: self) ifTrue:
+		[self error: 'cyclic portfolios'].! !
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 19:10:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 19:10:44'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:20:53' prior: 50860729!
+assertNoCycles: aPortfolioItem
+	parents do: [:portfolio | portfolio assertNoCycles: aPortfolioItem].
+	(aPortfolioItem has: self) ifTrue:
+		[self error: 'cyclic portfolios'].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:25:07'!
+anyParentHas: aPortfolioItem
+	| child cousin |
+	cousin _ parents anySatisfy: [:portfolio | portfolio anyParentHas: aPortfolioItem]. 
+	child _ (aPortfolioItem has: self).
+	^child or: cousin.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:26:27' prior: 50860742!
+assertNoCycles: aPortfolioItem
+	(aPortfolioItem anyParentHas: self) ifTrue:
+		[self error: 'cyclic portfolios'].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:34:35' prior: 50860759!
+assertNoCycles: aPortfolioItem
+	(aPortfolioItem anyParentHas: self) ifTrue:
+		[self error: 'cyclic portfolios'].! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 19:34:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:34:38'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 19:34:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:34:38'!
+ERROR!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 19:34:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 19:34:38'!
+ERROR!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 19:34:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 19:34:38'!
+ERROR!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:34:38'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 19:34:38'!
+FAILURE!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 19:34:38'!
+FAILURE!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:34:41'!
+ERROR!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:36:25'!
+anyParentHas: aPortfolioItem
+	| child cousin |
+	cousin _ parents anySatisfy: [:portfolio | portfolio anyParentHas: aPortfolioItem]. 
+	child _ (aPortfolioItem has: self).
+	^child or: cousin.! !
+
+!methodRemoval: Portfolio #anyParentHas: stamp: 'FS 10/17/2021 19:36:25'!
+anyParentHas: aPortfolioItem
+	| child cousin |
+	cousin _ parents anySatisfy: [:portfolio | portfolio anyParentHas: aPortfolioItem]. 
+	child _ (aPortfolioItem has: self).
+	^child or: cousin.!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 19:36:32'!
+FAILURE!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 19:36:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:36:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 19:36:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:36:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 19:36:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 19:36:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 19:36:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 19:36:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:36:50'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 19:36:50'!
+FAILURE!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 19:36:50'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:36:52'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:37:11'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:38:40'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:38:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:39:10'!
+FAILURE!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 19:42:10' prior: 50860812!
+anyParentHas: aPortfolioItem
+	| child cousin same |
+	cousin _ parents anySatisfy: [:portfolio | portfolio anyParentHas: aPortfolioItem]. 
+	child _ (aPortfolioItem has: self).
+	same _ self = aPortfolioItem.
+	^same or: child or: cousin.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 19:42:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:42:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 19:42:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 19:42:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 19:42:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 19:42:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 19:42:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 19:42:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 19:42:15'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 19:42:15'!
+FAILURE!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 19:42:15'!
+FAILURE!
+!Portfolio methodsFor: 'items' stamp: 'FS 10/17/2021 22:11:07' prior: 50860387 overrides: 50860400!
+has: aPortfolioItem 
+	^self = aPortfolioItem or:
+	(portfolioItems includes: aPortfolioItem) or:
+	(portfolioItems anySatisfy: [:item | item has: aPortfolioItem]).! !
+!ReceptiveAccount methodsFor: 'items' stamp: 'FS 10/17/2021 22:11:25' prior: 50860395 overrides: 50860400!
+has: aPortfolioItem
+	
+	^self = aPortfolioItem.! !
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:11:46' prior: 50860880!
+anyParentHas: aPortfolioItem
+	| child cousin same |
+	cousin _ parents anySatisfy: [:portfolio | portfolio anyParentHas: aPortfolioItem]. 
+	child _ (aPortfolioItem has: self).
+	^child or: cousin.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 22:12:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:12:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 22:12:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:12:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 22:12:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 22:12:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 22:12:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 22:12:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:12:12'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:12:12'!
+FAILURE!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 22:12:12'!
+FAILURE!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:27:17' prior: 50860941!
+anyParentHas: aPortfolioItem
+	| child cousin |
+	cousin _ parents anySatisfy: [:portfolio | portfolio anyParentHas: aPortfolioItem]. 
+	child _ (aPortfolioItem has: self).
+	^child or: cousin.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 22:27:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:27:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 22:27:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:27:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 22:27:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 22:27:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 22:27:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 22:27:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:27:21'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:27:21'!
+FAILURE!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 22:27:21'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:27:22'!
+FAILURE!
+
+aPortfolioItem!
+
+----STARTUP---- (17 October 2021 22:29:29) as /Users/franco/Repos/isw1/cuis/CuisUniversity-4532.image!
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:10:56'!
+test09
+	| portfolio |
+	portfolio _ Portfolio new.
+	! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:12:22' prior: 50859968!
+test09
+	| portfolio deposit |
+	portfolio _ Portfolio new.
+	deposit _ Deposit new.
+	deposit with: 	100.
+	portfolio hasRegistered: deposit.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:13:41' prior: 50859973!
+test09
+	| deposit mainPortfolio |
+	mainPortfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	mainPortfolio hasRegistered: deposit.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:13:53' prior: 50859981!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:14:55' prior: 50859989!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	portfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.
+	mainPortfolio add: portfolio.
+	self assert: mainPortfolio ! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:16:34' prior: 50859997!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	portfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.
+	mainPortfolio add: portfolio.
+	self assert: (mainPortfolio hasRegistered: deposit).! !
+
+!methodRemoval: PortfolioTest #test09 stamp: 'FS 10/17/2021 22:29:31'!
+test09
+	| deposit mainPortfolio portfolio |
+	mainPortfolio _ Portfolio new.
+	portfolio _ Portfolio new.
+	deposit _ Deposit for: 100.
+	portfolio hasRegistered: deposit.
+	mainPortfolio add: portfolio.
+	self assert: (mainPortfolio hasRegistered: deposit).!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:28:36'!
+test09
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 12:29:16' prior: 50860029!
+test09
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 16:47:53' prior: 50859658!
+add: aReceptiveAccount 
+	
+	portfolioItems add: aReceptiveAccount.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 22:29:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:29:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 22:29:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:29:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 22:29:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 22:29:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 22:29:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 22:29:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:29:54'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:29:54'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:30:03'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:30:08'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:30:13'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:31:21'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:31:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 22:31:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:31:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 22:31:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:31:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 22:31:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 22:31:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 22:31:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 22:31:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:31:35'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:31:35'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:36:53' prior: 50860047!
+add: aReceptiveAccount 
+	(portfolioItems includes: aReceptiveAccount) ifTrue: [self error: 'cyclic accounts'].
+	portfolioItems add: aReceptiveAccount.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 22:36:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:36:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 22:36:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:36:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 22:36:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 22:36:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 22:36:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 22:36:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:36:56'!
+FAILURE!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:36:56'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:37:12' prior: 50860131!
+add: aPortfolioItem 
+	(portfolioItems includes: aPortfolioItem) ifTrue: [self error: 'cyclic accounts'].
+	portfolioItems add: aPortfolioItem.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:38:02' prior: 50860173!
+add: aPortfolioItem 
+	(aPortfolioItem hasItem: self) ifTrue: [self error: 'cyclic accounts'].
+	portfolioItems add: aPortfolioItem.! !
+!PortfolioItem methodsFor: 'nil' stamp: 'FS 10/17/2021 22:38:55'!
+hasItem: aPortfolioItem
+	self subclassResponsibility. ! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:39:32' overrides: 50860188!
+hasItem: aPortfolioItem
+	portfolioItems includes: aPortfolioItem.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:39:36' prior: 50860193 overrides: 50860188!
+hasItem: aPortfolioItem
+	^portfolioItems includes: aPortfolioItem.! !
+!ReceptiveAccount methodsFor: 'nil' stamp: 'FS 10/17/2021 22:40:17' overrides: 50860188!
+hasItem: aPortfolioItem
+	^self = aPortfolioItem.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 22:40:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:40:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 22:40:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:40:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 22:40:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 22:40:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 22:40:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 22:40:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:40:35'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:41:16'!
+test10
+
+	| portfolio1 portfolio2 portfolio3 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	portfolio2 add: portfolio3
+	self should: [portfolio1 add: portfolio3] 
+		raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:41:22' prior: 50860240!
+test10
+
+	| portfolio1 portfolio2 portfolio3 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	portfolio2 add: portfolio3.
+	self should: [portfolio1 add: portfolio3] 
+		raise: Exception.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 22:41:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:41:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 22:41:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:41:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 22:41:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 22:41:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 22:41:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 22:41:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:41:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:41:38'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:41:38'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:44:02' prior: 50860199 overrides: 50860188!
+hasItem: aPortfolioItem
+	| childHasIt isChild |
+	isChild _ (portfolioItems includes: aPortfolioItem).
+	childHasIt _ (portfolioItems anySatisfy: [:item | item hasItem: aPortfolioItem]).
+	^isChild or: childHasIt.! !
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:44:18'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:44:20'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:44:22'!
+FAILURE!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 22:44:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:44:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 22:44:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:44:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 22:44:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 22:44:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 22:44:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 22:44:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:44:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:44:36'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:44:36'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:44:56' prior: 50860300 overrides: 50860188!
+hasItem: aPortfolioItem
+	| childHasIt isChild |
+	isChild _ portfolioItems includes: aPortfolioItem.
+	childHasIt _ portfolioItems anySatisfy: [:item | item hasItem: aPortfolioItem].
+	^isChild or: childHasIt.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 22:45:24' prior: 50860354 overrides: 50860188!
+hasItem: aPortfolioItem
+	| childHasIt isChild |
+	isChild _ portfolioItems includes: aPortfolioItem.
+	childHasIt _ portfolioItems anySatisfy: [:item | item hasItem: aPortfolioItem].
+	^isChild or: childHasIt.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 22:45:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:45:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 22:45:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 22:45:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 22:45:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 22:45:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 22:45:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 22:45:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 22:45:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:45:28'!
+FAILURE!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 22:45:28'!
+FAILURE!
+
+aPortfolioItem hasItem: self!
+
+----SNAPSHOT----(17 October 2021 22:47:46) CuisUniversity-4532.image priorSource: 16898568!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:12:16' prior: 50860252!
+test10
+
+	| portfolio1 portfolio2 portfolio3 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	portfolio2 add: portfolio3.
+	self should: [portfolio3 add: portfolio2] 
+		raise: Exception.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 23:12:21'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:14:12'!
+test11
+
+	| portfolio2 portfolio subPortfolio1 subPortfolio2 subSubPortfolio |
+	portfolio _ Portfolio new.
+	subPortfolio1 _ Portfolio new.
+	subPortfolio2 _ Portfolio new.
+	subSubPortfolio add: portfolio2.
+	portfolio add subPortfolio1.
+	portfolio add subPortfolio2.
+	subPortfolio1 add: subSubPortfolio.
+	self should: [subPortfolio2 add: subSubPortfolio] 
+		raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:14:48' prior: 50860460!
+test11
+
+	| portfolio subPortfolio1 subPortfolio2 subSubPortfolio |
+	portfolio _ Portfolio new.
+	subPortfolio1 _ Portfolio new.
+	subPortfolio2 _ Portfolio new.
+	subSubPortfolio _ Portfolio new.
+	subSubPortfolio add: subPortfolio2.
+	portfolio add subPortfolio1.
+	portfolio add subPortfolio2.
+	subPortfolio1 add: subSubPortfolio.
+	self should: [subPortfolio2 add: subSubPortfolio] 
+		raise: Exception.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:14:58' prior: 50860475!
+test11
+	| portfolio subPortfolio1 subPortfolio2 subSubPortfolio |
+	portfolio _ Portfolio new.
+	subPortfolio1 _ Portfolio new.
+	subPortfolio2 _ Portfolio new.
+	subSubPortfolio _ Portfolio new.
+	subSubPortfolio add: subPortfolio2.
+	portfolio add subPortfolio1.
+	portfolio add subPortfolio2.
+	subPortfolio1 add: subSubPortfolio.
+	self should: [subPortfolio2 add: subSubPortfolio] 
+		raise: Exception.! !
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 23:15:03'!
+ERROR!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:15:19' prior: 50860491!
+test11
+	| portfolio subPortfolio1 subPortfolio2 subSubPortfolio |
+	portfolio _ Portfolio new.
+	subPortfolio1 _ Portfolio new.
+	subPortfolio2 _ Portfolio new.
+	subSubPortfolio _ Portfolio new.
+	subSubPortfolio add: subPortfolio2.
+	portfolio add: subPortfolio1.
+	portfolio add: subPortfolio2.
+	subPortfolio1 add: subSubPortfolio.
+	self should: [subPortfolio2 add: subSubPortfolio] 
+		raise: Exception.! !
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 23:15:20'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:15:40' prior: 50860509!
+test11
+	| portfolio subPortfolio1 subPortfolio2 subSubPortfolio |
+	portfolio _ Portfolio new.
+	subPortfolio1 _ Portfolio new.
+	subPortfolio2 _ Portfolio new.
+	subSubPortfolio _ Portfolio new.
+	portfolio add: subPortfolio1.
+	portfolio add: subPortfolio2.
+	subPortfolio1 add: subSubPortfolio.
+	self should: [subPortfolio2 add: subSubPortfolio] 
+		raise: Exception.! !
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 23:15:41'!
+FAILURE!
+
+----SNAPSHOT----(17 October 2021 23:19:45) CuisUniversity-4532.image priorSource: 16920331!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:25:36' prior: 50860181!
+add: aPortfolioItem 
+	(self parents anySatisfy: [:portfolio | portfolio hasItem: aPortfolioItem]) ifTrue: [self error: 'cyclic accounts'].
+	portfolioItems add: aPortfolioItem.! !
+
+!classDefinition: #PortfolioItem category: 'Portfolio-Ejercicio' stamp: 'FS 10/17/2021 23:28:44'!
+Object subclass: #PortfolioItem
+	instanceVariableNames: 'farParents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #PortfolioItem category: 'Portfolio-Ejercicio' stamp: 'FS 10/17/2021 23:29:01'!
+Object subclass: #PortfolioItem
+	instanceVariableNames: 'farParents directParents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:28:59'!
+parents
+	farParents _ directParents collect: [:parent | parent parents ].
+	^directParents + farParents. ! !
+
+Object subclass: #PortfolioItem
+	instanceVariableNames: 'directParents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #PortfolioItem category: 'Portfolio-Ejercicio' stamp: 'FS 10/17/2021 23:29:09'!
+Object subclass: #PortfolioItem
+	instanceVariableNames: 'directParents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:29:22' prior: 50860608!
+parents
+	| farParents |
+	farParents _ directParents collect: [:parent | parent parents ].
+	^directParents + farParents. ! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:30:26' prior: 50860583!
+add: aPortfolioItem 
+	(self parents anySatisfy: [:portfolio | portfolio hasItem: aPortfolioItem]) ifTrue: [self error: 'cyclic accounts'].
+	aPortfolioItem addParent: self.
+	portfolioItems add: aPortfolioItem.! !
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:31:01'!
+addParent: parent
+	directParents add: parent.! !
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:31:17' overrides: 16896425!
+initialize
+	directParents _ Set new.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:31:31' prior: 50859675 overrides: 50860650!
+initialize
+
+	portfolioItems _ OrderedCollection new.
+	directParents _ Set new.! !
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'FS 10/17/2021 23:31:45' prior: 50859703 overrides: 50860650!
+initialize
+
+	transactions := OrderedCollection new.
+	directParents _ Set new.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 23:32:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:32:10'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 23:32:10'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:32:10'!
+ERROR!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 23:32:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 23:32:10'!
+ERROR!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 23:32:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 23:32:10'!
+ERROR!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 23:32:10'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 23:32:10'!
+ERROR!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 23:32:10'!
+ERROR!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:32:17'!
+ERROR!
+
+	farParents _ directParents collect: [:parent | parent parents ].!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:41:07' prior: 50860628!
+parents
+	| farParents |
+	farParents _ directParents collect: [:parent | parent parents ].
+	^directParents, farParents. ! !
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:41:08'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 23:41:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:41:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 23:41:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 23:41:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 23:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 23:41:12'!
+ERROR!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:43:57' prior: 50860709!
+parents
+	| farParents |
+	farParents _ directParents collect: [:parent | parent parents ].
+	^directParents, farParents. ! !
+!Collection methodsFor: 'arithmetic' stamp: 'FS 10/17/2021 23:45:09' prior: 16813989!
++ arg
+
+	^ arg adaptToCollection: self andSend: #+! !
+
+(Set new) addAll: (Set new); yourself!
+
+(Set new) addAll: (Set new); yourself!
+
+(Set new with: 0) addAll: (Set new); yourself!
+
+(Set  with: 0) addAll: (Set new); yourself!
+
+(Set  with: 0) addAll: (Set with: 1); yourself !
+
+(Set  with: 0) addAll: (Set with: 1); yourself !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 23:50:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:50:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 23:50:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:50:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 23:50:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 23:50:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 23:50:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 23:50:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 23:50:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 23:50:01'!
+ERROR!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 23:50:01'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 23:50:03'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 23:51:29'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 23:51:41'!
+ERROR!
+
+self parents!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/17/2021 23:53:10' prior: 50860740!
+parents
+	| farParents |
+	farParents _ (directParents collect: [:parent | parent parents ]) flatten.
+	^directParents, farParents. ! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/17/2021 23:53:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:53:52'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/17/2021 23:53:52'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:53:52'!
+ERROR!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/17/2021 23:53:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/17/2021 23:53:52'!
+ERROR!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/17/2021 23:53:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/17/2021 23:53:52'!
+ERROR!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/17/2021 23:53:52'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/17/2021 23:53:52'!
+ERROR!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/17/2021 23:53:52'!
+ERROR!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/17/2021 23:53:57'!
+ERROR!
+
+directParents collect: [:parent | parent parents ]!
+
+self species!
+
+Set new.!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/18/2021 00:01:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/18/2021 00:01:14'!
+ERROR!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/18/2021 00:01:14'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/18/2021 00:01:14'!
+ERROR!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/18/2021 00:01:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/18/2021 00:01:14'!
+ERROR!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/18/2021 00:01:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/18/2021 00:01:14'!
+ERROR!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/18/2021 00:01:14'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/18/2021 00:01:14'!
+ERROR!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/18/2021 00:01:14'!
+ERROR!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/18/2021 00:01:17'!
+ERROR!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:01:31' prior: 50860804!
+parents
+	| farParents |
+	farParents _ (directParents collect: [:parent | parent parents ]) asOrderedCollection flatten.
+	^directParents, farParents. ! !
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/18/2021 00:01:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/18/2021 00:01:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/18/2021 00:01:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/18/2021 00:01:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/18/2021 00:01:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/18/2021 00:01:34'!
+FAILURE!
+
+self parent!
+
+self parents!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:03:12' prior: 50860365 overrides: 50860188!
+hasItem: aPortfolioItem
+	| childHasIt isChild isIt |
+	isChild _ portfolioItems includes: aPortfolioItem.
+	isIt _ self = aPortfolioItem.
+	childHasIt _ portfolioItems anySatisfy: [:item | item hasItem: aPortfolioItem].
+	^isChild or: childHasIt.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:03:25' prior: 50860923 overrides: 50860188!
+hasItem: aPortfolioItem
+	| childHasIt isChild isIt |
+	isChild _ portfolioItems includes: aPortfolioItem.
+	isIt _ self = aPortfolioItem.
+	childHasIt _ portfolioItems anySatisfy: [:item | item hasItem: aPortfolioItem].
+	^isIt or: isChild or: childHasIt.! !
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/18/2021 00:03:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/18/2021 00:03:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/18/2021 00:03:30'!
+PASSED!
+!PortfolioItem methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:04:30' prior: 50860892!
+parents
+	| farParents |
+	farParents _ (directParents collect: [:parent | parent parents]) asOrderedCollection flatten.
+	^directParents, farParents. ! !
+!ReceptiveAccount methodsFor: 'items' stamp: 'FS 10/18/2021 00:07:50' prior: 50860204 overrides: 50860188!
+hasItem: aPortfolioItem
+
+	^self = aPortfolioItem.! !
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'FS 10/18/2021 00:08:06' prior: 50860662 overrides: 50860650!
+initialize
+
+	transactions _ OrderedCollection new.
+	directParents _ Set new.! !
+!Portfolio methodsFor: 'transactions' stamp: 'FS 10/18/2021 00:09:26' prior: 50859680!
+transactions
+
+	^(portfolioItems collect: [:portfolioItem | portfolioItem transactions]) flatten.! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHas0Balance stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithAccountHasAccountBalance stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithEmptyPortfolioHasEmptyPortfolioBalance stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithPortfolioWithAccountHasAccountBalance stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredDeposits stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithItemsHasRegisteredItemsDeposits stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test07EmptyPortfolioDoesNotHaveTransactions stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioWithItemsHasItemsTransactions stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'FS 10/18/2021 00:09:30'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:10:14'!
+test09SmallestCycle
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.! !
+
+!methodRemoval: PortfolioTest #test09SmallestCycle stamp: 'FS 10/18/2021 00:10:23'!
+test09SmallestCycle
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:10:28'!
+test09SmallestCycle
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.! !
+
+!methodRemoval: PortfolioTest #test09 stamp: 'FS 10/18/2021 00:10:28'!
+test09
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:24:45'!
+test10CycleWith3portfolios
+
+	| portfolio1 portfolio2 portfolio3 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	portfolio2 add: portfolio3.
+	self should: [portfolio3 add: portfolio2] 
+		raise: Exception.! !
+
+!methodRemoval: PortfolioTest #test10 stamp: 'FS 10/18/2021 00:24:45'!
+test10
+
+	| portfolio1 portfolio2 portfolio3 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	portfolio2 add: portfolio3.
+	self should: [portfolio3 add: portfolio2] 
+		raise: Exception.!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:25:07'!
+test09CycleWith4Portfolios
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.! !
+
+!methodRemoval: PortfolioTest #test09SmallestCycle stamp: 'FS 10/18/2021 00:25:07'!
+test09SmallestCycle
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:25:18'!
+test09CycleWith3Portfolios
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.! !
+
+!methodRemoval: PortfolioTest #test09CycleWith4Portfolios stamp: 'FS 10/18/2021 00:25:18'!
+test09CycleWith4Portfolios
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:25:23'!
+test09CycleWith2Portfolios
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.! !
+
+!methodRemoval: PortfolioTest #test09CycleWith3Portfolios stamp: 'FS 10/18/2021 00:25:23'!
+test09CycleWith3Portfolios
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:25:32'!
+test11CycleWith4Portfolios
+	| portfolio subPortfolio1 subPortfolio2 subSubPortfolio |
+	portfolio _ Portfolio new.
+	subPortfolio1 _ Portfolio new.
+	subPortfolio2 _ Portfolio new.
+	subSubPortfolio _ Portfolio new.
+	portfolio add: subPortfolio1.
+	portfolio add: subPortfolio2.
+	subPortfolio1 add: subSubPortfolio.
+	self should: [subPortfolio2 add: subSubPortfolio] 
+		raise: Exception.! !
+
+!methodRemoval: PortfolioTest #test11 stamp: 'FS 10/18/2021 00:25:32'!
+test11
+	| portfolio subPortfolio1 subPortfolio2 subSubPortfolio |
+	portfolio _ Portfolio new.
+	subPortfolio1 _ Portfolio new.
+	subPortfolio2 _ Portfolio new.
+	subSubPortfolio _ Portfolio new.
+	portfolio add: subPortfolio1.
+	portfolio add: subPortfolio2.
+	subPortfolio1 add: subSubPortfolio.
+	self should: [subPortfolio2 add: subSubPortfolio] 
+		raise: Exception.!
+
+----SNAPSHOT----(18 October 2021 00:25:49) CuisUniversity-4532.image priorSource: 16925721!

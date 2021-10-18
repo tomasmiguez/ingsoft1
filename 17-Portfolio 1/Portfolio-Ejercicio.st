@@ -104,6 +104,41 @@ test08PortfolioWithItemsHasItemsTransactions
 	
 	self assert: transactions equals: (aPortfolio transactions).! !
 
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:25:23'!
+test09CycleWith2Portfolios
+
+	| portfolio1 portfolio2 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	self should: [portfolio2 add: portfolio1] 
+		raise: Exception.! !
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:24:45'!
+test10CycleWith3portfolios
+
+	| portfolio1 portfolio2 portfolio3 |
+	portfolio1 _ Portfolio new.
+	portfolio2 _ Portfolio new.
+	portfolio3 _ Portfolio new.
+	portfolio1 add: portfolio2.
+	portfolio2 add: portfolio3.
+	self should: [portfolio3 add: portfolio2] 
+		raise: Exception.! !
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'FS 10/18/2021 00:25:32'!
+test11CycleWith4Portfolios
+	| portfolio subPortfolio1 subPortfolio2 subSubPortfolio |
+	portfolio _ Portfolio new.
+	subPortfolio1 _ Portfolio new.
+	subPortfolio2 _ Portfolio new.
+	subSubPortfolio _ Portfolio new.
+	portfolio add: subPortfolio1.
+	portfolio add: subPortfolio2.
+	subPortfolio1 add: subSubPortfolio.
+	self should: [subPortfolio2 add: subSubPortfolio] 
+		raise: Exception.! !
+
 
 !classDefinition: #ReceptiveAccountTest category: 'Portfolio-Ejercicio'!
 TestCase subclass: #ReceptiveAccountTest
@@ -304,10 +339,29 @@ for: aValue
 
 !classDefinition: #PortfolioItem category: 'Portfolio-Ejercicio'!
 Object subclass: #PortfolioItem
-	instanceVariableNames: ''
+	instanceVariableNames: 'directParents'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
+
+!PortfolioItem methodsFor: 'initialize' stamp: 'FS 10/17/2021 23:31:17'!
+initialize
+	directParents _ Set new.! !
+
+
+!PortfolioItem methodsFor: 'items' stamp: 'FS 10/17/2021 23:31:01'!
+addParent: parent
+	directParents add: parent.! !
+
+!PortfolioItem methodsFor: 'items' stamp: 'FS 10/17/2021 22:38:55'!
+hasItem: aPortfolioItem
+	self subclassResponsibility. ! !
+
+!PortfolioItem methodsFor: 'items' stamp: 'FS 10/18/2021 00:04:30'!
+parents
+	| farParents |
+	farParents _ (directParents collect: [:parent | parent parents]) asOrderedCollection flatten.
+	^directParents, farParents. ! !
 
 
 !classDefinition: #Portfolio category: 'Portfolio-Ejercicio'!
@@ -317,34 +371,43 @@ PortfolioItem subclass: #Portfolio
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:42'!
-add: aReceptiveAccount 
-	
-	portfolioItems add: aReceptiveAccount.! !
-
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:42'!
+!Portfolio methodsFor: 'balance' stamp: 'TM\ 10/14/2021 21:26:42'!
 balance
 
 	^(portfolioItems sum: [ :anXXX | anXXX balance ] ifEmpty: [0]).! !
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:42'!
+
+!Portfolio methodsFor: 'transactions' stamp: 'TM\ 10/14/2021 21:26:42'!
 hasRegistered: anAccountTransaction 
 	
 	^portfolioItems anySatisfy: [:anXXX | anXXX hasRegistered: anAccountTransaction].! !
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:26:42'!
-initialize
-
-	portfolioItems _ OrderedCollection new.! !
-
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'TM\ 10/14/2021 21:35:28'!
+!Portfolio methodsFor: 'transactions' stamp: 'FS 10/18/2021 00:09:26'!
 transactions
 
-	| allTransactions |
-	
-	allTransactions _ OrderedCollection new.
-	portfolioItems do: [:eachPortfolioItem | allTransactions addAll: (eachPortfolioItem transactions)].
-	^allTransactions.! !
+	^(portfolioItems collect: [:portfolioItem | portfolioItem transactions]) flatten.! !
+
+
+!Portfolio methodsFor: 'items' stamp: 'FS 10/17/2021 23:30:26'!
+add: aPortfolioItem 
+	(self parents anySatisfy: [:portfolio | portfolio hasItem: aPortfolioItem]) ifTrue: [self error: 'cyclic accounts'].
+	aPortfolioItem addParent: self.
+	portfolioItems add: aPortfolioItem.! !
+
+!Portfolio methodsFor: 'items' stamp: 'FS 10/18/2021 00:03:25'!
+hasItem: aPortfolioItem
+	| childHasIt isChild isIt |
+	isChild _ portfolioItems includes: aPortfolioItem.
+	isIt _ self = aPortfolioItem.
+	childHasIt _ portfolioItems anySatisfy: [:item | item hasItem: aPortfolioItem].
+	^isIt or: isChild or: childHasIt.! !
+
+
+!Portfolio methodsFor: 'initialize' stamp: 'FS 10/17/2021 23:31:31'!
+initialize
+
+	portfolioItems _ OrderedCollection new.
+	directParents _ Set new.! !
 
 
 !classDefinition: #ReceptiveAccount category: 'Portfolio-Ejercicio'!
@@ -354,10 +417,11 @@ PortfolioItem subclass: #ReceptiveAccount
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!ReceptiveAccount methodsFor: 'initialization' stamp: 'NR 10/17/2019 15:06:56'!
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'FS 10/18/2021 00:08:06'!
 initialize
 
-	transactions := OrderedCollection new.! !
+	transactions _ OrderedCollection new.
+	directParents _ Set new.! !
 
 
 !ReceptiveAccount methodsFor: 'transactions' stamp: 'TM\ 10/7/2021 21:09:05'!
@@ -383,3 +447,9 @@ hasRegistered: aTransaction
 
 	^ transactions includes: aTransaction 
 ! !
+
+
+!ReceptiveAccount methodsFor: 'items' stamp: 'FS 10/18/2021 00:07:50'!
+hasItem: aPortfolioItem
+
+	^self = aPortfolioItem.! !
