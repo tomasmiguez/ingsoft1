@@ -1,9 +1,9 @@
-!classDefinition: #PortfolioTest category: 'Portfolio-Solucion'!
+!classDefinition: #PortfolioTest category: 'Portfolio 2'!
 TestCase subclass: #PortfolioTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
-	category: 'Portfolio-Solucion'!
+	category: 'Portfolio 2'!
 
 !PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:16:26'!
 test01BalanceOfPortfolioWithoutAccountsIsZero
@@ -214,12 +214,12 @@ test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd
 			self assert: portfolioToModify accountsIsEmpty ]! !
 
 
-!classDefinition: #ReceptiveAccountTest category: 'Portfolio-Solucion'!
+!classDefinition: #ReceptiveAccountTest category: 'Portfolio 2'!
 TestCase subclass: #ReceptiveAccountTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
-	category: 'Portfolio-Solucion'!
+	category: 'Portfolio 2'!
 
 !ReceptiveAccountTest methodsFor: 'tests' stamp: 'HAW 5/23/2019 15:19:48'!
 test01ReceptiveAccountHaveZeroAsBalanceWhenCreated 
@@ -305,12 +305,97 @@ test07AccountKnowsItsTransactions
 ! !
 
 
-!classDefinition: #Account category: 'Portfolio-Solucion'!
+!classDefinition: #WireTest category: 'Portfolio 2'!
+TestCase subclass: #WireTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:30:02'!
+test01SendWireCheckValueIsCorrect
+
+	| aReceiver aSender aWire |
+	aSender _ ReceptiveAccount new.
+	aReceiver _ ReceptiveAccount new.
+	
+	aWire _ (aSender sendWireTo: aReceiver for: 10).
+	
+	self assert: 10 equals: (aWire value).! !
+
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:30:29'!
+test02SendWireCheckTransactionWasAddedToSender
+
+	| aReceiver aSender aWire |
+	aSender _ ReceptiveAccount new.
+	aReceiver _ ReceptiveAccount new.
+	
+	aWire _ (aSender sendWireTo: aReceiver for: 10).
+	
+	self assert: -10 equals: (aSender transactions last affectBalance: 0).! !
+
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:30:45'!
+test03SendWireCheckTransactionWasAddedToReceiver
+
+	| aReceiver aSender aWire |
+	aSender _ ReceptiveAccount new.
+	aReceiver _ ReceptiveAccount new.
+	
+	aWire _ (aSender sendWireTo: aReceiver for: 10).
+	
+	self assert: 10 equals: (aReceiver transactions last affectBalance: 0).! !
+
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:31:51'!
+test04SendWireCheckCreatedWireLegIsSenderTransaction
+
+	| aReceiver aSender aWire |
+	aSender _ ReceptiveAccount new.
+	aReceiver _ ReceptiveAccount new.
+	
+	aWire _ (aSender sendWireTo: aReceiver for: 10).
+	
+	self assert: (aSender transactions last) equals: (aWire senderLeg).! !
+
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:32:00'!
+test05SendWireCheckCreatedWireLegIsReceiverTransaction
+
+	| aReceiver aSender aWire |
+	aSender _ ReceptiveAccount new.
+	aReceiver _ ReceptiveAccount new.
+	
+	aWire _ (aSender sendWireTo: aReceiver for: 10).
+	
+	self assert: (aReceiver transactions last) equals: (aWire receiverLeg).! !
+
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:32:41'!
+test06SendWireCheckSenderLegWireIsWireCreated
+
+	| aReceiver aSender aWire |
+	aSender _ ReceptiveAccount new.
+	aReceiver _ ReceptiveAccount new.
+	
+	aWire _ (aSender sendWireTo: aReceiver for: 10).
+	
+	self assert: (aSender transactions last wire) equals: (aWire).! !
+
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:32:53'!
+test07SendWireCheckReceiverLegWireIsWireCreated
+
+	| aReceiver aSender aWire |
+	aSender _ ReceptiveAccount new.
+	aReceiver _ ReceptiveAccount new.
+	
+	aWire _ (aSender sendWireTo: aReceiver for: 10).
+	
+	self assert: (aReceiver transactions last wire) equals: (aWire).! !
+
+
+!classDefinition: #Account category: 'Portfolio 2'!
 Object subclass: #Account
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
-	category: 'Portfolio-Solucion'!
+	category: 'Portfolio 2'!
 
 !Account methodsFor: 'testing' stamp: 'HAW 5/25/2019 12:23:47'!
 hasRegistered: aTransaction
@@ -346,12 +431,12 @@ addedTo: aPortfolio
 	self subclassResponsibility ! !
 
 
-!classDefinition: #Portfolio category: 'Portfolio-Solucion'!
+!classDefinition: #Portfolio category: 'Portfolio 2'!
 Account subclass: #Portfolio
 	instanceVariableNames: 'accounts parents'
 	classVariableNames: ''
 	poolDictionaries: ''
-	category: 'Portfolio-Solucion'!
+	category: 'Portfolio 2'!
 
 !Portfolio methodsFor: 'accounts management' stamp: 'HAW 5/25/2019 11:49:20'!
 accountsIncludes: anAccount
@@ -459,7 +544,7 @@ signalCanNotAddAccount
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Portfolio class' category: 'Portfolio-Solucion'!
+!classDefinition: 'Portfolio class' category: 'Portfolio 2'!
 Portfolio class
 	instanceVariableNames: ''!
 
@@ -484,12 +569,12 @@ with: anAccount with: anotherAccount
 		yourself! !
 
 
-!classDefinition: #ReceptiveAccount category: 'Portfolio-Solucion'!
+!classDefinition: #ReceptiveAccount category: 'Portfolio 2'!
 Account subclass: #ReceptiveAccount
 	instanceVariableNames: 'transactions'
 	classVariableNames: ''
 	poolDictionaries: ''
-	category: 'Portfolio-Solucion'!
+	category: 'Portfolio 2'!
 
 !ReceptiveAccount methodsFor: 'initialization' stamp: 'HernanWilkinson 7/13/2011 18:35'!
 initialize
@@ -508,6 +593,14 @@ register: aTransaction
 
 	transactions add: aTransaction 
 ! !
+
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'TM 10/24/2021 20:22:56'!
+sendWireTo: aReceiver for: anAmount 
+	
+	| aWire |
+	aWire _ (Wire from: self to: aReceiver for: anAmount).
+	
+	^aWire.! !
 
 !ReceptiveAccount methodsFor: 'transactions' stamp: 'HernanWilkinson 7/13/2011 18:37'!
 transactions 
@@ -541,12 +634,12 @@ addedTo: aPortfolio
 	! !
 
 
-!classDefinition: #AccountTransaction category: 'Portfolio-Solucion'!
+!classDefinition: #AccountTransaction category: 'Portfolio 2'!
 Object subclass: #AccountTransaction
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
-	category: 'Portfolio-Solucion'!
+	category: 'Portfolio 2'!
 
 !AccountTransaction methodsFor: 'value' stamp: 'HernanWilkinson 9/12/2011 12:25'!
 value 
@@ -561,7 +654,7 @@ affectBalance: aBalance
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'AccountTransaction class' category: 'Portfolio-Solucion'!
+!classDefinition: 'AccountTransaction class' category: 'Portfolio 2'!
 AccountTransaction class
 	instanceVariableNames: ''!
 
@@ -576,12 +669,12 @@ register: aValue on: account
 	^ transaction! !
 
 
-!classDefinition: #Deposit category: 'Portfolio-Solucion'!
+!classDefinition: #Deposit category: 'Portfolio 2'!
 AccountTransaction subclass: #Deposit
 	instanceVariableNames: 'value'
 	classVariableNames: ''
 	poolDictionaries: ''
-	category: 'Portfolio-Solucion'!
+	category: 'Portfolio 2'!
 
 !Deposit methodsFor: 'initialization' stamp: 'HernanWilkinson 7/13/2011 18:45'!
 initializeFor: aValue
@@ -602,7 +695,7 @@ affectBalance: aBalance
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Deposit class' category: 'Portfolio-Solucion'!
+!classDefinition: 'Deposit class' category: 'Portfolio 2'!
 Deposit class
 	instanceVariableNames: ''!
 
@@ -612,12 +705,84 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
-!classDefinition: #Withdraw category: 'Portfolio-Solucion'!
+!classDefinition: #WireDepositLeg category: 'Portfolio 2'!
+AccountTransaction subclass: #WireDepositLeg
+	instanceVariableNames: 'wire'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!WireDepositLeg methodsFor: 'balance' stamp: 'TM 10/24/2021 20:26:03'!
+affectBalance: aBalance 
+	
+	^aBalance + wire value.! !
+
+
+!WireDepositLeg methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:26:48'!
+wire
+	
+	^wire! !
+
+
+!WireDepositLeg methodsFor: 'initialization' stamp: 'TM 10/24/2021 20:22:12'!
+initializeOf: aWire 
+
+	wire := aWire.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'WireDepositLeg class' category: 'Portfolio 2'!
+WireDepositLeg class
+	instanceVariableNames: ''!
+
+!WireDepositLeg class methodsFor: 'instance creation' stamp: 'TM 10/24/2021 20:24:21'!
+of: aWire 
+	
+	^(self new initializeOf: aWire).! !
+
+
+!classDefinition: #WireWithdrawLeg category: 'Portfolio 2'!
+AccountTransaction subclass: #WireWithdrawLeg
+	instanceVariableNames: 'wire'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!WireWithdrawLeg methodsFor: 'balance' stamp: 'TM 10/24/2021 20:25:35'!
+affectBalance: aBalance
+	
+	^aBalance - wire value.! !
+
+
+!WireWithdrawLeg methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:24:54'!
+wire
+
+	^wire! !
+
+
+!WireWithdrawLeg methodsFor: 'initialization' stamp: 'TM 10/24/2021 20:21:25'!
+initializeOf: aWire 
+
+	wire _ aWire.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'WireWithdrawLeg class' category: 'Portfolio 2'!
+WireWithdrawLeg class
+	instanceVariableNames: ''!
+
+!WireWithdrawLeg class methodsFor: 'instance creation' stamp: 'TM 10/24/2021 20:23:20'!
+of: aWire 
+	
+	^(self new initializeOf: aWire).! !
+
+
+!classDefinition: #Withdraw category: 'Portfolio 2'!
 AccountTransaction subclass: #Withdraw
 	instanceVariableNames: 'value'
 	classVariableNames: ''
 	poolDictionaries: ''
-	category: 'Portfolio-Solucion'!
+	category: 'Portfolio 2'!
 
 !Withdraw methodsFor: 'initialization' stamp: 'HernanWilkinson 7/13/2011 18:46'!
 initializeFor: aValue
@@ -638,7 +803,7 @@ affectBalance: aBalance
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Withdraw class' category: 'Portfolio-Solucion'!
+!classDefinition: 'Withdraw class' category: 'Portfolio 2'!
 Withdraw class
 	instanceVariableNames: ''!
 
@@ -646,3 +811,49 @@ Withdraw class
 for: aValue
 
 	^ self new initializeFor: aValue ! !
+
+
+!classDefinition: #Wire category: 'Portfolio 2'!
+Object subclass: #Wire
+	instanceVariableNames: 'senderLeg receiverLeg value sender receiver amount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!Wire methodsFor: 'initialization' stamp: 'TM 10/24/2021 20:20:10'!
+initializeFrom: aSender to: aReceiver for: anAmount 
+
+	senderLeg _ WireWithdrawLeg of: self.
+	receiverLeg _ WireDepositLeg of: self.
+
+	aSender register: senderLeg.
+	aReceiver register: receiverLeg.
+
+	value := anAmount.! !
+
+
+!Wire methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:15:03'!
+receiverLeg
+
+	^receiverLeg! !
+
+!Wire methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:12:21'!
+senderLeg
+
+	^senderLeg! !
+
+!Wire methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:14:28'!
+value
+
+	^value.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Wire class' category: 'Portfolio 2'!
+Wire class
+	instanceVariableNames: ''!
+
+!Wire class methodsFor: 'instance creation' stamp: 'TM 10/24/2021 20:09:54'!
+from: aSender to: aReceiver for: anAmount 
+
+	^self new initializeFrom: aSender to: aReceiver for: anAmount.! !
