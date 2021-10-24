@@ -231,6 +231,71 @@ test07AccountKnowsItsTransactions
 ! !
 
 
+!classDefinition: #ReportsTest category: 'Portfolio-Ejercicio'!
+TestCase subclass: #ReportsTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 13:23:16'!
+test01
+	| account sumary expected |
+	account _ ReceptiveAccount  new.
+	sumary _ account sumary.
+	expected _ OrderedCollection with: 'balance = 0'.
+	self assert: expected equals:  sumary.! !
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 13:25:25'!
+test02
+	| account sumary deposit |
+	account _ ReceptiveAccount  new.
+	deposit _ Deposit for: 10. 
+	account register: deposit.
+	sumary _ account sumary.
+	self assert: 'balance = 10' equals: sumary last.! !
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 13:39:15'!
+test03
+	| account sumary withdraw expected |
+	account _ ReceptiveAccount  new.
+	withdraw _ Withdraw for: 10. 
+	account register: withdraw.
+	sumary _ account sumary.
+	expected _ OrderedCollection with: 'withdraw for -10' with: 'balance = -10'.
+	self assert: 'balance = -10' equals: sumary last.! !
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 13:28:08'!
+test04
+	| account sumary deposit expected |
+	account _ ReceptiveAccount  new.
+	deposit _ Deposit for: 10. 
+	account register: deposit.
+	sumary _ account sumary.
+	expected _ OrderedCollection with: 'deposit for 10' with: 'balance = 10'.
+	self assert: expected equals: sumary.! !
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 13:38:11'!
+test05
+	| account sumary deposit expected |
+	account _ ReceptiveAccount  new.
+	deposit _ Deposit for: 20. 
+	account register: deposit.
+	sumary _ account sumary.
+	expected _ OrderedCollection with: 'deposit for 20' with: 'balance = 20'.
+	self assert: expected equals: sumary.! !
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 13:46:46'!
+test06
+	| account sumary withdraw expected |
+	account _ ReceptiveAccount  new.
+	withdraw _ Withdraw for: 10. 
+	account register: withdraw.
+	sumary _ account sumary.
+	expected _ OrderedCollection with: 'withdraw for 10' with: 'balance = -10'.
+	self assert: expected equals: sumary.! !
+
+
 !classDefinition: #AccountTransaction category: 'Portfolio-Ejercicio'!
 Object subclass: #AccountTransaction
 	instanceVariableNames: ''
@@ -453,3 +518,16 @@ hasRegistered: aTransaction
 hasItem: aPortfolioItem
 
 	^self = aPortfolioItem.! !
+
+
+!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 13:46:17'!
+sumary
+	| result |
+	result _ OrderedCollection new.
+	self transactions do: [:transaction |
+		(transaction isKindOf: Withdraw) ifTrue: [
+			result addLast: 'withdraw for ', transaction value asString].
+		(transaction isKindOf: Deposit) ifTrue: [
+			result addLast: 'deposit for ', transaction value asString].].
+	result addLast: 'balance = ', (self balance asString)	.
+	^result.! !
