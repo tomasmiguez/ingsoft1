@@ -295,6 +295,18 @@ test06
 	expected _ OrderedCollection with: 'withdraw for 10' with: 'balance = -10'.
 	self assert: expected equals: sumary.! !
 
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 16:17:01'!
+test07
+	| account sumary withdraw expected deposit |
+	account _ ReceptiveAccount  new.
+	withdraw _ Withdraw for: 10. 
+	deposit _ Deposit for: 10.
+	account register: withdraw.
+	account register: deposit.
+	sumary _ account sumary.
+	expected _ OrderedCollection with: 'withdraw for 10' with: 'deposit for 10' with: 'balance = 0'.
+	self assert: expected equals: sumary.! !
+
 
 !classDefinition: #AccountTransaction category: 'Portfolio-Ejercicio'!
 Object subclass: #AccountTransaction
@@ -520,7 +532,7 @@ hasItem: aPortfolioItem
 	^self = aPortfolioItem.! !
 
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 13:46:17'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 16:16:35'!
 sumary
 	| result |
 	result _ OrderedCollection new.
