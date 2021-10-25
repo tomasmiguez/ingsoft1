@@ -717,10 +717,17 @@ signalCanNotAddAccount
 	self error: self class canNotAddAccountErrorMessage! !
 
 
-!Portfolio methodsFor: 'reports' stamp: 'FS 10/24/2021 22:56:50'!
+!Portfolio methodsFor: 'reports' stamp: 'FS 10/24/2021 23:22:28'!
+reportTo: aReport
+	
+	^accounts do: [ :anAccount | anAccount reportTo: aReport].! !
+
+!Portfolio methodsFor: 'reports' stamp: 'FS 10/24/2021 23:28:34'!
 transferNet
 	
-	^accounts sum: [ :anAccount | anAccount transferNet ] ifEmpty: [ 0 ]! !
+	| report |
+	report _ TransferNetReport new.
+	^self reportTo: report.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -814,25 +821,25 @@ addedTo: aPortfolio
 	! !
 
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:13:16'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:21:24'!
+reportTo: aReport
+	self transactions do: [:transaction |
+		transaction reportTo: aReport].
+	^aReport value.! !
+
+!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:27:52'!
 sumary
 	| report |
 	report _ SumaryReport new.
-	self transactions do: [:transaction |
-		transaction reportTo: report].
-	report addBalanceLineFor: self.
+	self reportTo: report.
 	^report value.! !
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:09:21'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:28:04'!
 transferNet
 	
 	| report |
 	report _ TransferNetReport new.
-	
-	transactions do: [ :eachTransaction |
-		eachTransaction reportTo: report.
-	].
-
+	self reportTo: report.
 	^report value.
 		! !
 
@@ -1062,38 +1069,46 @@ reportWithdraw: aWire
 
 !classDefinition: #SumaryReport category: 'Portfolio 2'!
 Report subclass: #SumaryReport
-	instanceVariableNames: 'report'
+	instanceVariableNames: 'transactionLines balance'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 22:47:27'!
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:23:42'!
 addBalanceLineFor: anAccount
-	report addLast: 'Balance = ', (anAccount balance asString).! !
+	transactionLines addLast: 'Balance = ', (anAccount balance asString).! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 22:36:50'!
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:23:42'!
 initialize
-	report _ OrderedCollection new.! !
+	transactionLines _ OrderedCollection new.
+	balance _ 0.! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:02:34'!
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:25:24'!
 reportDeposit: aDeposit
-	report addLast: 'Depósito por ', (aDeposit value asString), '.'! !
+	aDeposit affectBalance: balance.
+	transactionLines addLast: 'Depósito por ', (aDeposit value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:02:46'!
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:25:34'!
 reportWireIncome: aWire
-	report addLast: 'Entrada por transferencia de ', (aWire wire value asString), '.'! !
+	aWire affectBalance: balance.
+	transactionLines addLast: 'Entrada por transferencia de ', (aWire wire value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:03:00'!
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:25:45'!
 reportWireOutcome: aWire
-	report addLast: 'Salida por transferencia de ', (aWire wire value asString), '.'! !
+	aWire affectBalance: balance.
+	transactionLines addLast: 'Salida por transferencia de ', (aWire wire value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:03:11'!
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:25:54'!
 reportWithdraw: aWithdraw
-	report addLast: 'Retiro por ', (aWithdraw value asString), '.'! !
+	aWithdraw affectBalance: balance.
+	transactionLines addLast: 'Retiro por ', (aWithdraw value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 22:48:53'!
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:24:58'!
 value
-	^report.! !
+	| output |
+	output _ transactionLines copy.
+	output addLast: 'Balance = ', (balance asString),'.'.
+	^transactionLines.! !
 
 
 !classDefinition: #TransferNetReport category: 'Portfolio 2'!
