@@ -869,9 +869,9 @@ addedTo: aPortfolio
 	! !
 
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/25/2021 00:00:24'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/25/2021 00:24:45'!
 reportTo: aReport
-	self transactions do: [:transaction |
+	transactions do: [:transaction |
 		transaction reportTo: aReport].! !
 
 !ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/24/2021 23:52:36'!
