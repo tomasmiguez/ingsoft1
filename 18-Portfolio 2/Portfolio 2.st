@@ -305,70 +305,70 @@ test07AccountKnowsItsTransactions
 ! !
 
 
-!classDefinition: #SumaryTest category: 'Portfolio 2'!
-TestCase subclass: #SumaryTest
+!classDefinition: #SummaryReportTest category: 'Portfolio 2'!
+TestCase subclass: #SummaryReportTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test01
 	| account sumary expected |
 	account _ ReceptiveAccount  new.
-	sumary _ account sumary.
+	sumary _ account summary.
 	expected _ OrderedCollection with: 'Balance = 0'.
 	self assert: expected equals:  sumary.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test02
 	| account sumary deposit |
 	account _ ReceptiveAccount  new.
 	deposit _ Deposit for: 10. 
 	account register: deposit.
-	sumary _ account sumary.
+	sumary _ account summary.
 	self assert: 'Balance = 10' equals: sumary last.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test03
 	| account sumary withdraw |
 	account _ ReceptiveAccount  new.
 	withdraw _ Withdraw for: 10. 
 	account register: withdraw.
-	sumary _ account sumary.
+	sumary _ account summary.
 	self assert: 'Balance = -10' equals: sumary last.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test04
 	| account sumary deposit expected |
 	account _ ReceptiveAccount  new.
 	deposit _ Deposit for: 10. 
 	account register: deposit.
-	sumary _ account sumary.
+	sumary _ account summary.
 	expected _ 'Depósito por 10.'.
 	self assert: expected equals: sumary first.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test05
 	| account sumary deposit expected |
 	account _ ReceptiveAccount  new.
 	deposit _ Deposit for: 20. 
 	account register: deposit.
-	sumary _ account sumary.
+	sumary _ account summary.
 	expected _ 'Depósito por 20.'.
 	self assert: expected equals: sumary first.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test06
 	| account sumary withdraw expected |
 	account _ ReceptiveAccount  new.
 	withdraw _ Withdraw for: 10. 
 	account register: withdraw.
-	sumary _ account sumary.
+	sumary _ account summary.
 	expected _ 'Retiro por 10.'.
 	self assert: expected equals: sumary first.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test07
 	| account sumary withdraw expected deposit |
 	account _ ReceptiveAccount  new.
@@ -376,40 +376,40 @@ test07
 	deposit _ Deposit for: 10.
 	account register: withdraw.
 	account register: deposit.
-	sumary _ account sumary.
+	sumary _ account summary.
 	expected _ OrderedCollection with: 'Retiro por 10.' with: 'Depósito por 10.' with: 'Balance = 0'.
 	self assert: expected equals: sumary.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test08
 	| sumary expected receiver sender |
 	sender _ ReceptiveAccount  new.
 	receiver _ ReceptiveAccount new.
 	sender sendWireTo: receiver for: 10.
-	sumary _ sender sumary.	
+	sumary _ sender summary.	
 	expected _ 'Salida por transferencia de 10.'.
 	self assert: expected equals: sumary first.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test09
 	| sumary expected receiver sender |
 	sender _ ReceptiveAccount  new.
 	receiver _ ReceptiveAccount new.
 	sender sendWireTo: receiver for: 10.
-	sumary _ receiver sumary.	
+	sumary _ receiver summary.	
 	expected _ 'Entrada por transferencia de 10.'.
 	self assert: expected equals: sumary first.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:50:45'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test10
 	
 	| aPortfolio expected |
 	aPortfolio _ Portfolio new.
 	
 	expected _ OrderedCollection with: 'Balance = 0'.
-	self assert: expected equals: (aPortfolio sumary).! !
+	self assert: expected equals: (aPortfolio summary).! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 00:05:41'!
+!SummaryReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:50:06'!
 test11
 	| account sumary deposit aPortfolio expected |
 	account _ ReceptiveAccount  new.
@@ -417,7 +417,7 @@ test11
 	
 	deposit _ Deposit for: 10. 
 	account register: deposit.
-	sumary _ account sumary.
+	sumary _ account summary.
 	
 	aPortfolio add: account.
 	
@@ -425,20 +425,20 @@ test11
 	self assert: expected equals: sumary.! !
 
 
-!classDefinition: #TransferNetTest category: 'Portfolio 2'!
-TestCase subclass: #TransferNetTest
+!classDefinition: #TransferNetReportTest category: 'Portfolio 2'!
+TestCase subclass: #TransferNetReportTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!TransferNetReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test01
 	| account |
 	account _ ReceptiveAccount new.
 	self assert: 0 equals: account transferNet.! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!TransferNetReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test02
 	| receiver sender |
 	sender _ ReceptiveAccount new.
@@ -446,7 +446,7 @@ test02
 	sender sendWireTo: receiver for: 10.
 	self assert: 10 equals: (receiver transferNet).! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!TransferNetReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test03
 	| receiver sender aWithdraw |
 	sender _ ReceptiveAccount new.
@@ -458,7 +458,7 @@ test03
 	
 	self assert: 10 equals: (receiver transferNet).! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!TransferNetReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test04
 	| receiver sender |
 	sender _ ReceptiveAccount new.
@@ -468,14 +468,14 @@ test04
 	
 	self assert: -10 equals: (sender transferNet).! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!TransferNetReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test05
 	| aPortfolio |
 	aPortfolio _ Portfolio new.
 	
 	self assert: 0 equals: aPortfolio transferNet.! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!TransferNetReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test06
 	| aReceiver aSender aPortfolio|
 	aSender _ ReceptiveAccount new.
@@ -487,7 +487,7 @@ test06
 	
 	self assert: 10 equals: (aPortfolio transferNet).! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!TransferNetReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test07
 	| aReceiver aSender aWithdraw aPortfolio|
 	aSender _ ReceptiveAccount new.
@@ -502,7 +502,7 @@ test07
 	
 	self assert: 10 equals: (aPortfolio transferNet).! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 00:07:11'!
+!TransferNetReportTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 00:07:11'!
 test08PARAMAUROBORRAR
 	| aReceiver aSender aWithdraw aPortfolio aReport |
 	aSender _ ReceptiveAccount new.
@@ -763,19 +763,22 @@ reportTo: aReport
 	
 	^accounts do: [ :anAccount | anAccount reportTo: aReport].! !
 
-!Portfolio methodsFor: 'reports' stamp: 'TM 10/25/2021 00:02:46'!
+!Portfolio methodsFor: 'reports' stamp: 'TM 10/25/2021 10:50:05'!
+summary
+	"Quedo de antes de hacer method object, no lo eliminamos para que los tests se mantuvieran y se vea el TDD"
+
+	| report |
+	report _ SummaryReport of: self.
+	^report value.! !
+
+!Portfolio methodsFor: 'reports' stamp: 'TM 10/25/2021 10:44:49'!
 transferNet
+	"Quedo de antes de hacer method object, no lo eliminamos para que los tests se mantuvieran y se vea el TDD"
 	
 	| report |
 	report _ TransferNetReport of: self.
 	^report value.! !
 
-
-!Portfolio methodsFor: 'unclassified' stamp: 'TM 10/25/2021 00:03:21'!
-sumary
-	| report |
-	report _ SumaryReport of: self.
-	^report value.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -869,15 +872,15 @@ addedTo: aPortfolio
 	! !
 
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/25/2021 00:24:45'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/25/2021 00:00:24'!
 reportTo: aReport
-	transactions do: [:transaction |
+	self transactions do: [:transaction |
 		transaction reportTo: aReport].! !
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/24/2021 23:52:36'!
-sumary
+!ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/25/2021 10:50:05'!
+summary
 	| report |
-	report _ SumaryReport of: self.
+	report _ SummaryReport of: self.
 	^report value.! !
 
 !ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/25/2021 00:02:00'!
@@ -989,9 +992,9 @@ initializeOf: aWire
 	wire := aWire.! !
 
 
-!WireDepositLeg methodsFor: 'reports' stamp: 'TM 10/24/2021 23:34:33'!
+!WireDepositLeg methodsFor: 'reports' stamp: 'TM 10/25/2021 10:48:27'!
 reportTo: aReport
-	^aReport reportWireIncome: self.! !
+	^aReport reportWireDepositLeg: self.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1030,9 +1033,9 @@ initializeOf: aWire
 	wire _ aWire.! !
 
 
-!WireWithdrawLeg methodsFor: 'reports' stamp: 'TM 10/24/2021 23:34:33'!
+!WireWithdrawLeg methodsFor: 'reports' stamp: 'TM 10/25/2021 10:48:44'!
 reportTo: aReport
-	^aReport reportWireOutcome: self.! !
+	^aReport reportWireWithdrawLeg: self.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1089,7 +1092,7 @@ for: aValue
 
 !classDefinition: #Report category: 'Portfolio 2'!
 Object subclass: #Report
-	instanceVariableNames: 'account'
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
@@ -1098,12 +1101,12 @@ Object subclass: #Report
 reportDeposit: aDeposit
 	self childResponsibility. ! !
 
-!Report methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:31'!
-reportWireIncome: aWire
+!Report methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:48:27'!
+reportWireDepositLeg: aWire
 	self childResponsibility. ! !
 
-!Report methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:31'!
-reportWireOutcome: aWire
+!Report methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:48:44'!
+reportWireWithdrawLeg: aWire
 	self childResponsibility. ! !
 
 !Report methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:31'!
@@ -1111,11 +1114,10 @@ reportWithdraw: aWire
 	self childResponsibility. ! !
 
 
-!Report methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:59:16'!
+!Report methodsFor: 'initialization' stamp: 'TM 10/25/2021 10:43:17'!
 initializeOf: anAccount 
 
-	anAccount reportTo: self.
-	account _ anAccount.! !
+	anAccount reportTo: self.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1129,80 +1131,80 @@ of: anAccount
 	^self new initializeOf: anAccount.! !
 
 
-!classDefinition: #SumaryReport category: 'Portfolio 2'!
-Report subclass: #SumaryReport
+!classDefinition: #SummaryReport category: 'Portfolio 2'!
+Report subclass: #SummaryReport
 	instanceVariableNames: 'transactionLines balance'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
+!SummaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
 addBalanceLineFor: anAccount
 	transactionLines addLast: 'Balance = ', (anAccount balance asString).! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
+!SummaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
 initialize
 	transactionLines _ OrderedCollection new.
 	balance _ 0.! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
+!SummaryReport methodsFor: 'initialization' stamp: 'TM 10/25/2021 10:39:59'!
 reportDeposit: aDeposit
-	aDeposit affectBalance: balance.
+	balance _ aDeposit affectBalance: balance.
 	transactionLines addLast: 'Depósito por ', (aDeposit value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
-reportWireIncome: aWire
-	aWire affectBalance: balance.
-	transactionLines addLast: 'Entrada por transferencia de ', (aWire wire value asString), '.'! !
+!SummaryReport methodsFor: 'initialization' stamp: 'TM 10/25/2021 10:48:27'!
+reportWireDepositLeg: aWireDepositLeg
+	balance _ aWireDepositLeg affectBalance: balance.
+	transactionLines addLast: 'Entrada por transferencia de ', (aWireDepositLeg wire value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
-reportWireOutcome: aWire
-	aWire affectBalance: balance.
-	transactionLines addLast: 'Salida por transferencia de ', (aWire wire value asString), '.'! !
+!SummaryReport methodsFor: 'initialization' stamp: 'TM 10/25/2021 10:48:44'!
+reportWireWithdrawLeg: aWireWithdrawLeg
+	balance _ aWireWithdrawLeg affectBalance: balance.
+	transactionLines addLast: 'Salida por transferencia de ', (aWireWithdrawLeg wire value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
+!SummaryReport methodsFor: 'initialization' stamp: 'TM 10/25/2021 10:42:01'!
 reportWithdraw: aWithdraw
-	aWithdraw affectBalance: balance.
+	balance _ aWithdraw affectBalance: balance.
 	transactionLines addLast: 'Retiro por ', (aWithdraw value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:58:39'!
+!SummaryReport methodsFor: 'initialization' stamp: 'TM 10/25/2021 10:37:11'!
 value
 	| output |
 	output _ transactionLines copy.
-	output addLast: 'Balance = ', (account balance asString),''.
+	output addLast: 'Balance = ', (balance asString),''.
 	^output.! !
 
 
 !classDefinition: #TransferNetReport category: 'Portfolio 2'!
 Report subclass: #TransferNetReport
-	instanceVariableNames: 'accumulated'
+	instanceVariableNames: 'transferNet'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:45:28'!
 initialize
-	accumulated _ 0.! !
+	transferNet _ 0.! !
 
 !TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 reportDeposit: aDeposit
 	^self! !
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
-reportWireIncome: aWireIncome
-	accumulated _ accumulated + aWireIncome wire value.! !
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:48:27'!
+reportWireDepositLeg: aWireIncome
+	transferNet _ transferNet + aWireIncome wire value.! !
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
-reportWireOutcome: aWireOutcome
-	accumulated _ accumulated + aWireOutcome wire value negated.! !
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:48:44'!
+reportWireWithdrawLeg: aWireOutcome
+	transferNet _ transferNet + aWireOutcome wire value negated.! !
 
 !TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 reportWithdraw: aWithdraw
 	^self! !
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 10:45:28'!
 value
-	^accumulated.! !
+	^transferNet.! !
 
 
 !classDefinition: #Wire category: 'Portfolio 2'!
