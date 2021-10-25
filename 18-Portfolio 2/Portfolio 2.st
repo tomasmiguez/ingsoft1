@@ -5,12 +5,12 @@ TestCase subclass: #PortfolioTest
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:16:26'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test01BalanceOfPortfolioWithoutAccountsIsZero
 
 	self assert: 0 equals: Portfolio new balance! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'NR 5/27/2021 17:36:04'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test02BalanceOfPortfolioWithAccountsIsSumOfAccountsBalance
 
 	| account portfolio |
@@ -21,7 +21,7 @@ test02BalanceOfPortfolioWithAccountsIsSumOfAccountsBalance
 	
 	self assert: account balance equals: portfolio balance! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:23:25'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios
 
 	| simplePortfolioAccount simplePortfolio composedPortfolioAccount composedPortofolio |
@@ -36,12 +36,12 @@ test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios
 	
 	self assert: (composedPortfolioAccount balance + simplePortfolio balance) equals: composedPortofolio balance! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:43:15'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test04PortfolioWithoutAccountsHasNoRegisteredTransaction
 
 	self deny: (Portfolio new hasRegistered: (Deposit for: 100))! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:43:11'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test05PortfolioHasRegisteredItsAccountsTransactions
 
 	| account portfolio deposit |
@@ -52,7 +52,7 @@ test05PortfolioHasRegisteredItsAccountsTransactions
 	
 	self assert: (portfolio hasRegistered: deposit)! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:58:06'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test06PortfolioLooksForRegisteredTransactionsRecursively
 
 	| simplePortfolioAccount simplePortfolio composedPortfolioAccount composedPortfolio composedPortfolioAccountWithdraw simplePortfolioAccountDeposit |
@@ -68,12 +68,12 @@ test06PortfolioLooksForRegisteredTransactionsRecursively
 	self assert: (composedPortfolio hasRegistered: simplePortfolioAccountDeposit).
 	self assert: (composedPortfolio hasRegistered: composedPortfolioAccountWithdraw)! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:58:10'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test07PortfolioHasNoTransactionWhenHasNoAccounts
 
 	self assert: Portfolio new transactions isEmpty! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'NR 6/22/2020 07:31:19'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test08PortfolioTransactionsIncludesAllItsAccountsTransactions
 
 	| account portfolio accountDeposit anotherAccount portfolioTransactions anotherAccountWithdraw |
@@ -90,7 +90,7 @@ test08PortfolioTransactionsIncludesAllItsAccountsTransactions
 	self assert: (portfolioTransactions includes: accountDeposit).
 	self assert: (portfolioTransactions includes: anotherAccountWithdraw)! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:58:20'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test09PortfolioTransactionsAreCalculatedRecursively
 
 	| simplePortfolioAccount simplePortfolio composedPortfolioAccount composedPortfolio composedPortfolioAccountWithdraw simplePortfolioAccountDeposit composedPortfolioTransactions |
@@ -108,7 +108,7 @@ test09PortfolioTransactionsAreCalculatedRecursively
 	self assert: (composedPortfolioTransactions includes: simplePortfolioAccountDeposit).
 	self assert: (composedPortfolioTransactions includes: composedPortfolioAccountWithdraw)! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:58:24'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce
 
 	| account portfolio |
@@ -124,7 +124,7 @@ test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce
 			self assert: 1 equals: portfolio accountsSize.
 			self assert: (portfolio accountsIncludes: account) ]! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:58:28'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test11PortfolioCanNotIncludeAccountOfItsPortfolios
 
 	| account simplePortfolio composedPortfolio |
@@ -141,7 +141,7 @@ test11PortfolioCanNotIncludeAccountOfItsPortfolios
 			self assert: 1 equals: composedPortfolio accountsSize.
 			self assert: (composedPortfolio accountsIncludes: simplePortfolio) ]! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 11:58:32'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test12PortfolioCanNotIncludeItself
 
 	| account simplePortfolio |
@@ -157,7 +157,7 @@ test12PortfolioCanNotIncludeItself
 			self assert: 1 equals: simplePortfolio accountsSize.
 			self assert: (simplePortfolio accountsIncludes: account) ]! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 12:01:51'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test13ComposedPortfolioCanNotHaveParentPortfolioAccount
 
 	| account simplePortfolio composedPortfolio |
@@ -174,7 +174,7 @@ test13ComposedPortfolioCanNotHaveParentPortfolioAccount
 			self assert: Portfolio canNotAddAccountErrorMessage equals: anError messageText.
 			self assert: simplePortfolio accountsIsEmpty ]! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/25/2019 12:12:16'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively
 
 	| account leftParentPortfolio leftRootParentPortfolio portfolio rightParentPortfolio rightRootParentPortfolio |
@@ -196,7 +196,7 @@ test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively
 			self assert: Portfolio canNotAddAccountErrorMessage equals: anError messageText.
 			self assert: portfolio accountsIsEmpty ]! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'HAW 5/29/2019 16:31:18'!
+!PortfolioTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:30'!
 test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd
 
 	| portfolioToAdd portfolioToModify rootPortfolio sharedAccount |
@@ -221,7 +221,7 @@ TestCase subclass: #ReceptiveAccountTest
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'HAW 5/23/2019 15:19:48'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:31'!
 test01ReceptiveAccountHaveZeroAsBalanceWhenCreated 
 
 	| account |
@@ -231,7 +231,7 @@ test01ReceptiveAccountHaveZeroAsBalanceWhenCreated
 	self assert: 0 equals: account balance .
 ! !
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'HAW 5/23/2019 15:19:54'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:31'!
 test02DepositIncreasesBalanceOnTransactionValue 
 
 	| account |
@@ -242,7 +242,7 @@ test02DepositIncreasesBalanceOnTransactionValue
 	self assert: 100 equals: account balance .
 ! !
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'HAW 5/23/2019 15:20:02'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:31'!
 test03WithdrawDecreasesBalanceOnTransactionValue 
 
 	| account |
@@ -254,7 +254,7 @@ test03WithdrawDecreasesBalanceOnTransactionValue
 	self assert: 50 equals: account balance .
 ! !
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'HAW 5/23/2019 15:20:32'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:31'!
 test04WithdrawValueMustBePositive 
 
 	| account withdrawValue |
@@ -265,7 +265,7 @@ test04WithdrawValueMustBePositive
 	self assert: withdrawValue equals: (Withdraw register: withdrawValue on: account) value
 ! !
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'HAW 5/23/2019 15:20:46'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:31'!
 test05ReceptiveAccountKnowsRegisteredTransactions 
 
 	| account deposit withdraw |
@@ -278,7 +278,7 @@ test05ReceptiveAccountKnowsRegisteredTransactions
 	self assert: (account hasRegistered: withdraw).
 ! !
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'HAW 5/23/2019 15:20:54'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:31'!
 test06ReceptiveAccountDoNotKnowNotRegisteredTransactions
 
 	| account deposit withdraw |
@@ -291,7 +291,7 @@ test06ReceptiveAccountDoNotKnowNotRegisteredTransactions
 	self deny: (account hasRegistered:withdraw).
 ! !
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'HAW 5/23/2019 15:21:24'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:31'!
 test07AccountKnowsItsTransactions 
 
 	| account1 deposit1 |
@@ -312,7 +312,7 @@ TestCase subclass: #SumaryTest
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:14:34'!
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test01
 	| account sumary expected |
 	account _ ReceptiveAccount  new.
@@ -320,7 +320,7 @@ test01
 	expected _ OrderedCollection with: 'Balance = 0'.
 	self assert: expected equals:  sumary.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:14:41'!
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test02
 	| account sumary deposit |
 	account _ ReceptiveAccount  new.
@@ -329,7 +329,7 @@ test02
 	sumary _ account sumary.
 	self assert: 'Balance = 10' equals: sumary last.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:21:56'!
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test03
 	| account sumary withdraw |
 	account _ ReceptiveAccount  new.
@@ -338,7 +338,7 @@ test03
 	sumary _ account sumary.
 	self assert: 'Balance = -10' equals: sumary last.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:21:25'!
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test04
 	| account sumary deposit expected |
 	account _ ReceptiveAccount  new.
@@ -348,7 +348,7 @@ test04
 	expected _ 'Depósito por 10.'.
 	self assert: expected equals: sumary first.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:21:09'!
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test05
 	| account sumary deposit expected |
 	account _ ReceptiveAccount  new.
@@ -358,7 +358,7 @@ test05
 	expected _ 'Depósito por 20.'.
 	self assert: expected equals: sumary first.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:20:53'!
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test06
 	| account sumary withdraw expected |
 	account _ ReceptiveAccount  new.
@@ -368,7 +368,7 @@ test06
 	expected _ 'Retiro por 10.'.
 	self assert: expected equals: sumary first.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:15:53'!
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test07
 	| account sumary withdraw expected deposit |
 	account _ ReceptiveAccount  new.
@@ -380,7 +380,7 @@ test07
 	expected _ OrderedCollection with: 'Retiro por 10.' with: 'Depósito por 10.' with: 'Balance = 0'.
 	self assert: expected equals: sumary.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:20:26'!
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test08
 	| sumary expected receiver sender |
 	sender _ ReceptiveAccount  new.
@@ -390,7 +390,7 @@ test08
 	expected _ 'Salida por transferencia de 10.'.
 	self assert: expected equals: sumary first.! !
 
-!SumaryTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:19:47'!
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test09
 	| sumary expected receiver sender |
 	sender _ ReceptiveAccount  new.
@@ -400,6 +400,30 @@ test09
 	expected _ 'Entrada por transferencia de 10.'.
 	self assert: expected equals: sumary first.! !
 
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:50:45'!
+test10
+	
+	| aPortfolio expected |
+	aPortfolio _ Portfolio new.
+	
+	expected _ OrderedCollection with: 'Balance = 0'.
+	self assert: expected equals: (aPortfolio sumary).! !
+
+!SumaryTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 00:05:41'!
+test11
+	| account sumary deposit aPortfolio expected |
+	account _ ReceptiveAccount  new.
+	aPortfolio _ Portfolio new.
+	
+	deposit _ Deposit for: 10. 
+	account register: deposit.
+	sumary _ account sumary.
+	
+	aPortfolio add: account.
+	
+	expected _ OrderedCollection with: 'Depósito por 10.' with: 'Balance = 10'.
+	self assert: expected equals: sumary.! !
+
 
 !classDefinition: #TransferNetTest category: 'Portfolio 2'!
 TestCase subclass: #TransferNetTest
@@ -408,13 +432,13 @@ TestCase subclass: #TransferNetTest
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 20:50:20'!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test01
 	| account |
 	account _ ReceptiveAccount new.
 	self assert: 0 equals: account transferNet.! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 20:50:29'!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test02
 	| receiver sender |
 	sender _ ReceptiveAccount new.
@@ -422,7 +446,7 @@ test02
 	sender sendWireTo: receiver for: 10.
 	self assert: 10 equals: (receiver transferNet).! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:52:48'!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test03
 	| receiver sender aWithdraw |
 	sender _ ReceptiveAccount new.
@@ -434,7 +458,7 @@ test03
 	
 	self assert: 10 equals: (receiver transferNet).! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:52:58'!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test04
 	| receiver sender |
 	sender _ ReceptiveAccount new.
@@ -444,14 +468,14 @@ test04
 	
 	self assert: -10 equals: (sender transferNet).! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:53:04'!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test05
 	| aPortfolio |
 	aPortfolio _ Portfolio new.
 	
 	self assert: 0 equals: aPortfolio transferNet.! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:53:09'!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test06
 	| aReceiver aSender aPortfolio|
 	aSender _ ReceptiveAccount new.
@@ -463,7 +487,7 @@ test06
 	
 	self assert: 10 equals: (aPortfolio transferNet).! !
 
-!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 22:53:15'!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 test07
 	| aReceiver aSender aWithdraw aPortfolio|
 	aSender _ ReceptiveAccount new.
@@ -478,6 +502,23 @@ test07
 	
 	self assert: 10 equals: (aPortfolio transferNet).! !
 
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'TM 10/25/2021 00:07:11'!
+test08PARAMAUROBORRAR
+	| aReceiver aSender aWithdraw aPortfolio aReport |
+	aSender _ ReceptiveAccount new.
+	aReceiver _ ReceptiveAccount new.
+	aPortfolio _ Portfolio new.
+	
+	aSender sendWireTo: aReceiver for: 10.
+	aWithdraw _ Withdraw for: 10.
+	aReceiver register: aWithdraw.
+	
+	aPortfolio add: aReceiver.
+	
+	aReport _ TransferNetReport of: aPortfolio.
+	
+	self assert: 10 equals: (aReport value).! !
+
 
 !classDefinition: #WireTest category: 'Portfolio 2'!
 TestCase subclass: #WireTest
@@ -486,7 +527,7 @@ TestCase subclass: #WireTest
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:30:02'!
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:33'!
 test01SendWireCheckValueIsCorrect
 
 	| aReceiver aSender aWire |
@@ -497,7 +538,7 @@ test01SendWireCheckValueIsCorrect
 	
 	self assert: 10 equals: (aWire value).! !
 
-!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:30:29'!
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:33'!
 test02SendWireCheckTransactionWasAddedToSender
 
 	| aReceiver aSender aWire |
@@ -508,7 +549,7 @@ test02SendWireCheckTransactionWasAddedToSender
 	
 	self assert: -10 equals: (aSender transactions last affectBalance: 0).! !
 
-!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:30:45'!
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:33'!
 test03SendWireCheckTransactionWasAddedToReceiver
 
 	| aReceiver aSender aWire |
@@ -519,7 +560,7 @@ test03SendWireCheckTransactionWasAddedToReceiver
 	
 	self assert: 10 equals: (aReceiver transactions last affectBalance: 0).! !
 
-!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:31:51'!
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:33'!
 test04SendWireCheckCreatedWireLegIsSenderTransaction
 
 	| aReceiver aSender aWire |
@@ -530,7 +571,7 @@ test04SendWireCheckCreatedWireLegIsSenderTransaction
 	
 	self assert: (aSender transactions last) equals: (aWire senderLeg).! !
 
-!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:32:00'!
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:33'!
 test05SendWireCheckCreatedWireLegIsReceiverTransaction
 
 	| aReceiver aSender aWire |
@@ -541,7 +582,7 @@ test05SendWireCheckCreatedWireLegIsReceiverTransaction
 	
 	self assert: (aReceiver transactions last) equals: (aWire receiverLeg).! !
 
-!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:32:41'!
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:33'!
 test06SendWireCheckSenderLegWireIsWireCreated
 
 	| aReceiver aSender aWire |
@@ -552,7 +593,7 @@ test06SendWireCheckSenderLegWireIsWireCreated
 	
 	self assert: (aSender transactions last wire) equals: (aWire).! !
 
-!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 20:32:53'!
+!WireTest methodsFor: 'tests' stamp: 'TM 10/24/2021 23:34:33'!
 test07SendWireCheckReceiverLegWireIsWireCreated
 
 	| aReceiver aSender aWire |
@@ -571,35 +612,35 @@ Object subclass: #Account
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!Account methodsFor: 'testing' stamp: 'HAW 5/25/2019 12:23:47'!
+!Account methodsFor: 'testing' stamp: 'TM 10/24/2021 23:34:29'!
 hasRegistered: aTransaction
 
 	self subclassResponsibility ! !
 
-!Account methodsFor: 'testing' stamp: 'HAW 5/25/2019 12:24:25'!
+!Account methodsFor: 'testing' stamp: 'TM 10/24/2021 23:34:29'!
 isComposedBy: anAccount
 
 	self subclassResponsibility ! !
 
 
-!Account methodsFor: 'balance' stamp: 'HAW 5/25/2019 12:23:40'!
+!Account methodsFor: 'balance' stamp: 'TM 10/24/2021 23:34:29'!
 balance
 
 	self subclassResponsibility ! !
 
 
-!Account methodsFor: 'transactions' stamp: 'HAW 5/25/2019 12:23:27'!
+!Account methodsFor: 'transactions' stamp: 'TM 10/24/2021 23:34:29'!
 addTransactionsTo: aCollectionOfTransactions
 
 	self subclassResponsibility ! !
 
-!Account methodsFor: 'transactions' stamp: 'HAW 5/25/2019 12:23:15'!
+!Account methodsFor: 'transactions' stamp: 'TM 10/24/2021 23:34:29'!
 transactions
 
 	self subclassResponsibility ! !
 
 
-!Account methodsFor: 'composition' stamp: 'HAW 5/25/2019 12:24:04'!
+!Account methodsFor: 'composition' stamp: 'TM 10/24/2021 23:34:29'!
 addedTo: aPortfolio
 
 	self subclassResponsibility ! !
@@ -612,22 +653,22 @@ Account subclass: #Portfolio
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!Portfolio methodsFor: 'accounts management' stamp: 'HAW 5/25/2019 11:49:20'!
+!Portfolio methodsFor: 'accounts management' stamp: 'TM 10/24/2021 23:34:29'!
 accountsIncludes: anAccount
 
 	^accounts includes: anAccount ! !
 
-!Portfolio methodsFor: 'accounts management' stamp: 'HAW 5/25/2019 12:05:04'!
+!Portfolio methodsFor: 'accounts management' stamp: 'TM 10/24/2021 23:34:30'!
 accountsIsEmpty
 	
 	^accounts isEmpty ! !
 
-!Portfolio methodsFor: 'accounts management' stamp: 'HAW 5/25/2019 11:49:06'!
+!Portfolio methodsFor: 'accounts management' stamp: 'TM 10/24/2021 23:34:29'!
 accountsSize
 	
 	^accounts size! !
 
-!Portfolio methodsFor: 'accounts management' stamp: 'HAW 5/25/2019 12:19:20'!
+!Portfolio methodsFor: 'accounts management' stamp: 'TM 10/24/2021 23:34:29'!
 add: accountToAdd
 
 	self assertCanAdd: accountToAdd.
@@ -636,7 +677,7 @@ add: accountToAdd
 	accountToAdd addedTo: self 
 	! !
 
-!Portfolio methodsFor: 'accounts management' stamp: 'HAW 5/25/2019 12:17:31'!
+!Portfolio methodsFor: 'accounts management' stamp: 'TM 10/24/2021 23:34:30'!
 rootParents
 	
 	| rootParents |
@@ -647,25 +688,25 @@ rootParents
 	^ rootParents! !
 
 
-!Portfolio methodsFor: 'initialization' stamp: 'HAW 5/25/2019 12:03:18'!
+!Portfolio methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:29'!
 initialize
 
 	accounts := OrderedCollection new.
 	parents := OrderedCollection new.! !
 
 
-!Portfolio methodsFor: 'balance' stamp: 'HAW 5/25/2019 11:19:36'!
+!Portfolio methodsFor: 'balance' stamp: 'TM 10/24/2021 23:34:30'!
 balance
 	
 	^accounts sum: [ :anAccount | anAccount balance ] ifEmpty: [ 0 ]! !
 
 
-!Portfolio methodsFor: 'transactions' stamp: 'HAW 5/25/2019 11:42:55'!
+!Portfolio methodsFor: 'transactions' stamp: 'TM 10/24/2021 23:34:30'!
 addTransactionsTo: aCollectionOfTransactions
 
 	accounts do: [ :anAccount | anAccount addTransactionsTo: aCollectionOfTransactions ]! !
 
-!Portfolio methodsFor: 'transactions' stamp: 'HAW 5/25/2019 11:38:32'!
+!Portfolio methodsFor: 'transactions' stamp: 'TM 10/24/2021 23:34:29'!
 transactions
 	
 	| transactions |
@@ -676,58 +717,65 @@ transactions
 	^transactions ! !
 
 
-!Portfolio methodsFor: 'composition' stamp: 'HAW 5/25/2019 12:02:59'!
+!Portfolio methodsFor: 'composition' stamp: 'TM 10/24/2021 23:34:29'!
 addedTo: aPortfolio 
 	
 	parents add: aPortfolio ! !
 
 
-!Portfolio methodsFor: 'testing' stamp: 'HAW 5/25/2019 12:20:56'!
+!Portfolio methodsFor: 'testing' stamp: 'TM 10/24/2021 23:34:29'!
 anyRootParentIsComposedBy: accountToAdd
 
 	^self rootParents anySatisfy: [ :aParent | aParent isComposedBy: accountToAdd]! !
 
-!Portfolio methodsFor: 'testing' stamp: 'HAW 5/25/2019 11:28:29'!
+!Portfolio methodsFor: 'testing' stamp: 'TM 10/24/2021 23:34:29'!
 hasRegistered: aTransaction
 
 	^accounts anySatisfy: [ :anAccount | anAccount hasRegistered: aTransaction ]! !
 
-!Portfolio methodsFor: 'testing' stamp: 'HAW 5/29/2019 16:24:54'!
+!Portfolio methodsFor: 'testing' stamp: 'TM 10/24/2021 23:34:29'!
 isComposedBy: anAccount
 
 	^ self = anAccount or: [ accounts anySatisfy: [ :composedAccount | (composedAccount isComposedBy: anAccount) or: [ anAccount isComposedBy: composedAccount ]]]! !
 
 
-!Portfolio methodsFor: 'account management - private' stamp: 'HAW 5/25/2019 12:17:31'!
+!Portfolio methodsFor: 'account management - private' stamp: 'TM 10/24/2021 23:34:29'!
 addRootParentsTo: rootParents
 
 	parents 
 		ifEmpty: [ rootParents add: self ] 
 		ifNotEmpty: [ parents do: [ :aParent | aParent addRootParentsTo: rootParents ]]! !
 
-!Portfolio methodsFor: 'account management - private' stamp: 'HAW 5/25/2019 12:20:36'!
+!Portfolio methodsFor: 'account management - private' stamp: 'TM 10/24/2021 23:34:29'!
 assertCanAdd: accountToAdd
 
 	(self anyRootParentIsComposedBy: accountToAdd) ifTrue: [ self signalCanNotAddAccount ].
 ! !
 
-!Portfolio methodsFor: 'account management - private' stamp: 'HAW 5/25/2019 11:48:34'!
+!Portfolio methodsFor: 'account management - private' stamp: 'TM 10/24/2021 23:34:29'!
 signalCanNotAddAccount
 	
 	self error: self class canNotAddAccountErrorMessage! !
 
 
-!Portfolio methodsFor: 'reports' stamp: 'FS 10/24/2021 23:22:28'!
+!Portfolio methodsFor: 'reports' stamp: 'TM 10/24/2021 23:34:29'!
 reportTo: aReport
 	
 	^accounts do: [ :anAccount | anAccount reportTo: aReport].! !
 
-!Portfolio methodsFor: 'reports' stamp: 'FS 10/24/2021 23:28:34'!
+!Portfolio methodsFor: 'reports' stamp: 'TM 10/25/2021 00:02:46'!
 transferNet
 	
 	| report |
-	report _ TransferNetReport new.
-	^self reportTo: report.! !
+	report _ TransferNetReport of: self.
+	^report value.! !
+
+
+!Portfolio methodsFor: 'unclassified' stamp: 'TM 10/25/2021 00:03:21'!
+sumary
+	| report |
+	report _ SumaryReport of: self.
+	^report value.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -763,25 +811,25 @@ Account subclass: #ReceptiveAccount
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!ReceptiveAccount methodsFor: 'initialization' stamp: 'HernanWilkinson 7/13/2011 18:35'!
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:30'!
 initialize
 
 	super initialize.
 	transactions := OrderedCollection new.! !
 
 
-!ReceptiveAccount methodsFor: 'transactions' stamp: 'HAW 5/25/2019 11:38:52'!
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'TM 10/24/2021 23:34:31'!
 addTransactionsTo: aCollectionOfTransactions
 
 	aCollectionOfTransactions addAll: transactions ! !
 
-!ReceptiveAccount methodsFor: 'transactions' stamp: 'HernanWilkinson 7/13/2011 18:37'!
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'TM 10/24/2021 23:34:31'!
 register: aTransaction
 
 	transactions add: aTransaction 
 ! !
 
-!ReceptiveAccount methodsFor: 'transactions' stamp: 'TM 10/24/2021 20:22:56'!
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'TM 10/24/2021 23:34:30'!
 sendWireTo: aReceiver for: anAmount 
 	
 	| aWire |
@@ -789,13 +837,13 @@ sendWireTo: aReceiver for: anAmount
 	
 	^aWire.! !
 
-!ReceptiveAccount methodsFor: 'transactions' stamp: 'HernanWilkinson 7/13/2011 18:37'!
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'TM 10/24/2021 23:34:30'!
 transactions 
 
 	^ transactions copy! !
 
 
-!ReceptiveAccount methodsFor: 'balance' stamp: 'HAW 5/25/2019 11:24:46'!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'TM 10/24/2021 23:34:31'!
 balance
 
 	^transactions 
@@ -803,43 +851,39 @@ balance
 		into: [ :currentBalance :transaction | transaction affectBalance: currentBalance ]! !
 
 
-!ReceptiveAccount methodsFor: 'testing' stamp: 'NR 10/21/2019 18:55:56'!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'TM 10/24/2021 23:34:30'!
 hasRegistered: aTransaction
 
 	^ transactions includes: aTransaction 
 ! !
 
-!ReceptiveAccount methodsFor: 'testing' stamp: 'HAW 5/25/2019 11:54:51'!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'TM 10/24/2021 23:34:31'!
 isComposedBy: anAccount
 
 	^self = anAccount ! !
 
 
-!ReceptiveAccount methodsFor: 'composition' stamp: 'HAW 5/25/2019 12:03:32'!
+!ReceptiveAccount methodsFor: 'composition' stamp: 'TM 10/24/2021 23:34:31'!
 addedTo: aPortfolio 
 	
 	! !
 
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:21:24'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/25/2021 00:00:24'!
 reportTo: aReport
 	self transactions do: [:transaction |
-		transaction reportTo: aReport].
-	^aReport value.! !
+		transaction reportTo: aReport].! !
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:27:52'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/24/2021 23:52:36'!
 sumary
 	| report |
-	report _ SumaryReport new.
-	self reportTo: report.
+	report _ SumaryReport of: self.
 	^report value.! !
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:28:04'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/25/2021 00:02:00'!
 transferNet
-	
 	| report |
-	report _ TransferNetReport new.
-	self reportTo: report.
+	report _ TransferNetReport of: self.
 	^report value.
 		! !
 
@@ -851,13 +895,13 @@ Object subclass: #AccountTransaction
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!AccountTransaction methodsFor: 'value' stamp: 'HernanWilkinson 9/12/2011 12:25'!
+!AccountTransaction methodsFor: 'value' stamp: 'TM 10/24/2021 23:34:29'!
 value 
 
 	self subclassResponsibility ! !
 
 
-!AccountTransaction methodsFor: 'balance' stamp: 'HAW 5/25/2019 11:25:39'!
+!AccountTransaction methodsFor: 'balance' stamp: 'TM 10/24/2021 23:34:29'!
 affectBalance: aBalance
 
 	self subclassResponsibility ! !
@@ -886,25 +930,25 @@ AccountTransaction subclass: #Deposit
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!Deposit methodsFor: 'initialization' stamp: 'HernanWilkinson 7/13/2011 18:45'!
+!Deposit methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:29'!
 initializeFor: aValue
 
 	value := aValue ! !
 
 
-!Deposit methodsFor: 'value' stamp: 'HernanWilkinson 7/13/2011 18:38'!
+!Deposit methodsFor: 'value' stamp: 'TM 10/24/2021 23:34:29'!
 value
 
 	^ value! !
 
 
-!Deposit methodsFor: 'balance' stamp: 'HAW 5/25/2019 11:25:02'!
+!Deposit methodsFor: 'balance' stamp: 'TM 10/24/2021 23:34:29'!
 affectBalance: aBalance
 
 	^aBalance + value ! !
 
 
-!Deposit methodsFor: 'reports' stamp: 'FS 10/24/2021 23:10:00'!
+!Deposit methodsFor: 'reports' stamp: 'TM 10/24/2021 23:34:29'!
 reportTo: aReport
 	^aReport reportDeposit: self.! !
 
@@ -927,25 +971,25 @@ AccountTransaction subclass: #WireDepositLeg
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!WireDepositLeg methodsFor: 'balance' stamp: 'TM 10/24/2021 20:26:03'!
+!WireDepositLeg methodsFor: 'balance' stamp: 'TM 10/24/2021 23:34:33'!
 affectBalance: aBalance 
 	
 	^aBalance + wire value.! !
 
 
-!WireDepositLeg methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:26:48'!
+!WireDepositLeg methodsFor: 'accesors' stamp: 'TM 10/24/2021 23:34:33'!
 wire
 	
 	^wire! !
 
 
-!WireDepositLeg methodsFor: 'initialization' stamp: 'TM 10/24/2021 20:22:12'!
+!WireDepositLeg methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:33'!
 initializeOf: aWire 
 
 	wire := aWire.! !
 
 
-!WireDepositLeg methodsFor: 'reports' stamp: 'FS 10/24/2021 23:10:22'!
+!WireDepositLeg methodsFor: 'reports' stamp: 'TM 10/24/2021 23:34:33'!
 reportTo: aReport
 	^aReport reportWireIncome: self.! !
 
@@ -968,25 +1012,25 @@ AccountTransaction subclass: #WireWithdrawLeg
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!WireWithdrawLeg methodsFor: 'balance' stamp: 'TM 10/24/2021 20:25:35'!
+!WireWithdrawLeg methodsFor: 'balance' stamp: 'TM 10/24/2021 23:34:33'!
 affectBalance: aBalance
 	
 	^aBalance - wire value.! !
 
 
-!WireWithdrawLeg methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:24:54'!
+!WireWithdrawLeg methodsFor: 'accesors' stamp: 'TM 10/24/2021 23:34:33'!
 wire
 
 	^wire! !
 
 
-!WireWithdrawLeg methodsFor: 'initialization' stamp: 'TM 10/24/2021 20:21:25'!
+!WireWithdrawLeg methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:33'!
 initializeOf: aWire 
 
 	wire _ aWire.! !
 
 
-!WireWithdrawLeg methodsFor: 'reports' stamp: 'FS 10/24/2021 23:10:49'!
+!WireWithdrawLeg methodsFor: 'reports' stamp: 'TM 10/24/2021 23:34:33'!
 reportTo: aReport
 	^aReport reportWireOutcome: self.! !
 
@@ -1009,25 +1053,25 @@ AccountTransaction subclass: #Withdraw
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!Withdraw methodsFor: 'initialization' stamp: 'HernanWilkinson 7/13/2011 18:46'!
+!Withdraw methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:33'!
 initializeFor: aValue
 
 	value := aValue ! !
 
 
-!Withdraw methodsFor: 'value' stamp: 'HernanWilkinson 7/13/2011 18:33'!
+!Withdraw methodsFor: 'value' stamp: 'TM 10/24/2021 23:34:33'!
 value
 
 	^ value! !
 
 
-!Withdraw methodsFor: 'balance' stamp: 'HAW 5/25/2019 11:25:15'!
+!Withdraw methodsFor: 'balance' stamp: 'TM 10/24/2021 23:34:33'!
 affectBalance: aBalance
 
 	^aBalance - value! !
 
 
-!Withdraw methodsFor: 'reports' stamp: 'FS 10/24/2021 23:11:12'!
+!Withdraw methodsFor: 'reports' stamp: 'TM 10/24/2021 23:34:33'!
 reportTo: aReport
 	^aReport reportWithdraw: self.! !
 
@@ -1045,26 +1089,44 @@ for: aValue
 
 !classDefinition: #Report category: 'Portfolio 2'!
 Object subclass: #Report
-	instanceVariableNames: ''
+	instanceVariableNames: 'account'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!Report methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:02:34'!
+!Report methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:31'!
 reportDeposit: aDeposit
 	self childResponsibility. ! !
 
-!Report methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:02:46'!
+!Report methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:31'!
 reportWireIncome: aWire
 	self childResponsibility. ! !
 
-!Report methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:03:00'!
+!Report methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:31'!
 reportWireOutcome: aWire
 	self childResponsibility. ! !
 
-!Report methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:03:11'!
+!Report methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:31'!
 reportWithdraw: aWire
 	self childResponsibility. ! !
+
+
+!Report methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:59:16'!
+initializeOf: anAccount 
+
+	anAccount reportTo: self.
+	account _ anAccount.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Report class' category: 'Portfolio 2'!
+Report class
+	instanceVariableNames: ''!
+
+!Report class methodsFor: 'unclassified' stamp: 'TM 10/24/2021 23:54:51'!
+of: anAccount 
+	
+	^self new initializeOf: anAccount.! !
 
 
 !classDefinition: #SumaryReport category: 'Portfolio 2'!
@@ -1074,41 +1136,41 @@ Report subclass: #SumaryReport
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:23:42'!
+!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
 addBalanceLineFor: anAccount
 	transactionLines addLast: 'Balance = ', (anAccount balance asString).! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:23:42'!
+!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
 initialize
 	transactionLines _ OrderedCollection new.
 	balance _ 0.! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:25:24'!
+!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
 reportDeposit: aDeposit
 	aDeposit affectBalance: balance.
 	transactionLines addLast: 'Depósito por ', (aDeposit value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:25:34'!
+!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
 reportWireIncome: aWire
 	aWire affectBalance: balance.
 	transactionLines addLast: 'Entrada por transferencia de ', (aWire wire value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:25:45'!
+!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
 reportWireOutcome: aWire
 	aWire affectBalance: balance.
 	transactionLines addLast: 'Salida por transferencia de ', (aWire wire value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:25:54'!
+!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:31'!
 reportWithdraw: aWithdraw
 	aWithdraw affectBalance: balance.
 	transactionLines addLast: 'Retiro por ', (aWithdraw value asString), '.'! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:24:58'!
+!SumaryReport methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:58:39'!
 value
 	| output |
 	output _ transactionLines copy.
-	output addLast: 'Balance = ', (balance asString),'.'.
-	^transactionLines.! !
+	output addLast: 'Balance = ', (account balance asString),''.
+	^output.! !
 
 
 !classDefinition: #TransferNetReport category: 'Portfolio 2'!
@@ -1118,27 +1180,27 @@ Report subclass: #TransferNetReport
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:07:58'!
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 initialize
 	accumulated _ 0.! !
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:05:59'!
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 reportDeposit: aDeposit
 	^self! !
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:07:07'!
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 reportWireIncome: aWireIncome
 	accumulated _ accumulated + aWireIncome wire value.! !
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:07:14'!
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 reportWireOutcome: aWireOutcome
 	accumulated _ accumulated + aWireOutcome wire value negated.! !
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:06:14'!
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 reportWithdraw: aWithdraw
 	^self! !
 
-!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:14:07'!
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'TM 10/24/2021 23:34:32'!
 value
 	^accumulated.! !
 
@@ -1150,7 +1212,7 @@ Object subclass: #Wire
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
 
-!Wire methodsFor: 'initialization' stamp: 'TM 10/24/2021 20:20:10'!
+!Wire methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:32'!
 initializeFrom: aSender to: aReceiver for: anAmount 
 
 	senderLeg _ WireWithdrawLeg of: self.
@@ -1162,17 +1224,17 @@ initializeFrom: aSender to: aReceiver for: anAmount
 	value := anAmount.! !
 
 
-!Wire methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:15:03'!
+!Wire methodsFor: 'accesors' stamp: 'TM 10/24/2021 23:34:32'!
 receiverLeg
 
 	^receiverLeg! !
 
-!Wire methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:12:21'!
+!Wire methodsFor: 'accesors' stamp: 'TM 10/24/2021 23:34:33'!
 senderLeg
 
 	^senderLeg! !
 
-!Wire methodsFor: 'accesors' stamp: 'TM 10/24/2021 20:14:28'!
+!Wire methodsFor: 'accesors' stamp: 'TM 10/24/2021 23:34:32'!
 value
 
 	^value.! !
