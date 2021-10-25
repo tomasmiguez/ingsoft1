@@ -1,3 +1,137 @@
+!classDefinition: #PortfolioReportTest category: 'Portfolio 2'!
+TestCase subclass: #PortfolioReportTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 15:18:14'!
+test01EmptyPortfolioStructureReport
+	| aPortfolio report |
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	report _ self createPortfolioStructureReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia') equals: report.! !
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 15:18:03'!
+test02PortfolioWithAccountStructureReport
+	| aPortfolio report anAccount |
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	anAccount _ ReceptiveAccount named: 'Cuenta Mia'.
+	aPortfolio add: anAccount.
+	report _ self createPortfolioStructureReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia' with: '  Cuenta Mia') equals: report.! !
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 15:27:13'!
+test03PortfolioWithTwoAccountStructureReport
+	| aPortfolio report anAccount anotherAccount |
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	anAccount _ ReceptiveAccount named: 'Cuenta Mia'.
+	
+	anotherAccount _ ReceptiveAccount named: 'Cuenta Juan'.
+	aPortfolio add: anAccount.
+	aPortfolio add: anotherAccount.
+	report _ self createPortfolioStructureReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia' with: '  Cuenta Mia' with: '  Cuenta Juan') equals: report.! !
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 15:34:21'!
+test04PortfolioWithPortfolioWithAccountStructureReport
+	| aPortfolio report anAccount anotherPortfolio|
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	anotherPortfolio _ Portfolio named: 'Portfolio de los hijos'.
+	anAccount _ ReceptiveAccount named: 'Cuenta Pedro'.
+	
+	aPortfolio add: anotherPortfolio.
+	anotherPortfolio add: anAccount.
+	report _ self createPortfolioStructureReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia' with: '  Portfolio de los hijos' with: '    Cuenta Pedro') equals: report.! !
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 15:39:33'!
+test05PortfolioWithPortfolioWithAccountStructureReport2
+	| aPortfolio report anAccount anotherPortfolio|
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	anotherPortfolio _ Portfolio named: 'Portfolio de los hijos'.
+	anAccount _ ReceptiveAccount named: 'Cuenta Lucas'.
+	
+	aPortfolio add: anotherPortfolio.
+	anotherPortfolio add: anAccount.
+	report _ self createPortfolioStructureReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia' with: '  Portfolio de los hijos' with: '    Cuenta Lucas') equals: report.! !
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 15:42:22'!
+test06PortfolioWithPortfolioWithPortfolioWithAccountStructureReport
+	| aPortfolio report anAccount anotherPortfolio anotherPortfolio2 |
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	anotherPortfolio _ Portfolio named: 'Portfolio de los hijos'.
+	anotherPortfolio2 _ Portfolio named: 'Portfolio de los hijos más grandes'.
+	anAccount _ ReceptiveAccount named: 'Cuenta Lucas'.
+	
+	aPortfolio add: anotherPortfolio.
+	anotherPortfolio add: anotherPortfolio2.
+	anotherPortfolio2 add: anAccount.
+	report _ self createPortfolioStructureReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia' with: '  Portfolio de los hijos' with: '    Portfolio de los hijos más grandes' with: '      Cuenta Lucas') equals: report.! !
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 16:37:47'!
+test07EmptyPortfolioSpecialReport
+	| aPortfolio report |
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	
+	report _ self createPortfolioSpecialReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia' with: '  Balance = 0') equals: report.! !
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 16:18:50'!
+test08PortfolioWithAccountSpecialReport
+	| aPortfolio report anAccount |
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	anAccount _ ReceptiveAccount named: 'Cuenta Mia'.
+	aPortfolio add: anAccount.
+	report _ self createPortfolioSpecialReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia' with: '  Cuenta Mia' with: '    Balance = 0' with: '  Balance = 0') equals: report.! !
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 16:18:38'!
+test09PortfolioWithTwoAccountSpecialReport
+	| aPortfolio report anAccount anotherAccount |
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	anAccount _ ReceptiveAccount named: 'Cuenta Mia'.
+	
+	anotherAccount _ ReceptiveAccount named: 'Cuenta Juan'.
+	aPortfolio add: anAccount.
+	aPortfolio add: anotherAccount.
+	report _ self createPortfolioSpecialReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia' with: '  Cuenta Mia' with: '    Balance = 0' with: '  Cuenta Juan' with: '    Balance = 0' with: '  Balance = 0') equals: report.! !
+
+!PortfolioReportTest methodsFor: 'test' stamp: 'mls 10/25/2021 16:38:50'!
+test10PortfolioWithPortfolioWithAccountSpecialReport
+	| aPortfolio report anAccount anotherPortfolio|
+	aPortfolio _ Portfolio named: 'Portfolio de la familia'.
+	anotherPortfolio _ Portfolio named: 'Portfolio de los hijos'.
+	anAccount _ ReceptiveAccount named: 'Cuenta Pedro'.
+	
+	aPortfolio add: anotherPortfolio.
+	anotherPortfolio add: anAccount.
+	report _ self createPortfolioSpecialReportOf: aPortfolio.
+	
+	self assert: (OrderedCollection with: 'Portfolio de la familia' with: '  Portfolio de los hijos' with: '    Cuenta Pedro' with:  '      Balance = 0' with: '    Balance = 0' with: '  Balance = 0') equals: report.! !
+
+
+!PortfolioReportTest methodsFor: 'initialization' stamp: 'mls 10/25/2021 15:59:50'!
+createPortfolioSpecialReportOf: aPortfolio 
+	^SpecialReport of: aPortfolio.! !
+
+!PortfolioReportTest methodsFor: 'initialization' stamp: 'mls 10/25/2021 15:10:30'!
+createPortfolioStructureReportOf: aPortfolio 
+	^StructureReport of: aPortfolio.! !
+
+
 !classDefinition: #PortfolioTest category: 'Portfolio 2'!
 TestCase subclass: #PortfolioTest
 	instanceVariableNames: ''
@@ -595,7 +729,7 @@ test07SendWireCheckReceiverLegWireIsWireCreated
 
 !classDefinition: #Account category: 'Portfolio 2'!
 Object subclass: #Account
-	instanceVariableNames: ''
+	instanceVariableNames: 'name'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
@@ -628,10 +762,26 @@ transactions
 	self subclassResponsibility ! !
 
 
+!Account methodsFor: 'accessing' stamp: 'mls 10/25/2021 15:30:52'!
+name
+
+	^name.! !
+
+
 !Account methodsFor: 'composition' stamp: 'TM 10/24/2021 23:34:29'!
 addedTo: aPortfolio
 
 	self subclassResponsibility ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Account class' category: 'Portfolio 2'!
+Account class
+	instanceVariableNames: ''!
+
+!Account class methodsFor: 'as yet unclassified' stamp: 'mls 10/25/2021 15:09:19'!
+named: aName 
+	^self new initializeNamed: aName ! !
 
 
 !classDefinition: #Portfolio category: 'Portfolio 2'!
@@ -640,6 +790,11 @@ Account subclass: #Portfolio
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio 2'!
+
+!Portfolio methodsFor: 'accounts management' stamp: 'mls 10/25/2021 15:23:21'!
+accounts
+
+	^accounts! !
 
 !Portfolio methodsFor: 'accounts management' stamp: 'TM 10/24/2021 23:34:29'!
 accountsIncludes: anAccount
@@ -679,6 +834,13 @@ rootParents
 !Portfolio methodsFor: 'initialization' stamp: 'TM 10/24/2021 23:34:29'!
 initialize
 
+	accounts := OrderedCollection new.
+	parents := OrderedCollection new.! !
+
+!Portfolio methodsFor: 'initialization' stamp: 'mls 10/25/2021 15:07:05'!
+initializeNamed: aName
+
+	name := aName.
 	accounts := OrderedCollection new.
 	parents := OrderedCollection new.! !
 
@@ -746,6 +908,11 @@ signalCanNotAddAccount
 	self error: self class canNotAddAccountErrorMessage! !
 
 
+!Portfolio methodsFor: 'reports' stamp: 'mls 10/25/2021 16:32:16'!
+reportStructureTo: aReport
+	
+	^(aReport class) of: self.! !
+
 !Portfolio methodsFor: 'reports' stamp: 'TM 10/24/2021 23:34:29'!
 reportTo: aReport
 	
@@ -789,6 +956,13 @@ Account subclass: #ReceptiveAccount
 initialize
 
 	super initialize.
+	transactions := OrderedCollection new.! !
+
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'mls 10/25/2021 15:08:20'!
+initializeNamed: aName
+
+	super initialize.
+	name := aName.	
 	transactions := OrderedCollection new.! !
 
 
@@ -842,6 +1016,11 @@ addedTo: aPortfolio
 	
 	! !
 
+
+!ReceptiveAccount methodsFor: 'reports' stamp: 'mls 10/25/2021 16:31:55'!
+reportStructureTo: aReport
+	
+	^(aReport class) ofReceptiveAccount: self.! !
 
 !ReceptiveAccount methodsFor: 'reports' stamp: 'TM 10/25/2021 00:00:24'!
 reportTo: aReport
@@ -1046,6 +1225,96 @@ Withdraw class
 for: aValue
 
 	^ self new initializeFor: aValue ! !
+
+
+!classDefinition: #PortfolioReport category: 'Portfolio 2'!
+Object subclass: #PortfolioReport
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!PortfolioReport methodsFor: 'as yet unclassified' stamp: 'mls 10/25/2021 16:41:03'!
+initializeOf: aPortfolio 
+	self subclassResponsibility ! !
+
+!PortfolioReport methodsFor: 'as yet unclassified' stamp: 'mls 10/25/2021 16:41:20'!
+initializeOfReceptiveAccount: aReceptiveAccount
+ 
+	self subclassResponsibility ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'PortfolioReport class' category: 'Portfolio 2'!
+PortfolioReport class
+	instanceVariableNames: ''!
+
+!PortfolioReport class methodsFor: 'as yet unclassified' stamp: 'mls 10/25/2021 16:41:55'!
+of: aPortfolio 
+	
+	^self new initializeOf: aPortfolio.! !
+
+!PortfolioReport class methodsFor: 'as yet unclassified' stamp: 'mls 10/25/2021 16:42:04'!
+ofReceptiveAccount: anReceptiveAccount 
+	
+	^self new initializeOfReceptiveAccount: anReceptiveAccount.! !
+
+
+!classDefinition: #SpecialReport category: 'Portfolio 2'!
+PortfolioReport subclass: #SpecialReport
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!SpecialReport methodsFor: 'as yet unclassified' stamp: 'mls 10/25/2021 16:37:37'!
+initializeOf: aPortfolio 
+	
+	| report innerReport |
+	report _ OrderedCollection with: aPortfolio name.
+	aPortfolio accounts do: [: anAccount | 
+		innerReport _ anAccount reportStructureTo: self.
+		innerReport do: [: aLine | 
+			report add: '  ', aLine.
+		].
+	].
+	report addLast: '  Balance = ', aPortfolio balance asString, ''.
+	^report! !
+
+!SpecialReport methodsFor: 'as yet unclassified' stamp: 'mls 10/25/2021 16:37:02'!
+initializeOfReceptiveAccount: aReceptiveAccount
+ 
+	| report innerReport |
+	report _ OrderedCollection with: aReceptiveAccount name.
+	innerReport _ (SummaryReport of: aReceptiveAccount) value.
+	innerReport do: [: aLine | 
+		report add: '  ', aLine.
+	].
+	^report! !
+
+
+!classDefinition: #StructureReport category: 'Portfolio 2'!
+PortfolioReport subclass: #StructureReport
+	instanceVariableNames: 'portfolio'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!StructureReport methodsFor: 'initialization' stamp: 'mls 10/25/2021 16:43:19'!
+initializeOf: aPortfolio 
+	| report |
+	report _ OrderedCollection with: aPortfolio name.
+	aPortfolio accounts do: [: anAccount | 
+		(anAccount reportStructureTo: self) do: [: aLine | 
+			report add: '  ', aLine.
+		].
+	].
+	^report! !
+
+!StructureReport methodsFor: 'initialization' stamp: 'mls 10/25/2021 15:54:29'!
+initializeOfReceptiveAccount: aReceptiveAccount 
+
+	^OrderedCollection with: aReceptiveAccount name.! !
 
 
 !classDefinition: #Report category: 'Portfolio 2'!
