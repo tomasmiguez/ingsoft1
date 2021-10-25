@@ -814,26 +814,26 @@ addedTo: aPortfolio
 	! !
 
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 22:44:51'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:13:16'!
 sumary
 	| report |
 	report _ SumaryReport new.
 	self transactions do: [:transaction |
-		transaction addSumaryLineTo: report].
+		transaction reportTo: report].
 	report addBalanceLineFor: self.
 	^report value.! !
 
-!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 22:53:43'!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'FS 10/24/2021 23:09:21'!
 transferNet
 	
-	| accumulatedNet |
-	accumulatedNet _ 0.
+	| report |
+	report _ TransferNetReport new.
 	
 	transactions do: [ :eachTransaction |
-		accumulatedNet _ accumulatedNet + eachTransaction transferNetValue.
+		eachTransaction reportTo: report.
 	].
 
-	^accumulatedNet.
+	^report value.
 		! !
 
 
@@ -897,13 +897,9 @@ affectBalance: aBalance
 	^aBalance + value ! !
 
 
-!Deposit methodsFor: 'reports' stamp: 'FS 10/24/2021 22:45:38'!
-addSumaryLineTo: aReport
-	^aReport addDepositLineFor: self.! !
-
-!Deposit methodsFor: 'reports' stamp: 'FS 10/24/2021 22:54:23'!
-transferNetValue
-	^0.! !
+!Deposit methodsFor: 'reports' stamp: 'FS 10/24/2021 23:10:00'!
+reportTo: aReport
+	^aReport reportDeposit: self.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -942,13 +938,9 @@ initializeOf: aWire
 	wire := aWire.! !
 
 
-!WireDepositLeg methodsFor: 'reports' stamp: 'FS 10/24/2021 22:46:00'!
-addSumaryLineTo: aReport
-	^aReport addWireIncomeLineFor: self.! !
-
-!WireDepositLeg methodsFor: 'reports' stamp: 'FS 10/24/2021 22:54:33'!
-transferNetValue
-	^wire value.! !
+!WireDepositLeg methodsFor: 'reports' stamp: 'FS 10/24/2021 23:10:22'!
+reportTo: aReport
+	^aReport reportWireIncome: self.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -987,13 +979,9 @@ initializeOf: aWire
 	wire _ aWire.! !
 
 
-!WireWithdrawLeg methodsFor: 'reports' stamp: 'FS 10/24/2021 22:46:23'!
-addSumaryLineTo: aReport
-	^aReport addWireOutcomeLineFor: self.! !
-
-!WireWithdrawLeg methodsFor: 'reports' stamp: 'FS 10/24/2021 22:54:51'!
-transferNetValue
-	^wire value negated.! !
+!WireWithdrawLeg methodsFor: 'reports' stamp: 'FS 10/24/2021 23:10:49'!
+reportTo: aReport
+	^aReport reportWireOutcome: self.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1032,13 +1020,9 @@ affectBalance: aBalance
 	^aBalance - value! !
 
 
-!Withdraw methodsFor: 'reports' stamp: 'FS 10/24/2021 22:46:42'!
-addSumaryLineTo: aReport
-	^aReport addWithdrawLineFor: self.! !
-
-!Withdraw methodsFor: 'reports' stamp: 'FS 10/24/2021 22:55:16'!
-transferNetValue
-	^0.! !
+!Withdraw methodsFor: 'reports' stamp: 'FS 10/24/2021 23:11:12'!
+reportTo: aReport
+	^aReport reportWithdraw: self.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1052,8 +1036,32 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
+!classDefinition: #Report category: 'Portfolio 2'!
+Object subclass: #Report
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!Report methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:02:34'!
+reportDeposit: aDeposit
+	self childResponsibility. ! !
+
+!Report methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:02:46'!
+reportWireIncome: aWire
+	self childResponsibility. ! !
+
+!Report methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:03:00'!
+reportWireOutcome: aWire
+	self childResponsibility. ! !
+
+!Report methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:03:11'!
+reportWithdraw: aWire
+	self childResponsibility. ! !
+
+
 !classDefinition: #SumaryReport category: 'Portfolio 2'!
-Object subclass: #SumaryReport
+Report subclass: #SumaryReport
 	instanceVariableNames: 'report'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -1063,29 +1071,61 @@ Object subclass: #SumaryReport
 addBalanceLineFor: anAccount
 	report addLast: 'Balance = ', (anAccount balance asString).! !
 
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 22:39:58'!
-addDepositLineFor: aDeposit
-	report addLast: 'Depósito por ', (aDeposit value asString), '.'! !
-
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 22:49:38'!
-addWireIncomeLineFor: aWire
-	report addLast: 'Entrada por transferencia de ', (aWire wire value asString), '.'! !
-
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 22:49:28'!
-addWireOutcomeLineFor: aWire
-	report addLast: 'Salida por transferencia de ', (aWire wire value asString), '.'! !
-
-!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 22:39:42'!
-addWithdrawLineFor: aWithdraw
-	report addLast: 'Retiro por ', (aWithdraw value asString), '.'! !
-
 !SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 22:36:50'!
 initialize
 	report _ OrderedCollection new.! !
 
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:02:34'!
+reportDeposit: aDeposit
+	report addLast: 'Depósito por ', (aDeposit value asString), '.'! !
+
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:02:46'!
+reportWireIncome: aWire
+	report addLast: 'Entrada por transferencia de ', (aWire wire value asString), '.'! !
+
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:03:00'!
+reportWireOutcome: aWire
+	report addLast: 'Salida por transferencia de ', (aWire wire value asString), '.'! !
+
+!SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 23:03:11'!
+reportWithdraw: aWithdraw
+	report addLast: 'Retiro por ', (aWithdraw value asString), '.'! !
+
 !SumaryReport methodsFor: 'initialization' stamp: 'FS 10/24/2021 22:48:53'!
 value
 	^report.! !
+
+
+!classDefinition: #TransferNetReport category: 'Portfolio 2'!
+Report subclass: #TransferNetReport
+	instanceVariableNames: 'accumulated'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:07:58'!
+initialize
+	accumulated _ 0.! !
+
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:05:59'!
+reportDeposit: aDeposit
+	^self! !
+
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:07:07'!
+reportWireIncome: aWireIncome
+	accumulated _ accumulated + aWireIncome wire value.! !
+
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:07:14'!
+reportWireOutcome: aWireOutcome
+	accumulated _ accumulated + aWireOutcome wire value negated.! !
+
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:06:14'!
+reportWithdraw: aWithdraw
+	^self! !
+
+!TransferNetReport methodsFor: 'as yet unclassified' stamp: 'FS 10/24/2021 23:14:07'!
+value
+	^accumulated.! !
 
 
 !classDefinition: #Wire category: 'Portfolio 2'!
