@@ -1,0 +1,1863 @@
+
+
+----STARTUP---- (24 October 2021 20:46:46) as /Users/franco/Repos/isw1/cuis limpio/CuisUniversity-4532.image!
+
+
+----SNAPSHOT----(24 October 2021 20:46:55) CuisUniversity-4532.image priorSource: 16885703!
+
+----End fileIn of /Users/franco/Repos/isw1/cuis/Portfolio-Ejercicio.st----!
+
+----QUIT----(24 October 2021 22:09:13) CuisUniversity-4532.image priorSource: 16885901!
+
+----STARTUP---- (24 October 2021 22:51:12) as /Users/franco/Repos/isw1/cuis limpio/CuisUniversity-4532.image!
+
+
+!classRemoval: #ReceptiveAccount stamp: 'FS 10/24/2021 22:51:45'!
+PortfolioItem subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #Portfolio stamp: 'FS 10/24/2021 22:51:45'!
+PortfolioItem subclass: #Portfolio
+	instanceVariableNames: 'portfolioItems'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #PortfolioItem stamp: 'FS 10/24/2021 22:51:46'!
+Object subclass: #PortfolioItem
+	instanceVariableNames: 'directParents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #Withdraw stamp: 'FS 10/24/2021 22:51:46'!
+AccountTransaction subclass: #Withdraw
+	instanceVariableNames: 'value'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #Deposit stamp: 'FS 10/24/2021 22:51:46'!
+AccountTransaction subclass: #Deposit
+	instanceVariableNames: 'value'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #AccountTransaction stamp: 'FS 10/24/2021 22:51:46'!
+Object subclass: #AccountTransaction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #TransferNetTest stamp: 'FS 10/24/2021 22:51:47'!
+TestCase subclass: #TransferNetTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #SumaryTest stamp: 'FS 10/24/2021 22:51:47'!
+TestCase subclass: #SumaryTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #ReceptiveAccountTest stamp: 'FS 10/24/2021 22:51:47'!
+TestCase subclass: #ReceptiveAccountTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #PortfolioTest stamp: 'FS 10/24/2021 22:51:47'!
+TestCase subclass: #PortfolioTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+----End fileIn of /Users/franco/Repos/isw1/ingsoft1/18-Portfolio 2/Portfolio 2.st----!
+
+----QUIT----(24 October 2021 23:34:02) CuisUniversity-4532.image priorSource: 16906216!
+
+----STARTUP---- (27 October 2021 22:34:32) as /Users/franco/Repos/isw1/cuis limpio/CuisUniversity-4532.image!
+
+
+!classRemoval: #Wire stamp: 'FS 10/27/2021 22:34:40'!
+Object subclass: #Wire
+	instanceVariableNames: 'senderLeg receiverLeg value sender receiver amount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #Withdraw stamp: 'FS 10/27/2021 22:34:41'!
+AccountTransaction subclass: #Withdraw
+	instanceVariableNames: 'value'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #WireWithdrawLeg stamp: 'FS 10/27/2021 22:34:41'!
+AccountTransaction subclass: #WireWithdrawLeg
+	instanceVariableNames: 'wire'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #WireDepositLeg stamp: 'FS 10/27/2021 22:34:41'!
+AccountTransaction subclass: #WireDepositLeg
+	instanceVariableNames: 'wire'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #Deposit stamp: 'FS 10/27/2021 22:34:41'!
+AccountTransaction subclass: #Deposit
+	instanceVariableNames: 'value'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #AccountTransaction stamp: 'FS 10/27/2021 22:34:42'!
+Object subclass: #AccountTransaction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #ReceptiveAccount stamp: 'FS 10/27/2021 22:34:42'!
+Account subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #Portfolio stamp: 'FS 10/27/2021 22:34:42'!
+Account subclass: #Portfolio
+	instanceVariableNames: 'accounts parents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #Account stamp: 'FS 10/27/2021 22:34:42'!
+Object subclass: #Account
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #WireTest stamp: 'FS 10/27/2021 22:34:43'!
+TestCase subclass: #WireTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #TransferNetTest stamp: 'FS 10/27/2021 22:34:43'!
+TestCase subclass: #TransferNetTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #SumaryTest stamp: 'FS 10/27/2021 22:34:43'!
+TestCase subclass: #SumaryTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #ReceptiveAccountTest stamp: 'FS 10/27/2021 22:34:43'!
+TestCase subclass: #ReceptiveAccountTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+!classRemoval: #PortfolioTest stamp: 'FS 10/27/2021 22:34:44'!
+TestCase subclass: #PortfolioTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio 2'!
+
+----QUIT----(27 October 2021 22:34:47) CuisUniversity-4532.image priorSource: 16945222!
+
+----STARTUP---- (27 October 2021 22:34:50) as /Users/franco/Repos/isw1/cuis limpio/CuisUniversity-4532.image!
+
+
+----QUIT----(27 October 2021 22:35:00) CuisUniversity-4532.image priorSource: 16948273!
+
+----STARTUP---- (27 October 2021 22:35:13) as /Users/franco/Repos/isw1/cuis/CuisUniversity-4532.image!
+
+
+----End fileIn of /Users/franco/Repos/isw1/ingsoft1/19-MarsRover-ElRegreso/MarsRover-WithHeading.st----!
+
+!classRenamed: #TestMarsRoverTracker as: #MarsRoverTrackerTest stamp: 'FS 10/27/2021 22:37:32'!
+Smalltalk renameClassNamed: #TestMarsRoverTracker as: #MarsRoverTrackerTest!
+
+!testRun: #MarsRoverTrackerTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test03TrackMoveEastPositionChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test04TrackMoveSouthPositionChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test05TrackEmptyHeadingChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test06TrackRotateHeadingChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test07Track2RotatesHeadingChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test08Track3RotatesHeadingChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test09Track4RotatesHeadingChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test10TrackNoProcessMarsRoverPositionAndHeadingChanges stamp: 'FS 10/27/2021 22:37:37'!
+PASSED!
+
+TestCase subclass: #MarsRoverWindowTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+
+!classDefinition: #MarsRoverWindowTest category: 'MarsRover-WithHeading' stamp: 'FS 10/27/2021 22:39:42'!
+TestCase subclass: #MarsRoverWindowTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverWindowTest methodsFor: 'nil' stamp: 'FS 10/27/2021 22:40:46'!
+test01
+	| rover |
+	rover _ MarsRover at: 0@0 heading: #north.
+	! !
+!MarsRoverWindowTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 22:41:06' prior: 50332438!
+test01
+	| rover |
+	rover _ MarsRover at: 0@0 heading: MarsRoverHeadingNorth.
+	! !
+
+!classDefinition: #MarsRoverWindow category: 'MarsRover-WithHeading' stamp: 'FS 10/27/2021 22:42:07'!
+Object subclass: #MarsRoverWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverWindowTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 22:41:57' prior: 50332444!
+test01
+	| rover window |
+	rover _ MarsRover at: 0@0 heading: MarsRoverHeadingNorth.
+	window _ MarsRoverWindow of: rover.
+	! !
+!MarsRoverWindowTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 22:43:08' prior: 50332458!
+test01
+	| rover window |
+	rover _ MarsRover at: 0@0 heading: MarsRoverHeadingNorth.
+	window _ MarsRoverWindow of: rover.
+	self assert: window positionField equals: 	'(0,0)'.
+	! !
+!MarsRoverWindow methodsFor: 'no messages' stamp: 'FS 10/27/2021 22:44:16'!
+positionField
+	^'(0,0)'! !
+!MarsRoverWindowTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 22:44:31'!
+test02
+	| rover window |
+	rover _ MarsRover at: 0@1 heading: MarsRoverHeadingNorth.
+	window _ MarsRoverWindow of: rover.
+	self assert: window positionField equals: 	'(0,1)'.
+	! !
+
+!testRun: #MarsRoverWindowTest #test02 stamp: 'FS 10/27/2021 22:44:35'!
+ERROR!
+!MarsRoverWindow class methodsFor: 'nil' stamp: 'FS 10/27/2021 22:45:13'!
+of: aRover
+	^self new initializeWith: aRover.! !
+
+!classDefinition: #MarsRoverWindow category: 'MarsRover-WithHeading' stamp: 'FS 10/27/2021 22:45:41'!
+Object subclass: #MarsRoverWindow
+	instanceVariableNames: 'rover'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverWindow methodsFor: 'nil' stamp: 'FS 10/27/2021 22:45:40'!
+initializeWith: aRover
+	rover _ aRover.! !
+
+!testRun: #MarsRoverWindowTest #test01 stamp: 'FS 10/27/2021 22:46:10'!
+PASSED!
+
+!testRun: #MarsRoverWindowTest #test02 stamp: 'FS 10/27/2021 22:46:10'!
+FAILURE!
+
+!testRun: #MarsRoverWindowTest #test02 stamp: 'FS 10/27/2021 22:46:10'!
+FAILURE!
+!MarsRoverWindowTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 22:46:31' prior: 50332466!
+test01
+	| rover window |
+	rover _ MarsRover at: 0@0 heading: MarsRoverHeadingNorth.
+	window _ MarsRoverWindow of: rover.
+	self assert: 	'(0,0)' equals:  window positionField.
+	! !
+!MarsRoverWindowTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 22:46:45' prior: 50332478!
+test02
+	| rover window |
+	rover _ MarsRover at: 0@1 heading: MarsRoverHeadingNorth.
+	window _ MarsRoverWindow of: rover.
+	self assert: 	'(0,1)' equals: window positionField.
+	! !
+!MarsRoverWindowTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 22:47:20' prior: 50332523!
+test02
+	| rover window |
+	rover _ MarsRover at: 0@1 heading: MarsRoverHeadingNorth.
+	window _ MarsRoverWindow of: rover.
+	self assert: 	'(0,1)' equals: window positionField.
+	! !
+
+!testRun: #MarsRoverWindowTest #test01 stamp: 'FS 10/27/2021 22:47:23'!
+PASSED!
+
+!testRun: #MarsRoverWindowTest #test02 stamp: 'FS 10/27/2021 22:47:23'!
+FAILURE!
+
+!testRun: #MarsRoverWindowTest #test02 stamp: 'FS 10/27/2021 22:47:23'!
+FAILURE!
+!MarsRoverWindow methodsFor: 'text fields' stamp: 'FS 10/27/2021 22:48:54' prior: 50332474!
+positionField
+	rover position = 0@0 ifTrue: [
+	^'(0,0)'].
+	rover position = 0@1 ifTrue: [^'(0,1)']! !
+
+!testRun: #MarsRoverWindowTest #test02 stamp: 'FS 10/27/2021 22:48:56'!
+ERROR!
+
+!methodRemoval: MarsRoverWindowTest #test02 stamp: 'FS 10/27/2021 23:05:58'!
+test02
+	| rover window |
+	rover _ MarsRover at: 0@1 heading: MarsRoverHeadingNorth.
+	window _ MarsRoverWindow of: rover.
+	self assert: 	'(0,1)' equals: window positionField.
+	!
+
+!classRemoval: #MarsRoverWindowTest stamp: 'FS 10/27/2021 23:11:18'!
+TestCase subclass: #MarsRoverWindowTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+
+TestCase subclass: #MarsRoverWindowTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+
+!classDefinition: #MarsRoverWindowTest category: 'MarsRover-WithHeading' stamp: 'FS 10/27/2021 23:12:11'!
+TestCase subclass: #MarsRoverWindowTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverWindowTest methodsFor: 'nil' stamp: 'FS 10/27/2021 23:12:28'!
+trackHeadingChangesOf: marsRover
+	
+	^marsRover trackerHeadingChanges.
+	! !
+!MarsRoverWindowTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:14:41' prior: 50332585!
+trackHeadingChangesOf: marsRover
+	| window |
+	window _ MarsRoverWindow new.
+	^marsRover trackerHeadingChanges.
+	! !
+
+!classRenamed: #MarsRoverWindow as: #MarsRoverView stamp: 'FS 10/27/2021 23:15:08'!
+Smalltalk renameClassNamed: #MarsRoverWindow as: #MarsRoverView!
+!MarsRoverWindowTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:15:08' prior: 50332591!
+trackHeadingChangesOf: marsRover
+	| window |
+	window _ MarsRoverView new.
+	^marsRover trackerHeadingChanges.
+	! !
+
+!classRenamed: #MarsRoverWindowTest as: #MarsRoverViewTest stamp: 'FS 10/27/2021 23:15:21'!
+Smalltalk renameClassNamed: #MarsRoverWindowTest as: #MarsRoverViewTest!
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:17:57'!
+trackPositionAndHeadingChangesTo: aLogger
+
+	^trackerPositionAndHeadingChanges.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:18:12'!
+trackerHeadingChangesTo: aLogger
+	^trackerHeadingChanges.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:18:13' prior: 50332619!
+trackerHeadingChangesTo: aLogger
+
+	^trackerHeadingChanges.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:18:26'!
+trackerPositionChangesTo: aLogger
+
+	^trackerPositionChanges.! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/27/2021 23:19:01' prior: 50331835!
+trackHeadingChangesOf: marsRover
+	
+	| logger |
+	logger _ WriteStream on: ''.
+	^marsRover trackerHeadingChangesTo: logger.
+	! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/27/2021 23:19:30' prior: 50331841!
+trackPositionAndHeadingChangesOf: aMarsRover 
+
+	| logger |
+	logger _ WriteStream on: ''.
+	^aMarsRover trackPositionAndHeadingChangesTo: logger.! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/27/2021 23:19:44' prior: 50331847!
+trackPositionChangesOf: marsRover
+
+	| logger |
+	logger _ WriteStream on: ''.
+	^marsRover trackerPositionChangesTo: logger.
+	! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/27/2021 23:20:35' prior: 50332635!
+trackHeadingChangesOf: marsRover
+	
+	| logger |
+	logger _ WriteStream on: ''.
+	marsRover trackerHeadingChangesTo: logger.
+	^logger
+	! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/27/2021 23:20:48' prior: 50332643!
+trackPositionAndHeadingChangesOf: aMarsRover 
+
+	| logger |
+	logger _ WriteStream on: ''.
+	aMarsRover trackPositionAndHeadingChangesTo: logger.
+	^logger.! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/27/2021 23:20:56' prior: 50332651!
+trackPositionChangesOf: marsRover
+
+	| logger |
+	logger _ WriteStream on: ''.
+	marsRover trackerPositionChangesTo: logger.
+	^logger
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:21:22' prior: 50331852!
+test01TrackNoPositionChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackPositionChangesOf: marsRover. 
+	loggerStream _ ReadStream on: logger contents.
+	
+	self assert: loggerStream atEnd.
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:21:28' prior: 50331864!
+test02TrackMoveNorthPositionChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackPositionChangesOf: marsRover. 
+	
+	marsRover process: 'f'.
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: 1@3 equals: (loggerStream next).
+	self assert: loggerStream atEnd.
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:21:34' prior: 50331878!
+test03TrackMoveEastPositionChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackPositionChangesOf: marsRover. 
+	
+	marsRover process: 'rf'.
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: 2@2 equals: (loggerStream next).
+	self assert: loggerStream atEnd.
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:21:39' prior: 50331892!
+test04TrackMoveSouthPositionChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackPositionChangesOf: marsRover. 
+	
+	marsRover process: 'rrrf'.
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: 0@2 equals: (loggerStream next).
+	self assert: loggerStream atEnd.
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:21:44' prior: 50331906!
+test05TrackEmptyHeadingChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackHeadingChangesOf: marsRover. 
+		
+	loggerStream _ ReadStream on: logger contents.
+	self assert: loggerStream atEnd.
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:21:48' prior: 50331918!
+test06TrackRotateHeadingChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackHeadingChangesOf: marsRover. 
+	
+	marsRover process: 'r'.
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: 'East' equals: (loggerStream next).
+	self assert: loggerStream atEnd.
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:21:54' prior: 50331932!
+test07Track2RotatesHeadingChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackHeadingChangesOf: marsRover. 
+	
+	marsRover process: 'rr'.
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: 'East' equals: (loggerStream next).
+	self assert: 'South' equals: (loggerStream next).
+	self assert: loggerStream atEnd.
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:22:00' prior: 50331948!
+test08Track3RotatesHeadingChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackHeadingChangesOf: marsRover. 
+	
+	marsRover process: 'rrr'.
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: 'East' equals: (loggerStream next).
+	self assert: 'South' equals: (loggerStream next).
+	self assert: 'West' equals: (loggerStream next).
+	self assert: loggerStream atEnd.
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:22:04' prior: 50331965!
+test09Track4RotatesHeadingChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackHeadingChangesOf: marsRover. 
+	
+	marsRover process: 'rrrr'.
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: 'East' equals: (loggerStream next).
+	self assert: 'South' equals: (loggerStream next).
+	self assert: 'West' equals: (loggerStream next).
+	self assert: 'North' equals: (loggerStream next).
+	self assert: loggerStream atEnd.
+	! !
+!MarsRoverTrackerTest methodsFor: 'tests' stamp: 'FS 10/27/2021 23:22:09' prior: 50331984!
+test10TrackNoProcessMarsRoverPositionAndHeadingChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackPositionAndHeadingChangesOf: marsRover. 
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: loggerStream atEnd.
+	! !
+
+!testRun: #MarsRoverTrackerTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 23:22:15'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/27/2021 23:22:15'!
+FAILURE!
+
+!testRun: #MarsRoverTrackerTest #test03TrackMoveEastPositionChanges stamp: 'FS 10/27/2021 23:22:15'!
+FAILURE!
+
+!testRun: #MarsRoverTrackerTest #test04TrackMoveSouthPositionChanges stamp: 'FS 10/27/2021 23:22:15'!
+FAILURE!
+
+!testRun: #MarsRoverTrackerTest #test05TrackEmptyHeadingChanges stamp: 'FS 10/27/2021 23:22:15'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test06TrackRotateHeadingChanges stamp: 'FS 10/27/2021 23:22:15'!
+FAILURE!
+
+!testRun: #MarsRoverTrackerTest #test07Track2RotatesHeadingChanges stamp: 'FS 10/27/2021 23:22:15'!
+FAILURE!
+
+!testRun: #MarsRoverTrackerTest #test08Track3RotatesHeadingChanges stamp: 'FS 10/27/2021 23:22:15'!
+FAILURE!
+
+!testRun: #MarsRoverTrackerTest #test09Track4RotatesHeadingChanges stamp: 'FS 10/27/2021 23:22:15'!
+FAILURE!
+
+!testRun: #MarsRoverTrackerTest #test10TrackNoProcessMarsRoverPositionAndHeadingChanges stamp: 'FS 10/27/2021 23:22:15'!
+PASSED!
+
+!methodRemoval: MarsRover #trackerHeadingChanges stamp: 'FS 10/27/2021 23:22:27'!
+trackerHeadingChanges
+
+	trackerHeadingChanges := 	(WriteStream on: (OrderedCollection new)).
+	^trackerHeadingChanges.!
+
+!methodRemoval: MarsRover #trackerPositionChanges stamp: 'FS 10/27/2021 23:22:29'!
+trackerPositionChanges
+
+	trackerPositionChanges := 	(WriteStream on: (OrderedCollection new)).
+	^trackerPositionChanges.!
+
+!methodRemoval: MarsRover #trackPositionAndHeadingChanges stamp: 'FS 10/27/2021 23:22:31'!
+trackPositionAndHeadingChanges
+
+	trackerPositionAndHeadingChanges := 	(WriteStream on: (OrderedCollection new)).
+	^trackerPositionAndHeadingChanges.!
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:23:05' prior: 50332614!
+trackPositionAndHeadingChangesTo: aLogger
+	trackerPositionChanges  _ aLogger.
+	^trackerPositionAndHeadingChanges.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:23:21' prior: 50332629!
+trackerPositionChangesTo: aLogger
+
+	trackerPositionChanges  _ aLogger.
+	^trackerPositionChanges.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:23:38' prior: 50332624!
+trackerHeadingChangesTo: aLogger
+
+	trackerHeadingChanges  _ aLogger.
+	^trackerHeadingChanges.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:23:49' prior: 50332884!
+trackPositionAndHeadingChangesTo: aLogger
+	
+	trackerPositionAndHeadingChanges  _ aLogger.
+	^trackerPositionAndHeadingChanges.! !
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:24:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:24:05'!
+PASSED!
+
+----SNAPSHOT----(27 October 2021 23:24:10) CuisUniversity-4532.image priorSource: 16948474!
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/27/2021 23:26:42'!
+movePositionWith: anOffset
+	
+	position := position + anOffset.
+	trackerPositionChanges ifNotNil: [trackerPositionChanges nextPut: position].! !
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/27/2021 23:27:28' prior: 50332091!
+moveEast
+	
+	self movePositionWith: (1@0).
+! !
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:27:29'!
+PASSED!
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/27/2021 23:27:48' prior: 50332101!
+moveNorth
+	
+	self movePositionWith: 0@1.
+! !
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:27:50'!
+PASSED!
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/27/2021 23:27:56' prior: 50332975!
+moveEast
+	
+	self movePositionWith: 1@0.
+! !
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/27/2021 23:28:10' prior: 50332108!
+moveSouth
+	
+	self movePositionWith: 0@-1.
+! !
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:28:12'!
+PASSED!
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/27/2021 23:28:37' prior: 50332115!
+moveWest
+	
+	self movePositionWith: -1@0.! !
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:28:39'!
+PASSED!
+!MarsRover methodsFor: 'heading' stamp: 'FS 10/27/2021 23:31:34'!
+changeHeadTo: aHeading
+	
+	head := aHeading.
+	trackerHeadingChanges ifNotNil: [trackerHeadingChanges nextPut: head printString].! !
+!MarsRover methodsFor: 'heading' stamp: 'FS 10/27/2021 23:31:59' prior: 50332029!
+headEast
+	
+	self changeHeadTo: (MarsRoverHeadingEast for: self).! !
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:32:01'!
+PASSED!
+!MarsRover methodsFor: 'heading' stamp: 'FS 10/27/2021 23:32:17' prior: 50332036!
+headNorth
+	
+	self changeHeadTo: (MarsRoverHeadingNorth for: self).! !
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:32:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:32:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:32:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:32:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:32:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:32:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:32:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:32:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:32:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:32:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:32:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:32:19'!
+PASSED!
+!MarsRover methodsFor: 'heading' stamp: 'FS 10/27/2021 23:32:34' prior: 50332043!
+headSouth
+	
+	self changeHeadTo: (MarsRoverHeadingSouth for: self).! !
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:32:36'!
+PASSED!
+!MarsRover methodsFor: 'heading' stamp: 'FS 10/27/2021 23:32:54' prior: 50332050!
+headWest
+	
+	self changeHeadTo: (MarsRoverHeadingWest for: self).! !
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:32:57'!
+PASSED!
+
+----SNAPSHOT----(27 October 2021 23:34:36) CuisUniversity-4532.image priorSource: 42035!
+
+!classRenamed: #MarsRoverView as: #MarsRoverStatusView stamp: 'FS 10/27/2021 23:34:52'!
+Smalltalk renameClassNamed: #MarsRoverView as: #MarsRoverStatusView!
+!MarsRoverViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:34:53' prior: 50332603!
+trackHeadingChangesOf: marsRover
+	| window |
+	window _ MarsRoverStatusView new.
+	^marsRover trackerHeadingChanges.
+	! !
+
+!classRenamed: #MarsRoverViewTest as: #MarsRoverStatusViewTest stamp: 'FS 10/27/2021 23:35:01'!
+Smalltalk renameClassNamed: #MarsRoverViewTest as: #MarsRoverStatusViewTest!
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:35:19' prior: 50333470!
+trackHeadingChangesOf: marsRover
+	| statusView |
+	statusView _ MarsRoverStatusView new.
+	^marsRover trackerHeadingChanges.
+	! !
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:35:36' prior: 50333483!
+trackHeadingChangesOf: marsRover
+	| statusView |
+	statusView _ MarsRoverStatusView new.
+	^marsRover trackerHeadingChangesToStatusView: statusView.
+	! !
+!MarsRoverStatusViewTest methodsFor: 'nil' stamp: 'FS 10/27/2021 23:38:34'!
+test01TrackNoPositionChanges
+
+	| loggerStream marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackPositionChangesOf: marsRover. 
+	loggerStream _ ReadStream on: statusView contents.
+	
+	self assert: 1@2 equals: statusView positionTextField.! !
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:38:47' prior: 50333499!
+test01TrackNoPositionChanges
+
+	| marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackPositionChangesOf: marsRover. 
+		
+	self assert: 1@2 equals: statusView positionTextField.! !
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:38:52' prior: 50333512!
+test01TrackNoPositionChanges
+
+	| marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackPositionChangesOf: marsRover. 
+	self assert: 1@2 equals: statusView positionTextField.! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 23:39:02'!
+ERROR!
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:39:23'!
+trackPositionChangesOf: marsRover
+	| statusView |
+	statusView _ MarsRoverStatusView new.
+	^marsRover trackerPositionChangesToStatusView: statusView.
+	! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 23:39:30'!
+ERROR!
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:40:05'!
+trackHeadingChangesTo: aLogger
+
+	trackerHeadingChanges  _ aLogger.
+	^trackerHeadingChanges.! !
+!MarsRoverTrackerTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:40:05' prior: 50332659!
+trackHeadingChangesOf: marsRover
+	
+	| logger |
+	logger _ WriteStream on: ''.
+	marsRover trackHeadingChangesTo: logger.
+	^logger
+	! !
+
+!methodRemoval: MarsRover #trackerHeadingChangesTo: stamp: 'FS 10/27/2021 23:40:05'!
+trackerHeadingChangesTo: aLogger
+
+	trackerHeadingChanges  _ aLogger.
+	^trackerHeadingChanges.!
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:40:17'!
+trackPositionChangesTo: aLogger
+
+	trackerPositionChanges  _ aLogger.
+	^trackerPositionChanges.! !
+!MarsRoverTrackerTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:40:17' prior: 50332676!
+trackPositionChangesOf: marsRover
+
+	| logger |
+	logger _ WriteStream on: ''.
+	marsRover trackPositionChangesTo: logger.
+	^logger
+	! !
+
+!methodRemoval: MarsRover #trackerPositionChangesTo: stamp: 'FS 10/27/2021 23:40:17'!
+trackerPositionChangesTo: aLogger
+
+	trackerPositionChanges  _ aLogger.
+	^trackerPositionChanges.!
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:40:35' prior: 50333491!
+trackHeadingChangesOf: marsRover
+	| statusView |
+	statusView _ MarsRoverStatusView new.
+	^marsRover trackHeadingChangesToStatusView: statusView.
+	! !
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:40:41' prior: 50333537!
+trackPositionChangesOf: marsRover
+	| statusView |
+	statusView _ MarsRoverStatusView new.
+	^marsRover trackPositionChangesToStatusView: statusView.
+	! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 23:40:49'!
+ERROR!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 23:40:49'!
+ERROR!
+!MarsRover methodsFor: 'track' stamp: 'FS 10/27/2021 23:41:13'!
+trackPositionChangesToStatusView: aMarsRoverStatusView 
+	self shouldBeImplemented.! !
+
+!classDefinition: #MarsRover category: 'MarsRover-WithHeading' stamp: 'FS 10/27/2021 23:42:29'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position head trackerPositionChanges trackerHeadingChanges trackerPositionAndHeadingChanges statusViewtrackerPositionChanges'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:42:41' prior: 50333611!
+trackPositionChangesToStatusView: aMarsRoverStatusView 
+	
+	statusViewtrackerPositionChanges  _ aMarsRoverStatusView .
+	^statusViewtrackerPositionChanges .! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/27/2021 23:42:42' prior: 50333628!
+trackPositionChangesToStatusView: aMarsRoverStatusView 
+	
+	statusViewtrackerPositionChanges  _ aMarsRoverStatusView .
+	^statusViewtrackerPositionChanges.! !
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/27/2021 23:46:57' prior: 50332967!
+movePositionWith: anOffset
+	
+	position := position + anOffset.
+	trackerPositionChanges ifNotNil: [trackerPositionChanges nextPut: position].
+	statusViewtrackerPositionChanges ifNotNil: [statusViewtrackerPositionChanges positionTextField: position].! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 23:47:37'!
+ERROR!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 23:47:37'!
+ERROR!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:47:50'!
+positionTextField
+	self shouldBeImplemented.! !
+
+!classDefinition: #MarsRoverStatusView category: 'MarsRover-WithHeading' stamp: 'FS 10/27/2021 23:48:20'!
+Object subclass: #MarsRoverStatusView
+	instanceVariableNames: 'rover position'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/27/2021 23:48:18' prior: 50333662!
+positionTextField
+	position.! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 23:48:35'!
+FAILURE!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/27/2021 23:48:35'!
+FAILURE!
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/27/2021 23:53:05' prior: 50332667!
+trackPositionAndHeadingChangesOf: aMarsRover 
+
+	| logger |
+	logger _ WriteStream on: ''.
+	aMarsRover trackPositionChangesTo: logger.
+	aMarsRover trackHeadingChangesTo: logger.
+
+	^logger.! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/27/2021 23:53:07' prior: 50333687!
+trackPositionAndHeadingChangesOf: aMarsRover 
+
+	| logger |
+	logger _ WriteStream on: ''.
+	aMarsRover trackPositionChangesTo: logger.
+	aMarsRover trackHeadingChangesTo: logger.
+	^logger.! !
+
+!methodRemoval: MarsRover #trackPositionAndHeadingChangesTo: stamp: 'FS 10/27/2021 23:53:19'!
+trackPositionAndHeadingChangesTo: aLogger
+	
+	trackerPositionAndHeadingChanges  _ aLogger.
+	^trackerPositionAndHeadingChanges.!
+
+!testRun: #MarsRoverTest #test01DoesNotMoveWhenNoCommand stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02IsAtFailsForDifferentPosition stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03IsAtFailsForDifferentHeading stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04IncrementsYAfterMovingForwardWhenHeadingNorth stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06DecrementsYAfterMovingBackwardsWhenHeadingNorth stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07PointToEashAfterRotatingRightWhenHeadingNorth stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08PointsToWestAfterRotatingLeftWhenPointingNorth stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09DoesNotProcessInvalidCommand stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10CanProcessMoreThanOneCommand stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11IncrementsXAfterMovingForwareWhenHeadingEast stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12DecrementsXAfterMovingBackwardWhenHeadingEast stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13PointsToSouthAfterRotatingRightWhenHeadingEast stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14PointsToNorthAfterRotatingLeftWhenPointingEast stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingSouth stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ForwardBackwardsAndRotateRightWorkAsExpectedWhenPointingWest stamp: 'FS 10/27/2021 23:54:08'!
+PASSED!
+
+----SNAPSHOT----(27 October 2021 23:54:13) CuisUniversity-4532.image priorSource: 57942!
+
+!methodRemoval: MarsRoverTrackerTest #test10TrackNoProcessMarsRoverPositionAndHeadingChanges stamp: 'FS 10/27/2021 23:59:11'!
+test10TrackNoProcessMarsRoverPositionAndHeadingChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackPositionAndHeadingChangesOf: marsRover. 
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: loggerStream atEnd.
+	!
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/28/2021 00:05:41' prior: 50333636!
+trackPositionChangesToStatusView: aMarsRoverStatusView 
+	aMarsRoverStatusView positionField: position.
+	statusViewtrackerPositionChanges  _ aMarsRoverStatusView .
+	^statusViewtrackerPositionChanges.! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:05:57'!
+ERROR!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:05:57'!
+ERROR!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:06:07'!
+positionField: aPoint 
+	self shouldBeImplemented.! !
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:06:21' prior: 50333800!
+positionField: aPoint 
+	position _ aPoint.! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:06:26'!
+FAILURE!
+
+statusView positionTextField!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:07:02' prior: 50333676!
+positionTextField
+	^position.! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:07:04'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:07:06'!
+PASSED!
+!MarsRoverStatusView methodsFor: 'nil' stamp: 'FS 10/28/2021 00:17:05'!
+test02TrackMoveNorthPositionChanges
+
+	| loggerStream marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackPositionChangesOf: marsRover. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1@3 equals: statusView positionTextField.! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:17:09'!
+PASSED!
+
+!methodRemoval: MarsRoverStatusView #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:17:30'!
+test02TrackMoveNorthPositionChanges
+
+	| loggerStream marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackPositionChangesOf: marsRover. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1@3 equals: statusView positionTextField.!
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:17:40'!
+test02TrackMoveNorthPositionChanges
+
+	| loggerStream marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackPositionChangesOf: marsRover. 
+	
+	marsRover process: 'f'.
+	
+	loggerStream _ ReadStream on: logger contents.
+	self assert: 1@3 equals: (loggerStream next).
+	self assert: loggerStream atEnd.! !
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:17:46' prior: 50333856!
+test02TrackMoveNorthPositionChanges
+
+	| loggerStream marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackPositionChangesOf: marsRover. 
+	
+	marsRover process: 'f'.
+	
+	loggerStream _ ReadStream on: statusView contents.
+	self assert: 1@3 equals: (loggerStream next).
+	self assert: loggerStream atEnd.! !
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:18:04' prior: 50333871!
+test02TrackMoveNorthPositionChanges
+
+	| marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackPositionChangesOf: marsRover. 
+	
+	marsRover process: 'f'.
+	self assert: 1@3 equals: (statusView positionTextField ).! !
+
+!testRun: #MarsRoverStatusViewTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:18:06'!
+ERROR!
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/28/2021 00:18:19' prior: 50333644!
+movePositionWith: anOffset
+	
+	position := position + anOffset.
+	trackerPositionChanges ifNotNil: [trackerPositionChanges nextPut: position].
+	statusViewtrackerPositionChanges ifNotNil: [statusViewtrackerPositionChanges positionField: position].! !
+
+!testRun: #MarsRoverStatusViewTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:18:23'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:18:23'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:18:23'!
+PASSED!
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:19:52'!
+test03TrackEmptyHeadingChanges
+
+	| marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackHeadingChangesOf: marsRover. 
+		
+	self assert: MarsRoverHeadingNorth equals: logger headingTextField.! !
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:19:58' prior: 50333923!
+test03TrackEmptyHeadingChanges
+
+	| marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackHeadingChangesOf: marsRover. 
+		
+	self assert: MarsRoverHeadingNorth equals: statusView headingTextField.! !
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:20:08' prior: 50333934!
+test03TrackEmptyHeadingChanges
+
+	| marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackHeadingChangesOf: marsRover. 
+		
+	self assert: MarsRoverHeadingNorth equals: (statusView headingTextField).! !
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:20:10'!
+ERROR!
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/28/2021 00:20:37'!
+trackHeadingChangesToStatusView: aMarsRoverStatusView 
+	self shouldBeImplemented.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/28/2021 00:22:03' prior: 50333960!
+trackHeadingChangesToStatusView: aMarsRoverStatusView 
+	aMarsRoverStatusView headingTextField: head.
+	^aMarsRoverStatusView .! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/28/2021 00:22:09' prior: 50333966!
+trackHeadingChangesToStatusView: aMarsRoverStatusView 
+	aMarsRoverStatusView headingTextField: head.
+	^aMarsRoverStatusView.! !
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:22:11'!
+ERROR!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:22:19'!
+headingTextField: aMarsRoverHeadingNorth 
+	self shouldBeImplemented.! !
+
+!classDefinition: #MarsRoverStatusView category: 'MarsRover-WithHeading' stamp: 'FS 10/28/2021 00:22:32'!
+Object subclass: #MarsRoverStatusView
+	instanceVariableNames: 'rover position head'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:22:31' prior: 50333984!
+headingTextField: aMarsRoverHeadingNorth 
+	head _ aMarsRoverHeadingNorth.! !
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:22:34'!
+ERROR!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:22:46'!
+headingTextField
+	self shouldBeImplemented.! !
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:22:52' prior: 50334008!
+headingTextField
+	^head! !
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:22:54'!
+FAILURE!
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:23:20' prior: 50333946!
+test03TrackEmptyHeadingChanges
+
+	| marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackHeadingChangesOf: marsRover. 
+		
+	self assert: (MarsRoverHeadingNorth new) equals: (statusView headingTextField).! !
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:23:38'!
+FAILURE!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:25:38'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:25:38'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:25:38'!
+FAILURE!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:25:38'!
+FAILURE!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:26:25'!
+FAILURE!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:26:39'!
+FAILURE!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:26:42'!
+PASSED!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:26:58' prior: 50334013!
+headingTextField
+	^head printString.! !
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:27:06'!
+FAILURE!
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:27:16' prior: 50334021!
+test03TrackEmptyHeadingChanges
+
+	| marsRover statusView |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	statusView _ self trackHeadingChangesOf: marsRover. 
+		
+	self assert: 'North' equals: (statusView headingTextField).! !
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:27:18'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:27:18'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:27:18'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:27:18'!
+PASSED!
+!MarsRoverStatusViewTest methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:28:45'!
+test04TrackRotateHeadingChanges
+
+	| marsRover logger |
+	marsRover _ MarsRover at: 1@2 heading: MarsRoverHeadingNorth.
+	logger _ self trackHeadingChangesOf: marsRover. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 'East' equals: (logger headingTextField) .
+! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:28:50'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:28:50'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:28:50'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test04TrackRotateHeadingChanges stamp: 'FS 10/28/2021 00:28:50'!
+FAILURE!
+
+!testRun: #MarsRoverStatusViewTest #test04TrackRotateHeadingChanges stamp: 'FS 10/28/2021 00:28:50'!
+FAILURE!
+
+!classDefinition: #MarsRover category: 'MarsRover-WithHeading' stamp: 'FS 10/28/2021 00:30:34'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position head trackerPositionChanges trackerHeadingChanges trackerPositionAndHeadingChanges statusViewtrackerPositionChanges statusViewTrackerHeadingChanges'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRover methodsFor: 'heading' stamp: 'FS 10/28/2021 00:30:31' prior: 50333215!
+changeHeadTo: aHeading
+	
+	head := aHeading.
+	trackerHeadingChanges ifNotNil: [trackerHeadingChanges nextPut: head printString].
+	statusViewTrackerHeadingChanges ifNotNil: [statusViewTrackerHeadingChanges headingTextField: head printString].! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/28/2021 00:31:31' prior: 50333973!
+trackHeadingChangesToStatusView: aMarsRoverStatusView 
+	aMarsRoverStatusView headingTextField: head string.
+	statusViewTrackerHeadingChanges  _ aMarsRoverStatusView .
+
+	^statusViewTrackerHeadingChanges.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/28/2021 00:31:36' prior: 50334146!
+trackHeadingChangesToStatusView: aMarsRoverStatusView 
+	aMarsRoverStatusView headingTextField: head string.
+	statusViewTrackerHeadingChanges  _ aMarsRoverStatusView.
+
+	^statusViewTrackerHeadingChanges.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/28/2021 00:31:40' prior: 50334156!
+trackHeadingChangesToStatusView: aMarsRoverStatusView 
+
+	aMarsRoverStatusView headingTextField: head string.
+	statusViewTrackerHeadingChanges  _ aMarsRoverStatusView.
+	^statusViewTrackerHeadingChanges.! !
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/28/2021 00:31:47' prior: 50333784!
+trackPositionChangesToStatusView: aMarsRoverStatusView 
+
+	aMarsRoverStatusView positionField: position.
+	statusViewtrackerPositionChanges  _ aMarsRoverStatusView .
+	^statusViewtrackerPositionChanges.! !
+
+!classDefinition: #MarsRover category: 'MarsRover-WithHeading' stamp: 'FS 10/28/2021 00:31:53'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position head trackerPositionChanges trackerHeadingChanges trackerPositionAndHeadingChanges statusViewTrackerPositionChanges statusViewTrackerHeadingChanges'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:31:53' prior: 50333901!
+movePositionWith: anOffset
+	
+	position := position + anOffset.
+	trackerPositionChanges ifNotNil: [trackerPositionChanges nextPut: position].
+	statusViewTrackerPositionChanges ifNotNil: [statusViewTrackerPositionChanges positionField: position].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:31:53' prior: 50334174!
+trackPositionChangesToStatusView: aMarsRoverStatusView 
+
+	aMarsRoverStatusView positionField: position.
+	statusViewTrackerPositionChanges  _ aMarsRoverStatusView .
+	^statusViewTrackerPositionChanges.! !
+
+!methodRemoval: MarsRoverStatusView #positionField stamp: 'FS 10/28/2021 00:32:20'!
+positionField
+	rover position = 0@0 ifTrue: [
+	^'(0,0)'].
+	rover position = 0@1 ifTrue: [^'(0,1)']!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:32:30'!
+positionTextField: aPoint 
+	position _ aPoint.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:32:30' prior: 50334207!
+trackPositionChangesToStatusView: aMarsRoverStatusView 
+
+	aMarsRoverStatusView positionTextField: position.
+	statusViewTrackerPositionChanges  _ aMarsRoverStatusView .
+	^statusViewTrackerPositionChanges.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:32:30' prior: 50334196!
+movePositionWith: anOffset
+	
+	position := position + anOffset.
+	trackerPositionChanges ifNotNil: [trackerPositionChanges nextPut: position].
+	statusViewTrackerPositionChanges ifNotNil: [statusViewTrackerPositionChanges positionTextField: position].! !
+
+!methodRemoval: MarsRoverStatusView #positionField: stamp: 'FS 10/28/2021 00:32:30'!
+positionField: aPoint 
+	position _ aPoint.!
+!MarsRoverStatusView methodsFor: 'as yet unclassified' stamp: 'FS 10/28/2021 00:32:40' prior: 50334060!
+headingTextField
+	^head.! !
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:32:44'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:32:44'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:32:44'!
+ERROR!
+
+!testRun: #MarsRoverStatusViewTest #test04TrackRotateHeadingChanges stamp: 'FS 10/28/2021 00:32:44'!
+ERROR!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:32:46'!
+ERROR!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:33:01'!
+ERROR!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:33:06'!
+ERROR!
+!MarsRover methodsFor: 'trackers' stamp: 'FS 10/28/2021 00:33:14' prior: 50334165!
+trackHeadingChangesToStatusView: aMarsRoverStatusView 
+
+	aMarsRoverStatusView headingTextField: head printString.
+	statusViewTrackerHeadingChanges  _ aMarsRoverStatusView.
+	^statusViewTrackerHeadingChanges.! !
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:33:15'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test04TrackRotateHeadingChanges stamp: 'FS 10/28/2021 00:33:16'!
+PASSED!
+
+----SNAPSHOT----(28 October 2021 00:35:09) CuisUniversity-4532.image priorSource: 67725!
+
+!testRun: #MarsRoverTrackerTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:35:25'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:35:25'!
+ERROR!
+
+!testRun: #MarsRoverTrackerTest #test03TrackMoveEastPositionChanges stamp: 'FS 10/28/2021 00:35:25'!
+ERROR!
+
+!testRun: #MarsRoverTrackerTest #test04TrackMoveSouthPositionChanges stamp: 'FS 10/28/2021 00:35:25'!
+ERROR!
+
+!testRun: #MarsRoverTrackerTest #test05TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:35:25'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test06TrackRotateHeadingChanges stamp: 'FS 10/28/2021 00:35:25'!
+ERROR!
+
+!testRun: #MarsRoverTrackerTest #test07Track2RotatesHeadingChanges stamp: 'FS 10/28/2021 00:35:25'!
+ERROR!
+
+!testRun: #MarsRoverTrackerTest #test08Track3RotatesHeadingChanges stamp: 'FS 10/28/2021 00:35:25'!
+ERROR!
+
+!testRun: #MarsRoverTrackerTest #test09Track4RotatesHeadingChanges stamp: 'FS 10/28/2021 00:35:25'!
+ERROR!
+
+!testRun: #MarsRoverTrackerTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:35:26'!
+ERROR!
+
+----STARTUP---- (28 October 2021 00:37:20) as /Users/franco/Repos/isw1/cuis/CuisUniversity-4532.image!
+
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/28/2021 00:38:31' prior: 50334237!
+movePositionWith: anOffset
+	
+	position := position + anOffset.
+	trackerPositionChanges ifNotNil: [trackerPositionChanges nextPut: position printString].
+	statusViewTrackerPositionChanges ifNotNil: [statusViewTrackerPositionChanges positionTextField: position].! !
+!MarsRover methodsFor: 'moving' stamp: 'FS 10/28/2021 00:38:45' prior: 50334337!
+movePositionWith: anOffset
+	
+	position := position + anOffset.
+	trackerPositionChanges ifNotNil: [trackerPositionChanges nextPut: position].
+	statusViewTrackerPositionChanges ifNotNil: [statusViewTrackerPositionChanges positionTextField: position].! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/28/2021 00:39:07' prior: 50333555!
+trackHeadingChangesOf: marsRover
+	
+	| logger |
+	logger _ WriteStream on: (OrderedCollection new).
+	marsRover trackHeadingChangesTo: logger.
+	^logger
+	! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/28/2021 00:39:15' prior: 50333697!
+trackPositionAndHeadingChangesOf: aMarsRover 
+
+	| logger |
+	logger _ WriteStream on: (OrderedCollection new)..
+	aMarsRover trackPositionChangesTo: logger.
+	aMarsRover trackHeadingChangesTo: logger.
+	^logger.! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/28/2021 00:39:17' prior: 50334368!
+trackPositionAndHeadingChangesOf: aMarsRover 
+
+	| logger |
+	logger _ WriteStream on: (OrderedCollection new).
+	aMarsRover trackPositionChangesTo: logger.
+	aMarsRover trackHeadingChangesTo: logger.
+	^logger.! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/28/2021 00:39:22' prior: 50333574!
+trackPositionChangesOf: marsRover
+
+	| logger |
+	logger _ WriteStream on: (OrderedCollection new)..
+	marsRover trackPositionChangesTo: logger.
+	^logger
+	! !
+!MarsRoverTrackerTest methodsFor: 'initializations' stamp: 'FS 10/28/2021 00:39:23' prior: 50334388!
+trackPositionChangesOf: marsRover
+
+	| logger |
+	logger _ WriteStream on: (OrderedCollection new).
+	marsRover trackPositionChangesTo: logger.
+	^logger
+	! !
+
+!testRun: #MarsRoverTrackerTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:39:28'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:39:28'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test03TrackMoveEastPositionChanges stamp: 'FS 10/28/2021 00:39:28'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test04TrackMoveSouthPositionChanges stamp: 'FS 10/28/2021 00:39:28'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test05TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:39:28'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test06TrackRotateHeadingChanges stamp: 'FS 10/28/2021 00:39:28'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test07Track2RotatesHeadingChanges stamp: 'FS 10/28/2021 00:39:28'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test08Track3RotatesHeadingChanges stamp: 'FS 10/28/2021 00:39:28'!
+PASSED!
+
+!testRun: #MarsRoverTrackerTest #test09Track4RotatesHeadingChanges stamp: 'FS 10/28/2021 00:39:28'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test01TrackNoPositionChanges stamp: 'FS 10/28/2021 00:39:30'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test02TrackMoveNorthPositionChanges stamp: 'FS 10/28/2021 00:39:30'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test03TrackEmptyHeadingChanges stamp: 'FS 10/28/2021 00:39:30'!
+PASSED!
+
+!testRun: #MarsRoverStatusViewTest #test04TrackRotateHeadingChanges stamp: 'FS 10/28/2021 00:39:30'!
+PASSED!
+
+----SNAPSHOT----(28 October 2021 00:39:34) CuisUniversity-4532.image priorSource: 84684!
