@@ -5,66 +5,54 @@ TestCase subclass: #TusLibrosTest
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 10/31/2021 22:40:11'!
+!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/1/2021 00:24:46'!
+createBookWithISBN: anIsbn
+	
+	^anIsbn! !
+
+!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/1/2021 01:53:50'!
+createCartwithCataloge: aCataloge
+	
+	^Cart withCataloge: aCataloge! !
+
+!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/1/2021 01:56:00'!
 test01NewCartIsEmpty
 	
 	| cart |
-	cart _ Cart new.
+	cart _ self createCartwithCataloge: OrderedCollection new.
 	self assert: cart books isEmpty.! !
 
-!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 10/31/2021 22:41:43'!
+!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/1/2021 01:56:42'!
 test02AddBookToCartHasOnlyAddedBook
 	
 	| cart aBook |
-	cart _ Cart new.
-	aBook _ Book new.
+	cart _ self createCartwithCataloge: (OrderedCollection with: '0').
+	aBook _ self createBookWithISBN: '0'.
 	cart add: aBook.
 	self assert: cart books equals: (OrderedCollection with: aBook).! !
 
-!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 10/31/2021 22:42:33'!
+!TusLibrosTest methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/1/2021 02:01:34'!
 test03AddInvalidBookRaiseError
 	
 	| cart aBook isbn |
-	cart _ Cart new.
-	isbn _ 0.
-	aBook _ Book withISBN: isbn.
+	cart _ self createCartwithCataloge: (OrderedCollection new).
+	isbn _ '0'.
+	aBook _ self createBookWithISBN: isbn.
 	self should:  [cart add: aBook.] raise: Error.
-	self assert: cart books equals: (OrderedCollection with: aBook).! !
-
-
-!classDefinition: #Book category: 'Tus-Libros'!
-Object subclass: #Book
-	instanceVariableNames: 'isbn'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Tus-Libros'!
-
-!Book methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 10/28/2021 21:32:01'!
-inititalizeWith: anISBN
-	
-	isbn _ anISBN.! !
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'Book class' category: 'Tus-Libros'!
-Book class
-	instanceVariableNames: ''!
-
-!Book class methodsFor: 'initialization' stamp: 'Ejercicio1 10/28/2021 21:29:33'!
-withISBN: anISBN 
-	^Book new initializeWith: anISBN.! !
+	self assert: cart books equals: (OrderedCollection new).! !
 
 
 !classDefinition: #Cart category: 'Tus-Libros'!
 Object subclass: #Cart
-	instanceVariableNames: 'books'
+	instanceVariableNames: 'books catalogue'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!Cart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 10/28/2021 21:15:18'!
+!Cart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/1/2021 02:00:39'!
 add: aBook 
-	books addLast: aBook.! !
+	(catalogue includes: aBook) ifTrue: [
+	books addLast: aBook.] ifFalse: [self error.].! !
 
 !Cart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 10/28/2021 21:19:21'!
 books
@@ -73,3 +61,21 @@ books
 !Cart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 10/28/2021 21:18:51'!
 initialize
 	books _ OrderedCollection new.! !
+
+!Cart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/1/2021 01:55:01'!
+initializeWith: aCatalogue
+	
+	books _ OrderedCollection new.
+	catalogue _ aCatalogue! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Cart class' category: 'Tus-Libros'!
+Cart class
+	instanceVariableNames: ''!
+
+
+!Cart class methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/1/2021 01:57:24'!
+withCataloge: aCataloge
+	
+	^self new initializeWith: aCataloge! !
