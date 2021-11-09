@@ -248,7 +248,7 @@ debit: anAmount from: aCreditCard
 
 !classDefinition: #InterfaceTest category: 'TusLibros'!
 TestCase subclass: #InterfaceTest
-	instanceVariableNames: 'authenticationBehaviour objectFactory'
+	instanceVariableNames: 'authenticationBehaviour objectFactory currentDate'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
@@ -257,10 +257,11 @@ TestCase subclass: #InterfaceTest
 invalidPassword
 	^'password'.! !
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:31:29'!
+!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 19:55:33'!
 setUp
 	
 	objectFactory _ StoreTestObjectsFactory new.
+	currentDate _ DateAndTime now.
 ! !
 
 !InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:56:17'!
@@ -274,28 +275,57 @@ test01
 	raise: Error - MessageNotUnderstood 
 	withMessageText: Interface invalidAuthenticationErrorMessage.! !
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:56:46'!
+!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:08:31'!
 test02
 	| interface cartId contents catalog |
 	authenticationBehaviour  _ [].
 	catalog _ objectFactory defaultCatalog.
-	interface _ Interface withAuthentication: self withCatalog: catalog.
+	interface _ Interface withAuthentication: self withCatalog: catalog withClock: self.
 	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
 	contents _ interface listCart: cartId.
 	self assert: contents isEmpty.! !
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:48:46'!
+!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:09:26'!
 test03
 	| interface cartId contents book catalog |
 	
 	authenticationBehaviour  _ [].
 	catalog _ objectFactory defaultCatalog.
-	interface _ Interface withAuthentication: self withCatalog: catalog.
+	interface _ Interface withAuthentication: self withCatalog: catalog withClock: self.
 	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
 	book _ objectFactory itemSellByTheStore.
 	interface add: 1 of: book to: cartId.
 	contents _ interface listCart: cartId.
 	self assert: contents includes: book.! !
+
+!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:24:36'!
+test04
+	| interface cartId contents book catalog |
+	
+	authenticationBehaviour  _ [].
+	catalog _ objectFactory defaultCatalog.
+	interface _ Interface withAuthentication: self withCatalog: catalog withClock: self.
+	
+	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
+	book _ objectFactory itemSellByTheStore.
+	interface add: 1 of: book to: cartId.
+
+	interface createCartWithUser: self user withPassword: self validPassword.
+	
+	contents _ interface listCart: cartId.
+	self assert: contents includes: book.! !
+
+!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:15:11'!
+test05
+	| interface cartId |
+	interface _ Interface withAuthentication: self withCatalog: objectFactory defaultCatalog withClock: self.
+	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
+	self forwardMinutes: 31.
+	self should: [
+		interface listCart: cartId]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Interface expiredCartErrorMessage.
+		! !
 
 !InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:11:01'!
 user
@@ -309,6 +339,17 @@ validPassword
 !InterfaceTest methodsFor: 'authentication' stamp: 'FS 11/4/2021 20:19:41'!
 authenticate: aUser withPassword: aPassword 
 	^authenticationBehaviour value.! !
+
+
+!InterfaceTest methodsFor: 'clock' stamp: 'FS 11/8/2021 19:55:57'!
+forwardMinutes: someMinutes 
+	
+	currentDate _ currentDate  + (Duration minutes: someMinutes).! !
+
+!InterfaceTest methodsFor: 'clock' stamp: 'FS 11/8/2021 20:12:32'!
+now
+
+	^currentDate.! !
 
 
 !classDefinition: #Cart category: 'TusLibros'!
@@ -382,6 +423,14 @@ add: aQuantity of: anItem
 	self assertIsValidItem: anItem.
 
 	1 to: aQuantity do: [ :aNumber | items add: anItem ]! !
+
+
+!Cart methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 19:32:00'!
+contents
+	
+	^Bag new 
+		addAll: items;
+		yourself! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -518,34 +567,43 @@ expiringOn: aMonth
 
 !classDefinition: #Interface category: 'TusLibros'!
 Object subclass: #Interface
-	instanceVariableNames: 'authenticator authenticationMethod cart catalog'
+	instanceVariableNames: 'authenticator authenticationMethod cart catalog interfaceTest dictionary interfaceTest3 clock lastAction carts cartId'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:37:43'!
+!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:26:50'!
 add: aQuantity of: aBook to: aCartId 
-	cart add: aQuantity of: aBook.! !
+	(carts at: aCartId) add: aQuantity of: aBook.! !
 
-!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 21:33:11'!
+!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:08:52'!
+assertCartNotExpired: aCartId 
+	
+	(lastAction + (Duration minutes: 30) < clock now) ifTrue: [
+		self error: Interface expiredCartErrorMessage ].! !
+
+!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:31:05'!
 createCartWithUser: aUser withPassword: aPassword 
 	authenticator authenticate: aUser withPassword: aPassword.
-	cart _ Cart acceptingItemsOf: catalog.
-	^0.! !
+	cartId _ cartId + 1.
+	carts add: cartId->(Cart acceptingItemsOf: catalog).
+	^cartId.! !
 
-!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 21:37:31'!
+!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:31:33'!
 listCart: aCartId 
-	| booksList |
-	booksList _ Bag new.
-	catalog keysAndValuesDo: [:book :price | 
-		booksList add: book withOccurrences: (cart occurrencesOf: book)].
-	^booksList.! !
+	self assertCartNotExpired: aCartId.
+	^(carts at: aCartId) contents.! !
 
 
-!Interface methodsFor: 'initialization' stamp: 'FS 11/4/2021 20:17:39'!
-initializeWith: anAuthenticator 
+!Interface methodsFor: 'initialization' stamp: 'FS 11/8/2021 20:30:25'!
+initializeWithAuthentication: anAuthenticator withCatalog: aCatalog withClock: aClock
 	
-	authenticator := anAuthenticator.! !
+	lastAction _ aClock now.
+	authenticator := anAuthenticator.
+	catalog := aCatalog.
+	clock := aClock.
+	carts _ Dictionary new.
+	cartId _ 0.! !
 
 !Interface methodsFor: 'initialization' stamp: 'FS 11/4/2021 20:54:48'!
 initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog 
@@ -559,6 +617,10 @@ initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog
 Interface class
 	instanceVariableNames: 'authenticator'!
 
+!Interface class methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 19:56:36'!
+expiredCartErrorMessage
+	^'30 minutes already passed'! !
+
 !Interface class methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:59:50'!
 withAuthentication: anAuthenticator withCatalog: aCatalog 
 	
@@ -570,9 +632,10 @@ invalidAuthenticationErrorMessage
 	^'invalid user'.! !
 
 
-!Interface class methodsFor: 'error handling' stamp: 'FS 11/4/2021 20:50:53'!
-error: aString 
-	self shouldBeImplemented.! !
+!Interface class methodsFor: 'instance creation' stamp: 'FS 11/8/2021 19:49:06'!
+withAuthentication: anInterfaceTest withCatalog: aDictionary withClock: anInterfaceTest3 
+
+	^self new initializeWithAuthentication: anInterfaceTest withCatalog: aDictionary withClock: anInterfaceTest3 ! !
 
 
 !classDefinition: #Sale category: 'TusLibros'!
