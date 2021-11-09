@@ -246,65 +246,60 @@ debit: anAmount from: aCreditCard
 	^debitBehavior value: anAmount value: aCreditCard ! !
 
 
-!classDefinition: #InterfaceTest category: 'TusLibros'!
-TestCase subclass: #InterfaceTest
+!classDefinition: #RestApiTest category: 'TusLibros'!
+TestCase subclass: #RestApiTest
 	instanceVariableNames: 'authenticationBehaviour objectFactory currentDate'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:03:36'!
-invalidPassword
-	^'password'.! !
-
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 19:55:33'!
-setUp
-	
-	objectFactory _ StoreTestObjectsFactory new.
-	currentDate _ DateAndTime now.
-! !
-
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:56:17'!
-test01
+!RestApiTest methodsFor: 'tests' stamp: 'mls 11/8/2021 22:20:57'!
+test01CreateCartWithInvalidCredentialsRaiseError
 	| interface catalog |
 	catalog _ objectFactory defaultCatalog.
-	interface _ Interface withAuthentication: self withCatalog: catalog.
-	authenticationBehaviour  _ [self error: Interface invalidAuthenticationErrorMessage].
+	interface _ RestApi withAuthentication: self withCatalog: catalog withClock: Clock new.
+	authenticationBehaviour  _ [self error: RestApi invalidAuthenticationErrorMessage].
 	self should:
 		[interface createCartWithUser: self user withPassword: self invalidPassword.]
 	raise: Error - MessageNotUnderstood 
-	withMessageText: Interface invalidAuthenticationErrorMessage.! !
+	withMessageText: RestApi invalidAuthenticationErrorMessage.! !
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:08:31'!
-test02
+!RestApiTest methodsFor: 'tests' stamp: 'mls 11/8/2021 22:21:16'!
+test02CreateCartWithValidCredentialsCreatesEmptyCart
 	| interface cartId contents catalog |
 	authenticationBehaviour  _ [].
 	catalog _ objectFactory defaultCatalog.
-	interface _ Interface withAuthentication: self withCatalog: catalog withClock: self.
+	interface _ RestApi withAuthentication: self withCatalog: catalog withClock: Clock new.
 	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
 	contents _ interface listCart: cartId.
 	self assert: contents isEmpty.! !
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:09:26'!
+!RestApiTest methodsFor: 'tests' stamp: 'mls 11/8/2021 22:23:27'!
 test03
-	| interface cartId contents book catalog |
+	| interface cartId contents book |
 	
 	authenticationBehaviour  _ [].
-	catalog _ objectFactory defaultCatalog.
-	interface _ Interface withAuthentication: self withCatalog: catalog withClock: self.
+	interface _ RestApi 
+		withAuthentication: self 
+		withCatalog: objectFactory defaultCatalog 
+		withClock: Clock new.
+	
 	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
 	book _ objectFactory itemSellByTheStore.
 	interface add: 1 of: book to: cartId.
+	
 	contents _ interface listCart: cartId.
 	self assert: contents includes: book.! !
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:24:36'!
+!RestApiTest methodsFor: 'tests' stamp: 'mls 11/8/2021 22:23:34'!
 test04
-	| interface cartId contents book catalog |
+	| interface cartId contents book |
 	
 	authenticationBehaviour  _ [].
-	catalog _ objectFactory defaultCatalog.
-	interface _ Interface withAuthentication: self withCatalog: catalog withClock: self.
+	interface _ RestApi 
+		withAuthentication: self 
+		withCatalog: objectFactory defaultCatalog 
+		withClock: Clock new.
 	
 	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
 	book _ objectFactory itemSellByTheStore.
@@ -315,38 +310,111 @@ test04
 	contents _ interface listCart: cartId.
 	self assert: contents includes: book.! !
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:15:11'!
-test05
+!RestApiTest methodsFor: 'tests' stamp: 'mls 11/8/2021 21:28:00'!
+test05ListCartAfterExpirationTimeRaisesError
 	| interface cartId |
-	interface _ Interface withAuthentication: self withCatalog: objectFactory defaultCatalog withClock: self.
+	interface _ RestApi withAuthentication: self withCatalog: objectFactory defaultCatalog withClock: self.
 	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
 	self forwardMinutes: 31.
 	self should: [
 		interface listCart: cartId]
 		raise: Error - MessageNotUnderstood
-		withMessageText: Interface expiredCartErrorMessage.
+		withMessageText: RestApi expiredCartErrorMessage.
 		! !
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:11:01'!
+!RestApiTest methodsFor: 'tests' stamp: 'mls 11/8/2021 21:28:00'!
+test06ListCartAfterExpirationTimeWithActionInBetweenDoesNotRaiseError
+	| interface cartId |
+	interface _ RestApi withAuthentication: self withCatalog: objectFactory defaultCatalog withClock: self.
+	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
+	self forwardMinutes: 15.
+	interface listCart: cartId.
+	self forwardMinutes: 16.
+	self shouldnt: [
+		interface listCart: cartId]
+		raise: Error - MessageNotUnderstood
+		description: RestApi expiredCartErrorMessage.
+		! !
+
+!RestApiTest methodsFor: 'tests' stamp: 'mls 11/8/2021 21:31:09'!
+test07AddToCartAfterExpirationTimeRaisesError
+	| interface cartId book |
+	interface _ RestApi withAuthentication: self withCatalog: objectFactory defaultCatalog withClock: self.
+	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
+	
+	book _ objectFactory itemSellByTheStore.
+	
+
+	self forwardMinutes: 31.
+	self should: [
+		interface add: 1 of: book to: cartId ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: RestApi expiredCartErrorMessage.
+		! !
+
+!RestApiTest methodsFor: 'tests' stamp: 'mls 11/8/2021 21:37:37'!
+test08AddCartAfterExpirationTimeWithActionInBetweenDoesNotRaiseError
+	| interface cartId |
+	interface _ RestApi withAuthentication: self withCatalog: objectFactory defaultCatalog withClock: self.
+	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
+	self forwardMinutes: 15.
+	
+	interface add: 1 of: objectFactory itemSellByTheStore to: cartId.
+	
+	self forwardMinutes: 16.
+	self shouldnt: [
+		interface listCart: cartId]
+		raise: Error - MessageNotUnderstood
+		description: RestApi expiredCartErrorMessage.
+		! !
+
+!RestApiTest methodsFor: 'tests' stamp: 'mls 11/8/2021 21:42:49'!
+test09ListCartOfAnotherCartDoesNotRestartExpirationTime
+	| interface cartId anotherCartId |
+	interface _ RestApi withAuthentication: self withCatalog: objectFactory defaultCatalog withClock: self.
+	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
+	anotherCartId _ interface createCartWithUser: self user withPassword: self validPassword.
+	self forwardMinutes: 15.
+	interface listCart: anotherCartId.
+	self forwardMinutes: 16.
+	self should: [
+		interface listCart: cartId]
+		raise: Error - MessageNotUnderstood
+		withMessageText: RestApi expiredCartErrorMessage.
+		! !
+
+
+!RestApiTest methodsFor: 'authentication' stamp: 'FS 11/4/2021 20:19:41'!
+authenticate: aUser withPassword: aPassword 
+	^authenticationBehaviour value.! !
+
+!RestApiTest methodsFor: 'authentication' stamp: 'FS 11/4/2021 20:03:36'!
+invalidPassword
+	^'password'.! !
+
+!RestApiTest methodsFor: 'authentication' stamp: 'FS 11/4/2021 20:11:01'!
 user
 	^'miguelito'.! !
 
-!InterfaceTest methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:13:18'!
+!RestApiTest methodsFor: 'authentication' stamp: 'FS 11/4/2021 20:13:18'!
 validPassword
 	^'password2'.! !
 
 
-!InterfaceTest methodsFor: 'authentication' stamp: 'FS 11/4/2021 20:19:41'!
-authenticate: aUser withPassword: aPassword 
-	^authenticationBehaviour value.! !
+!RestApiTest methodsFor: 'setUp' stamp: 'FS 11/8/2021 19:55:33'!
+setUp
+	
+	objectFactory _ StoreTestObjectsFactory new.
+	currentDate _ DateAndTime now.
+! !
 
 
-!InterfaceTest methodsFor: 'clock' stamp: 'FS 11/8/2021 19:55:57'!
+!RestApiTest methodsFor: 'clock' stamp: 'FS 11/8/2021 19:55:57'!
 forwardMinutes: someMinutes 
 	
 	currentDate _ currentDate  + (Duration minutes: someMinutes).! !
 
-!InterfaceTest methodsFor: 'clock' stamp: 'FS 11/8/2021 20:12:32'!
+!RestApiTest methodsFor: 'clock' stamp: 'FS 11/8/2021 20:12:32'!
 now
 
 	^currentDate.! !
@@ -535,6 +603,18 @@ creditCardHasNoCreditErrorMessage
 	^'Credit card has no credit'! !
 
 
+!classDefinition: #Clock category: 'TusLibros'!
+Object subclass: #Clock
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!Clock methodsFor: 'as yet unclassified' stamp: 'mls 11/8/2021 22:19:26'!
+now
+	^DateAndTime now.! !
+
+
 !classDefinition: #CreditCard category: 'TusLibros'!
 Object subclass: #CreditCard
 	instanceVariableNames: 'expiration'
@@ -565,77 +645,77 @@ expiringOn: aMonth
 	^self new initializeExpiringOn: aMonth! !
 
 
-!classDefinition: #Interface category: 'TusLibros'!
-Object subclass: #Interface
-	instanceVariableNames: 'authenticator authenticationMethod cart catalog interfaceTest dictionary interfaceTest3 clock lastAction carts cartId'
+!classDefinition: #RestApi category: 'TusLibros'!
+Object subclass: #RestApi
+	instanceVariableNames: 'authenticator authenticationMethod timedCarts catalog interfaceTest dictionary clock lastAction cartId'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:26:50'!
+!RestApi methodsFor: 'as yet unclassified' stamp: 'mls 11/8/2021 22:58:05'!
 add: aQuantity of: aBook to: aCartId 
-	(carts at: aCartId) add: aQuantity of: aBook.! !
 
-!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:08:52'!
+	| timedCart |
+
+	self assertCartNotExpired: aCartId.
+	lastAction _ clock now.
+	
+	timedCart _ timedCarts at: aCartId.
+	timedCarts at: aCartId put: (timedCart key)->clock now.
+	(timedCart key) add: aQuantity of: aBook.! !
+
+!RestApi methodsFor: 'as yet unclassified' stamp: 'mls 11/8/2021 22:57:01'!
 assertCartNotExpired: aCartId 
 	
-	(lastAction + (Duration minutes: 30) < clock now) ifTrue: [
-		self error: Interface expiredCartErrorMessage ].! !
+	((timedCarts at: aCartId) value + (Duration minutes: 30) < clock now) ifTrue: [
+		self error: RestApi expiredCartErrorMessage ].! !
 
-!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:31:05'!
+!RestApi methodsFor: 'as yet unclassified' stamp: 'mls 11/8/2021 22:47:45'!
 createCartWithUser: aUser withPassword: aPassword 
 	authenticator authenticate: aUser withPassword: aPassword.
 	cartId _ cartId + 1.
-	carts add: cartId->(Cart acceptingItemsOf: catalog).
+	timedCarts add: cartId->((Cart acceptingItemsOf: catalog)->(clock now)).
 	^cartId.! !
 
-!Interface methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 20:31:33'!
+!RestApi methodsFor: 'as yet unclassified' stamp: 'mls 11/8/2021 22:57:40'!
 listCart: aCartId 
+	| timedCart |
 	self assertCartNotExpired: aCartId.
-	^(carts at: aCartId) contents.! !
+	timedCart := timedCarts at: aCartId.
+	timedCarts at: aCartId put: (timedCart key)->clock now.
+	^timedCart key contents.! !
 
 
-!Interface methodsFor: 'initialization' stamp: 'FS 11/8/2021 20:30:25'!
+!RestApi methodsFor: 'initialization' stamp: 'mls 11/8/2021 22:08:13'!
 initializeWithAuthentication: anAuthenticator withCatalog: aCatalog withClock: aClock
 	
 	lastAction _ aClock now.
 	authenticator := anAuthenticator.
 	catalog := aCatalog.
 	clock := aClock.
-	carts _ Dictionary new.
+	timedCarts _ Dictionary new.
 	cartId _ 0.! !
-
-!Interface methodsFor: 'initialization' stamp: 'FS 11/4/2021 20:54:48'!
-initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog 
-
-	authenticator := anAuthenticator.
-	catalog := aCatalog.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Interface class' category: 'TusLibros'!
-Interface class
+!classDefinition: 'RestApi class' category: 'TusLibros'!
+RestApi class
 	instanceVariableNames: 'authenticator'!
 
-!Interface class methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 19:56:36'!
+!RestApi class methodsFor: 'as yet unclassified' stamp: 'FS 11/8/2021 19:56:36'!
 expiredCartErrorMessage
 	^'30 minutes already passed'! !
 
-!Interface class methodsFor: 'as yet unclassified' stamp: 'FS 11/4/2021 20:59:50'!
-withAuthentication: anAuthenticator withCatalog: aCatalog 
-	
-	^self new initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog. ! !
 
-
-!Interface class methodsFor: 'errors' stamp: 'FS 11/4/2021 20:10:29'!
+!RestApi class methodsFor: 'errors' stamp: 'FS 11/4/2021 20:10:29'!
 invalidAuthenticationErrorMessage
 	^'invalid user'.! !
 
 
-!Interface class methodsFor: 'instance creation' stamp: 'FS 11/8/2021 19:49:06'!
-withAuthentication: anInterfaceTest withCatalog: aDictionary withClock: anInterfaceTest3 
+!RestApi class methodsFor: 'instance creation' stamp: 'mls 11/8/2021 22:11:49'!
+withAuthentication: anInterfaceTest withCatalog: aDictionary withClock: aClock 
 
-	^self new initializeWithAuthentication: anInterfaceTest withCatalog: aDictionary withClock: anInterfaceTest3 ! !
+	^self new initializeWithAuthentication: anInterfaceTest withCatalog: aDictionary withClock: aClock ! !
 
 
 !classDefinition: #Sale category: 'TusLibros'!
