@@ -380,7 +380,7 @@ test09ListCartOfAnotherCartDoesNotPushForwardExpiration
 		withMessageText: RestApi expiredCartErrorMessage.
 		! !
 
-!RestApiTest methodsFor: 'tests' stamp: 'FS 11/10/2021 23:45:57'!
+!RestApiTest methodsFor: 'tests' stamp: 'Ejercicio1 11/11/2021 14:54:42'!
 test10CanCheckoutANonEmptyCart
 	| interface cartId book |
 	interface _ self createDefaultInterface.
@@ -390,29 +390,29 @@ test10CanCheckoutANonEmptyCart
 	self 
 		shouldnt: [interface 
 			checkOutCart: cartId 
-			withCcn: 1 
-			withCced: objectFactory notExpiredMonthOfYear 
-			withCco: self user]
+			withCreditCardNumber: 1 
+			withCreditCardExpirationDate: objectFactory notExpiredMonthOfYear 
+			withCreditCardOwnerName: self user]
 		raise: Error - MessageNotUnderstood.
 
 		! !
 
-!RestApiTest methodsFor: 'tests' stamp: 'FS 11/10/2021 23:45:50'!
+!RestApiTest methodsFor: 'tests' stamp: 'Ejercicio1 11/11/2021 14:54:42'!
 test11CantCheckoutCartNotCreated
 	| interface |
 	interface _ self createDefaultInterface.
 	self 
 		should: [interface 
 			checkOutCart: 0 
-			withCcn: 1 
-			withCced: objectFactory notExpiredMonthOfYear 
-			withCco: self user]
+			withCreditCardNumber: 1 
+			withCreditCardExpirationDate: objectFactory notExpiredMonthOfYear 
+			withCreditCardOwnerName: self user]
 		raise: Error - MessageNotUnderstood
 		withMessageText: RestApi invalidCartErrorMessage.
 
 		! !
 
-!RestApiTest methodsFor: 'tests' stamp: 'FS 11/10/2021 23:45:43'!
+!RestApiTest methodsFor: 'tests' stamp: 'Ejercicio1 11/11/2021 14:54:42'!
 test12CantCheckoutEmptyCart
 	| interface cartId |
 	interface _ self createDefaultInterface.
@@ -420,9 +420,9 @@ test12CantCheckoutEmptyCart
 	self 
 		should: [interface 
 			checkOutCart: cartId 
-			withCcn: 1 
-			withCced: objectFactory notExpiredMonthOfYear 
-			withCco: self user]
+			withCreditCardNumber: 1 
+			withCreditCardExpirationDate: objectFactory notExpiredMonthOfYear 
+			withCreditCardOwnerName: self user]
 		raise: Error - MessageNotUnderstood
 		withMessageText: RestApi emptyCartCheckoutErrorMessage.
 
@@ -440,7 +440,7 @@ test13CantListCartNotCreated
 
 		! !
 
-!RestApiTest methodsFor: 'tests' stamp: 'FS 11/10/2021 23:45:34'!
+!RestApiTest methodsFor: 'tests' stamp: 'Ejercicio1 11/11/2021 14:54:42'!
 test14CantCheckoutExpiredCart
 	| interface cartId |
 	clock _ self.
@@ -451,13 +451,13 @@ test14CantCheckoutExpiredCart
 	self 
 		should: [interface 
 			checkOutCart: cartId 
-			withCcn: 1 
-			withCced: objectFactory notExpiredMonthOfYear 
-			withCco: self user ]
+			withCreditCardNumber: 1 
+			withCreditCardExpirationDate: objectFactory notExpiredMonthOfYear 
+			withCreditCardOwnerName: self user ]
 		raise: Error - MessageNotUnderstood
 		withMessageText: RestApi expiredCartErrorMessage.! !
 
-!RestApiTest methodsFor: 'tests' stamp: 'FS 11/10/2021 23:45:28'!
+!RestApiTest methodsFor: 'tests' stamp: 'Ejercicio1 11/11/2021 14:54:42'!
 test15CantCheckoutWithExpiredCard
 	| interface cartId |
 	clock _ self.
@@ -467,9 +467,9 @@ test15CantCheckoutWithExpiredCard
 	self 
 		should: [interface 
 			checkOutCart: cartId 
-			withCcn: 1 
-			withCced: objectFactory expiredMonthOfYear 
-			withCco: self user ]
+			withCreditCardNumber: 1 
+			withCreditCardExpirationDate: objectFactory expiredMonthOfYear 
+			withCreditCardOwnerName: self user ]
 		raise: Error - MessageNotUnderstood
 		withMessageText: Cashier canNotChargeAnExpiredCreditCardErrorMessage .! !
 
@@ -485,6 +485,45 @@ test16CantAddBookToInvalidCart
 			itemSellByTheStore  to: 0]
 		raise: Error - MessageNotUnderstood
 		withMessageText: RestApi invalidCartErrorMessage .! !
+
+!RestApiTest methodsFor: 'tests' stamp: 'Ejercicio1 11/11/2021 14:35:23'!
+test17ListPurchasesWithInvalidCredentialsRaiseError
+	| interface |
+	interface _ self createDefaultInterface.
+	authenticationBehaviour  _ [self error: RestApi invalidAuthenticationErrorMessage].
+	self should:
+		[interface listPurchasesWithUser: self user withPassword: self invalidPassword.]
+	raise: Error - MessageNotUnderstood 
+	withMessageText: RestApi invalidAuthenticationErrorMessage.! !
+
+!RestApiTest methodsFor: 'tests' stamp: 'Ejercicio1 11/11/2021 14:39:27'!
+test18ListPurchasesWithValidCredentialsListNoPurchases
+	| interface listPurchases |
+	interface _ self createDefaultInterface.
+	authenticationBehaviour _ [].
+	listPurchases _ interface listPurchasesWithUser: self user withPassword: self invalidPassword.
+	
+	self assert: listPurchases isEmpty.! !
+
+!RestApiTest methodsFor: 'tests' stamp: 'Ejercicio1 11/11/2021 16:22:13'!
+test19ListPurchasesWithAPurchaseShowsPurchase
+
+	| interface cartId book listPurchases |
+	interface _ self createDefaultInterface.
+	cartId _ interface createCartWithUser: self user withPassword: self validPassword.
+	book _ objectFactory itemSellByTheStore.
+	authenticationBehaviour _ [].
+	interface add: 1 of: book to: cartId.
+			
+	interface 
+			checkOutCart: cartId 
+			withCreditCardNumber: 1 
+			withCreditCardExpirationDate: objectFactory notExpiredMonthOfYear 
+			withCreditCardOwnerName: self user.
+
+	listPurchases _ interface listPurchasesWithUser: self user withPassword: self invalidPassword.
+	
+	self assert: (listPurchases occurrencesOf: book) = 1.! !
 
 
 !RestApiTest methodsFor: 'authentication' stamp: 'FS 11/4/2021 20:19:41'!
@@ -531,10 +570,10 @@ now
 	^currentDate.! !
 
 
-!RestApiTest methodsFor: 'merchant processor' stamp: 'FS 11/10/2021 22:50:05'!
+!RestApiTest methodsFor: 'merchant processor' stamp: 'Ejercicio1 11/11/2021 16:31:02'!
 debit: anAmount from: aCreditCard 
 
-	^debitBehavior value: anAmount value: aCreditCard ! !
+	^debitBehavior value! !
 
 
 !classDefinition: #Cart category: 'TusLibros'!
@@ -566,11 +605,11 @@ assertIsValidQuantity: aQuantity
 	aQuantity strictlyPositive ifFalse: [ self error: self invalidQuantityErrorMessage ]! !
 
 
-!Cart methodsFor: 'initialization' stamp: 'HernanWilkinson 6/17/2013 17:48'!
+!Cart methodsFor: 'initialization' stamp: 'Ejercicio1 11/11/2021 15:21:09'!
 initializeAcceptingItemsOf: aCatalog
 
 	catalog := aCatalog.
-	items := OrderedCollection new.! !
+	items := Bag new.! !
 
 
 !Cart methodsFor: 'queries' stamp: 'FS 11/8/2021 19:32:00'!
@@ -597,6 +636,10 @@ isEmpty
 	^items isEmpty ! !
 
 
+!Cart methodsFor: 'total' stamp: 'Ejercicio1 11/11/2021 15:15:02'!
+catalog
+	^ catalog! !
+
 !Cart methodsFor: 'total' stamp: 'HernanWilkinson 6/17/2013 19:09'!
 total
 
@@ -608,13 +651,12 @@ add: anItem
 
 	^ self add: 1 of: anItem ! !
 
-!Cart methodsFor: 'adding' stamp: 'HernanWilkinson 6/17/2013 17:51'!
+!Cart methodsFor: 'adding' stamp: 'Ejercicio1 11/11/2021 15:23:23'!
 add: aQuantity of: anItem
-
 	self assertIsValidQuantity: aQuantity.
 	self assertIsValidItem: anItem.
-
-	1 to: aQuantity do: [ :aNumber | items add: anItem ]! !
+	items add: anItem withOccurrences: aQuantity.
+! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -635,38 +677,37 @@ Object subclass: #Cashier
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!Cashier methodsFor: 'checkout - private' stamp: 'HernanWilkinson 6/17/2013 19:08'!
-calculateTotal
-
-	total := cart total.
-	! !
-
-!Cashier methodsFor: 'checkout - private' stamp: 'HernanWilkinson 6/17/2013 19:07'!
+!Cashier methodsFor: 'checkout - private' stamp: 'Ejercicio1 11/11/2021 15:36:45'!
 createSale
+	| sale contents |
+	sale _ Sale new.
+	contents _ cart contents.
+	contents sortedElements do: [:anItem | 
+		sale add: (anItem value) of: (anItem key) withValue: (cart catalog at: anItem key).
+	].
 
-	^ Sale of: total
+	^sale
 ! !
 
-!Cashier methodsFor: 'checkout - private' stamp: 'HernanWilkinson 6/17/2013 19:06'!
-debitTotal
-
-	merchantProcessor debit: total from: creditCard.
+!Cashier methodsFor: 'checkout - private' stamp: 'Ejercicio1 11/11/2021 15:20:24'!
+debitTotal: aValue
+	merchantProcessor debit: aValue from: creditCard.
 	! !
 
-!Cashier methodsFor: 'checkout - private' stamp: 'HernanWilkinson 6/17/2013 19:06'!
-registerSale
+!Cashier methodsFor: 'checkout - private' stamp: 'Ejercicio1 11/11/2021 15:38:33'!
+registerSale: aSale
+	^salesBook add: aSale! !
 
-	salesBook add: self createSale! !
 
-
-!Cashier methodsFor: 'checkout' stamp: 'HernanWilkinson 6/17/2013 19:06'!
+!Cashier methodsFor: 'checkout' stamp: 'Ejercicio1 11/11/2021 15:38:24'!
 checkOut
 
-	self calculateTotal.
-	self debitTotal.
-	self registerSale.
-
-	^ total! !
+	| sale |
+	
+	sale _ self createSale.
+	self debitTotal: sale total.
+	self registerSale: sale.
+	^sale total.! !
 
 
 !Cashier methodsFor: 'initialization' stamp: 'HernanWilkinson 6/17/2013 18:53'!
@@ -763,77 +804,103 @@ expiringOn: aMonth
 
 !classDefinition: #RestApi category: 'TusLibros'!
 Object subclass: #RestApi
-	instanceVariableNames: 'authenticator timedCarts catalog clock cartId merchantProcessor'
+	instanceVariableNames: 'authenticator sessionCarts catalog clock cartId merchantProcessor salesBook'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!RestApi methodsFor: 'as yet unclassified' stamp: 'FS 11/10/2021 23:41:32'!
+!RestApi methodsFor: 'initialization' stamp: 'Ejercicio1 11/11/2021 16:33:33'!
+initializeWithAuthentication: anAuthenticator withCatalog: aCatalog withClock: aClock withMerchantProcessor: aMerchantProcessor 
+	authenticator := anAuthenticator.
+	catalog := aCatalog.
+	clock := aClock.
+	sessionCarts _ Dictionary new.
+	merchantProcessor _ aMerchantProcessor.
+	cartId _ 0.
+	
+	salesBook _ Dictionary new.! !
+
+
+!RestApi methodsFor: 'api' stamp: 'Ejercicio1 11/11/2021 16:33:34'!
 add: aQuantity of: aBook to: aCartId 
 
 	self onCart: aCartId do: [:cart |
-		timedCarts at: aCartId put: cart->clock now.
+		(sessionCarts at: aCartId) lastActionDate: clock now.
 		cart add: aQuantity of: aBook.]! !
 
-!RestApi methodsFor: 'as yet unclassified' stamp: 'FS 11/10/2021 23:25:49'!
-assertCartNotExpired: aCartId 
-	| expirationDate |
-	expirationDate _ (timedCarts at: aCartId) value + (Duration minutes: 30).
-	(expirationDate < clock now) ifTrue: [
-		self error: self class expiredCartErrorMessage ].! !
-
-!RestApi methodsFor: 'as yet unclassified' stamp: 'FS 11/10/2021 23:31:06'!
-assertCartValid: aCartId 
-	((timedCarts keys) includes: aCartId) ifFalse: [
-		^self error: self class invalidCartErrorMessage].! !
-
-!RestApi methodsFor: 'as yet unclassified' stamp: 'FS 11/10/2021 23:42:34'!
-checkOutCart: aCartId withCcn: aCcn withCced: aCced withCco: aCco 
+!RestApi methodsFor: 'api' stamp: 'Ejercicio1 11/11/2021 16:33:34'!
+checkOutCart: aCartId withCreditCardNumber: aCreditCardNumber withCreditCardExpirationDate: aCreditCardExpirationDate withCreditCardOwnerName: aCreditCardOwnerName 
+	| userId |
+	userId _ (sessionCarts at: aCartId ifAbsent: [self error: RestApi invalidCartErrorMessage]) userId.
+	(salesBook includes: userId) ifFalse: [
+		salesBook at: userId put: OrderedCollection new.
+	].
 
 	self onCart: cartId do: [:cart |
 		(cart contents) isEmpty ifTrue: [self error: self class emptyCartCheckoutErrorMessage.].
-		Cashier 
-			toCheckout:  cart
-			charging: (CreditCard expiringOn: aCced)
+		(Cashier 
+			toCheckout: cart
+			charging: (CreditCard expiringOn: aCreditCardExpirationDate)
 			throught:  merchantProcessor
 			on: clock now
-			registeringOn: OrderedCollection new]
-	! !
+			registeringOn: (salesBook at: userId)) checkOut].
+		! !
 
-!RestApi methodsFor: 'as yet unclassified' stamp: 'mls 11/8/2021 22:47:45'!
+!RestApi methodsFor: 'api' stamp: 'Ejercicio1 11/11/2021 16:33:33'!
 createCartWithUser: aUser withPassword: aPassword 
 	authenticator authenticate: aUser withPassword: aPassword.
 	cartId _ cartId + 1.
-	timedCarts add: cartId->((Cart acceptingItemsOf: catalog)->(clock now)).
+	sessionCarts add: cartId->(SessionCart 
+			withACart: (Cart acceptingItemsOf: catalog)
+			aDate: clock now 
+			aUserId: aUser).
+	
 	^cartId.! !
 
-!RestApi methodsFor: 'as yet unclassified' stamp: 'FS 11/10/2021 23:45:00'!
+!RestApi methodsFor: 'api' stamp: 'Ejercicio1 11/11/2021 16:33:33'!
 listCart: aCartId 
 
 	self onCart: aCartId do: [:cart |
-		timedCarts at: aCartId put: cart->clock now.
+		(sessionCarts at: aCartId) lastActionDate: clock now.
 		^cart contents.]! !
 
-!RestApi methodsFor: 'as yet unclassified' stamp: 'FS 11/10/2021 23:33:50'!
+!RestApi methodsFor: 'api' stamp: 'Ejercicio1 11/11/2021 16:21:48'!
+listPurchasesWithUser: aUser withPassword: aPassword 
+	
+	| purchases |
+	authenticator authenticate: aUser withPassword: aPassword.
+	
+	purchases _ Bag new.
+	(salesBook at: aUser ifAbsent: [^Bag new]) do: [ :aSale | 
+		aSale items do: [:aSaleItem |
+			purchases add: aSaleItem product withOccurrences:	 aSaleItem quantity.
+		]
+	].
+	^purchases.! !
+
+
+!RestApi methodsFor: 'helpers' stamp: 'Ejercicio1 11/11/2021 16:33:34'!
 onCart: aCartId do: aClosure
 	| cart |
 	self assertCartValid: aCartId.
 	self assertCartNotExpired: aCartId.
-	cart _ (timedCarts at: aCartId) key.
+	cart _ (sessionCarts at: aCartId) cart.
 	aClosure value: cart.
 
 	! !
 
 
-!RestApi methodsFor: 'initialization' stamp: 'FS 11/10/2021 23:17:20'!
-initializeWithAuthentication: anAuthenticator withCatalog: aCatalog withClock: aClock withMerchantProcessor: aMerchantProcessor 
-	
-	authenticator := anAuthenticator.
-	catalog := aCatalog.
-	clock := aClock.
-	timedCarts _ Dictionary new.
-	merchantProcessor _ aMerchantProcessor.
-	cartId _ 0.! !
+!RestApi methodsFor: 'assertions' stamp: 'Ejercicio1 11/11/2021 16:33:33'!
+assertCartNotExpired: aCartId 
+	| expirationDate |
+	expirationDate _ (sessionCarts at: aCartId) lastActionDate + (Duration minutes: 30).
+	(expirationDate < clock now) ifTrue: [
+		self error: self class expiredCartErrorMessage ].! !
+
+!RestApi methodsFor: 'assertions' stamp: 'Ejercicio1 11/11/2021 16:33:34'!
+assertCartValid: aCartId 
+	((sessionCarts keys) includes: aCartId) ifFalse: [
+		^self error: self class invalidCartErrorMessage].! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -858,41 +925,126 @@ invalidCartErrorMessage
 	^'invalid cart'.! !
 
 
-!RestApi class methodsFor: 'instance creation' stamp: 'FS 11/10/2021 23:13:05'!
+!RestApi class methodsFor: 'instance creation' stamp: 'Ejercicio1 11/11/2021 14:44:40'!
 withAuthentication: anAuthenticator withCatalog: aCatalog withClock: aClock withMerchantProcessor: aMerchantProcessor  
-
 	^self new initializeWithAuthentication: anAuthenticator withCatalog: aCatalog withClock: aClock withMerchantProcessor: aMerchantProcessor ! !
 
 
 !classDefinition: #Sale category: 'TusLibros'!
 Object subclass: #Sale
-	instanceVariableNames: 'total'
+	instanceVariableNames: 'total items'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!Sale methodsFor: 'total' stamp: 'HernanWilkinson 6/17/2013 18:48'!
+!Sale methodsFor: 'total' stamp: 'Ejercicio1 11/11/2021 15:06:39'!
 total
+	^items sum: [:anItem | anItem value * anItem quantity].! !
+
+
+!Sale methodsFor: 'adding' stamp: 'Ejercicio1 11/11/2021 15:13:42'!
+add: aQuantity of: anItem withValue: anAmount
 	
-	^ total! !
+	items add: (SaleItem of: anItem withAmout: anAmount quantity: aQuantity).
+	
+	! !
 
 
-!Sale methodsFor: 'initialization' stamp: 'HernanWilkinson 6/17/2013 18:47'!
-initializeTotal: aTotal
+!Sale methodsFor: 'accesing' stamp: 'Ejercicio1 11/11/2021 15:10:55'!
+items
+	^items! !
 
-	total := aTotal ! !
+
+!Sale methodsFor: 'initialization' stamp: 'Ejercicio1 11/11/2021 15:26:06'!
+initialize
+
+	items _ OrderedCollection new.! !
+
+
+!classDefinition: #SaleItem category: 'TusLibros'!
+Object subclass: #SaleItem
+	instanceVariableNames: 'product quantity value'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!SaleItem methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:09:06'!
+initializeWithAnItem: anItem withAmount: anAmount withQuantity: aQuantity.
+	
+	product _ anItem.
+	value _ anAmount.
+	quantity _ aQuantity.! !
+
+!SaleItem methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:09:23'!
+product
+	
+	^product! !
+
+!SaleItem methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:10:22'!
+quantity
+	^quantity! !
+
+!SaleItem methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:09:43'!
+value
+
+	^value! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Sale class' category: 'TusLibros'!
-Sale class
+!classDefinition: 'SaleItem class' category: 'TusLibros'!
+SaleItem class
 	instanceVariableNames: ''!
 
-!Sale class methodsFor: 'instance creation' stamp: 'HernanWilkinson 6/17/2013 18:47'!
-of: aTotal
+!SaleItem class methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:08:36'!
+of: anItem withAmout: anAmount quantity: aQuantity
+	
+	^self new initializeWithAnItem: anItem withAmount: anAmount withQuantity: aQuantity.! !
 
-	"should assert total is not negative or 0!!"
-	^self new initializeTotal: aTotal ! !
+
+!classDefinition: #SessionCart category: 'TusLibros'!
+Object subclass: #SessionCart
+	instanceVariableNames: 'cart lastActionDate userId'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!SessionCart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:59:54'!
+cart
+	^cart.! !
+
+!SessionCart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:54:25'!
+initializeWithACart: aCart aDate: aDate aUserId: aUserId
+
+	cart _ aCart.
+	lastActionDate _ aDate.
+	userId _ aUserId.
+	! !
+
+!SessionCart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:59:45'!
+lastActionDate
+	^lastActionDate
+	! !
+
+!SessionCart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:59:23'!
+lastActionDate: aDate
+	lastActionDate _ aDate
+	! !
+
+!SessionCart methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 15:59:38'!
+userId
+	^userId.
+	! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'SessionCart class' category: 'TusLibros'!
+SessionCart class
+	instanceVariableNames: ''!
+
+!SessionCart class methodsFor: 'nil' stamp: 'Ejercicio1 11/11/2021 15:54:47'!
+withACart: aCart aDate: aDate aUserId: aUserId
+
+	^self new initializeWithACart: aCart aDate: aDate aUserId: aUserId.! !
 
 
 !classDefinition: #StoreTestObjectsFactory category: 'TusLibros'!
