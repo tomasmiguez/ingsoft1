@@ -11,7 +11,7 @@ defaultExtent
 	^ 1035@600
 	! !
 
-!TusLibrosClientWindow methodsFor: 'initialization' stamp: 'mls 11/28/2021 11:46:07'!
+!TusLibrosClientWindow methodsFor: 'initialization' stamp: 'FS 11/28/2021 18:12:09'!
 initializeWith: aTitle
 
 	self titleMorph showButtonsNamed: #( close collapse ).
@@ -19,7 +19,7 @@ initializeWith: aTitle
 	self model: (TusLibrosClientWindowModel new).
 	self morphExtent: (self defaultExtent).
 	
-	currentView := (TusLibrosLoginView withModel: self model withWindow: self).
+	currentView := (TusLibrosLoginView withModel: self model withWindow: self) build.
 	
 	self buildMorphicWindow.
 	self openInWorld.
@@ -27,34 +27,19 @@ initializeWith: aTitle
 	self model when: #newWordsArrived send: #refreshListOfWords to: self.! !
 
 
-!TusLibrosClientWindow methodsFor: 'access' stamp: 'mls 11/15/2021 21:41:33'!
-refreshListOfWords
-	
-	wordsListMorph updateList.
-	wordsListMorph setSelectionIndex: 0.
-	! !
-
-
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 11:25:46'!
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'FS 11/28/2021 18:25:18'!
 buildMorphicWindow
 		
-	self layoutMorph beColumn;
+	currentView _ self layoutMorph beColumn;
 	separation: 0;
 	axisEdgeWeight: 0;
-	addMorph: currentView build.! !
+	addMorph: currentView.! !
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 11:27:41'!
-changeViewTo: aView
-
-	currentView := aView.
-	self buildMorphicWindow.
-	! !
-
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 11:47:19'!
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'FS 11/28/2021 18:26:24'!
 changeViewToCatalog
-
-	currentView := CatalogView new.
-	self buildMorphicWindow.
+	| newView |
+	newView _ CatalogView new build.
+	currentView _ self replaceSubmorph: currentView by: newView. 
 	! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -256,10 +241,10 @@ View subclass: #CatalogView
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 11:28:43'!
+!CatalogView methodsFor: 'as yet unclassified' stamp: 'FS 11/28/2021 18:31:04'!
 build
 	
-	^LayoutMorph newColumn
+	^LayoutMorph newRow
 	separation: 25;
 	axisEdgeWeight: 0.5;
 
