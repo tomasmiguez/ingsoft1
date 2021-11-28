@@ -4,6 +4,16 @@ Panel subclass: #TusLibrosClientWindow
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
+!TusLibrosClientWindow commentStamp: '<historical>' prior: 0!
+server := TusLibrosRestInterface listeningOn: 80.  
+server destroy. 
+ 
+(TusLibrosRestInterface allInstances) do: [:a|a destroy] 
+
+TusLibrosClientWindow open.   
+
+WebClient htmlSubmit: ('http://localhost:80','/createCart') fields: (Dictionary with: 'clientId'->('usuario') with: 'password'->('pass'))   !
+
 
 !TusLibrosClientWindow methodsFor: 'initialization' stamp: 'mls 11/27/2021 21:41:45'!
 defaultExtent
@@ -27,19 +37,19 @@ initializeWith: aTitle
 	self model when: #newWordsArrived send: #refreshListOfWords to: self.! !
 
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'FS 11/28/2021 18:25:18'!
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 20:06:57'!
 buildMorphicWindow
 		
-	currentView _ self layoutMorph beColumn;
+	self layoutMorph beColumn;
 	separation: 0;
 	axisEdgeWeight: 0;
 	addMorph: currentView.! !
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'FS 11/28/2021 18:26:24'!
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 20:06:04'!
 changeViewToCatalog
 	| newView |
 	newView _ CatalogView new build.
-	currentView _ self replaceSubmorph: currentView by: newView. 
+	currentView _ self layoutMorph replaceSubmorph: currentView by: newView. 
 	! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -72,10 +82,10 @@ initialize
 	user _ 'usuario'.
 	password _ 'pass'.! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/18/2021 18:25:44'!
+!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:28:29'!
 port
 	
-	^port ifNil: [port:=8080].! !
+	^port ifNil: [port:=80].! !
 
 !TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/18/2021 18:30:28'!
 sendCreateCartRequestWith: aUser withPassword: aPassword 
@@ -91,34 +101,61 @@ sendCreateCartRequestWith: aUser withPassword: aPassword
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
 
+!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:32:25'!
+sendGetCatalog
+
+	| resp |
+	resp := WebClient htmlSubmit: (self url,'/getCatalog') fields: (Dictionary with: 'clientId'->(user) with: 'password'->(password)).
+	resp isSuccess 
+		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
+		ifFalse:[^self error: resp content].! !
+
 !TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/15/2021 21:41:33'!
 url
 	
 	^'http://localhost:', self port asString! !
 
 
-!classDefinition: #TusLibrosClientWindowModel category: 'TusLibros-Front'!
-Object subclass: #TusLibrosClientWindowModel
-	instanceVariableNames: 'sentence words selectedIndex restInterface user password'
+!classDefinition: #LoaderView category: 'TusLibros-Front'!
+Object subclass: #LoaderView
+	instanceVariableNames: 'innerView nextView'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
 
-!TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'mls 11/15/2021 21:41:33'!
-words
-	
-	^words.
-! !
+!LoaderView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:41:00'!
+build
 
-!TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'mls 11/15/2021 21:41:33'!
-wordsListIndex
-	
-	^selectedIndex.! !
+	^innerView ! !
 
-!TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'mls 11/15/2021 21:41:33'!
-wordsListIndex: anIndex
-	
-	selectedIndex := anIndex.! !
+!LoaderView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:41:47'!
+finishedLoading
+
+	innerView _ self replaceSubmorph: innerView by: nextView.! !
+
+!LoaderView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:43:32'!
+initializeWithNextView: aView
+
+	nextView _ aView.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'LoaderView class' category: 'TusLibros-Front'!
+LoaderView class
+	instanceVariableNames: ''!
+
+!LoaderView class methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:43:56'!
+withNextView: aView
+
+	^self new initializeWithNextView: aView.! !
+
+
+!classDefinition: #TusLibrosClientWindowModel category: 'TusLibros-Front'!
+Object subclass: #TusLibrosClientWindowModel
+	instanceVariableNames: 'restInterface user password'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
 
 
 !TusLibrosClientWindowModel methodsFor: 'initialization' stamp: 'mls 11/18/2021 18:41:12'!
@@ -142,17 +179,6 @@ passwordText: aPassword
 	password := aPassword.
 	^true.! !
 
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/15/2021 21:41:33'!
-sentenceText
-	
-	^sentence.! !
-
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/15/2021 21:41:33'!
-sentenceText: aSentence
-
-	sentence := aSentence.
-	^true.! !
-
 !TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/18/2021 18:32:15'!
 userText
 	
@@ -165,36 +191,11 @@ userText: aUser
 	^true.! !
 
 
-!TusLibrosClientWindowModel methodsFor: 'PluggableButtonSelectors' stamp: 'mls 11/18/2021 18:31:51'!
+!TusLibrosClientWindowModel methodsFor: 'PluggableButtonSelectors' stamp: 'mls 11/28/2021 20:43:58'!
 sendCreateCartRequest
-		
-	words := restInterface sendCreateCartRequestWith: user withPassword: password.
-	
+	restInterface sendCreateCartRequestWith: user withPassword: password.
 	self triggerEvent: #createCartSucceed.
 	! !
-
-!TusLibrosClientWindowModel methodsFor: 'PluggableButtonSelectors' stamp: 'mls 11/15/2021 21:41:33'!
-sendWordsFromSentenceRequest
-		
-	words := restInterface sendWordsRequest: sentence.
-	
-	self triggerEvent: #newWordsArrived.
-	
-	"Investiguen mensajes como:
-	self triggerEvent: #newWordsArrived with: 1.
-	self triggerEvent: #newWordsArrived withArguments: (Array with: 1 with: 2)"
-	! !
-
-!TusLibrosClientWindowModel methodsFor: 'PluggableButtonSelectors' stamp: 'mls 11/15/2021 21:41:33'!
-showWordInTranscript
-	
-	(selectedIndex = 0) ifFalse: 
-		[TranscriptWindow openTranscript.
-		Transcript clear.
-		Transcript show: 'The word selected is: '.
-		Transcript show: (words at: selectedIndex).
-		Transcript show: ' '.].
-! !
 
 
 !classDefinition: #View category: 'TusLibros-Front'!
@@ -241,14 +242,85 @@ View subclass: #CatalogView
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'FS 11/28/2021 18:31:04'!
+!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:23:59'!
 build
-	
 	^LayoutMorph newRow
 	separation: 25;
 	axisEdgeWeight: 0.5;
+	addMorph: self buildCatalog;
+	
+	addMorph: self buildCart.! !
 
-	addMorph: (LabelMorph contents:'Catalogo').! !
+!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:20:09'!
+buildBook
+
+	| book |
+	book _ Book defaultDune.
+	
+	^LayoutMorph newColumn 
+	separation: 25;
+	axisEdgeWeight: 0.5;
+	
+	"addMorph: (ImageMorph new image: (Form fromBinaryStream: book image base64Decoded asByteArray readStream));"
+	
+	addMorph: (LabelMorph contents: book name);
+	
+	addMorph: (LabelMorph contents: '3000 pesos');
+	
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendCreateCartRequest  label: 'Agregar al carrito').! !
+
+!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:35:55'!
+buildCart
+
+	^LayoutMorph newColumn 
+	separation: 25;
+	axisEdgeWeight: 0;
+	
+	addMorph: (LabelMorph contents: 'Mi carrito');
+	addMorph: (LabelMorph contents: '3x Dune (1965)');
+	addMorph: (LabelMorph contents: '2x Fundación (1942)');
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendCreateCartRequest  label: 'Comprar').! !
+
+!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:24:51'!
+buildCatalog
+
+	^LayoutMorph newColumn 
+	separation: 25;
+	axisEdgeWeight: 0.5;
+	
+	addMorph: self buildBook;
+	addMorph: self buildBook.! !
+
+
+!classDefinition: #LoadingView category: 'TusLibros-Front'!
+View subclass: #LoadingView
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+!LoadingView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:37:16'!
+build
+
+	^LayoutMorph newRow
+	separation: 25;
+	axisEdgeWeight: 0.5;
+	addMorph: (LabelMorph contents:'Cargando...').! !
+
+
+!classDefinition: #PurchasesView category: 'TusLibros-Front'!
+View subclass: #PurchasesView
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+!PurchasesView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:33:32'!
+build
+	| nameBook quantity |
+	nameBook _ 'Dune (1965)'.
+	quantity _ 1.
+	 ^LabelMorph contents: nameBook, ' con cantidad ', quantity printString.! !
 
 
 !classDefinition: #TusLibrosLoginView category: 'TusLibros-Front'!
