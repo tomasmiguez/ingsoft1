@@ -1,30 +1,30 @@
 !classDefinition: #TusLibrosClientWindow category: 'TusLibros-Front'!
 Panel subclass: #TusLibrosClientWindow
-	instanceVariableNames: 'sentenceTextBoxMorph wordsListMorph'
+	instanceVariableNames: 'sentenceTextBoxMorph wordsListMorph currentView'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
 
-!TusLibrosClientWindow methodsFor: 'initialization' stamp: 'mls 11/15/2021 21:41:33'!
+!TusLibrosClientWindow methodsFor: 'initialization' stamp: 'mls 11/27/2021 21:41:45'!
 defaultExtent
 
-	^ 1035@485
+	^ 1035@600
 	! !
 
-!TusLibrosClientWindow methodsFor: 'initialization' stamp: 'mls 11/15/2021 21:41:33'!
+!TusLibrosClientWindow methodsFor: 'initialization' stamp: 'mls 11/28/2021 11:46:07'!
 initializeWith: aTitle
 
 	self titleMorph showButtonsNamed: #( close collapse ).
 	self setLabel: aTitle.
-	self model: (WordsClientWindowModel new).
+	self model: (TusLibrosClientWindowModel new).
 	self morphExtent: (self defaultExtent).
+	
+	currentView := (TusLibrosLoginView withModel: self model withWindow: self).
+	
 	self buildMorphicWindow.
 	self openInWorld.
 			
-	self model when: #newWordsArrived send: #refreshListOfWords to: self.
-	
-	"Investigar:
-	self model when: #newWordsArrived send: #refreshListOfWords:and: to: self."! !
+	self model when: #newWordsArrived send: #refreshListOfWords to: self.! !
 
 
 !TusLibrosClientWindow methodsFor: 'access' stamp: 'mls 11/15/2021 21:41:33'!
@@ -35,116 +35,27 @@ refreshListOfWords
 	! !
 
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/15/2021 21:41:33'!
-build1stColumn2ndRow
-	| firstColumnLayoutMorphOfSecondRow |
-	
-	wordsListMorph := PluggableListMorph model: self model listGetter: #words indexGetter: #wordsListIndex indexSetter: #wordsListIndex:.
-	wordsListMorph  borderColor: Color skyBlue; borderWidth: 1; morphWidth:300.
-		
-	firstColumnLayoutMorphOfSecondRow := LayoutMorph newColumn.
-	firstColumnLayoutMorphOfSecondRow separation: 5; 
-	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents:'Results');
-	addMorph: wordsListMorph.
-	
-	"Dos opciones para jugar con los layouts... ¿Qué diferencia hay?"
-	firstColumnLayoutMorphOfSecondRow layoutSpec fixedWidth: 390.
-	"wordsListMorph layoutSpec proportionalWidth: 1.
-	wordsListMorph layoutSpec proportionalHeight: 1."
-		
-	^firstColumnLayoutMorphOfSecondRow.
-	! !
-
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/15/2021 21:41:33'!
-build1stRow
-	| sendRequestButtonMorph firstRowLayoutMorph |
-	
-	sendRequestButtonMorph := PluggableButtonMorph model: self model stateGetter: nil action: #sendWordsFromSentenceRequest  label: 'Send Request To Server'.
-	
-	sentenceTextBoxMorph := TextModelMorph textProvider: self model textGetter: #sentenceText textSetter: #sentenceText:. 
-	sentenceTextBoxMorph innerTextMorph setProperty: #keyStroke: toValue: [ :key | sentenceTextBoxMorph innerTextMorph acceptContents ] .
-	sentenceTextBoxMorph  borderWidth: 1; borderColor: Color skyBlue; morphWidth: 300. 
-		
-	firstRowLayoutMorph := LayoutMorph newRow.
-	firstRowLayoutMorph separation: 25;
-	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents:'Enter sentence:');
-	addMorph: sentenceTextBoxMorph;
- 	addMorph: sendRequestButtonMorph.
-	
-	^firstRowLayoutMorph.! !
-
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/15/2021 21:41:33'!
-build2ndRow
-	| showInTranscriptButtonMorph secondRowLayoutMorph |
-	
-	showInTranscriptButtonMorph := PluggableButtonMorph model: self model stateGetter: nil  action: #showWordInTranscript label: 'Show Selected Word In Transcript'.	
-	
-	secondRowLayoutMorph := LayoutMorph newRow.
-	secondRowLayoutMorph separation: 25;
-	axisEdgeWeight: 0.5;
-	addMorph: self build1stColumn2ndRow;
-	addMorph: showInTranscriptButtonMorph.
-	
-	^secondRowLayoutMorph.
-	! !
-
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/15/2021 21:45:10'!
-buildLoginButton
-	
-	^PluggableButtonMorph model: self model stateGetter: nil action: #sendWordsFromSentenceRequest  label: 'Ingresar'.! !
-
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/15/2021 21:41:33'!
-buildLogoRow
-	^ImageMorph new image: ImageMorph defaultForm
-	! !
-
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/15/2021 21:46:43'!
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 11:25:46'!
 buildMorphicWindow
 		
 	self layoutMorph beColumn;
-	separation: 10;
+	separation: 0;
 	axisEdgeWeight: 0;
-	addMorph: self buildLogoRow;
-	
-	addMorph: self buildUserInputRow;
-	
-	addMorph: self buildPasswordInputRow;
-	
-	addMorph: self buildLoginButton.	! !
+	addMorph: currentView build.! !
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/15/2021 21:45:21'!
-buildPasswordInputRow
-	| firstRowLayoutMorph |
-	
-	
-	sentenceTextBoxMorph := TextModelMorph textProvider: self model textGetter: #sentenceText textSetter: #sentenceText:. 
-	sentenceTextBoxMorph innerTextMorph setProperty: #keyStroke: toValue: [ :key | sentenceTextBoxMorph innerTextMorph acceptContents ] .
-	sentenceTextBoxMorph  borderWidth: 1; borderColor: Color skyBlue; morphWidth: 300. 
-		
-	firstRowLayoutMorph := LayoutMorph newRow.
-	firstRowLayoutMorph separation: 25;
-	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents:'Contraseña:');
-	addMorph: sentenceTextBoxMorph.
-	
-	^firstRowLayoutMorph.! !
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 11:27:41'!
+changeViewTo: aView
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/15/2021 21:41:33'!
-buildUserInputRow
-	| firstRowLayoutMorph |
-	sentenceTextBoxMorph := TextModelMorph textProvider: self model textGetter: #sentenceText textSetter: #sentenceText:. 
-	sentenceTextBoxMorph innerTextMorph setProperty: #keyStroke: toValue: [ :key | sentenceTextBoxMorph innerTextMorph acceptContents ] .
-	sentenceTextBoxMorph  borderWidth: 1; borderColor: Color skyBlue; morphWidth: 300. 
-		
-	firstRowLayoutMorph := LayoutMorph newRow.
-	firstRowLayoutMorph separation: 25;
-	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents:'Usuario:');
-	addMorph: sentenceTextBoxMorph.
+	currentView := aView.
+	self buildMorphicWindow.
+	! !
 
-	^firstRowLayoutMorph.! !
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 11:47:19'!
+changeViewToCatalog
+
+	currentView := CatalogView new.
+	self buildMorphicWindow.
+	! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -176,21 +87,23 @@ initialize
 	user _ 'usuario'.
 	password _ 'pass'.! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/15/2021 21:41:33'!
+!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/18/2021 18:25:44'!
 port
 	
 	^port ifNil: [port:=8080].! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/15/2021 21:41:33'!
-sendCreateCartRequest
+!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/18/2021 18:30:28'!
+sendCreateCartRequestWith: aUser withPassword: aPassword 
 
 	| resp |
 
+	user _ aUser.
+	password _ aPassword.
 	
-	resp:= WebClient htmlSubmit: (self url,'/createCart') fields: (Dictionary with: 'clientId'->(user) with: 'password'->(password)).
+	resp := WebClient htmlSubmit: (self url,'/createCart') fields: (Dictionary with: 'clientId'->(user) with: 'password'->(password)).
 	
 	resp isSuccess 
-		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)) asOrderedCollection .] 
+		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
 
 !TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/15/2021 21:41:33'!
@@ -201,7 +114,7 @@ url
 
 !classDefinition: #TusLibrosClientWindowModel category: 'TusLibros-Front'!
 Object subclass: #TusLibrosClientWindowModel
-	instanceVariableNames: 'sentence words selectedIndex restInterface'
+	instanceVariableNames: 'sentence words selectedIndex restInterface user password'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
@@ -223,14 +136,26 @@ wordsListIndex: anIndex
 	selectedIndex := anIndex.! !
 
 
-!TusLibrosClientWindowModel methodsFor: 'initialization' stamp: 'mls 11/15/2021 21:41:33'!
+!TusLibrosClientWindowModel methodsFor: 'initialization' stamp: 'mls 11/18/2021 18:41:12'!
 initialize
 
 	words := OrderedCollection new.
-	sentence := ''.
+	password := ''.
+	user := ''.
 	selectedIndex := 0.
-	restInterface := WordsRestInterface new.! !
+	restInterface := TusLibrosFrontRestInterface new.! !
 
+
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/18/2021 18:33:01'!
+passwordText
+
+	^password! !
+
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/18/2021 18:32:50'!
+passwordText: aPassword
+
+	password := aPassword.
+	^true.! !
 
 !TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/15/2021 21:41:33'!
 sentenceText
@@ -243,6 +168,25 @@ sentenceText: aSentence
 	sentence := aSentence.
 	^true.! !
 
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/18/2021 18:32:15'!
+userText
+	
+	^user.! !
+
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/18/2021 18:32:35'!
+userText: aUser
+
+	user := aUser.
+	^true.! !
+
+
+!TusLibrosClientWindowModel methodsFor: 'PluggableButtonSelectors' stamp: 'mls 11/18/2021 18:31:51'!
+sendCreateCartRequest
+		
+	words := restInterface sendCreateCartRequestWith: user withPassword: password.
+	
+	self triggerEvent: #createCartSucceed.
+	! !
 
 !TusLibrosClientWindowModel methodsFor: 'PluggableButtonSelectors' stamp: 'mls 11/15/2021 21:41:33'!
 sendWordsFromSentenceRequest
@@ -266,3 +210,138 @@ showWordInTranscript
 		Transcript show: (words at: selectedIndex).
 		Transcript show: ' '.].
 ! !
+
+
+!classDefinition: #View category: 'TusLibros-Front'!
+Object subclass: #View
+	instanceVariableNames: 'model'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+!View methodsFor: 'build' stamp: 'mls 11/27/2021 22:44:22'!
+build
+	self subclassResponsibility ! !
+
+!View methodsFor: 'build' stamp: 'mls 11/27/2021 22:59:41'!
+buildInputWithTextGetter: aTextGetter withTextSetter: aTextSetter
+	| textBoxMorth |
+	textBoxMorth := TextModelMorph textProvider: model textGetter: aTextGetter textSetter: aTextSetter. 
+	textBoxMorth innerTextMorph setProperty: #keyStroke: toValue: [ :key | textBoxMorth innerTextMorph acceptContents ] .
+	textBoxMorth  borderWidth: 1; borderColor: Color skyBlue; morphWidth: 300; morphHeight: 30. 
+
+	^textBoxMorth.! !
+
+!View methodsFor: 'build' stamp: 'mls 11/27/2021 22:59:29'!
+initializeWithModel: aModel 
+	
+	model := aModel.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'View class' category: 'TusLibros-Front'!
+View class
+	instanceVariableNames: ''!
+
+!View class methodsFor: 'as yet unclassified' stamp: 'mls 11/27/2021 22:59:18'!
+withModel: aModel
+
+	^self new initializeWithModel: aModel! !
+
+
+!classDefinition: #CatalogView category: 'TusLibros-Front'!
+View subclass: #CatalogView
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 11:28:43'!
+build
+	
+	^LayoutMorph newColumn
+	separation: 25;
+	axisEdgeWeight: 0.5;
+
+	addMorph: (LabelMorph contents:'Catalogo').! !
+
+
+!classDefinition: #TusLibrosLoginView category: 'TusLibros-Front'!
+View subclass: #TusLibrosLoginView
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'mls 11/27/2021 22:50:58'!
+build
+	
+	^LayoutMorph newColumn
+	separation: 25;
+	axisEdgeWeight: 0.5;
+
+	addMorph: self buildHeaderRow;
+	
+	addMorph: self buildUserInputRow;
+	
+	addMorph: self buildPasswordInputRow;
+	
+	addMorph: self buildLoginButton.! !
+
+!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'mls 11/27/2021 22:45:22'!
+buildHeaderRow
+		
+	^LayoutMorph newRow 
+	separation: 25;
+	axisEdgeWeight: 0.5;
+	addMorph: (ImageMorph new image: ImageMorph defaultForm);
+	addMorph: (LabelMorph contents: 'TusLibrosCuis');
+	addMorph: (ImageMorph new image: ImageMorph defaultForm).! !
+
+!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'mls 11/27/2021 22:58:30'!
+buildLoginButton
+	
+	^PluggableButtonMorph model: model stateGetter: nil action: #sendCreateCartRequest  label: 'Crear Carrito'.! !
+
+!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'mls 11/27/2021 22:46:05'!
+buildPasswordInputRow
+	| firstRowLayoutMorph |
+			
+	firstRowLayoutMorph := LayoutMorph newRow.
+	firstRowLayoutMorph separation: 25;
+	axisEdgeWeight: 0.5;
+	addMorph: (LabelMorph contents: 'Contraseña:');
+	addMorph: (self buildInputWithTextGetter: #passwordText withTextSetter: #passwordText:).
+	
+	^firstRowLayoutMorph.! !
+
+!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'mls 11/27/2021 22:46:14'!
+buildUserInputRow
+	| firstRowLayoutMorph |
+	
+	firstRowLayoutMorph := LayoutMorph newRow.
+	firstRowLayoutMorph separation: 25;
+	axisEdgeWeight: 0.5;
+	addMorph: (LabelMorph contents:'Usuario:');
+	addMorph: (self buildInputWithTextGetter: #userText withTextSetter: #userText:).
+
+	^firstRowLayoutMorph.! !
+
+
+!TusLibrosLoginView methodsFor: 'initialization' stamp: 'mls 11/28/2021 11:44:55'!
+initializeWithModel: aModel 
+	
+	model := aModel.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'TusLibrosLoginView class' category: 'TusLibros-Front'!
+TusLibrosLoginView class
+	instanceVariableNames: ''!
+
+!TusLibrosLoginView class methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 11:45:38'!
+withModel: aModel withWindow: aWindow
+
+	aModel when: #createCartSucceed send: #changeViewToCatalog to: aWindow.
+	^self new initializeWithModel: aModel
+	! !
