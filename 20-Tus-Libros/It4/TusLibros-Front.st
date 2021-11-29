@@ -1,4 +1,4 @@
-!classDefinition: #TusLibrosClientWindow category: #'TusLibros-Front'!
+!classDefinition: #TusLibrosClientWindow category: 'TusLibros-Front'!
 Panel subclass: #TusLibrosClientWindow
 	instanceVariableNames: 'sentenceTextBoxMorph wordsListMorph currentView'
 	classVariableNames: ''
@@ -79,7 +79,7 @@ changeViewToCheckout
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'TusLibrosClientWindow class' category: #'TusLibros-Front'!
+!classDefinition: 'TusLibrosClientWindow class' category: 'TusLibros-Front'!
 TusLibrosClientWindow class
 	instanceVariableNames: ''!
 
@@ -94,7 +94,7 @@ open: aPort
 	^self new initializeWith: 'Words-Service Client Window' withPort: aPort.! !
 
 
-!classDefinition: #TusLibrosFrontRestInterface category: #'TusLibros-Front'!
+!classDefinition: #TusLibrosFrontRestInterface category: 'TusLibros-Front'!
 Panel subclass: #TusLibrosFrontRestInterface
 	instanceVariableNames: 'port user password'
 	classVariableNames: ''
@@ -117,6 +117,15 @@ initializeWithPort: aPort
 port
 	
 	^port.! !
+
+!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 00:49:13'!
+sendCheckoutWithCartId: aCartId withCd: aCdNumber withOwner: anOwner withExpMonth: anExpMonth
+
+	| resp |
+	resp := WebClient htmlSubmit: (self url,'/checkoutCart') fields: (Dictionary with: 'cartId'->aCartId with: 'creditCardNumber'->aCdNumber with: 'owner'->anOwner with: 'expirationMonth'->anExpMonth).
+	resp isSuccess 
+		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
+		ifFalse:[^self error: resp content].! !
 
 !TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/18/2021 18:30:28'!
 sendCreateCartRequestWith: aUser withPassword: aPassword 
@@ -148,7 +157,7 @@ url
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'TusLibrosFrontRestInterface class' category: #'TusLibros-Front'!
+!classDefinition: 'TusLibrosFrontRestInterface class' category: 'TusLibros-Front'!
 TusLibrosFrontRestInterface class
 	instanceVariableNames: ''!
 
@@ -158,7 +167,7 @@ connectTo: aPort
 	^self new initializeWithPort: aPort ! !
 
 
-!classDefinition: #LoaderView category: #'TusLibros-Front'!
+!classDefinition: #LoaderView category: 'TusLibros-Front'!
 Object subclass: #LoaderView
 	instanceVariableNames: 'innerView nextView'
 	classVariableNames: ''
@@ -182,7 +191,7 @@ initializeWithNextView: aView
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'LoaderView class' category: #'TusLibros-Front'!
+!classDefinition: 'LoaderView class' category: 'TusLibros-Front'!
 LoaderView class
 	instanceVariableNames: ''!
 
@@ -192,13 +201,12 @@ withNextView: aView
 	^self new initializeWithNextView: aView.! !
 
 
-!classDefinition: #TusLibrosClientWindowModel category: #'TusLibros-Front'!
+!classDefinition: #TusLibrosClientWindowModel category: 'TusLibros-Front'!
 Object subclass: #TusLibrosClientWindowModel
-	instanceVariableNames: 'restInterface user password'
+	instanceVariableNames: 'restInterface user password creditCardOwner creditCardNumber creditCardExpiration cartId'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
-
 
 !TusLibrosClientWindowModel methodsFor: 'initialization' stamp: 'FS 11/28/2021 23:18:28'!
 initializeWithPort: aPort
@@ -212,22 +220,28 @@ initializeWithPort: aPort
 creditCardExpiration
 	^''! !
 
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'FS 11/29/2021 00:06:14'!
-creditCardExpiration: aText ! !
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/29/2021 01:21:58'!
+creditCardExpiration: aText 
 
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'FS 11/28/2021 23:50:13'!
+	creditCardExpiration := aText! !
+
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/29/2021 01:21:39'!
 creditCardNumber
-	^''.! !
+	^creditCardNumber.! !
 
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'FS 11/29/2021 00:04:23'!
-creditCardNumber: aText ! !
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/29/2021 01:21:14'!
+creditCardNumber: aText 
 
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'FS 11/28/2021 23:50:26'!
+	creditCardNumber := aText! !
+
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/29/2021 01:20:38'!
 creditCardOwner
-	^''.! !
+	^creditCardOwner.! !
 
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'FS 11/29/2021 00:04:51'!
-creditCardOwner: aText ! !
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/29/2021 01:20:50'!
+creditCardOwner: aText 
+
+	creditCardOwner := aText.! !
 
 !TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/18/2021 18:33:01'!
 passwordText
@@ -264,6 +278,12 @@ changeViewToCheckout
 	self triggerEvent: #changeViewToCheckout.
 ! !
 
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 01:22:25'!
+sendCheckout
+
+	restInterface sendCheckoutWithCartId: cartId withCd: creditCardNumber withOwner: creditCardOwner withExpMonth: creditCardExpiration.
+	self triggerEvent: #successCheckout.! !
+
 !TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/28/2021 21:31:01'!
 sendGetCatalog
 	
@@ -271,7 +291,7 @@ sendGetCatalog
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'TusLibrosClientWindowModel class' category: #'TusLibros-Front'!
+!classDefinition: 'TusLibrosClientWindowModel class' category: 'TusLibros-Front'!
 TusLibrosClientWindowModel class
 	instanceVariableNames: ''!
 
@@ -281,7 +301,7 @@ connectTo: aPort
 	^self new initializeWithPort: aPort! !
 
 
-!classDefinition: #View category: #'TusLibros-Front'!
+!classDefinition: #View category: 'TusLibros-Front'!
 Object subclass: #View
 	instanceVariableNames: 'model'
 	classVariableNames: ''
@@ -308,7 +328,7 @@ initializeWithModel: aModel
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'View class' category: #'TusLibros-Front'!
+!classDefinition: 'View class' category: 'TusLibros-Front'!
 View class
 	instanceVariableNames: ''!
 
@@ -318,7 +338,7 @@ withModel: aModel
 	^self new initializeWithModel: aModel! !
 
 
-!classDefinition: #CatalogView category: #'TusLibros-Front'!
+!classDefinition: #CatalogView category: 'TusLibros-Front'!
 View subclass: #CatalogView
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -398,7 +418,7 @@ buildCatalog
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'CatalogView class' category: #'TusLibros-Front'!
+!classDefinition: 'CatalogView class' category: 'TusLibros-Front'!
 CatalogView class
 	instanceVariableNames: ''!
 
@@ -409,14 +429,14 @@ withModel: aModel withWindow: aWindow
 	^self new initializeWithModel: aModel! !
 
 
-!classDefinition: #CheckOutView category: #'TusLibros-Front'!
+!classDefinition: #CheckOutView category: 'TusLibros-Front'!
 View subclass: #CheckOutView
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
 
-!CheckOutView methodsFor: 'as yet unclassified' stamp: 'FS 11/29/2021 00:05:27'!
+!CheckOutView methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 00:23:15'!
 build
 	^LayoutMorph newColumn
 	separation: 25;
@@ -425,7 +445,7 @@ build
 	addMorph: (self inputWithLabel: 'Número:' withGetter: #creditCardNumber withSetter: #creditCardNumber:);
 	addMorph: (self inputWithLabel: 'Fecha expiración:' withGetter: #creditCardExpiration withSetter: #creditCardExpiration:);
 	addMorph: (self inputWithLabel: 'Nombre dueño:' withGetter: #creditCardOwner withSetter: #creditCardOwner:);
-	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #checkout  label: 'Checkout').! !
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendCheckout  label: 'Checkout').! !
 
 !CheckOutView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:49:43'!
 inputWithLabel: aLabel withGetter: aGetter withSetter: aSetter
@@ -442,7 +462,7 @@ inputWithLabel: aLabel withGetter: aGetter withSetter: aSetter
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'CheckOutView class' category: #'TusLibros-Front'!
+!classDefinition: 'CheckOutView class' category: 'TusLibros-Front'!
 CheckOutView class
 	instanceVariableNames: ''!
 
@@ -452,7 +472,7 @@ withModel: aModel withWindow: aWindow
 	^self new initializeWithModel: aModel! !
 
 
-!classDefinition: #LoadingView category: #'TusLibros-Front'!
+!classDefinition: #LoadingView category: 'TusLibros-Front'!
 View subclass: #LoadingView
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -468,7 +488,7 @@ build
 	addMorph: (LabelMorph contents:'Cargando...').! !
 
 
-!classDefinition: #PurchasesView category: #'TusLibros-Front'!
+!classDefinition: #PurchasesView category: 'TusLibros-Front'!
 View subclass: #PurchasesView
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -496,7 +516,7 @@ inputWithLabel: aLabel withGetter: aGetter withSetter: aSetter
 	^firstRowLayoutMorph.! !
 
 
-!classDefinition: #TusLibrosLoginView category: #'TusLibros-Front'!
+!classDefinition: #TusLibrosLoginView category: 'TusLibros-Front'!
 View subclass: #TusLibrosLoginView
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -565,7 +585,7 @@ initializeWithModel: aModel
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'TusLibrosLoginView class' category: #'TusLibros-Front'!
+!classDefinition: 'TusLibrosLoginView class' category: 'TusLibros-Front'!
 TusLibrosLoginView class
 	instanceVariableNames: ''!
 
