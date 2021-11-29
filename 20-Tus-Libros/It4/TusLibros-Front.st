@@ -72,6 +72,11 @@ changeViewToCatalog
 	self changeViewTo: CatalogView
 	! !
 
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/29/2021 02:37:15'!
+changeViewToCheckOutSuccess
+	self changeViewTo: CheckOutSuccess
+	! !
+
 !TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:05'!
 changeViewToCheckout
 	self changeViewTo: CheckOutView
@@ -369,11 +374,26 @@ userText: aUser
 	^true.! !
 
 
-!TusLibrosClientWindowModel methodsFor: 'PluggableButtonSelectors' stamp: 'TM 11/29/2021 02:01:06'!
-sendCreateCartRequest
-	restInterface sendCreateCartRequestWith: user withPassword: password.
-	self triggerEvent: #createCartSucceed.
-	! !
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:06'!
+changeViewToCheckout
+	self triggerEvent: #changeViewToCheckout.
+! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:06'!
+changeViewToHistoryPurchases
+	self triggerEvent: #changeViewToHistoryPurchases.
+! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:07'!
+sendCheckout
+
+	restInterface sendCheckoutWithCartId: cartId withCd: creditCardNumber withOwner: creditCardOwner withExpMonth: creditCardExpiration.
+	self triggerEvent: #successCheckout.! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:12:51'!
+sendGetCatalog
+	
+	catalog _ restInterface sendGetCatalog.! !
 
 
 !TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'TM 11/29/2021 02:24:02'!
@@ -427,26 +447,11 @@ updatePurchasesList
 	purchases := restInterface getPurchaseHistory keys asOrderedCollection.! !
 
 
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:06'!
-changeViewToCheckout
-	self triggerEvent: #changeViewToCheckout.
-! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:06'!
-changeViewToHistoryPurchases
-	self triggerEvent: #changeViewToHistoryPurchases.
-! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:07'!
-sendCheckout
-
-	restInterface sendCheckoutWithCartId: cartId withCd: creditCardNumber withOwner: creditCardOwner withExpMonth: creditCardExpiration.
-	self triggerEvent: #successCheckout.! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:12:51'!
-sendGetCatalog
-	
-	catalog _ restInterface sendGetCatalog.! !
+!TusLibrosClientWindowModel methodsFor: 'PluggableButtonSelectors' stamp: 'TM 11/29/2021 02:01:06'!
+sendCreateCartRequest
+	restInterface sendCreateCartRequestWith: user withPassword: password.
+	self triggerEvent: #createCartSucceed.
+	! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -609,6 +614,14 @@ withModel: aModel withWindow: aWindow
 	^self new initializeWithModel: aModel! !
 
 
+!classDefinition: #CheckOutSuccess category: 'TusLibros-Front'!
+View subclass: #CheckOutSuccess
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+
 !classDefinition: #CheckOutView category: 'TusLibros-Front'!
 View subclass: #CheckOutView
 	instanceVariableNames: ''
@@ -674,6 +687,7 @@ View subclass: #PurchaseHistoryWindow
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
+
 
 !PurchaseHistoryWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:05'!
 build

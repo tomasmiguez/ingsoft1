@@ -124,6 +124,11 @@ add: aQuantity of: anItem
 
 	items add: anItem withOccurrences: aQuantity ! !
 
+!Cart methodsFor: 'adding' stamp: 'mls 11/29/2021 02:32:04'!
+remove: anItem
+	self assertIsValidItem: anItem.
+	items removeAll: anItem.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'Cart class' category: 'TusLibros-Model'!
@@ -221,6 +226,11 @@ checkOutCartWithCreditCardNumbered: aCreditCartNumber ownedBy: anOwner expiringO
 		throught: systemFacade merchantProcessor
 		on: self today
 		registeringOn: systemFacade salesBook) checkOut ! !
+
+!CartSession methodsFor: 'cart' stamp: 'mls 11/29/2021 02:32:46'!
+removeFromCart: aBook
+
+	^cart remove: aBook! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -629,7 +639,7 @@ initializeWith: aPortNumber
 		
 	self setUpRouting.! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 01:47:07'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 02:42:58'!
 setUpRouting
 
 	self addRoute: '/createCart' action: [:parameters |	
@@ -643,6 +653,12 @@ setUpRouting
 			of: (parameters at: 'bookIsbn').
 		true asString.
 	].
+
+	self addRoute: '/removeFromCart' action: [:parameters |	
+		tusLibrosSystemFacade remove: (parameters at: 'bookIsbn') fromCart: (parameters at: 'cartId').
+		true asString.
+	].
+
 	self addRoute: '/getCatalog' action: [:parameters |	
 		tusLibrosSystemFacade catalog.
 	].
@@ -835,6 +851,11 @@ listPurchasesOf: aUser authenticatingWith: aPassword
 			into: [ :salesOrderedByBook :aSale |
 				self list: aSale on: salesOrderedByBook.
 				salesOrderedByBook ] ]! !
+
+!TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'mls 11/29/2021 02:30:37'!
+remove: aBook fromCart: aCartId
+
+	self withCartSessionIdentifiedAs: aCartId do: [ :cartSession | cartSession removeFromCart: aBook ]! !
 
 
 !TusLibrosSystemFacade methodsFor: 'checkout support' stamp: 'HernanWilkinson 6/17/2015 20:49'!
