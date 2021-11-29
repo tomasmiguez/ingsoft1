@@ -124,10 +124,10 @@ add: aQuantity of: anItem
 
 	items add: anItem withOccurrences: aQuantity ! !
 
-!Cart methodsFor: 'adding' stamp: 'mls 11/29/2021 02:32:04'!
+!Cart methodsFor: 'adding' stamp: 'TM 11/29/2021 04:10:49'!
 remove: anItem
 	self assertIsValidItem: anItem.
-	items removeAll: anItem.! !
+	items contents removeKey: anItem.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -639,7 +639,7 @@ initializeWith: aPortNumber
 		
 	self setUpRouting.! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 02:42:58'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 04:01:34'!
 setUpRouting
 
 	self addRoute: '/createCart' action: [:parameters |	
@@ -647,15 +647,17 @@ setUpRouting
 			createCartFor: (parameters at: 'clientId') 
 			authenticatedWith: (parameters at: 'password') asString.
 	].
-	self addRoute: '/addToCart' action: [:parameters |	
-		tusLibrosSystemFacade 
-			addToCart: (parameters at: 'cartId')
-			of: (parameters at: 'bookIsbn').
-		true asString.
-	].
+	self addRoute: '/addToCart' action: [:parameters |    
+        		tusLibrosSystemFacade             
+			add: (parameters at: 'amount') asNumber
+			of: (parameters at: 'bookIsbn') 
+			toCartIdentifiedAs: (parameters at: 'cartId') asNumber.
+        
+        		true asString.
+    	].
 
 	self addRoute: '/removeFromCart' action: [:parameters |	
-		tusLibrosSystemFacade remove: (parameters at: 'bookIsbn') fromCart: (parameters at: 'cartId').
+		tusLibrosSystemFacade remove: (parameters at: 'bookIsbn') fromCart: (parameters at: 'cartId') asNumber.
 		true asString.
 	].
 
@@ -670,6 +672,10 @@ setUpRouting
 	self addRoute: '/listPurchases' action: [:parameters |
 		tusLibrosSystemFacade listPurchasesOf: (parameters at: 'clientId') authenticatingWith: (parameters at: 'password')			
 	].
+
+	self addRoute: '/listCart' action: [:parameters |
+        (tusLibrosSystemFacade listCartIdentifiedAs: (parameters at: 'cartId') asNumber) contents.        
+    ].
 
 ! !
 
