@@ -613,12 +613,12 @@ destroy
 	
 	webServer ifNotNil:[webServer destroy].! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 11:10:54'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 22:17:33'!
 initializeWith: aPortNumber
 	
 	tusLibrosSystemFacade := TusLibrosSystemFacade 
 		authenticatingWith: (Dictionary with: 'usuario'->'pass')
-		acceptingItemsOf: (Dictionary with: Book defaultDune->3000000)
+		acceptingItemsOf: (Dictionary with: 'Dune'->3000000)
 		registeringOn: OrderedCollection new
 		debitingThrought: (MockMerchantProcessor withValidCreditCard: 'xd') 
 		measuringTimeWith: SystemClock new.
@@ -629,7 +629,7 @@ initializeWith: aPortNumber
 		
 	self setUpRouting.! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/27/2021 23:12:10'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 21:31:51'!
 setUpRouting
 
 	self addRoute: '/createCart' action: [:parameters |	
@@ -643,7 +643,7 @@ setUpRouting
 			of: (parameters at: 'bookIsbn').
 		true asString.
 	].
-	self addRoute: '/catalog' action: [:parameters |	
+	self addRoute: '/getCatalog' action: [:parameters |	
 		tusLibrosSystemFacade catalog.
 	].! !
 
@@ -783,7 +783,7 @@ add: anAmount of: aBook toCartIdentifiedAs: aCartId
 
 	self withCartSessionIdentifiedAs: aCartId do: [ :cartSession | cartSession addToCart: anAmount of: aBook ]! !
 
-!TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'mls 11/27/2021 23:13:14'!
+!TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'mls 11/28/2021 22:19:05'!
 catalog
 
 	^catalog.! !

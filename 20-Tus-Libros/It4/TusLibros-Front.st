@@ -21,7 +21,7 @@ defaultExtent
 	^ 1035@600
 	! !
 
-!TusLibrosClientWindow methodsFor: 'initialization' stamp: 'FS 11/28/2021 18:12:09'!
+!TusLibrosClientWindow methodsFor: 'initialization' stamp: 'mls 11/28/2021 22:55:12'!
 initializeWith: aTitle
 
 	self titleMorph showButtonsNamed: #( close collapse ).
@@ -33,8 +33,7 @@ initializeWith: aTitle
 	
 	self buildMorphicWindow.
 	self openInWorld.
-			
-	self model when: #newWordsArrived send: #refreshListOfWords to: self.! !
+! !
 
 
 !TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 20:06:57'!
@@ -45,11 +44,22 @@ buildMorphicWindow
 	axisEdgeWeight: 0;
 	addMorph: currentView.! !
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 20:06:04'!
-changeViewToCatalog
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 22:57:52'!
+changeViewTo: aClassView
 	| newView |
-	newView _ CatalogView new build.
+	newView _ (aClassView withModel: self model withWindow: self) build.
 	currentView _ self layoutMorph replaceSubmorph: currentView by: newView. 
+	! !
+
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 21:17:49'!
+changeViewToCatalog
+
+	self changeViewTo: CatalogView
+	! !
+
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/28/2021 21:10:23'!
+changeViewToCheckout
+	self changeViewTo: CheckOutView
 	! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -116,40 +126,6 @@ url
 	^'http://localhost:', self port asString! !
 
 
-!classDefinition: #LoaderView category: 'TusLibros-Front'!
-Object subclass: #LoaderView
-	instanceVariableNames: 'innerView nextView'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'TusLibros-Front'!
-
-!LoaderView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:41:00'!
-build
-
-	^innerView ! !
-
-!LoaderView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:41:47'!
-finishedLoading
-
-	innerView _ self replaceSubmorph: innerView by: nextView.! !
-
-!LoaderView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:43:32'!
-initializeWithNextView: aView
-
-	nextView _ aView.! !
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'LoaderView class' category: 'TusLibros-Front'!
-LoaderView class
-	instanceVariableNames: ''!
-
-!LoaderView class methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 19:43:56'!
-withNextView: aView
-
-	^self new initializeWithNextView: aView.! !
-
-
 !classDefinition: #TusLibrosClientWindowModel category: 'TusLibros-Front'!
 Object subclass: #TusLibrosClientWindowModel
 	instanceVariableNames: 'restInterface user password'
@@ -196,6 +172,12 @@ sendCreateCartRequest
 	restInterface sendCreateCartRequestWith: user withPassword: password.
 	self triggerEvent: #createCartSucceed.
 	! !
+
+
+!TusLibrosClientWindowModel methodsFor: 'xxx' stamp: 'mls 11/28/2021 21:31:01'!
+sendGetCatalog
+	
+	^restInterface sendGetCatalog.! !
 
 
 !classDefinition: #View category: 'TusLibros-Front'!
@@ -251,11 +233,8 @@ build
 	
 	addMorph: self buildCart.! !
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:20:09'!
-buildBook
-
-	| book |
-	book _ Book defaultDune.
+!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 22:25:39'!
+buildBook: aBookName withPrice: aPrice
 	
 	^LayoutMorph newColumn 
 	separation: 25;
@@ -263,13 +242,13 @@ buildBook
 	
 	"addMorph: (ImageMorph new image: (Form fromBinaryStream: book image base64Decoded asByteArray readStream));"
 	
-	addMorph: (LabelMorph contents: book name);
+	addMorph: (LabelMorph contents: aBookName);
 	
-	addMorph: (LabelMorph contents: '3000 pesos');
+	addMorph: (LabelMorph contents: aPrice printString);
 	
 	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendCreateCartRequest  label: 'Agregar al carrito').! !
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:35:55'!
+!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 22:58:39'!
 buildCart
 
 	^LayoutMorph newColumn 
@@ -279,17 +258,67 @@ buildCart
 	addMorph: (LabelMorph contents: 'Mi carrito');
 	addMorph: (LabelMorph contents: '3x Dune (1965)');
 	addMorph: (LabelMorph contents: '2x Fundación (1942)');
-	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendCreateCartRequest  label: 'Comprar').! !
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #changeViewToCheckout  label: 'Comprar').
+	! !
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:24:51'!
+!CatalogView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 22:24:57'!
 buildCatalog
 
-	^LayoutMorph newColumn 
+	| catalog morph |
+	catalog _ model sendGetCatalog.
+
+	morph _ LayoutMorph newColumn 
+	separation: 25;
+	axisEdgeWeight: 0.5.
+	
+	catalog keysAndValuesDo: [:aBook :aPrice|
+		morph addMorph: (self buildBook: aBook withPrice: aPrice).
+	].
+	
+	^morph.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'CatalogView class' category: 'TusLibros-Front'!
+CatalogView class
+	instanceVariableNames: ''!
+
+!CatalogView class methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 22:58:33'!
+withModel: aModel withWindow: aWindow
+
+	aModel when: #changeViewToCheckout send: #changeViewToCheckout to: aWindow.
+	^self new initializeWithModel: aModel! !
+
+
+!classDefinition: #CheckOutView category: 'TusLibros-Front'!
+View subclass: #CheckOutView
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+!CheckOutView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:55:23'!
+build
+	^LayoutMorph newRow
 	separation: 25;
 	axisEdgeWeight: 0.5;
 	
-	addMorph: self buildBook;
-	addMorph: self buildBook.! !
+	addMorph: (self inputWithLabel: 'Número:' withGetter: #a withSetter: #a);
+	addMorph: (self inputWithLabel: 'Fecha expiración:' withGetter: #a withSetter: #a);
+	addMorph: (self inputWithLabel: 'Nombre dueño:' withGetter: #a withSetter: #a).! !
+
+!CheckOutView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:49:43'!
+inputWithLabel: aLabel withGetter: aGetter withSetter: aSetter
+
+	| firstRowLayoutMorph |
+	
+	firstRowLayoutMorph := LayoutMorph newRow.
+	firstRowLayoutMorph separation: 25;
+	axisEdgeWeight: 0.5;
+	addMorph: (LabelMorph contents: aLabel);
+	addMorph: (self buildInputWithTextGetter: aGetter withTextSetter: aSetter).
+
+	^firstRowLayoutMorph.! !
 
 
 !classDefinition: #LoadingView category: 'TusLibros-Front'!
@@ -321,6 +350,19 @@ build
 	nameBook _ 'Dune (1965)'.
 	quantity _ 1.
 	 ^LabelMorph contents: nameBook, ' con cantidad ', quantity printString.! !
+
+!PurchasesView methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 20:49:28'!
+inputWithLabel: aLabel withGetter: aGetter withSetter: aSetter
+
+	| firstRowLayoutMorph |
+	
+	firstRowLayoutMorph := LayoutMorph newRow.
+	firstRowLayoutMorph separation: 25;
+	axisEdgeWeight: 0.5;
+	addMorph: (LabelMorph contents: aLabel);
+	addMorph: (self buildInputWithTextGetter: aGetter withTextSetter: aSetter).
+
+	^firstRowLayoutMorph.! !
 
 
 !classDefinition: #TusLibrosLoginView category: 'TusLibros-Front'!
