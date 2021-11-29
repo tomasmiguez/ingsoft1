@@ -629,7 +629,7 @@ initializeWith: aPortNumber
 		
 	self setUpRouting.! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 00:37:49'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 01:47:07'!
 setUpRouting
 
 	self addRoute: '/createCart' action: [:parameters |	
@@ -649,7 +649,13 @@ setUpRouting
 
 	self addRoute: '/checkoutCart' action: [:parameters |
 		tusLibrosSystemFacade checkOutCartIdentifiedAs: (parameters at: 'cartId') withCreditCardNumbered: (parameters at: 'creditCardNumber') ownedBy: (parameters at: 'owner') expiringOn: (parameters at: 'expirationMonth').
-	].! !
+	].
+
+	self addRoute: '/listPurchases' action: [:parameters |
+		tusLibrosSystemFacade listPurchasesOf: (parameters at: 'clientId') authenticatingWith: (parameters at: 'password')			
+	].
+
+! !
 
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'Ejercicio1 11/11/2021 21:34:33'!
 startListening
