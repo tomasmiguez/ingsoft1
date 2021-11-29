@@ -106,6 +106,22 @@ correctlyEncodeSpacesForUrlRequestParameter: aParameter
 	
 	^ aParameter copyReplaceAll: ' ' with: '%20'. ! !
 
+!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/28/2021 21:33:25'!
+getPurchaseHistory
+	| resp |
+	
+	resp := WebClient htmlSubmit: (self url,'/purchaseHistory') fields: (Dictionary with: 'clientId'->(user) with: 'password'->(password)).
+	
+	resp isSuccess 
+		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
+		ifFalse:[^self error: resp content].! !
+
+!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/28/2021 21:13:11'!
+initialize
+
+	user _ 'usuario'.
+	password _ 'pass'.! !
+
 !TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'FS 11/28/2021 23:20:12'!
 initializeWithPort: aPort
 
@@ -167,6 +183,69 @@ connectTo: aPort
 	^self new initializeWithPort: aPort ! !
 
 
+!classDefinition: #TusLibrosPurchaseHistoryWindow category: 'TusLibros-Front'!
+Panel subclass: #TusLibrosPurchaseHistoryWindow
+	instanceVariableNames: 'sentenceTextBoxMorph wordsListMorph currentView'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+!TusLibrosPurchaseHistoryWindow methodsFor: 'initialization' stamp: 'TM 11/28/2021 21:13:11'!
+defaultExtent
+
+	^ 1035@485! !
+
+!TusLibrosPurchaseHistoryWindow methodsFor: 'initialization' stamp: 'TM 11/29/2021 01:12:13'!
+initializeWith: aTitle
+
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: aTitle.
+	self model: (TusLibrosClientWindowModel new).
+	self model updatePurchasesList.
+	self morphExtent: (self defaultExtent).
+	self buildMorphicWindow.
+	self openInWorld.! !
+
+
+!TusLibrosPurchaseHistoryWindow methodsFor: 'GUI building' stamp: 'TM 11/28/2021 21:13:11'!
+buildMorphicWindow
+
+	self layoutMorph beColumn;
+	separation: 15;
+	axisEdgeWeight: 0;
+	addMorph: self buildPurchaseListRow.! !
+
+!TusLibrosPurchaseHistoryWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 01:12:21'!
+buildPurchaseListRow
+	| purchaseListMorph layoutMorphOfPurchaseListRow |
+	
+	purchaseListMorph _ PluggableListMorph model: self model listGetter: #purchases indexGetter: #purchasesListIndex indexSetter: #purchasesListIndex:.
+	purchaseListMorph  borderColor: Color skyBlue; borderWidth: 1; morphWidth: 600.
+	
+	purchaseListMorph updateList.
+	
+	layoutMorphOfPurchaseListRow _ LayoutMorph newColumn.
+	layoutMorphOfPurchaseListRow separation: 5; 
+	axisEdgeWeight: 0.5;
+	addMorph: (LabelMorph contents: 'Purchase history');
+	addMorph: purchaseListMorph.
+	
+	layoutMorphOfPurchaseListRow layoutSpec proportionalWidth: 1.
+	
+	^layoutMorphOfPurchaseListRow.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'TusLibrosPurchaseHistoryWindow class' category: 'TusLibros-Front'!
+TusLibrosPurchaseHistoryWindow class
+	instanceVariableNames: ''!
+
+!TusLibrosPurchaseHistoryWindow class methodsFor: 'instance creation' stamp: 'TM 11/28/2021 21:13:11'!
+open
+	
+	^self new initializeWith: 'Client Purchase History'.! !
+
+
 !classDefinition: #LoaderView category: 'TusLibros-Front'!
 Object subclass: #LoaderView
 	instanceVariableNames: 'innerView nextView'
@@ -207,6 +286,15 @@ Object subclass: #TusLibrosClientWindowModel
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
+
+!TusLibrosClientWindowModel methodsFor: 'initialization' stamp: 'TM 11/28/2021 22:02:07'!
+initialize
+
+	purchases := OrderedCollection new.
+	purchasesListSelectedIndex := 0.
+	password := 'pass'.
+	user := 'user'.
+	restInterface := TusLibrosFrontRestInterface new.! !
 
 !TusLibrosClientWindowModel methodsFor: 'initialization' stamp: 'FS 11/28/2021 23:18:28'!
 initializeWithPort: aPort
@@ -271,6 +359,27 @@ sendCreateCartRequest
 	restInterface sendCreateCartRequestWith: user withPassword: password.
 	self triggerEvent: #createCartSucceed.
 	! !
+
+
+!TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'TM 11/28/2021 21:13:10'!
+purchases
+
+	^purchases.! !
+
+!TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'TM 11/28/2021 21:13:10'!
+purchasesListIndex
+
+	^purchasesListSelectedIndex.! !
+
+!TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'TM 11/28/2021 21:13:10'!
+purchasesListIndex: anIndex
+
+	purchasesListSelectedIndex _ anIndex .! !
+
+!TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'TM 11/29/2021 01:11:23'!
+updatePurchasesList
+
+	purchases := restInterface getPurchaseHistory keys asOrderedCollection.! !
 
 
 !TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'FS 11/28/2021 23:34:37'!
