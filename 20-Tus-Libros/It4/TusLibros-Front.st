@@ -1,3 +1,48 @@
+!classDefinition: #AlertWindow category: 'TusLibros-Front'!
+Panel subclass: #AlertWindow
+	instanceVariableNames: 'errorMessage'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+!AlertWindow methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 16:41:24'!
+buildMorphicWindow
+
+	self layoutMorph beColumn;
+		separation: 40;
+		axisEdgeWeight: 0;
+		addMorph: (LabelMorph contents: errorMessage) .! !
+
+!AlertWindow methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 16:42:08'!
+defaultExtent
+
+	^ 500@150! !
+
+!AlertWindow methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 16:36:34'!
+initializeWithErrorMessage: anErrorMessage
+
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Error'.
+	self morphExtent: (self defaultExtent).
+	
+	errorMessage := anErrorMessage.
+	
+	self buildMorphicWindow.
+	
+	self openInWorld.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'AlertWindow class' category: 'TusLibros-Front'!
+AlertWindow class
+	instanceVariableNames: ''!
+
+!AlertWindow class methodsFor: 'instance creation' stamp: 'mls 11/29/2021 16:35:18'!
+showWithErrorMessage: anErrorMessage 
+	
+	^self new initializeWithErrorMessage: anErrorMessage ! !
+
+
 !classDefinition: #TusLibrosClientWindow category: 'TusLibros-Front'!
 Panel subclass: #TusLibrosClientWindow
 	instanceVariableNames: 'sentenceTextBoxMorph wordsListMorph currentView'
@@ -169,7 +214,7 @@ sendCheckoutWithCartId: aCartId withCd: aCdNumber withOwner: anOwner withExpMont
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
 
-!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'TM 11/29/2021 02:01:08'!
+!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'mls 11/29/2021 16:29:10'!
 sendCreateCartRequestWith: aUser withPassword: aPassword 
 
 	| resp |
@@ -178,7 +223,6 @@ sendCreateCartRequestWith: aUser withPassword: aPassword
 	password _ aPassword.
 	
 	resp := WebClient htmlSubmit: (self url,'/createCart') fields: (Dictionary with: 'clientId'->(user) with: 'password'->(password)).
-	
 	resp isSuccess 
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
@@ -312,6 +356,14 @@ continueShopping
 	self triggerEvent: #continueShopping.
 ! !
 
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 16:44:35'!
+evaluateAndShowAlertIfError: aBlock
+
+	aBlock ifError: [:error | 
+		AlertWindow showWithErrorMessage: error
+	]
+	! !
+
 !TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 14:02:27'!
 sendAddToCartRequest
 	catalogListSelectedIndex ~= 0 ifTrue: [
@@ -320,17 +372,20 @@ sendAddToCartRequest
 		self triggerEvent: #addedCartItem.
 	]! !
 
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 14:03:58'!
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 16:45:01'!
 sendCheckOut
+	self evaluateAndShowAlertIfError: [
+		ticket := restInterface sendCheckoutWithCartId: cartId withCd: creditCardNumber withOwner: creditCardOwner withExpMonth: creditCardExpiration.
+		self triggerEvent: #successCheckOut.
+	].! !
 
-	ticket := restInterface sendCheckoutWithCartId: cartId withCd: creditCardNumber withOwner: creditCardOwner withExpMonth: creditCardExpiration.
-	self triggerEvent: #successCheckOut.! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:56:30'!
-sendCreateCartRequest
-	cartId _ restInterface sendCreateCartRequestWith: user withPassword: password.
-	self triggerEvent: #createCartSucceed.
-	! !
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 16:45:53'!
+sendCreateCartRequest	
+	self evaluateAndShowAlertIfError: [
+		cartId _ restInterface sendCreateCartRequestWith: user withPassword: password.
+		self triggerEvent: #createCartSucceed.
+	
+	].! !
 
 !TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:12:51'!
 sendGetCatalog

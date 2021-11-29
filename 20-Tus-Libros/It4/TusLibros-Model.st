@@ -620,20 +620,19 @@ Object subclass: #TusLibrosRestInterface
 	poolDictionaries: ''
 	category: 'TusLibros-Model'!
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/15/2021 20:56:35'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 16:28:48'!
 addRoute: aRoute action: anAction
 	
 	webServer addService: aRoute action: [:request | 
 		[
+			
 		| responseAction |
-
 		responseAction _ anAction value: request fields.
-		
 		request send200Response: 
 			(WebUtils jsonEncode: responseAction).
 		]
 		on: Error 
-		do: [ :anError | request send400Response: (anError messageText) ]
+		do: [ :anError | self send400ResponseWithRequest: request WithErrorMessage: (anError messageText) ]
 	].
 ! !
 
@@ -657,6 +656,14 @@ initializeWith: aPortNumber
 	webServer := WebServer new listenOn: port.
 		
 	self setUpRouting.! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 16:27:46'!
+send400ResponseWithRequest: aRequest WithErrorMessage: anErrorMessage
+
+	aRequest sendResponseCode: 400 
+		content: anErrorMessage asUtf8
+		type: 'text/plain; charset=utf-8'
+		close: true.! !
 
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 13:21:51'!
 setUpRouting
