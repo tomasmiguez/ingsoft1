@@ -1,0 +1,18 @@
+port := 4444
+
+" Para iniciar el servidor: "
+server := TusLibrosRestInterface listeningOn: 4444.  
+
+server destroy. 
+
+server
+
+(TusLibrosRestInterface allInstances) do: [:a|a destroy] 
+
+
+" Para crear ventana del cliente: "
+TusLibrosClientWindow open: 4444.  
+
+" Cuenta para entrar: "
+user: usuario
+password: pass

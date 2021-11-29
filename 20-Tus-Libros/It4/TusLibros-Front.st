@@ -66,22 +66,25 @@ changeViewTo: aClassView
 	currentView _ self layoutMorph addMorph: newView. 
 	! !
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:05'!
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/29/2021 13:37:51'!
 changeViewToCatalog
-
-	self changeViewTo: CatalogView
+	self changeViewTo: TusLibrosCatalogView
 	! !
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:05'!
-changeViewToCheckout
-	self changeViewTo: CheckOutView
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/29/2021 13:37:43'!
+changeViewToCheckOutSuccess
+	self changeViewTo: TusLibrosCheckOutSuccess
 	! !
 
-!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:05'!
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/29/2021 13:37:28'!
 changeViewToHistoryPurchases
-	self changeViewTo: PurchaseHistoryWindow 
+	self changeViewTo: TusLibrosPurchaseHistoryWindow 
 	! !
 
+!TusLibrosClientWindow methodsFor: 'GUI building' stamp: 'mls 11/29/2021 03:10:17'!
+changeViewToLogin
+	self changeViewTo: TusLibrosLoginView
+	! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -107,12 +110,36 @@ Panel subclass: #TusLibrosFrontRestInterface
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:07'!
+!TusLibrosFrontRestInterface methodsFor: 'initialization' stamp: 'TM 11/29/2021 02:01:07'!
+initialize
+
+	user _ 'usuario'.
+	password _ 'pass'.! !
+
+!TusLibrosFrontRestInterface methodsFor: 'initialization' stamp: 'TM 11/29/2021 02:01:08'!
+initializeWithPort: aPort
+
+	user _ 'usuario'.
+	password _ 'pass'.
+	port _ aPort.! !
+
+!TusLibrosFrontRestInterface methodsFor: 'initialization' stamp: 'TM 11/29/2021 02:01:07'!
+port
+	
+	^port.! !
+
+!TusLibrosFrontRestInterface methodsFor: 'initialization' stamp: 'TM 11/29/2021 02:01:07'!
+url
+	
+	^'http://localhost:', self port asString! !
+
+
+!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'TM 11/29/2021 02:01:07'!
 correctlyEncodeSpacesForUrlRequestParameter: aParameter
 	
 	^ aParameter copyReplaceAll: ' ' with: '%20'. ! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
+!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'TM 11/29/2021 02:01:08'!
 getPurchaseHistory
 	| resp |
 	
@@ -122,36 +149,18 @@ getPurchaseHistory
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:07'!
-initialize
-
-	user _ 'usuario'.
-	password _ 'pass'.! !
-
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
-initializeWithPort: aPort
-
-	user _ 'usuario'.
-	password _ 'pass'.
-	port _ aPort.! !
-
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:07'!
-port
-	
-	^port.! !
-
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 03:45:16'!
+!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'mls 11/29/2021 13:31:30'!
 sendAddToCartRequestToCart: aCartId anAmountOf: anAmount of: anIsbn
 
 	| resp |
 	
-	resp := WebClient htmlSubmit: (self url,'/addToCart') fields: (Dictionary with: 'cartId'->(aCartId asString) with: 'amount'->(anAmount) with: 'bookIsbn'->(anIsbn)).
+	resp := WebClient htmlSubmit: (self url,'/addToCart') fields: (Dictionary with: 'cartId'->(aCartId asString) with: 'amount'->(anAmount) with: 'bookIsbn'->(self correctlyEncodeSpacesForUrlRequestParameter: anIsbn)).
 	
 	resp isSuccess 
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:07'!
+!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'TM 11/29/2021 02:01:07'!
 sendCheckoutWithCartId: aCartId withCd: aCdNumber withOwner: anOwner withExpMonth: anExpMonth
 
 	| resp |
@@ -160,7 +169,7 @@ sendCheckoutWithCartId: aCartId withCd: aCdNumber withOwner: anOwner withExpMont
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
+!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'TM 11/29/2021 02:01:08'!
 sendCreateCartRequestWith: aUser withPassword: aPassword 
 
 	| resp |
@@ -174,7 +183,7 @@ sendCreateCartRequestWith: aUser withPassword: aPassword
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
+!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'TM 11/29/2021 02:01:08'!
 sendGetCatalog
 
 	| resp |
@@ -183,7 +192,7 @@ sendGetCatalog
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 03:21:48'!
+!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'TM 11/29/2021 03:21:48'!
 sendListCartd: aCartId
 
 	| resp |
@@ -192,20 +201,15 @@ sendListCartd: aCartId
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
 
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 04:01:11'!
+!TusLibrosFrontRestInterface methodsFor: 'sending requests' stamp: 'mls 11/29/2021 13:31:56'!
 sendRemoveFromCartRequestToCart: aCartId of: anIsbn
 	| resp |
 	
-	resp := WebClient htmlSubmit: (self url,'/removeFromCart') fields: (Dictionary with: 'cartId'->(aCartId asString) with: 'bookIsbn'->(anIsbn)).
+	resp := WebClient htmlSubmit: (self url,'/removeFromCart') fields: (Dictionary with: 'cartId'->(aCartId asString) with: 'bookIsbn'->(self correctlyEncodeSpacesForUrlRequestParameter: anIsbn)).
 	
 	resp isSuccess 
 		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)).] 
 		ifFalse:[^self error: resp content].! !
-
-!TusLibrosFrontRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:07'!
-url
-	
-	^'http://localhost:', self port asString! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -219,106 +223,9 @@ connectTo: aPort
 	^self new initializeWithPort: aPort ! !
 
 
-!classDefinition: #TusLibrosPurchaseHistoryWindow category: 'TusLibros-Front'!
-Panel subclass: #TusLibrosPurchaseHistoryWindow
-	instanceVariableNames: 'sentenceTextBoxMorph wordsListMorph currentView'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'TusLibros-Front'!
-
-!TusLibrosPurchaseHistoryWindow methodsFor: 'initialization' stamp: 'TM 11/29/2021 02:01:08'!
-defaultExtent
-
-	^ 1035@485! !
-
-!TusLibrosPurchaseHistoryWindow methodsFor: 'initialization' stamp: 'TM 11/29/2021 02:01:08'!
-initializeWith: aTitle
-
-	self titleMorph showButtonsNamed: #( close collapse ).
-	self setLabel: aTitle.
-	self model: (TusLibrosClientWindowModel new).
-	self model updatePurchasesList.
-	self morphExtent: (self defaultExtent).
-	self buildMorphicWindow.
-	self openInWorld.! !
-
-
-!TusLibrosPurchaseHistoryWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:08'!
-buildMorphicWindow
-
-	self layoutMorph beColumn;
-	separation: 15;
-	axisEdgeWeight: 0;
-	addMorph: self buildPurchaseListRow.! !
-
-!TusLibrosPurchaseHistoryWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:08'!
-buildPurchaseListRow
-	| purchaseListMorph layoutMorphOfPurchaseListRow |
-	
-	purchaseListMorph _ PluggableListMorph model: self model listGetter: #purchases indexGetter: #purchasesListIndex indexSetter: #purchasesListIndex:.
-	purchaseListMorph  borderColor: Color skyBlue; borderWidth: 1; morphWidth: 600.
-	
-	purchaseListMorph updateList.
-	
-	layoutMorphOfPurchaseListRow _ LayoutMorph newColumn.
-	layoutMorphOfPurchaseListRow separation: 5; 
-	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents: 'Purchase history');
-	addMorph: purchaseListMorph.
-	
-	layoutMorphOfPurchaseListRow layoutSpec proportionalWidth: 1.
-	
-	^layoutMorphOfPurchaseListRow.! !
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'TusLibrosPurchaseHistoryWindow class' category: 'TusLibros-Front'!
-TusLibrosPurchaseHistoryWindow class
-	instanceVariableNames: ''!
-
-!TusLibrosPurchaseHistoryWindow class methodsFor: 'instance creation' stamp: 'TM 11/29/2021 02:01:08'!
-open
-	
-	^self new initializeWith: 'Client Purchase History'.! !
-
-
-!classDefinition: #LoaderView category: 'TusLibros-Front'!
-Object subclass: #LoaderView
-	instanceVariableNames: 'innerView nextView'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'TusLibros-Front'!
-
-!LoaderView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
-build
-
-	^innerView ! !
-
-!LoaderView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
-finishedLoading
-
-	innerView _ self replaceSubmorph: innerView by: nextView.! !
-
-!LoaderView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
-initializeWithNextView: aView
-
-	nextView _ aView.! !
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'LoaderView class' category: 'TusLibros-Front'!
-LoaderView class
-	instanceVariableNames: ''!
-
-!LoaderView class methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
-withNextView: aView
-
-	^self new initializeWithNextView: aView.! !
-
-
 !classDefinition: #TusLibrosClientWindowModel category: 'TusLibros-Front'!
 Object subclass: #TusLibrosClientWindowModel
-	instanceVariableNames: 'restInterface user password creditCardOwner creditCardNumber creditCardExpiration cartId purchases purchasesListSelectedIndex catalog catalogListSelectedIndex cartListSelectedIndex cartItemsList bookAmount'
+	instanceVariableNames: 'restInterface user password creditCardOwner creditCardNumber creditCardExpiration cartId purchases purchasesListSelectedIndex catalog catalogListSelectedIndex cartListSelectedIndex cartItemsList bookAmount ticket'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
@@ -364,33 +271,6 @@ bookAmountText: aBookAmount
 	^true.! !
 
 !TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'TM 11/29/2021 02:01:07'!
-creditCardExpiration
-	^''! !
-
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'TM 11/29/2021 02:01:06'!
-creditCardExpiration: aText 
-
-	creditCardExpiration := aText! !
-
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'TM 11/29/2021 02:01:07'!
-creditCardNumber
-	^creditCardNumber.! !
-
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'TM 11/29/2021 02:01:06'!
-creditCardNumber: aText 
-
-	creditCardNumber := aText! !
-
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'TM 11/29/2021 02:01:06'!
-creditCardOwner
-	^creditCardOwner.! !
-
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'TM 11/29/2021 02:01:07'!
-creditCardOwner: aText 
-
-	creditCardOwner := aText.! !
-
-!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'TM 11/29/2021 02:01:07'!
 passwordText
 
 	^password! !
@@ -400,6 +280,10 @@ passwordText: aPassword
 
 	password := aPassword.
 	^true.! !
+
+!TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'mls 11/29/2021 03:02:13'!
+ticket
+	^ticket.! !
 
 !TusLibrosClientWindowModel methodsFor: 'TextModelMorphSelectors' stamp: 'TM 11/29/2021 02:01:07'!
 userText
@@ -413,11 +297,65 @@ userText: aUser
 	^true.! !
 
 
-!TusLibrosClientWindowModel methodsFor: 'PluggableButtonSelectors' stamp: 'TM 11/29/2021 02:56:30'!
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:06'!
+changeViewToCheckout
+	self triggerEvent: #changeViewToCheckout.
+! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:06'!
+changeViewToHistoryPurchases
+	self triggerEvent: #changeViewToHistoryPurchases.
+! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 03:04:20'!
+continueShopping
+	self triggerEvent: #continueShopping.
+! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 14:02:27'!
+sendAddToCartRequest
+	catalogListSelectedIndex ~= 0 ifTrue: [
+		restInterface sendAddToCartRequestToCart: cartId anAmountOf: bookAmount of: (catalog keys asOrderedCollection at: catalogListSelectedIndex).
+		self updateCartContents.
+		self triggerEvent: #addedCartItem.
+	]! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 14:03:58'!
+sendCheckOut
+
+	ticket := restInterface sendCheckoutWithCartId: cartId withCd: creditCardNumber withOwner: creditCardOwner withExpMonth: creditCardExpiration.
+	self triggerEvent: #successCheckOut.! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:56:30'!
 sendCreateCartRequest
 	cartId _ restInterface sendCreateCartRequestWith: user withPassword: password.
 	self triggerEvent: #createCartSucceed.
 	! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:12:51'!
+sendGetCatalog
+	
+	catalog _ restInterface sendGetCatalog.! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 14:03:21'!
+sendRemoveFromCart
+	cartListSelectedIndex ~= 0 ifTrue: [
+		restInterface sendRemoveFromCartRequestToCart: cartId of: (catalog keys asOrderedCollection at: cartListSelectedIndex).
+		self updateCartContents.
+		self triggerEvent: #addedCartItem.
+	]! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'mls 11/29/2021 11:49:21'!
+signOut
+	user := ''.
+	password := ''.
+	self triggerEvent: #signout.
+! !
+
+!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 03:27:05'!
+updateCartContents
+
+	cartItemsList _ restInterface sendListCartd: cartId.! !
 
 
 !TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'TM 11/29/2021 02:24:02'!
@@ -465,51 +403,13 @@ purchasesListIndex: anIndex
 
 	purchasesListSelectedIndex _ anIndex .! !
 
-!TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'TM 11/29/2021 02:01:07'!
+!TusLibrosClientWindowModel methodsFor: 'PluggableListSelectors' stamp: 'mls 11/29/2021 13:53:12'!
 updatePurchasesList
-
-	purchases := restInterface getPurchaseHistory keys asOrderedCollection.! !
-
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:06'!
-changeViewToCheckout
-	self triggerEvent: #changeViewToCheckout.
-! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:06'!
-changeViewToHistoryPurchases
-	self triggerEvent: #changeViewToHistoryPurchases.
-! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 03:58:14'!
-sendAddToCartRequest
-	
-	restInterface sendAddToCartRequestToCart: cartId anAmountOf: bookAmount of: (catalog keys asOrderedCollection at: catalogListSelectedIndex).
-	self updateCartContents.
-	self triggerEvent: #addedCartItem.! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:01:07'!
-sendCheckout
-
-	restInterface sendCheckoutWithCartId: cartId withCd: creditCardNumber withOwner: creditCardOwner withExpMonth: creditCardExpiration.
-	self triggerEvent: #successCheckout.! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 02:12:51'!
-sendGetCatalog
-	
-	catalog _ restInterface sendGetCatalog.! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 04:00:23'!
-sendRemoveFromCart
-	
-	restInterface sendRemoveFromCartRequestToCart: cartId of: (catalog keys asOrderedCollection at: cartListSelectedIndex).
-	self updateCartContents.
-	self triggerEvent: #addedCartItem.! !
-
-!TusLibrosClientWindowModel methodsFor: 'actions' stamp: 'TM 11/29/2021 03:27:05'!
-updateCartContents
-
-	cartItemsList _ restInterface sendListCartd: cartId.! !
+	| history |
+	history _ restInterface getPurchaseHistory.
+	purchases := OrderedCollection new.
+	history keysAndValuesDo: [:item :amount | purchases add: item, ' x', amount printString ].
+	"purchases := restInterface getPurchaseHistory keys asOrderedCollection."! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -565,14 +465,14 @@ withModel: aModel withWindow: aWindow
 	^self new initializeWithModel: aModel! !
 
 
-!classDefinition: #CatalogView category: 'TusLibros-Front'!
-View subclass: #CatalogView
+!classDefinition: #TusLibrosCatalogView category: 'TusLibros-Front'!
+View subclass: #TusLibrosCatalogView
 	instanceVariableNames: 'cartListMorph'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 03:28:22'!
+!TusLibrosCatalogView methodsFor: 'GUI building' stamp: 'TM 11/29/2021 03:28:22'!
 build
 	model when: #addedCartItem send: #refreshCartItems to: self.
 
@@ -583,10 +483,43 @@ build
 	addMorph: self buildNavigationColumn;
 	addMorph: self buildCart.! !
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 03:31:16'!
+!TusLibrosCatalogView methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:04'!
+buildBook
+
+	| book |
+	book _ Book defaultDune.
+	
+	^LayoutMorph newColumn 
+	separation: 25;
+	axisEdgeWeight: 0.5;
+	
+	"addMorph: (ImageMorph new image: (Form fromBinaryStream: book image base64Decoded asByteArray readStream));"
+	
+	addMorph: (LabelMorph contents: book name);
+	
+	addMorph: (LabelMorph contents: '3000 pesos');
+	
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendCreateCartRequest  label: 'Agregar al carrito').! !
+
+!TusLibrosCatalogView methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:04'!
+buildBook: aBookName withPrice: aPrice
+	
+	^LayoutMorph newColumn 
+	separation: 25;
+	axisEdgeWeight: 0.5;
+	
+	"addMorph: (ImageMorph new image: (Form fromBinaryStream: book image base64Decoded asByteArray readStream));"
+	
+	addMorph: (LabelMorph contents: aBookName);
+	
+	addMorph: (LabelMorph contents: aPrice printString);
+	
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendCreateCartRequest  label: 'Agregar al carrito').! !
+
+!TusLibrosCatalogView methodsFor: 'GUI building' stamp: 'mls 11/29/2021 11:53:57'!
 buildCart
 	|layoutMorphOfCartListRow |
-	
+	model updateCartContents.
 	cartListMorph := PluggableListMorph model: model listGetter: #cartTitles indexGetter: #cartListIndex indexSetter: #cartListIndex:.
 	cartListMorph  borderColor: Color skyBlue; borderWidth: 1; morphWidth:300.
 		
@@ -599,7 +532,7 @@ buildCart
 	^layoutMorphOfCartListRow.
 	! !
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:21:44'!
+!TusLibrosCatalogView methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:21:44'!
 buildCatalog
 
 	| catalogListMorph layoutMorphOfCatalogListRow |
@@ -616,7 +549,7 @@ buildCatalog
 	
 	^layoutMorphOfCatalogListRow.! !
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 03:59:29'!
+!TusLibrosCatalogView methodsFor: 'GUI building' stamp: 'mls 11/29/2021 11:56:56'!
 buildNavigationColumn
 	| bookAmountTextBoxMorph |
 	
@@ -633,96 +566,176 @@ buildNavigationColumn
 	addMorph: bookAmountTextBoxMorph;
 	
 	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendRemoveFromCart  label: 'Remove from cart');
-	
-	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #changeViewToHistoryPurchases  label: 'Ver historial compras').
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendCheckOut  label: 'Check out');
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #changeViewToHistoryPurchases  label: 'View history purchases').
 ! !
 
-!CatalogView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 03:31:46'!
+!TusLibrosCatalogView methodsFor: 'GUI building' stamp: 'TM 11/29/2021 03:31:46'!
 refreshCartItems
 	cartListMorph updateList.
 	cartListMorph setSelectionIndex: 0.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'CatalogView class' category: 'TusLibros-Front'!
-CatalogView class
+!classDefinition: 'TusLibrosCatalogView class' category: 'TusLibros-Front'!
+TusLibrosCatalogView class
 	instanceVariableNames: ''!
 
-!CatalogView class methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
+!TusLibrosCatalogView class methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 11:41:26'!
 withModel: aModel withWindow: aWindow
 
-	aModel when: #changeViewToCheckout send: #changeViewToCheckout to: aWindow.
+	aModel when: #successCheckOut send: #changeViewToCheckOutSuccess to: aWindow.
 	aModel when: #changeViewToHistoryPurchases send: #changeViewToHistoryPurchases to: aWindow.
 	^self new initializeWithModel: aModel! !
 
 
-!classDefinition: #CheckOutView category: 'TusLibros-Front'!
-View subclass: #CheckOutView
+!classDefinition: #TusLibrosCheckOutSuccess category: 'TusLibros-Front'!
+View subclass: #TusLibrosCheckOutSuccess
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
 
-!CheckOutView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
+!TusLibrosCheckOutSuccess methodsFor: 'GUI building' stamp: 'mls 11/29/2021 13:42:13'!
 build
+	
+	| ticket |
+	ticket _ model ticket.
+
 	^LayoutMorph newColumn
 	separation: 25;
 	axisEdgeWeight: 0.5;
+	addMorph: (LabelMorph contents: 'Success CheckOut!!');
+	addMorph: (self buildTicket: ticket);
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #continueShopping  label: 'Continue shopping');
+	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #signOut  label: 'Sign out').! !
+
+!TusLibrosCheckOutSuccess methodsFor: 'GUI building' stamp: 'mls 11/29/2021 13:46:38'!
+buildTicket: aTicket
 	
-	addMorph: (self inputWithLabel: 'Número:' withGetter: #creditCardNumber withSetter: #creditCardNumber:);
-	addMorph: (self inputWithLabel: 'Fecha expiración:' withGetter: #creditCardExpiration withSetter: #creditCardExpiration:);
-	addMorph: (self inputWithLabel: 'Nombre dueño:' withGetter: #creditCardOwner withSetter: #creditCardOwner:);
-	addMorph: (PluggableButtonMorph model: model stateGetter: nil action: #sendCheckout  label: 'Checkout').! !
+	| ticketMorph total |
+	
+	ticketMorph _ LayoutMorph newColumn separation: 0; axisEdgeWeight: 0.
+	total _ 0.
+	aTicket keysAndValuesDo: [:item :amout | 
+		ticketMorph addMorph: 
+			(LayoutMorph newRow
+			separation: 20;
+			axisEdgeWeight: 0.5;
+			addMorph: (LabelMorph contents: 'Nombre: ', item);
+			addMorph: (LabelMorph contents: ' - ');
+			addMorph: (LabelMorph contents: 'Precio: ', amout printString)).
+		total _ total + amout.
+	].
 
-!CheckOutView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
-inputWithLabel: aLabel withGetter: aGetter withSetter: aSetter
+	ticketMorph addMorph: (LabelMorph contents: 'Total:  ', total printString).
+	
+	^LayoutMorph newColumn
+	separation: 0;
+	axisEdgeWeight: 0;
 
+	addMorph: (LabelMorph contents: 'Ticket');
+	addMorph: ticketMorph.
+	! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'TusLibrosCheckOutSuccess class' category: 'TusLibros-Front'!
+TusLibrosCheckOutSuccess class
+	instanceVariableNames: ''!
+
+!TusLibrosCheckOutSuccess class methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 03:01:11'!
+withModel: aModel withWindow: aWindow
+
+	aModel when: #continueShopping send: #changeViewToCatalog to: aWindow.
+	aModel when: #signout send: #changeViewToLogin to: aWindow.
+	^self new initializeWithModel: aModel! !
+
+
+!classDefinition: #TusLibrosLoginView category: 'TusLibros-Front'!
+View subclass: #TusLibrosLoginView
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Front'!
+
+!TusLibrosLoginView methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:08'!
+build
+	
+	^LayoutMorph newColumn
+	separation: 25;
+	axisEdgeWeight: 0.5;
+
+	addMorph: self buildHeaderRow;
+	
+	addMorph: self buildUserInputRow;
+	
+	addMorph: self buildPasswordInputRow;
+	
+	addMorph: self buildLoginButton.! !
+
+!TusLibrosLoginView methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:08'!
+buildHeaderRow
+		
+	^LayoutMorph newRow 
+	separation: 25;
+	axisEdgeWeight: 0.5;
+	addMorph: (ImageMorph new image: ImageMorph defaultForm);
+	addMorph: (LabelMorph contents: 'TusLibrosCuis');
+	addMorph: (ImageMorph new image: ImageMorph defaultForm).! !
+
+!TusLibrosLoginView methodsFor: 'GUI building' stamp: 'mls 11/29/2021 11:56:11'!
+buildLoginButton
+	
+	^PluggableButtonMorph model: model stateGetter: nil action: #sendCreateCartRequest  label: 'Create Cart'.! !
+
+!TusLibrosLoginView methodsFor: 'GUI building' stamp: 'mls 11/29/2021 11:56:18'!
+buildPasswordInputRow
+	| firstRowLayoutMorph |
+			
+	firstRowLayoutMorph := LayoutMorph newRow.
+	firstRowLayoutMorph separation: 25;
+	axisEdgeWeight: 0.5;
+	addMorph: (LabelMorph contents: 'Password:');
+	addMorph: (self buildInputWithTextGetter: #passwordText withTextSetter: #passwordText:).
+	
+	^firstRowLayoutMorph.! !
+
+!TusLibrosLoginView methodsFor: 'GUI building' stamp: 'mls 11/29/2021 11:56:23'!
+buildUserInputRow
 	| firstRowLayoutMorph |
 	
 	firstRowLayoutMorph := LayoutMorph newRow.
 	firstRowLayoutMorph separation: 25;
 	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents: aLabel);
-	addMorph: (self buildInputWithTextGetter: aGetter withTextSetter: aSetter).
+	addMorph: (LabelMorph contents:'User:');
+	addMorph: (self buildInputWithTextGetter: #userText withTextSetter: #userText:).
 
 	^firstRowLayoutMorph.! !
 
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'CheckOutView class' category: 'TusLibros-Front'!
-CheckOutView class
+!classDefinition: 'TusLibrosLoginView class' category: 'TusLibros-Front'!
+TusLibrosLoginView class
 	instanceVariableNames: ''!
 
-!CheckOutView class methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
+!TusLibrosLoginView class methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
 withModel: aModel withWindow: aWindow
 
-	^self new initializeWithModel: aModel! !
+	aModel when: #createCartSucceed send: #changeViewToCatalog to: aWindow.
+	^self new initializeWithModel: aModel
+	! !
 
 
-!classDefinition: #LoadingView category: 'TusLibros-Front'!
-View subclass: #LoadingView
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'TusLibros-Front'!
-
-!LoadingView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
-build
-
-	^LayoutMorph newRow
-	separation: 25;
-	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents:'Cargando...').! !
-
-
-!classDefinition: #PurchaseHistoryWindow category: 'TusLibros-Front'!
-View subclass: #PurchaseHistoryWindow
+!classDefinition: #TusLibrosPurchaseHistoryWindow category: 'TusLibros-Front'!
+View subclass: #TusLibrosPurchaseHistoryWindow
 	instanceVariableNames: 'sentenceTextBoxMorph wordsListMorph currentView'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Front'!
 
-!PurchaseHistoryWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:05'!
+!TusLibrosPurchaseHistoryWindow methodsFor: 'GUI building' stamp: 'TM 11/29/2021 02:01:05'!
 build
 	| purchaseListMorph layoutMorphOfPurchaseListRow |
 	
@@ -742,112 +755,3 @@ build
 	layoutMorphOfPurchaseListRow layoutSpec proportionalWidth: 1.
 	
 	^layoutMorphOfPurchaseListRow.! !
-
-
-!classDefinition: #PurchasesView category: 'TusLibros-Front'!
-View subclass: #PurchasesView
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'TusLibros-Front'!
-
-!PurchasesView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
-build
-	| nameBook quantity |
-	nameBook _ 'Dune (1965)'.
-	quantity _ 1.
-	 ^LabelMorph contents: nameBook, ' con cantidad ', quantity printString.! !
-
-!PurchasesView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:05'!
-inputWithLabel: aLabel withGetter: aGetter withSetter: aSetter
-
-	| firstRowLayoutMorph |
-	
-	firstRowLayoutMorph := LayoutMorph newRow.
-	firstRowLayoutMorph separation: 25;
-	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents: aLabel);
-	addMorph: (self buildInputWithTextGetter: aGetter withTextSetter: aSetter).
-
-	^firstRowLayoutMorph.! !
-
-
-!classDefinition: #TusLibrosLoginView category: 'TusLibros-Front'!
-View subclass: #TusLibrosLoginView
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'TusLibros-Front'!
-
-!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
-build
-	
-	^LayoutMorph newColumn
-	separation: 25;
-	axisEdgeWeight: 0.5;
-
-	addMorph: self buildHeaderRow;
-	
-	addMorph: self buildUserInputRow;
-	
-	addMorph: self buildPasswordInputRow;
-	
-	addMorph: self buildLoginButton.! !
-
-!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
-buildHeaderRow
-		
-	^LayoutMorph newRow 
-	separation: 25;
-	axisEdgeWeight: 0.5;
-	addMorph: (ImageMorph new image: ImageMorph defaultForm);
-	addMorph: (LabelMorph contents: 'TusLibrosCuis');
-	addMorph: (ImageMorph new image: ImageMorph defaultForm).! !
-
-!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
-buildLoginButton
-	
-	^PluggableButtonMorph model: model stateGetter: nil action: #sendCreateCartRequest  label: 'Crear Carrito'.! !
-
-!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
-buildPasswordInputRow
-	| firstRowLayoutMorph |
-			
-	firstRowLayoutMorph := LayoutMorph newRow.
-	firstRowLayoutMorph separation: 25;
-	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents: 'Contraseña:');
-	addMorph: (self buildInputWithTextGetter: #passwordText withTextSetter: #passwordText:).
-	
-	^firstRowLayoutMorph.! !
-
-!TusLibrosLoginView methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
-buildUserInputRow
-	| firstRowLayoutMorph |
-	
-	firstRowLayoutMorph := LayoutMorph newRow.
-	firstRowLayoutMorph separation: 25;
-	axisEdgeWeight: 0.5;
-	addMorph: (LabelMorph contents:'Usuario:');
-	addMorph: (self buildInputWithTextGetter: #userText withTextSetter: #userText:).
-
-	^firstRowLayoutMorph.! !
-
-
-!TusLibrosLoginView methodsFor: 'initialization' stamp: 'TM 11/29/2021 02:01:08'!
-initializeWithModel: aModel 
-	
-	model := aModel.! !
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'TusLibrosLoginView class' category: 'TusLibros-Front'!
-TusLibrosLoginView class
-	instanceVariableNames: ''!
-
-!TusLibrosLoginView class methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 02:01:08'!
-withModel: aModel withWindow: aWindow
-
-	aModel when: #createCartSucceed send: #changeViewToCatalog to: aWindow.
-	^self new initializeWithModel: aModel
-	! !

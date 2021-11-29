@@ -124,6 +124,11 @@ add: aQuantity of: anItem
 
 	items add: anItem withOccurrences: aQuantity ! !
 
+!Cart methodsFor: 'adding' stamp: 'mls 11/29/2021 14:10:22'!
+clear
+	
+	items := Bag new. ! !
+
 !Cart methodsFor: 'adding' stamp: 'TM 11/29/2021 04:10:49'!
 remove: anItem
 	self assertIsValidItem: anItem.
@@ -216,16 +221,21 @@ cartContent
 
 	^cart content! !
 
-!CartSession methodsFor: 'cart' stamp: 'HernanWilkinson 6/17/2015 20:35'!
+!CartSession methodsFor: 'cart' stamp: 'mls 11/29/2021 11:35:10'!
 checkOutCartWithCreditCardNumbered: aCreditCartNumber ownedBy: anOwner expiringOn: anExpirationMonthOfYear
 
 	^(Cashier
 		toCheckout: cart
 		ownedBy: owner
-		charging: (CreditCard expiringOn: anExpirationMonthOfYear)
+		charging: (CreditCard expiringOn: anExpirationMonthOfYear withNumber: aCreditCartNumber)
 		throught: systemFacade merchantProcessor
 		on: self today
 		registeringOn: systemFacade salesBook) checkOut ! !
+
+!CartSession methodsFor: 'cart' stamp: 'mls 11/29/2021 14:05:46'!
+clearCart 
+
+	^cart clear! !
 
 !CartSession methodsFor: 'cart' stamp: 'mls 11/29/2021 02:32:46'!
 removeFromCart: aBook
@@ -291,12 +301,13 @@ totalOf: anItem quantity: aQuantity
 	^(cart catalog at: anItem) * aQuantity  ! !
 
 
-!Cashier methodsFor: 'checkout' stamp: 'HernanWilkinson 6/22/2013 12:28'!
+!Cashier methodsFor: 'checkout' stamp: 'mls 11/29/2021 14:11:07'!
 checkOut
 
 	self createTicket.
 	self debitTotal.
 	self registerSale.
+	cart clear.
 
 	^ ticket ! !
 
@@ -399,7 +410,7 @@ today
 
 !classDefinition: #CreditCard category: 'TusLibros-Model'!
 Object subclass: #CreditCard
-	instanceVariableNames: 'expiration'
+	instanceVariableNames: 'expiration number'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Model'!
@@ -410,10 +421,14 @@ isExpiredOn: aDate
 	^expiration start < (Month month: aDate monthIndex year: aDate yearNumber) start ! !
 
 
-!CreditCard methodsFor: 'initialization' stamp: 'HernanWilkinson 6/17/2013 18:38'!
-initializeExpiringOn: aMonth
-
+!CreditCard methodsFor: 'initialization' stamp: 'mls 11/29/2021 11:31:03'!
+initializeExpiringOn: aMonth withNumber: aNumber
+	number := aNumber.
 	expiration := aMonth ! !
+
+!CreditCard methodsFor: 'initialization' stamp: 'mls 11/29/2021 11:30:44'!
+number
+	^number! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -421,10 +436,10 @@ initializeExpiringOn: aMonth
 CreditCard class
 	instanceVariableNames: ''!
 
-!CreditCard class methodsFor: 'instance creation' stamp: 'HernanWilkinson 6/17/2013 18:38'!
-expiringOn: aMonth
+!CreditCard class methodsFor: 'instance creation' stamp: 'mls 11/29/2021 11:31:25'!
+expiringOn: aMonth withNumber: aNumber
 
-	^self new initializeExpiringOn: aMonth! !
+	^self new initializeExpiringOn: aMonth withNumber: aNumber! !
 
 
 !classDefinition: #LineItem category: 'TusLibros-Model'!
@@ -438,6 +453,10 @@ Object subclass: #LineItem
 item
 
 	^ item! !
+
+!LineItem methodsFor: 'accessing' stamp: 'mls 11/29/2021 13:55:47'!
+quantity
+	^ quantity! !
 
 !LineItem methodsFor: 'accessing' stamp: 'HernanWilkinson 6/22/2013 12:21'!
 total
@@ -493,10 +512,10 @@ MerchantProcessor subclass: #MockMerchantProcessor
 	poolDictionaries: ''
 	category: 'TusLibros-Model'!
 
-!MockMerchantProcessor methodsFor: 'as yet unclassified' stamp: 'mls 11/15/2021 20:35:44'!
+!MockMerchantProcessor methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 11:35:45'!
 debit: anAmount from: aCreditCard
 
-	(validCreditCard ~= aCreditCard) ifTrue:[ self error: 'invalid credit card'].! !
+	(validCreditCard ~= aCreditCard number) ifTrue:[ self error: 'invalid credit card'].! !
 
 !MockMerchantProcessor methodsFor: 'as yet unclassified' stamp: 'mls 11/15/2021 20:35:17'!
 initializeWithValidCreditCard: aValidCreditCard.
@@ -623,14 +642,14 @@ destroy
 	
 	webServer ifNotNil:[webServer destroy].! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/28/2021 22:17:33'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 14:13:22'!
 initializeWith: aPortNumber
 	
 	tusLibrosSystemFacade := TusLibrosSystemFacade 
 		authenticatingWith: (Dictionary with: 'usuario'->'pass')
-		acceptingItemsOf: (Dictionary with: 'Dune'->3000000)
+		acceptingItemsOf: (Dictionary with: 'Dune (1965)'->3000000 with: 'Fahrenheit 451 (1953)'->1000000 with: 'Nineteen Eighty-Four (1949)'->1500000 with: 'Brave New World (1932)'->2500000)
 		registeringOn: OrderedCollection new
-		debitingThrought: (MockMerchantProcessor withValidCreditCard: 'xd') 
+		debitingThrought: (MockMerchantProcessor withValidCreditCard: '1111222233334444') 
 		measuringTimeWith: SystemClock new.
 	
 	port := aPortNumber.
@@ -639,7 +658,7 @@ initializeWith: aPortNumber
 		
 	self setUpRouting.! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'TM 11/29/2021 04:01:34'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'mls 11/29/2021 13:21:51'!
 setUpRouting
 
 	self addRoute: '/createCart' action: [:parameters |	
@@ -650,7 +669,7 @@ setUpRouting
 	self addRoute: '/addToCart' action: [:parameters |    
         		tusLibrosSystemFacade             
 			add: (parameters at: 'amount') asNumber
-			of: (parameters at: 'bookIsbn') 
+			of: (parameters at: 'bookIsbn')
 			toCartIdentifiedAs: (parameters at: 'cartId') asNumber.
         
         		true asString.
@@ -665,8 +684,14 @@ setUpRouting
 		tusLibrosSystemFacade catalog.
 	].
 
-	self addRoute: '/checkoutCart' action: [:parameters |
-		tusLibrosSystemFacade checkOutCartIdentifiedAs: (parameters at: 'cartId') withCreditCardNumbered: (parameters at: 'creditCardNumber') ownedBy: (parameters at: 'owner') expiringOn: (parameters at: 'expirationMonth').
+	self addRoute: '/checkoutCart' action: [:parameters |		| ticket ticketDict |
+		ticket _ tusLibrosSystemFacade checkOutCartIdentifiedAs: (parameters at: 'cartId') asNumber withCreditCardNumbered: '1111222233334444' ownedBy: 'RAY BRADBURY' expiringOn: (Month month: DateAndTime now monthIndex year: DateAndTime now yearNumber + 3).
+		
+		ticketDict _ Dictionary new.
+		ticket lineItemsDo: [:v|
+			ticketDict add: v item -> v total
+		].
+		ticketDict
 	].
 
 	self addRoute: '/listPurchases' action: [:parameters |
@@ -820,10 +845,10 @@ catalog
 
 	^catalog.! !
 
-!TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'HernanWilkinson 6/17/2015 20:47'!
+!TusLibrosSystemFacade methodsFor: 'facade protocol' stamp: 'mls 11/29/2021 11:38:30'!
 checkOutCartIdentifiedAs: aCartId withCreditCardNumbered: aCreditCartNumber ownedBy: anOwner expiringOn: anExpirationMonthOfYear
 
-	self
+	^self
 		withCartSessionIdentifiedAs: aCartId
 		do: [ :cartSession | cartSession
 			checkOutCartWithCreditCardNumbered: aCreditCartNumber
@@ -875,14 +900,13 @@ salesBook
 	^ salesBook! !
 
 
-!TusLibrosSystemFacade methodsFor: 'private' stamp: 'HernanWilkinson 6/17/2015 20:56'!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'mls 11/29/2021 14:00:13'!
 list: aSale on: salesOrderedByBook
-
-	"Esto es un indicio de que por ahi conviene empezar a pensar en modelar un SaleBook - Hernan"
 	aSale lineItemsDo: [ :aLineItem | | oldTotal newTotal |
 		oldTotal := salesOrderedByBook at: aLineItem item ifAbsentPut: [ 0 ].
-		newTotal := oldTotal + aLineItem total.
-		salesOrderedByBook at: aLineItem item put: newTotal ]! !
+		newTotal := oldTotal + aLineItem quantity.
+		salesOrderedByBook at: aLineItem item put: newTotal 
+	]! !
 
 !TusLibrosSystemFacade methodsFor: 'private' stamp: 'HernanWilkinson 6/17/2015 20:55'!
 salesDoneBy: aUser
